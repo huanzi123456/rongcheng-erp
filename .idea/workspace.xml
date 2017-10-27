@@ -7,9 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/T3.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/T4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/T5.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/controller/ItemCommonInfoController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/controller/Jxb_AddressCarrierAllocationController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/controller/Jxb_AuditAddOrderController.class" afterPath="" />
@@ -149,6 +146,39 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/utils/KdniaoTrackQueryAPI.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/utils/PrintTool.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/rongcheng/erp/utils/UserUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/conf/config.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/conf/spring-mvc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/conf/spring-mybatis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/AddressCarrierAllocationMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/BuyerMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/OrderItemLinkMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/OrderMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/PlatformMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/PlatformShopMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/PrintTemplateMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/ShopMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/TestAS_OrderMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/UserInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/itemCommonMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/jxb/itemEspMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/lsx/AddressCarrierAllocationMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/lsx/ItemCommonInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/lsx/PrintTemplateMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/lsx/ShopInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/lsx/UserInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/DataAddShopAndPlatform.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/DataSelectMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/RegionCodeNameMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/RoleMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/UserMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/xzy/readOrderInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/CarrierInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/FieldCoordinateMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/InventoryMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/PrintMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/PrintTemplateMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/ShipmentMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/mapper/zb/StockInfoMapper.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/CaiNiao/CaiNiaoPrintBase.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/CaiNiao/CaiNiaoPrintOrder.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/CaiNiao/CaiNiaoPrintTool.js" afterPath="" />
@@ -164,7 +194,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/audit/order-update.jsp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/audit/public/search-advanced.jsp" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/audit/public/search.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/META-INF/MANIFEST.MF" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/controller/ItemCommonInfoController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/controller/Jxb_AddressCarrierAllocationController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/controller/Jxb_AuditAddOrderController.class" afterPath="" />
@@ -304,134 +333,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/utils/KdniaoTrackQueryAPI.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/utils/PrintTool.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/erp/utils/UserUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ItemCommonInfoController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_AddressCarrierAllocationController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_AuditAddOrderController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_AuditEditOrderController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_InquireExpressController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_LoginController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Jxb_PrintOrderController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ShopInfoController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/TestAS.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/UserInfoController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Xzy_ReadOrderInfoController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Xzy_RoleController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/Xzy_UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ZB_CarrierInfoController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ZB_PrintController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ZB_PrintTemplateController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/ZB_ShipmentController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/dataStatisticsController/Xzy_AddShopAndPlatformController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/dataStatisticsController/Xzy_DataSelectController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/controller/待定Jxb_OrderAdvancedSearchController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/converter/CustomTimestampConverter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ItemCommonInfoDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_AddressCarrierAllocationDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_BuyerDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_ItemCommonDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_ItemEspDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_OrderDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_OrderItemLinkDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_PlatformDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_PlatformShopDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_PrintTemplateDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_ShopDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Jxb_UserInfoDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/PrintTemplateDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ShopInfoDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/TestAS_Jxb_OrderDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/UserInfoDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Xzy_ReadOrderInfoDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Xzy_RoleDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/Xzy_UserDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_CarrierInfoDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_FieldCoordinateDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_PrintDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_PrintTemplateDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_ShipmentDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/ZB_StockInfoDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/dataStatisticsDao/Xzy_DataAddShopAndPlatformDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dao/dataStatisticsDao/Xzy_DataSelectDao.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/ItemCommonWarehouse_S.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/OrderItemInfo_S.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/PlatformShop.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/XzyDataJsonResult.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/XzyDataSelectParam.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/XzyFindInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/XzyJsonResult.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/dto/XzyOrderInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/AddressCarrierAllocation.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/AuthorityManagement.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/BuyerInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/CarrierInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/FieldCoordinate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/ItemCommonInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/ItemCommonInfoOrderItemLink.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/ItemEspInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/OrderInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/OrderItemLink.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/PlatformErpLink.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/PlatformInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/PrintTemplate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/RoleManagement.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/ShopInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/StockInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/UserInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/UserRoleAuthority.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/entity/WarehouseInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/exception/NameException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/exception/OrderOutNumberException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/exception/PasswordException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/interceptor/SessionInterceptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/authorization/code/GetCodeController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/item/converter/JDItem2BaseEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/item/converter/incrId/ItemAutoIncrId.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/item/search/SearchItem.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/item/search/SearchItemController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/order/converter/JDOrder2BaseEntity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/order/converter/incrId/BuyerInfoAutoIncrId.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/order/converter/incrId/OrderAutoIncrId.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/order/search/SearchOrder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/jd/order/search/SearchOrderController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/DataStatisticsService/Xzy_AddShopAndPlatformService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/DataStatisticsService/Xzy_AddShopAndPlatformServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/DataStatisticsService/Xzy_DataSelectService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/DataStatisticsService/Xzy_DataSelectServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/ItemCommonInfo/ItemCommonInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/ItemCommonInfo/ItemCommonInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/Shipment/ZB_ShipmentService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/Shipment/ZB_ShipmentServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/ShopInfo/ShopInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/ShopInfo/ShopInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/UserInfo/Jxb_UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/UserInfo/Jxb_UserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/UserInfo/UserInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/UserInfo/UserInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/carrierInfo/ZB_CarrierInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/carrierInfo/ZB_CarrierInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/itemCommon/Jxb_ItemCommonService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/itemCommon/Jxb_ItemCommonServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/order/Jxb_OrderService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/order/Jxb_OrderServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/order/待定Jxb_OrderAdvancedSearchService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/PrintTemplateService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/PrintTemplateServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/ZB_PrintService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/ZB_PrintServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/ZB_PrintTemplateService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/printTemplate/ZB_PrintTemplateServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/readOrderInfo/Xzy_ReadOrderInfoService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/readOrderInfo/Xzy_ReadOrderInfoServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/roleManagementService/Xzy_RoleService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/roleManagementService/Xzy_RoleServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/userManagementService/Xzy_UserService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/service/userManagementService/Xzy_UserServiceImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/FileTool.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/ImgCodeUtil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/JsonResult.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/KdniaoTrackQueryAPI.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/PrintTool.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/com/rongcheng/print/utils/UserUtil.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/conf/config.properties" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/conf/spring-mvc.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/WEB-INF/classes/conf/spring-mybatis.xml" afterPath="" />
@@ -3558,9 +3459,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/zb/settings/toPrint.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/zb/settings/toPrintOld.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/rongcheng-print-0.0.1-SNAPSHOT/zb/shipment/shipmentInspection.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/T3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/T4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/T5.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -4251,7 +4149,7 @@
       <workItem from="1508894525697" duration="18063000" />
       <workItem from="1508981211322" duration="6402000" />
       <workItem from="1508989811661" duration="19563000" />
-      <workItem from="1509068121941" duration="30235000" />
+      <workItem from="1509068121941" duration="30289000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -4260,7 +4158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509101261829</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="erp项目">
+      <created>1509102306570</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1509102306570</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -4296,7 +4201,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106472000" />
+    <option name="totallyTimeSpent" value="106526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
