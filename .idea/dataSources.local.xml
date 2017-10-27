@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="远程融成" uuid="1d8c6377-2074-4f36-a4d9-1bf3b77ba63b">
+      <database-info product="MySQL" version="5.1.69" jdbc-version="3.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.8 ( Revision: ${svn.Revision} )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>rongchengtech</user-name>
+      <introspection-schemas>*:information_schema,rongchengtech</introspection-schemas>
+    </data-source>
+  </component>
+</project>

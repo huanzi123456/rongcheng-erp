@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.UserInfoDao">
+	
+	 <select id="findByUserInfoId" 
+			  parameterType="BigInteger"
+			  resultType="com.rongcheng.erp.entity.UserInfo">
+		select 
+			id,
+			account_num as accountNum,
+			password,
+			digital_certificate as digitalCertificate, 
+			nickname,
+			name,
+			telephone,
+			mobile,
+			region_id as regionId, 
+			reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_admin as admin,
+			is_root_account as rootAccount,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified,
+			account_status as accountStatus,
+			role_id as accountStatus,
+			authority_id as accountStatus
+		from
+			user_info
+		where id=#{id}
+	</select> 
+	
+	<select id="findUserInfoByPage" parameterType="int" resultType="com.rongcheng.erp.entity.UserInfo">
+	select 
+			id,
+			account_num as accountNum,
+			password,
+			digital_certificate as digitalCertificate, 
+			nickname,
+			name,
+			telephone,
+			mobile,
+			region_id as regionId, 
+			reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_admin as admin,
+			is_root_account as rootAccount,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified,
+			account_status as accountStatus,
+			<!-- role_id as roleId, -->
+			authority_id as authorityId
+		from
+			user_info
+		limit #{0},#{1}
+	</select>
+	<select id="findUserInfoCount" resultType="String">select count(id) from user_info</select>
+	 
+	 <update id="modifyUserInfo" parameterType="com.rongcheng.erp.entity.UserInfo">
+		update user_info 
+			set 
+				name=#{name},
+				account_num=#{accountNum},
+				password=#{password},
+				telephone=#{telephone},
+				account_status=#{accountStatus}
+			where id=#{id}
+	</update> 
+	<insert id="addUserInfo" parameterType="com.rongcheng.erp.entity.UserInfo">
+	insert into user_info 
+	(
+		name,
+		account_num,
+		password,
+		email,
+		telephone
+	)
+	values
+	(
+		#{name},
+		#{accountNum},
+		#{password},
+		#{email},
+		#{telephone}
+	)
+	</insert>
+	<delete id="delUserInfo" parameterType="BigInteger">
+	delete from user_info where id=#{id}
+	</delete>
+	<select id="getUserByAccountNum"  parameterType="String" resultType="com.rongcheng.erp.entity.UserInfo">
+		select 
+			id,
+			name,
+			owner_id as ownerId,
+			account_num as accountNum,
+			account_status as accountStatus,
+			password			
+		from
+			user_info
+		where account_num=#{accountNum}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

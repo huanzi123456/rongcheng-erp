@@ -1,0 +1,295 @@
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.left_btn_box{
+	width: 220px;
+	height: 550px;
+	overflow: auto;
+	float: left;
+	padding: 10px;
+	position: relative;
+}
+.left_btn_box .btn_box{
+	width: 100%;
+	height: 30px;
+	border: 1px solid #ddd;
+}
+.left_btn_box .btn_box .shipping_btn{
+	float: left;
+	width: 50%;
+	height: 100%;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;	
+}
+.left_btn_box .btn_box .shipping_btn:first-child{
+	border-right: 1px solid #ddd;
+}
+.left_btn_box .top_and_bottom_box,.left_btn_box .shipping_list{
+	width: calc(100% - 20px);
+	width: -moz-calc(100% - 20px);
+	width: -webkit-calc(100% - 20px);
+	background: #fff;
+	position: absolute;
+	left: 10px;
+	height: 560px;
+	top: 40px;
+
+	border: 1px solid #ddd;
+	border-top: none;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.left_btn_box .top_and_bottom_box{
+	z-index: 1;
+}
+.left_btn_box .top_and_bottom_box>ul:after{
+	content: "";
+	height: 0;
+	display: block;
+	clear: both;
+}
+.left_btn_box .top_and_bottom_box>ul>li{
+	float: left;
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+}
+.left_btn_box .top_and_bottom_box h4{
+	font-size: 14px;
+	color: #f00;
+	line-height: 30px;
+}
+.left_btn_box .top_and_bottom_box h5{
+	font-size: 14px;
+	line-height: 30px;
+}
+.left_btn_box .top_and_bottom_box .format_box{
+	
+}
+.left_btn_box .top_and_bottom_box .format_box .font_sizeAnd_family{
+	height: 50px;
+	padding-top: 10px;
+}
+.left_btn_box .top_and_bottom_box .format_box .font_sizeAnd_family .font_size_text{
+	display: inline-block;
+	width: 28px;
+}
+.left_btn_box .top_and_bottom_box .format_box .font_sizeAnd_family .font_size_text>input{
+	width: 26px;
+}
+.left_btn_box .top_and_bottom_box .format_box .font_sizeAnd_family .font_size_btn{
+	display: inline-block;
+	width: 20px;
+	vertical-align: middle;
+}
+.left_btn_box .top_and_bottom_box .format_box .font_sizeAnd_family .font_size_btn>button{
+	height: 15px;
+	width: 20px;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+.left_btn_box .top_and_bottom_box .format_box .page_layout{
+	height: 40px;
+	padding-top: 5px;
+}
+.left_btn_box .top_and_bottom_box .format_box .page_layout>button{
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	font-size: 12px;
+	vertical-align: top;
+}
+.left_btn_box .top_and_bottom_box .format_box .page_layout>span{
+	margin: 0 5px;
+}
+.left_btn_box .top_and_bottom_box .font_submit{
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+.left_btn_box .shipping_list>ul:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+}
+.left_btn_box .shipping_list>ul>li{
+	float: left;
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 10px;
+}
+.left_btn_box .shipping_list>ul>li.row_one{
+	width: 100%;
+}
+.left_btn_box .shipping_list .format_box{
+	
+}
+.left_btn_box .shipping_list .format_box .font_sizeAnd_family{
+	height: 50px;
+	padding-top: 10px;
+}
+.left_btn_box .shipping_list .format_box .font_sizeAnd_family .font_size_text{
+	display: inline-block;
+	width: 28px;
+}
+.left_btn_box .shipping_list .format_box .font_sizeAnd_family .font_size_text>input{
+	width: 26px;
+}
+.left_btn_box .shipping_list .format_box .font_sizeAnd_family .font_size_btn{
+	display: inline-block;
+	width: 20px;
+	vertical-align: middle;
+}
+.left_btn_box .shipping_list .format_box .font_sizeAnd_family .font_size_btn>button{
+	height: 15px;
+	width: 20px;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+.left_btn_box .shipping_list .format_box .page_layout{
+	height: 40px;
+	padding-top: 5px;
+}
+.left_btn_box .shipping_list .format_box .page_layout>button{
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	font-size: 12px;
+	vertical-align: top;
+}
+.left_btn_box .shipping_list .format_box .page_layout>span{
+	margin: 0 5px;
+}
+.left_btn_box .shipping_list .font_submit{
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+.left_btn_box .shipping_list h5{
+	font-size: 14px;
+	line-height: 30px;
+}
+.left_btn_box .shipping_list h3{
+	font-size: 14px;
+	text-align: left;
+	padding-left: 10px;
+}
+.left_btn_box .shipping_list .lineHeight{
+	height: 70px;
+}
+.left_btn_box .shipping_list .lineHeight .title_height{
+	height: 35px;
+	font-size: 14px;
+	text-align: left;
+	padding-left: 10px;
+}
+.left_btn_box .shipping_list .lineHeight .title_height .font_size_text{
+	width: 30px;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+}
+.left_btn_box .shipping_list .lineHeight .title_height .font_size_text input{
+	width: 28px;
+	vertical-align: top;
+}
+.left_btn_box .shipping_list .lineHeight .title_height .font_size_btn{
+	display: inline-block;
+	width: 20px;
+	vertical-align: top;
+}
+.left_btn_box .shipping_list .lineHeight .title_height .font_size_btn>button{
+	height: 15px;
+	width: 20px;
+	padding: 0;
+	margin: 0;
+	float: left;
+	vertical-align: top;
+
+}
+.right_show_box{
+	float: left;
+	height: 550px;
+	width: calc(100% - 220px);
+	width: -moz-calc(100% - 220px);
+	width: -webkit-calc(100% - 220px);
+	overflow: auto;
+	padding:10px 10px 10px 0;
+}
+.right_show_box .content-box{
+	height: 580px;
+	width: 100%;
+	overflow: auto;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+.right_show_box .content-box .header_content{
+	width: 100%;
+	height: calc((100% - 200px) / 2);
+	height: -moz-calc((100% - 200px) / 2);
+	height: -webkit-calc((100% - 200px) / 2);
+	border: 1px solid #ddd;
+	position: relative;
+}
+.right_show_box .content-box .table_list_box{
+	height: 200px;
+	width: 100%;
+	border: 1px solid #ddd;
+	text-align: center;
+	background: #eee;
+}
+#del_Btn{
+	width: 14px;
+	height: 14px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 10px;
+	position: absolute;
+	left:-10px;top:-5px;
+	cursor:pointer;
+	color: #f00;
+	border-radius: 50%;
+}
+.right_show_box .content-box .table_list_box .table_list{
+	margin: 10px 10px 0 10px;
+	width: 98%;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+.right_show_box .content-box .table_list_box .table_list tr{
+	border: 1px solid #ddd;
+}
+.right_show_box .content-box .table_list_box .table_list td{
+	height: 40px;
+	padding: 5px;
+	display: none;
+}
+.right_show_box .content-box .table_list_box .table_list td>img{
+	height: 35px;
+	max-width: 100px;
+	vertical-align: top;
+}
+.right_show_box .content-box .table_list_box .table_list th{
+	padding: 5px;
+	display: none;
+}
+.right_show_box .content-box .footer_content{
+	height: calc((100% - 200px) / 2);
+	height: -moz-calc((100% - 200px) / 2);
+	height: -webkit-calc((100% - 200px) / 2);
+	width: 100%;
+	border: 1px solid #ddd;
+	position: relative;
+}
+.right_show_box .button_box{
+	margin: 10px 0 0 10px;
+}

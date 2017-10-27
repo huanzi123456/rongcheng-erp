@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 用户管理页面的SQL语句 -->
+<mapper namespace="com.rongcheng.erp.dao.Xzy_UserDao">
+<!-- 1.页面查询 -->
+  <!-- 1.1.统计用户表中同一个owner_id下的用户数量 -->
+  <select id="countUserIdByOwnerId" parameterType="BigInteger" resultType="Integer">
+    SELECT COUNT(id)
+    FROM user_info
+    WHERE owner_id=#{ownerId}
+  </select>
+  <!-- 1.2.分页查询语句 ()-->
+  <select id="userPaging" parameterType="com.rongcheng.erp.dto.XzyFindInfo" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT id,user_type AS userType,NAME,account_num AS accountNum,PASSWORD,telephone,account_status AS accountStatus,gmt_create AS gmtCreate,GROUP_CONCAT(d) strRoleId,GROUP_CONCAT(f) strRoleName,GROUP_CONCAT(e) strMouldId,GROUP_CONCAT(h) strMouldName
+    FROM (SELECT DISTINCT a.id AS id,a.user_type,a.name,a.account_num,a.PASSWORD,a.telephone,a.account_status,a.gmt_create,b.role_id AS d,c.role_name AS f,b.mould_id AS e,d.module_name AS h
+          FROM user_info a
+          LEFT JOIN user_role_authority b
+          ON a.id=b.user_id    
+          AND b.role_id IS NOT NULL 
+          LEFT JOIN role_management c
+          ON c.id=b.role_id 
+          LEFT JOIN authority_management d
+          ON d.id = b.mould_id           
+          AND a.owner_id=b.owner_id=c.owner_id=d.owner_id = #{ownerId}) g
+    GROUP BY id
+    LIMIT #{page},#{pageSize}
+  </select>    
+  <!-- 1.3 查询同一用户下的不同角色所拥有的权限id -->
+  <select id="seleAuthId" parameterType="com.rongcheng.erp.entity.UserRoleAuthority" resultType="String">
+    SELECT a.mould_id 
+    FROM user_role_authority a
+    WHERE a.role_id=#{roleId}
+    AND a.user_id=#{userId}
+    AND a.owner_id=#{ownerId}
+  </select>		
+  <!-- 1.4 查询该用户的补充权限 -->
+  <select id="selectReplenishAuId" parameterType="com.rongcheng.erp.entity.UserRoleAuthority" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT id,GROUP_CONCAT(e) replenishMoudleId,GROUP_CONCAT(f) replenishMoudleName
+    FROM (SELECT a.user_id AS id,a.mould_id AS e,b.module_name AS f
+          FROM user_role_authority a
+          JOIN authority_management b
+          ON a.mould_id=b.id
+          AND a.owner_id=b.owner_id=#{ownerId}
+          AND a.role_id IS NULL 
+          AND a.user_id=#{userId})g
+    GROUP BY id
+  </select> 
+<!-- 2.查询当前用户的ownerId下的所有的: 角色 -->
+  <select id="findRoleAndAuth" parameterType="BigInteger" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT  role_id AS roleId,role_name AS roleName,GROUP_CONCAT(b) childModuleId 
+    FROM (SELECT DISTINCT a.id AS role_id,a.role_name,b.mould_id AS b 
+          FROM role_management a 
+          JOIN user_role_authority b
+          ON a.id=b.role_id
+          AND a.owner_id=b.owner_id=#{ownerId}) g
+    GROUP BY role_id
+  </select>
+<!-- 3.查询当前账户的ownerId下的所有的: 权限 -->
+  <select id="findAuth" parameterType="BigInteger" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT id AS parentModuleId,module_name AS parentModuleName,GROUP_CONCAT(a) childModuleId,GROUP_CONCAT(b) childModuleName
+    FROM (SELECT a.id,a.module_name,b.id AS a,b.module_name AS b
+          FROM authority_management a
+          JOIN authority_management b
+          ON a.id=b.parent_module
+          AND a.owner_id=b.owner_id=#{ownerId}) g
+    GROUP BY id
+  </select>
+<!-- 4.新建用户 -->
+  <!-- 4.1 查询新建的用户的账号,避免重复 -->
+  <select id="findByAccountNum" resultType="String" parameterType="String">
+    SELECT account_num 
+    FROM user_info
+    WHERE account_num=#{accountNum}
+</select>
+  <!-- 4.2 向用户表中插入数据 并返回该记录的id  -->
+  <insert id="saveUserInfo" useGeneratedKeys="true" keyProperty="id" parameterType="com.rongcheng.erp.entity.UserInfo">
+    INSERT INTO user_info
+    (user_type,account_num,PASSWORD,NAME,telephone,account_status,owner_id,operator_id,gmt_create)
+    VALUES
+    (#{userType},#{accountNum},#{password},#{name},#{telephone},#{accountStatus},#{ownerId},#{operatorId},#{gmtCreate})
+  </insert>
+  <!-- 4.3 向关联表中插入数据 -->
+  <insert id="saveUserRoleAuthInfo" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    INSERT INTO user_role_authority
+    <if test="roleId != null">
+      (user_id,role_id,mould_id,owner_id,operator_id,gmt_create)
+      VALUES
+      (#{userId},#{roleId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate})
+    </if>
+    <if test="roleId == null">
+      (user_id,mould_id,owner_id,operator_id,gmt_create)
+      VALUES
+      (#{userId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate})
+    </if>
+  </insert>
+<!-- 5.修改用户 -->
+  <!-- 5.1 在用户表查询该用户的密码 -->
+  <select id="selectPwdById" resultType="String" parameterType="com.rongcheng.erp.entity.UserInfo">
+    SELECT PASSWORD
+    FROM user_info
+    WHERE id=#{id}
+    AND owner_id =#{ownerId}
+  </select>
+  <!-- 5.2 在用户表查询账号 -->
+  <select id="seleAccountNumById" parameterType="com.rongcheng.erp.entity.UserInfo" resultType="String">
+    SELECT account_num AS accountNum
+    FROM user_info
+    WHERE account_num = #{accountNum}
+    AND id != #{id}
+  </select>
+  <!-- 5.3 修改用户表中的信息 -->
+  <update id="updateUserInfo" parameterType="com.rongcheng.erp.entity.UserInfo">
+    UPDATE user_info
+    SET 
+    <!-- 注:主账户可以修改账号  非主账户不能修改 -->
+    <if test="accountNum !='' ">
+      account_num=#{accountNum},password=#{password},name=#{name},telephone=#{telephone},operator_id=#{operatorId},gmt_modified=#{gmtModified}
+    </if>
+    <if test="accountNum =='' ">
+      password=#{password},name=#{name},telephone=#{telephone},operator_id=#{operatorId},gmt_modified=#{gmtModified}
+    </if>
+    WHERE id=#{id}
+    AND owner_id=#{ownerId}
+  </update>
+  <!-- 5.4 修改关联表的数据 -->
+  <insert id="insertURAs" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    INSERT INTO user_role_authority
+      <if test="roleId != null">
+        (user_id,role_id,mould_id,owner_id,operator_id,gmt_create)
+        VALUES
+        (#{userId},#{roleId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate})
+      </if>
+      <if test="roleId == null">
+        (user_id,mould_id,owner_id,operator_id,gmt_create)
+        VALUES
+        (#{userId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate})
+     </if>
+  </insert>
+  <!-- 5.5 删除关联表中修改用户后未被包含的权限记录 -->
+  <!-- 
+    roleId != null                      :该角色中的某个权限不被包含
+    roleId != null $$ mouldId == null   :该角色不被包含
+    roleId == null                      :补充权限不被包含
+   -->
+  <delete id="deleteInfo" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    DELETE FROM user_role_authority
+    WHERE user_id=#{userId}
+    AND owner_id=#{ownerId}
+    <if test="roleId != null and mouldId != null">
+    AND role_id =#{roleId}
+    AND mould_id = #{mouldId}
+    </if>
+    <if test="roleId != null and mouldId == null">
+     AND role_id =#{roleId}
+    </if>
+    <if test="roleId == null and mouldId != null">
+    AND mould_id = #{mouldId}
+    </if>
+  </delete>
+<!-- 6 其他按钮 (停用,启用,删除) -->
+  <!-- 6.1 启用按钮 -->
+  <update id="starts" parameterType="BigInteger">
+    UPDATE user_info
+    SET account_status=1,operator_id=#{operatorId}
+    WHERE id=#{id}
+    AND owner_id=#{ownerId}
+  </update>
+  <!-- 6.2 停用按钮 -->
+  <update id="stops" parameterType="BigInteger">
+    UPDATE user_info
+    SET account_status=0,operator_id=#{operatorId}
+    WHERE id=#{id}
+    AND owner_id=#{ownerId}
+  </update>
+  <!-- 6.3 删除按钮 -->
+  <!-- 6.3.1 删除用户表的记录 -->
+  <delete id="deleUser" parameterType="BigInteger">
+    DELETE FROM user_info
+    WHERE id=#{id}
+    AND owner_id=#{ownerId}
+  </delete>
+  <!-- 6.3.2 删除关联表的信息 -->
+  <delete id="deleURA" parameterType="BigInteger">
+    DELETE FROM user_role_authority
+    WHERE user_id=#{id}
+    AND owner_id=#{ownerId}
+  </delete>
+</mapper>

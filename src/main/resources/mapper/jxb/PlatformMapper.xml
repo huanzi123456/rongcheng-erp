@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Jxb_PlatformDAO" >
+  <resultMap id="BaseResultMap" type="com.rongcheng.erp.entity.PlatformInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="platform_url" property="platformUrl" jdbcType="VARCHAR" />
+    <result column="platform_shop_type" property="platformShopType" jdbcType="VARCHAR" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="is_authorized" property="authorized" jdbcType="BIT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, platform_url, platform_shop_type, reserved1, note, owner_id, operator_id, 
+    is_authorized, gmt_create, gmt_modified
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.math.BigInteger" >
+    select 
+    <include refid="Base_Column_List" />
+    from platform_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger" >
+    delete from platform_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.rongcheng.erp.entity.PlatformInfo" >
+    insert into platform_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="platformUrl != null" >
+        platform_url,
+      </if>
+      <if test="platformShopType != null" >
+        platform_shop_type,
+      </if>
+      <if test="reserved1 != null" >
+        reserved1,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="isAuthorized != null" >
+        is_authorized,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="platformUrl != null" >
+        #{platformUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="platformShopType != null" >
+        #{platformShopType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="isAuthorized != null" >
+        #{isAuthorized,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rongcheng.erp.entity.PlatformInfo" >
+    update platform_info
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="platformUrl != null" >
+        platform_url = #{platformUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="platformShopType != null" >
+        platform_shop_type = #{platformShopType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserved1 != null" >
+        reserved1 = #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="isAuthorized != null" >
+        is_authorized = #{isAuthorized,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

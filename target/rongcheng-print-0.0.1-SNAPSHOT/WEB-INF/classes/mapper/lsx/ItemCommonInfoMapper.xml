@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.ItemCommonInfoDao">
+	
+	 <select id="findById" 
+			  parameterType="BigInteger"
+			  resultType="com.rongcheng.erp.entity.ItemCommonInfo">
+		select 
+			id,
+			erp_item_num as erpItemNum,
+			name,
+			short_name as shortName,
+			platform_id as platformId,
+			platform_item_sku as platformItemSku,
+			user_shop_code as userShopCode,
+			user_item_code as userItemCode,
+			image1,
+			category,
+			brand,
+			series,
+			color,
+			size,
+			normal_price as normalPrice,
+			cost_price as costPrice,
+			promotion_price as promotionPrice,
+			bar_code as barCode,
+			package_condition as packageCondition,
+			user_classification as userClassification,
+			is_presell as presell,
+			is_commission_sell as commissionSell,
+			is_gift as gift,
+			bar_code_image as barCodeImage,
+			qr_code_image as qrCodeImage,
+			reserved1,
+			note,
+			is_authorized as authorized,
+			item_secret_key as itemSecretKey,
+			owner_id as ownerId,
+			shop_id as shopId,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified,
+			operator_id as operatorId,
+			spec
+		from
+			item_common_info
+		where id=#{id}
+	</select> 
+
+	<select id="findItemCommonInfoAll" resultType="com.rongcheng.erp.entity.ItemCommonInfo">
+	select 
+			id,
+			erp_item_num as erpItemNum,
+			name,
+			short_name as shortName,
+			platform_id as platformId,
+			platform_item_sku as platformItemSku,
+			user_shop_code as userShopCode,
+			user_item_code as userItemCode,
+			image1,
+			category,
+			brand,
+			series,
+			color,
+			size,
+			normal_price as normalPrice,
+			cost_price as costPrice,
+			promotion_price as promotionPrice,
+			bar_code as barCode,
+			package_condition as packageCondition,
+			user_classification as userClassification,
+			is_presell as presell,
+			is_commission_sell as commissionSell,
+			is_gift as isGift,
+			bar_code_image as barCodeImage,
+			qr_code_image as qrCodeImage,
+			reserved1,
+			note,
+			is_authorized as authorized,
+			item_secret_key as itemSecretKey,
+			owner_id as ownerId,
+			shop_id as shopId,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified,
+			operator_id as operatorId,
+			spec
+		from
+			item_common_info 
+	</select>
+	
+	<select id="findItemCommonInfoByPage" parameterType="int" resultType="com.rongcheng.erp.entity.ItemCommonInfo">
+	select 
+			id,
+			erp_item_num as erpItemNum,
+			name,
+			short_name as shortName,
+			platform_id as platformId,
+			platform_item_sku as platformItemSku,
+			user_shop_code as userShopCode,
+			user_item_code as userItemCode,
+			image1,
+			category,
+			brand,
+			series,
+			color,
+			size,
+			normal_price as normalPrice,
+			cost_price as costPrice,
+			promotion_price as promotionPrice,
+			bar_code as barCode,
+			package_condition as packageCondition,
+			user_classification as userClassification,
+			is_presell as presell,
+			is_commission_sell as commissionSell,
+			is_gift as gift,
+			bar_code_image as barCodeImage,
+			qr_code_image as qrCodeImage,
+			reserved1,
+			note,
+			is_authorized as authorized,
+			item_secret_key as itemSecretKey,
+			owner_id as ownerId,
+			shop_id as shopId,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified,
+			operator_id as operatorId,
+			spec
+		from
+			item_common_info 
+			order by gmt_create asc
+		limit #{0},#{1}
+	</select>
+	<select id="findItemCommonInfoCount" resultType="String">select count(id) from item_common_info</select>	
+	 <update id="modifyItemCommonInfo" parameterType="com.rongcheng.erp.entity.ItemCommonInfo">
+		update item_common_info 
+			set 
+				short_name=#{shortName}
+		where 
+			id=#{id}
+	</update> 
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

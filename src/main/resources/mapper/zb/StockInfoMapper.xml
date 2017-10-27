@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.ZB_StockInfoDAO">
+	
+	<!-- /**
+     * 查询库存状态
+     * 
+     * <p>根据关键字
+     * 
+     * @param start 开始位置
+     * @param row 查询几条
+     * @param ownerId 主账号ID
+     * @param keywords 关键字
+     * @return list 结果集合
+     * @author 赵滨
+     */ -->
+	<select id="listItemCommonStockByKeywords"  resultType="java.util.Map">
+        select 
+            
+            <!-- 商品ID -->
+			i.id,
+			
+			<!-- 商品编码 -->
+			ifnull(i.erp_item_num, '') as erpItemNum,
+			
+			<!-- 商品名称 -->
+			ifnull(i.name, '') as name,
+			
+			<!-- 商品条码 -->
+			ifnull(i.bar_code, '') as barCode,
+			
+			<!-- 商品颜色 -->
+			ifnull(i.color, '') as color,
+			
+			<!-- 商品尺码 -->
+			ifnull(i.size, '') as size,
+			
+			<!-- 商品包装（是否破损，包装完整等） -->
+			ifnull(i.package_condition, '') as packageCondition,
+			
+			<!-- 库存总量 -->
+			ifnull(s.stock_quantity,0) as sumQuantity,
+			
+			<!-- 订单占用量 -->
+			ifnull(
+			(
+				select 
+				
+				    sum(l.quantity)
+				
+				from 
+				
+					order_item_link as l ,
+					
+					item_common_info as it,
+					
+					order_info as o
+				
+				where 
+				
+				    it.id = l.order_item_id
+				
+				and 
+				
+				    l.erp_order_id = o.id
+				
+				and 
+				
+				    l.order_item_id = i.id
+				
+				and 
+				
+				    o.order_status in (2, 3, 4, 5, 6)
+				
+				and 
+
+                    l.owner_id = #{2}
+                    
+                and 
+                    
+                    it.owner_id = #{2}
+                    
+                and 
+                    
+                    o.owner_id = #{2}
+			
+			), 0) as useQuantity,
+			
+			<!-- 30天销量 -->
+			ifnull(
+			(
+				select 
+				
+				    SUM(l.quantity)
+				
+				from 
+				
+				    order_item_link as l ,
+				
+				    item_common_info as it,
+				
+				    order_info as o
+				
+				where 
+				
+				    it.id = l.order_item_id
+				
+				and 
+				
+				    l.erp_order_id = o.id
+				
+				and 
+				
+				    l.order_item_id = i.id
+				
+				and 
+				
+				    o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
+				
+				and 
+				
+				    (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
+				
+				and 
+
+                    l.owner_id = #{2}
+                    
+                and 
+                    
+                    it.owner_id = #{2}
+                    
+                and 
+                    
+                    o.owner_id = #{2}
+			), 0) as salesQuantity,
+			
+			<!-- 警戒量 -->
+			ifnull(s.alert_stock, 0) as alertStock
+			
+		from 
+			
+			stock_info as s  
+			
+		right join 
+			
+			item_common_info as i
+			
+		on
+			
+			s.item_id = i.id
+			
+		<where>
+
+			s.owner_id = #{2}
+			
+		and 
+			
+			i.owner_id = #{2}
+			
+        <if test="param4 != '' and param4 != null"> 
+        and 
+			(
+			i.erp_item_num like concat('%', #{3}, '%')
+			
+	    or 
+			
+			i.name like concat('%', #{3}, '%')
+			
+		or 
+			
+			i.bar_code like concat('%', #{3}, '%')
+			)
+        </if> 
+        </where> 
+		limit 
+		
+		    #{0}, #{1}
+    </select>
+
+    <!-- /**
+     * 查询库存状态
+     * 
+     * <p>低于警戒线
+     * 
+     * @param start 开始位置
+     * @param row 查询几条
+     * @param ownerId 主账号ID
+     * @return list 结果集合
+     * @author 赵滨
+     */ -->
+    <select id="listItemCommonStockByAlertStock"  resultType="java.util.Map">
+        select 
+            *
+        from (
+            
+            select
+                *,
+                (sumQuantity-useQuantity) as availableQuantity
+            from(
+                select 
+            
+		            <!-- 商品ID -->
+		            i.id,
+		            
+		            <!-- 商品编码 -->
+		            ifnull(i.erp_item_num, '') as erpItemNum,
+		            
+		            <!-- 商品名称 -->
+		            ifnull(i.name, '') as name,
+		            
+		            <!-- 商品条码 -->
+		            ifnull(i.bar_code, '') as barCode,
+		            
+		            <!-- 商品颜色 -->
+		            ifnull(i.color, '') as color,
+		            
+		            <!-- 商品尺码 -->
+		            ifnull(i.size, '') as size,
+		            
+		            <!-- 商品包装（是否破损，包装完整等） -->
+		            ifnull(i.package_condition, '') as packageCondition,
+		            
+		            <!-- 库存总量 -->
+		            ifnull(s.stock_quantity,0) as sumQuantity,
+		            
+		            <!-- 订单占用量 -->
+		            ifnull(
+		            (
+		                select 
+		                
+		                    sum(l.quantity)
+		                
+		                from 
+		                
+		                    order_item_link as l ,
+		                    
+		                    item_common_info as it,
+		                    
+		                    order_info as o
+		                
+		                where 
+		                
+		                    it.id = l.order_item_id
+		                
+		                and 
+		                
+		                    l.erp_order_id = o.id
+		                
+		                and 
+		                
+		                    l.order_item_id = i.id
+		                
+		                and 
+		                
+		                    o.order_status in (2, 3, 4, 5, 6)
+		                
+		                and 
+		
+		                    l.owner_id = #{2}
+		                    
+		                and 
+		                    
+		                    it.owner_id = #{2}
+		                    
+		                and 
+		                    
+		                    o.owner_id = #{2}
+		            
+		            ), 0) as useQuantity,
+		            
+		            <!-- 30天销量 -->
+		            ifnull(
+		            (
+		                select 
+		                
+		                    SUM(l.quantity)
+		                
+		                from 
+		                
+		                    order_item_link as l ,
+		                
+		                    item_common_info as it,
+		                
+		                    order_info as o
+		                
+		                where 
+		                
+		                    it.id = l.order_item_id
+		                
+		                and 
+		                
+		                    l.erp_order_id = o.id
+		                
+		                and 
+		                
+		                    l.order_item_id = i.id
+		                
+		                and 
+		                
+		                    o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
+		                
+		                and 
+		                
+		                    (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
+		                
+		                and 
+		
+		                    l.owner_id = #{2}
+		                    
+		                and 
+		                    
+		                    it.owner_id = #{2}
+		                    
+		                and 
+		                    
+		                    o.owner_id = #{2}
+		            ), 0) as salesQuantity,
+		            
+		            <!-- 警戒量 -->
+		            ifnull(s.alert_stock, 0) as alertStock
+		            
+		        from 
+		            
+		            stock_info as s  
+		            
+		        right join 
+		            
+		            item_common_info as i
+		            
+		        on
+		            
+		            s.item_id = i.id
+		            
+		        where
+		
+		            s.owner_id = #{2}
+		            
+		        and 
+		            
+		            i.owner_id = #{2}
+		            
+            ) as innerLayer
+        ) as outerLayer
+        
+        where
+        
+            availableQuantity &lt; alertStock
+            
+        limit 
+        
+            #{0}, #{1}
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+

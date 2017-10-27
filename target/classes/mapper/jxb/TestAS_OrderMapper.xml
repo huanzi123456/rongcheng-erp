@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.TestAS_Jxb_OrderDAO" >
+<sql id="Base_Where">
+	<!-- 订单条件筛选 start -->
+		owner_id = #{ownerId}
+		<if test="erpOrderNum != null || platformOrderId != null">
+			AND (erp_order_num = #{erpOrderNum} OR platform_order_id = #{platformOrderId})
+		</if>
+		<if test="platformId != null">
+			AND platform_id = #{platformId}
+		</if>
+		<if test="shopId != null">
+			AND shop_id = #{shopId}
+		</if>
+		<if test="orderHold != null">
+			AND is_order_hold = #{orderHold}
+		</if>
+		<if test="buyerWord != null">
+			AND buyer_word IS NOT NULL
+		</if>
+		<if test="sellerWord != null">
+			AND seller_word IS NOT NULL
+		</if>
+		<if test="invoiceTitle != null">
+			AND invoice_title IS NOT NULL
+		</if>
+		<if test="orderMerge != null">
+			AND order_merge IS NOT NULL
+		</if>
+		<if test="orderSplit != null">
+			AND order_split IS NOT NULL
+		</if>
+		<if test="orderEdit != null">
+			AND order_edit IS NOT NULL
+		</if>
+		<if test="time1 != null and time2 != null">
+			AND order_create BETWEEN #{time1} AND #{time2}
+		</if>
+		<if test="payTime1 != null and payTime2 != null">
+			AND order_pay BETWEEN #{payTime1} AND #{payTime2}
+		</if>
+		<if test="print != null">
+			<choose>
+				<when test="expressSheetPrint != null">
+					AND express_sheet_print IS NOT NULL
+					<if test="saleBillPrint != null">
+						AND sale_bill_print IS NOT NULL
+					</if>
+					<if test="saleBillPrint == null">
+						AND sale_bill_print IS NULL
+					</if>
+				</when>
+				<when test="expressSheetPrint == null">
+					AND express_sheet_print IS NULL
+					<if test="saleBillPrint != null">
+						AND sale_bill_print IS NOT NULL
+					</if>
+					<if test="saleBillPrint == null">
+						AND sale_bill_print IS NULL
+					</if>
+				</when>
+			</choose>
+		</if>
+		<if test="carrierIdArray != null">
+			AND carrier_id IN
+				<foreach item="item" index="index" collection="carrierIdArray" open="(" separator="," close=")">  
+                   	#{item}
+          		</foreach>
+		</if>
+		<choose>
+			<when test="refundClose != null">
+				AND refund_close = #{refundClose}
+			</when>
+			<when test="refundCloseArray != null">
+				AND refund_close IN
+					<foreach item="item" index="index" collection="refundCloseArray" open="(" separator="," close=")">  
+	                   	#{item}
+	          		</foreach>
+			</when>
+		</choose>
+		<choose>
+			<when test="orderCod != null">
+				AND is_order_cod = #{orderCod}
+			</when>
+			<when test="orderCodArray != null">
+				AND is_order_cod IN
+					<foreach item="item" index="index" collection="orderCodArray" open="(" separator="," close=")">  
+	                   	#{item}
+	          		</foreach>
+			</when>
+		</choose>
+		<choose>
+			<when test="orderStatus != null">
+				AND order_status = #{orderStatus}
+			</when>
+			<when test="orderStatusArray != null">
+				AND order_status IN
+					<foreach item="item" index="index" collection="orderStatusArray" open="(" separator="," close=")">  
+	                   	#{item}
+	          		</foreach>
+			</when>
+		</choose>
+		<choose>
+			<when test="orderStatus != null">
+				AND order_status = #{orderStatus}
+			</when>
+			<when test="orderStatusArray != null">
+				AND order_status IN
+					<foreach item="item" index="index" collection="orderStatusArray" open="(" separator="," close=")">  
+	                   	#{item}
+	          		</foreach>
+			</when>
+		</choose>
+	<!-- 订单条件筛选 end -->
+	
+	<!-- 关键字及条件筛选查询 start -->
+		<if test="keyword != null || province != null || presellArray != null">
+<!-- 		<if test="keyword != null || quantity != null || count != null || price != null || weight != null || province != null || presellArray != null"> -->
+			AND(
+			<if test="keyword != null">
+				<!-- 订单信息筛选 start -->
+				buyer_word LIKE CONCAT('%',#{keyword},'%')
+				OR seller_word LIKE CONCAT('%',#{keyword},'%')
+				<!-- 订单信息筛选 end -->
+				
+				<!-- 买家信息筛选 start -->
+				OR
+			</if>
+			<if test="keyword != null || province != null || presellArray != null">
+				platform_buyer_id IN(
+					SELECT id FROM buyer_info WHERE
+						owner_id = #{ownerId}
+						<if test="presellArray != null">
+							AND　is_presell IN
+								<foreach item="item" index="index" collection="presellArray" open="(" separator="," close=")">  
+				                   	#{item}
+				          		</foreach>
+						</if>
+						<if test="province != null">
+							AND floor(region_id/10000)*10000 = #{province}
+						</if>
+						<if test="keyword != null">
+							AND (
+								buyer_name LIKE CONCAT('%',#{keyword},'%')
+								OR consignee_name LIKE CONCAT('%',#{keyword},'%')
+								OR consignee_tel LIKE CONCAT('%',#{keyword},'%')
+								OR consignee_mobile LIKE CONCAT('%',#{keyword},'%')
+							)
+						</if>
+				)
+				<if test="keyword != null">
+<!-- 				<if test="keyword != null || quantity != null || count != null || price != null || weight != null"> -->
+				<!-- 	<if test="quantity != null || count != null || price != null || weight != null">
+				AND
+					</if>
+					<if test="quantity == null and count == null and price == null and weight == null"> -->
+				OR	
+					<!-- </if> -->
+				</if>
+			</if>
+				<!-- 买家信息筛选 end -->
+				
+				<!-- 商品信息筛选 start -->
+			<if test="keyword != null">
+			<!-- <if test="keyword != null || quantity != null || count != null || price != null || weight != null"> -->
+				erp_order_num IN(
+					SELECT erp_order_id FROM order_item_link WHERE owner_id = #{ownerId} AND order_item_id IN(
+						SELECT id FROM item_common_info WHERE
+							owner_id = #{ownerId}
+							AND (
+								name LIKE CONCAT('%',#{keyword},'%')
+								OR erp_item_num LIKE CONCAT('%',#{keyword},'%')
+							)
+					)
+					<!-- 此处去掉商品数量等筛选 -->
+					<!-- SELECT
+						erp_order_id
+					FROM
+						(SELECT
+							订单里同种商品的信息
+							erp_order_id, l.quantity AS quantity, l.quantity*i.normal_price AS price, l.quantity*i.weight AS weight
+						FROM
+							(SELECT
+								ic.id, ic.normal_price, ie.weight
+							FROM
+								(SELECT
+									<include refid="com.rongcheng.erpao.Jxb_ItemCommonDAO.Base_Column_List"/>
+								FROM
+									item_common_info
+								WHERE
+									owner_id = #{ownerId}
+									<if test="keyword != null">
+										AND (
+											name LIKE CONCAT('%',#{keyword},'%')
+											OR erp_item_num LIKE CONCAT('%',#{keyword},'%')
+										)
+									</if>
+								) AS ic LEFT JOIN item_esp_info AS ie
+							ON
+								ic.id = ie.item_id
+							) AS i 
+						LEFT JOIN order_item_link l
+						ON
+							l.owner_id = #{ownerId}
+							AND i.id = l.order_item_id
+					<if test="quantity != null || count != null || price != null || weight != null">
+						GROUP BY
+							erp_order_id
+						HAVING
+						<trim suffixOverrides="AND">
+						<if test="quantity != null">
+							SUM(quantity) BETWEEN <foreach collection="quantity" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="count != null">
+							COUNT(erp_order_id) BETWEEN <foreach collection="count" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="price != null">
+							SUM(price) BETWEEN <foreach collection="price" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="weight != null">
+							SUM(weight) BETWEEN <foreach collection="weight" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						</trim>
+					</if>
+					) AS base -->
+				
+				)<!-- erp_order_num IN( -->
+			</if>
+				<!-- 商品信息筛选 end -->
+			)
+		</if>
+		
+		
+			<!-- 商品数量等筛选 start -->
+			<if test="quantity != null || count != null || price != null || weight != null">
+				AND erp_order_num IN(
+					<!-- 
+					SELECT erp_order_id FROM order_item_link WHERE owner_id = #{ownerId} AND order_item_id IN(
+						SELECT id FROM item_common_info WHERE
+							owner_id = #{ownerId}
+							AND (
+								name LIKE CONCAT('%',#{keyword},'%')
+								OR erp_item_num LIKE CONCAT('%',#{keyword},'%')
+							)
+					)
+					-->
+					SELECT
+						erp_order_id
+					FROM
+						(SELECT
+							<!-- 订单里同种商品的信息 -->
+							erp_order_id, l.quantity AS quantity, l.quantity*i.normal_price AS price, l.quantity*i.weight AS weight
+						FROM
+							(SELECT
+								ic.id, ic.normal_price, ie.weight
+							FROM
+								(SELECT
+									<include refid="com.rongcheng.erp.dao.Jxb_ItemCommonDAO.Base_Column_List"/>
+								FROM
+									item_common_info
+								WHERE
+									owner_id = #{ownerId}
+									<!-- <if test="keyword != null">
+										AND (
+											name LIKE CONCAT('%',#{keyword},'%')
+											OR erp_item_num LIKE CONCAT('%',#{keyword},'%')
+										)
+									</if> --><!-- 此处去掉关键字过滤 -->
+								) AS ic LEFT JOIN item_esp_info AS ie
+							ON
+								ic.id = ie.item_id
+							) AS i 
+						LEFT JOIN order_item_link l
+						ON
+							l.owner_id = #{ownerId}
+							AND i.id = l.order_item_id
+					<if test="quantity != null || count != null || price != null || weight != null">
+						GROUP BY
+							erp_order_id
+						HAVING
+						<trim suffixOverrides="AND">
+						<if test="quantity != null">
+							SUM(quantity) BETWEEN <foreach collection="quantity" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="count != null">
+							COUNT(erp_order_id) BETWEEN <foreach collection="count" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="price != null">
+							SUM(price) BETWEEN <foreach collection="price" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						<if test="weight != null">
+							SUM(weight) BETWEEN <foreach collection="weight" item="item" separator="AND">#{item}</foreach> AND
+						</if>
+						</trim>
+					</if>
+					) AS base
+				
+				)<!-- erp_order_num IN( -->
+			</if>
+				<!-- 商品数量等筛选筛选 end -->
+				
+	<!-- 关键字及条件筛选查询 end -->
+</sql>
+  <select id="list" parameterType="com.rongcheng.erp.dto.OrderItemInfo_S" resultMap="com.rongcheng.erp.dao.Jxb_OrderDAO.ResultMap">
+    <include refid="com.rongcheng.erp.dao.Jxb_OrderDAO.Base_Search1"/>
+	(SELECT 
+		<include refid="com.rongcheng.erp.dao.Jxb_OrderDAO.Min_Column_List"></include>
+	FROM
+		order_info
+	WHERE
+		<include refid="Base_Where"/>
+	order by
+		IF(ISNULL(order_pay),0,1) DESC,order_pay
+	<if test="start != null">
+		limit #{start},#{rows}
+	</if>
+	)
+	<include refid="com.rongcheng.erp.dao.Jxb_OrderDAO.Base_Search2"/>
+  </select>
+  <select id="count" parameterType="com.rongcheng.erp.dto.OrderItemInfo_S" resultType="int">
+    SELECT COUNT(*) FROM order_info WHERE <include refid="Base_Where" />
+  </select>
+</mapper>

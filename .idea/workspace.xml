@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="rongcheng-erp:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="erp项目">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ShopInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ShopInfoController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand>
+      <path>
+        <item name="" type="eadb38e5:DatabaseStructure$Root" />
+        <item name="远程融成" type="e3449647:DbNodeDescriptor" />
+      </path>
+      <path>
+        <item name="" type="eadb38e5:DatabaseStructure$Root" />
+        <item name="远程融成" type="e3449647:DbNodeDescriptor" />
+        <item name="rongchengtech" type="e3449647:DbNodeDescriptor" />
+      </path>
+      <path>
+        <item name="" type="eadb38e5:DatabaseStructure$Root" />
+        <item name="远程融成" type="e3449647:DbNodeDescriptor" />
+        <item name="rongchengtech" type="e3449647:DbNodeDescriptor" />
+        <item name="" type="fce03ad6:DatabaseStructure$GroupNode" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="rongcheng-erp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ZB_InventoryService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="201" column="0" lean-forward="true" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZB_InventoryServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="1099" column="0" lean-forward="false" selection-start-line="1099" selection-start-column="0" selection-end-line="1099" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZB_InventoryDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="414" column="41" lean-forward="true" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZB_InventoryController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="596">
+              <caret line="410" column="30" lean-forward="false" selection-start-line="410" selection-start-column="30" selection-end-line="410" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inventorySync.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1452">
+              <caret line="78" column="31" lean-forward="false" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inventory_sync.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/js/inventory_sync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inventorySync.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="260" column="56" lean-forward="true" selection-start-line="260" selection-start-column="56" selection-end-line="260" selection-end-column="56" />
+              <folding>
+                <marker date="1509100730261" expanded="true" signature="10245:10263" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="10383:10401" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="10493:10511" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="12648:12666" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="13091:13108" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="13233:13284" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="13730:13747" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="13870:13921" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="15090:15108" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="15340:15358" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="21891:21905" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="22804:22818" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="23636:23650" ph="..." />
+                <marker date="1509100730261" expanded="true" signature="24178:24192" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Arquillian JUnit Test Class" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>location_item_stock</find>
+      <find>com</find>
+      <find>com.</find>
+      <find>Integer</find>
+      <find>String</find>
+      <find>Big</find>
+      <find>isA</find>
+      <find>\n</find>
+      <find>/inventorySync/listInventorySyncByItemId.do</find>
+      <find>listPlatformErpLinkShopInfo</find>
+      <find>platformErpLinkShopInfo</find>
+      <find>inventorySync_syncTable</find>
+      <find>&lt;p&gt;</find>
+      <find>自动同步</find>
+      <find>p</find>
+      <find>inventorySync_startSync</find>
+      <find>6.</find>
+      <find>/columnAddPublic/columnAddPublicCommit.do</find>
+      <find>/inventorySync/updateInventorySyncConfiguations.do</find>
+      <find>row</find>
+      <find>up</find>
+      <find>upda</find>
+      <find>updateByIdSelective</find>
+      <find>updateByPrimaryKeySelective</find>
+      <find>autoSynchron</find>
+      <find>block</find>
+      <find>none</find>
+      <find>显示 警戒库 弹出框</find>
+      <find>&quot;display&quot;, &quot;block&quot;</find>
+      <find>&quot;display&quot;, &quot;none&quot;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>/util/cookie_util.js</replace>
+      <replace>showMessage</replace>
+      <replace>/</replace>
+      <replace>A</replace>
+      <replace>a</replace>
+      <replace>platformErpLinkShopWarehouseInfo</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/login/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/topnav.js" />
+        <option value="$PROJECT_DIR$/../rongcheng-print/src/main/webapp/topnav/settings.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/topnav/settings.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/css/print.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/print.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/InventoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/css/inventory_state.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendExpressTemplate.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendInvoiceTemplate.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressTemplate.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/shipment/shipmentInspection.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/inventory_list.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryList.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/storageLocation.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/location.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryState.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventory_sync.html" />
+        <option value="E:/MavenRepository/org/springframework/spring-webmvc/3.2.8.RELEASE/spring-webmvc-3.2.8.RELEASE.jar!/org/springframework/web/servlet/DispatcherServlet.class" />
+        <option value="$PROJECT_DIR$/src/main/webapp/topnav/inventory.html" />
+        <option value="$PROJECT_DIR$/src/test/java/T3.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAOTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ZB_InventoryDAOTest.java" />
+        <option value="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
+        <option value="$PROJECT_DIR$/src/test/java/T5.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp" />
+        <option value="$USER_HOME$/Desktop/util.jar!/util/utils/PrintTool.class" />
+        <option value="E:/MavenRepository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/org/aopalliance/aop/AspectException.class" />
+        <option value="E:/MavenRepository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/org/aopalliance/aop/Advice.class" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/OrderInfo.java" />
+        <option value="$USER_HOME$/Desktop/工作中用到的技术/java工具包/myself/sql语句转换FileSqlTransformationTool(1).java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/sql语句转换FileSqlTransformationTool.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformErpLinkShopInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformErpLinkShopWarehouseInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformErpLink.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/inventory_sync.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\MavenRepository" />
+        <option name="mavenHome" value="D:/Java/apache-maven-3.5.0-bin" />
+        <option name="userSettingsFile" value="D:\Java\apache-maven-3.5.0-bin\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="960" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Abstraction issuesJava</id>
+          </State>
+          <State>
+            <id>Google Web Toolkit issues</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Security issuesJava</id>
+          </State>
+          <State>
+            <id>Serialization issuesJava</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SerializableHasSerialVersionUIDField</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="erp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="erp" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="SearchEverywhereHistoryKey" value=".jar&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/lib/jiml-util.jar&#10;web&#9;ACTION&#9;ActivateWebToolWindow&#10;index&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/login/index.jsp" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.rongcheng.erp.dao" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\test" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\test\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\utils" />
+      <recent name="E:\JavaProject\rongcheng-erp\out\artifacts\uril" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\test\java" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\util" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Go">
+    <configuration name="FileSqlTransformationTool" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.rongcheng.erp.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.rongcheng.erp.utils.FileSqlTransformationTool" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration name="Go" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.1" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <deployment>
+        <artifact name="rongcheng-erp:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_rongcheng-erp" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="58610" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="rongcheng-erp:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="T3.t11" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="rongcheng-erp" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="T3" />
+      <option name="METHOD_NAME" value="t11" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="T5.t1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="rongcheng-erp" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="T5" />
+      <option name="METHOD_NAME" value="t1" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="T5.t2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="rongcheng-erp" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="T5" />
+      <option name="METHOD_NAME" value="t2" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="rongcheng-print" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.Go" />
+      <item index="1" class="java.lang.String" itemvalue="Application.FileSqlTransformationTool" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.T3.t11" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.T5.t1" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.T5.t2" />
+    </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.FileSqlTransformationTool" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.T5.t2" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.T5.t1" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.T3.t11" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="" />
+      <created>1508738579712</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1508738579712</updated>
+      <workItem from="1508738581038" duration="12831000" />
+      <workItem from="1508808135933" duration="19378000" />
+      <workItem from="1508894525697" duration="18063000" />
+      <workItem from="1508981211322" duration="6402000" />
+      <workItem from="1508989811661" duration="19563000" />
+      <workItem from="1509068121941" duration="29487000" />
+    </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1509101261829</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1509101261829</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="T5_t1 - 2017.10.25 at 15h 36m 42s.xml">
+      <configuration name="T5.t1" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t1 - 2017.10.25 at 15h 37m 47s.xml">
+      <configuration name="T5.t1" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t1 - 2017.10.25 at 15h 55m 38s.xml">
+      <configuration name="T5.t1" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 33m 02s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 33m 07s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 33m 57s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 34m 59s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 35m 10s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 35m 23s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T5_t2 - 2017.10.25 at 15h 55m 46s.xml">
+      <configuration name="T5.t2" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="105724000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790446" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4610874" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.50647247" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5038002" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryState.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="39" column="20" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/rongcheng-Globalexpress/src/main/java/com/globalexpress/web/cms/util/UrlTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="19" column="74" lean-forward="true" selection-start-line="19" selection-start-column="74" selection-end-line="19" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/T5.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="41" column="17" lean-forward="false" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/META-INF/MANIFEST.MF" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+    <entry file="file://$PROJECT_DIR$/rongcheng-erp.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/artifacts/rongcheng_erp_jar.xml" />
+    <entry file="file://$PROJECT_DIR$/.idea/artifacts/rongcheng_erp_war.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/MavenRepository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/org/aopalliance/aop/AspectException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/MavenRepository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar!/org/aopalliance/aop/Advice.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Desktop/util.jar!/util/utils/PrintTool.class" />
+    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/ClientInfoUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/RequestUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/JsonpResult.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/FileUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/LocationItemStock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/OrderInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/工作中用到的技术/java工具包/myself/sql语句转换FileSqlTransformationTool(1).java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/sql语句转换FileSqlTransformationTool.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/converter/CustomTimestampConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-182">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Jxb_PlatformShopDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformShop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+          <folding>
+            <element signature="e#369#370#0" expanded="false" />
+            <element signature="e#383#384#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/ShopInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="39" column="57" lean-forward="true" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
+          <folding>
+            <marker date="1508897255997" expanded="true" signature="10958:10991" ph="..." />
+            <marker date="1508897255997" expanded="true" signature="11391:11405" ph="..." />
+            <marker date="1508897255997" expanded="true" signature="12340:12354" ph="..." />
+            <marker date="1508897255997" expanded="true" signature="13192:13206" ph="..." />
+            <marker date="1508897255997" expanded="true" signature="13750:13764" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/itemCommon/Jxb_ItemCommonServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="358" column="0" lean-forward="true" selection-start-line="358" selection-start-column="0" selection-end-line="429" selection-end-column="1" />
+          <folding>
+            <marker date="1508751745697" expanded="true" signature="11522:11534" ph="..." />
+            <marker date="1508751745697" expanded="true" signature="13388:13402" ph="..." />
+            <marker date="1508751745697" expanded="true" signature="14337:14351" ph="..." />
+            <marker date="1508751745697" expanded="true" signature="15189:15203" ph="..." />
+            <marker date="1508751745697" expanded="true" signature="15747:15761" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/工作中用到的技术/WEB/js_jquery选择框_单选_全选.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="78" lean-forward="true" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/rongcheng-Globalexpress/src/main/java/com/globalexpress/web/cms/controller/BlockChannelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="222" column="78" lean-forward="true" selection-start-line="222" selection-start-column="78" selection-end-line="222" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/rongcheng-Globalexpress/src/main/webapp/admin/zb/js/contentManagement/columnAddPublic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="273" column="24" lean-forward="true" selection-start-line="273" selection-start-column="24" selection-end-line="273" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="88" column="4" lean-forward="true" selection-start-line="88" selection-start-column="4" selection-end-line="93" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/jxb/OrderMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="807" column="2" lean-forward="false" selection-start-line="807" selection-start-column="2" selection-end-line="964" selection-end-column="11" />
+          <folding>
+            <marker date="1508738641209" expanded="true" signature="26841:26872" ph="select count... order_info" />
+            <marker date="1508738641209" expanded="true" signature="27079:27154" ph="insert into order_info... " />
+            <marker date="1508738641209" expanded="true" signature="27513:33706" ph="update order... " />
+            <marker date="1508738641209" expanded="true" signature="38005:40399" ph="SELECT oiw.i... id" />
+            <marker date="1508738641209" expanded="true" signature="38878:40399" ph="SELECT oi.id... id" />
+            <marker date="1508738641209" expanded="true" signature="39760:40399" ph="SELECT o.id,... " />
+            <marker date="1508738641209" expanded="true" signature="40437:40770" ph="o LEFT JOIN " />
+            <marker date="1508738641209" expanded="true" signature="40945:41223" ph="(SELECT FROM... " />
+            <marker date="1508738641209" expanded="true" signature="41331:41361" ph="select MAX(i... order_info" />
+            <marker date="1508738641209" expanded="true" signature="41438:41538" ph="SELECT MAX(g... order_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/order/Jxb_OrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="33" column="68" lean-forward="true" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Jxb_OrderDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="38" column="27" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/jxb/PlatformMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="103" column="2" lean-forward="false" selection-start-line="103" selection-start-column="2" selection-end-line="138" selection-end-column="11" />
+          <folding>
+            <marker date="1508738642051" expanded="true" signature="1373:1481" ph="select from platform_info" />
+            <marker date="1508738642051" expanded="true" signature="1571:1633" ph="delete from " />
+            <marker date="1508738642051" expanded="true" signature="3722:4816" ph="update platf... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Jxb_PlatformDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformErpLinkShopWarehouseInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="201" column="0" lean-forward="true" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="414" column="41" lean-forward="true" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="410" column="30" lean-forward="false" selection-start-line="410" selection-start-column="30" selection-end-line="410" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="1099" column="0" lean-forward="false" selection-start-line="1099" selection-start-column="0" selection-end-line="1099" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="78" column="31" lean-forward="false" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformErpLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/inventory_sync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="1640" column="21" lean-forward="true" selection-start-line="1640" selection-start-column="21" selection-end-line="1640" selection-end-column="21" />
+          <folding>
+            <marker date="1509097126978" expanded="true" signature="569:3795" ph="select i.id,... " />
+            <marker date="1509097126978" expanded="true" signature="5386:8784" ph="select * fro... *" />
+            <marker date="1509097126978" expanded="true" signature="5435:8662" ph="select *, (s... id" />
+            <marker date="1509097126978" expanded="true" signature="9057:11203" ph="select count... *" />
+            <marker date="1509097126978" expanded="true" signature="9112:11119" ph="select *, (s... count" />
+            <marker date="1509097126978" expanded="true" signature="9218:11092" ph="select count... *" />
+            <marker date="1509097126978" expanded="true" signature="9448:10226" ph="select sum(l... order_item_link" />
+            <marker date="1509097126978" expanded="true" signature="11446:12053" ph="select id, u... warehouse_info" />
+            <marker date="1509097126978" expanded="true" signature="12380:12950" ph="select id, w... " />
+            <marker date="1509097126978" expanded="true" signature="13275:13966" ph="select id, w... " />
+            <marker date="1509097126978" expanded="true" signature="14259:14859" ph="insert into location_item_stock... " />
+            <marker date="1509097126978" expanded="true" signature="15155:15753" ph="update locat... " />
+            <marker date="1509097126978" expanded="true" signature="16040:16210" ph="delete from " />
+            <marker date="1509097126978" expanded="true" signature="16462:16595" ph="delete from " />
+            <marker date="1509097126978" expanded="true" signature="16964:17599" ph="select sum(l... order_item_link" />
+            <marker date="1509097126978" expanded="true" signature="18598:20985" ph="select i.id,... " />
+            <marker date="1509097126978" expanded="true" signature="22660:23761" ph="select id, u... warehouse_info" />
+            <marker date="1509097126978" expanded="true" signature="24991:25691" ph="insert into warehouse_info... " />
+            <marker date="1509097126978" expanded="true" signature="25966:26681" ph="update wareh... " />
+            <marker date="1509097126978" expanded="true" signature="27006:27628" ph="select id, u... warehouse_info" />
+            <marker date="1509097126978" expanded="true" signature="27986:28766" ph="select id, w... stocklocation_info" />
+            <marker date="1509097126978" expanded="true" signature="29772:30402" ph="select id, w... stocklocation_info" />
+            <marker date="1509097126978" expanded="true" signature="30706:31290" ph="insert into stocklocation_info... " />
+            <marker date="1509097126978" expanded="true" signature="31546:32168" ph="update stock... " />
+            <marker date="1509097126978" expanded="true" signature="32376:32492" ph="delete from " />
+            <marker date="1509097126978" expanded="true" signature="32807:34156" ph="select i.id,... stocklocation_info" />
+            <marker date="1509097126978" expanded="true" signature="34452:35929" ph="select id, e... " />
+            <marker date="1509097126978" expanded="true" signature="38850:41708" ph="select i.id,... " />
+            <marker date="1509097126978" expanded="true" signature="38967:41537" ph="select /* 商品... " />
+            <marker date="1509097126978" expanded="true" signature="38967:41563" ph="select /* 商品... " />
+            <marker date="1509097126978" expanded="true" signature="39417:39439" ph="/* 商品包装（是否破损... " />
+            <marker date="1509097126978" expanded="true" signature="40526:40543" ph="/*库存自动同步状况（开... " />
+            <marker date="1509097126978" expanded="true" signature="40810:40847" ph="/*1.系统商品信息表1... " />
+            <marker date="1509097126978" expanded="true" signature="40924:40946" ph="/*20.erp专用-库... " />
+            <marker date="1509097126978" expanded="true" signature="42021:43052" ph="select count... ifnull" />
+            <marker date="1509097126978" expanded="true" signature="42075:42931" ph="select /*库存自... item_common_info" />
+            <marker date="1509097126978" expanded="true" signature="42098:42115" ph="/*库存自动同步状况（开... " />
+            <marker date="1509097126978" expanded="true" signature="42140:42250" ph="select max(p... platform_erp_link" />
+            <marker date="1509097126978" expanded="true" signature="42140:42288" ph="select max(p... platform_erp_link" />
+            <marker date="1509097126978" expanded="true" signature="42140:42328" ph="select max(p... platform_erp_link" />
+            <marker date="1509097126978" expanded="true" signature="42382:42419" ph="/*1.系统商品信息表1... " />
+            <marker date="1509097126978" expanded="true" signature="43335:44618" ph="select id, i... platform_erp_link" />
+            <marker date="1509097126978" expanded="true" signature="44866:47018" ph="update platf... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="260" column="56" lean-forward="true" selection-start-line="260" selection-start-column="56" selection-end-line="260" selection-end-column="56" />
+          <folding>
+            <marker date="1509100730261" expanded="true" signature="10245:10263" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="10383:10401" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="10493:10511" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="12648:12666" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="13091:13108" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="13233:13284" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="13730:13747" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="13870:13921" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="15090:15108" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="15340:15358" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="21891:21905" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="22804:22818" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="23636:23650" ph="..." />
+            <marker date="1509100730261" expanded="true" signature="24178:24192" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArquillianSettingsConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor>
+            <show-content>
+              <type id="library" />
+            </show-content>
+          </artifact-editor>
+          <last-edited>rongcheng-erp:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>rongcheng-erp</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: aopalliance:aopalliance:1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

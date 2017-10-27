@@ -1,0 +1,415 @@
+package com.rongcheng.erp.controller;
+
+
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import com.jimlp.util.FileUtils;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.rongcheng.erp.service.Inventory.ZB_InventoryService;
+import com.rongcheng.erp.utils.JsonResult;
+
+
+/**
+ * 库位设置 控制层
+ *
+ * @author 赵滨
+ */
+@Controller
+public class ZB_InventoryController {
+
+    @Resource
+    private ZB_InventoryService inventoryService;
+
+    //分页相关（每页多少条）
+//    @Value("#{config['rows']}")
+    private int rows = 2;
+
+    //临时主账号
+    private BigInteger ownerId = new BigInteger("1");
+
+//    @ExceptionHandler(OrderOutNumberException.class)
+//    @ResponseBody
+//    public JsonResult orderOutNumberException(OrderOutNumberException e){
+//        e.printStackTrace();
+//        return new JsonResult(5,e);
+//    }
+
+    /**
+     * 跳转 库存状态 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/inventoryState.do")
+    public String inventoryState() {
+        return "inventory/inventoryState";
+    }
+
+    /**
+     * 加载 库存状态 页面
+     *
+     * @param nowPage         当前页数
+     * @param keywords        搜索关键字
+     * @param isAlertStock    是否低于警戒线
+     * @param warehouseInfoId 仓库ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryState/loadInventoryState.do")
+    public JsonResult loadInventoryState(Integer nowPage, String keywords, Boolean isAlertStock,
+                                         BigInteger warehouseInfoId) {
+
+        //加载
+        Map<String, Object> map =
+                inventoryService.loadInventoryState(nowPage, rows, keywords, isAlertStock, ownerId, warehouseInfoId);
+
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 加载 仓库 栏目
+     *
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryState/loadWarehouseInfo.do")
+    public JsonResult loadWarehouseInfo() {
+
+        return new JsonResult(inventoryService.listStockOfWarehouse(ownerId));
+    }
+
+    /**
+     * 修改 警戒库存
+     *
+     * @param alertStockNum 警戒库存
+     * @param itemCommonId  商品ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryState/updateInventoryState.do")
+    public JsonResult updateInventoryState(Integer alertStockNum, BigInteger[] itemCommonId) {
+
+        return new JsonResult(inventoryService.updateInventoryState(alertStockNum, itemCommonId, ownerId));
+    }
+
+    /**
+     * 跳转 库位库存 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/storageLocation.do")
+    public String storageLocation() {
+        return "inventory/storageLocation";
+    }
+
+    /**
+     * 加载 库位库存 页面
+     *
+     * @param nowPage         当前页数
+     * @param keywords        搜索关键字
+     * @param warehouseInfoId 仓库ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/storageLocation/loadStorageLocation.do")
+    public JsonResult loadInventoryState(Integer nowPage, String keywords, BigInteger warehouseInfoId) {
+
+        //加载
+        Map<String, Object> map =
+                inventoryService.loadStorageLocation(nowPage, rows, keywords, ownerId, warehouseInfoId);
+
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 修改 库位库存
+     *
+     * @param alertStockNum 库存
+     * @param itemCommonId  商品ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/storageLocation/updateStorageLocation.do")
+    public JsonResult updateStorageLocation(Integer alertStockNum, BigInteger[] itemCommonId) {
+
+        return new JsonResult(inventoryService.updateStorageLocation(alertStockNum, itemCommonId, ownerId));
+    }
+
+    /**
+     * 修改 库存清零
+     *
+     * @param itemCommonId 商品ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/storageLocation/updateStocksEmpty.do")
+    public JsonResult updateStocksEmpty(BigInteger[] itemCommonId) {
+
+        return new JsonResult(inventoryService.updateStocksEmpty(itemCommonId, ownerId));
+    }
+
+    /**
+     * 跳转 仓库列表 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/inventoryList.do")
+    public String inventoryList() {
+        return "inventory/inventoryList";
+    }
+
+    /**
+     * 加载 仓库列表 页面
+     *
+     * @param nowPage         当前页数
+     * @param keywords        搜索关键字
+     * @param warehouseStatus 该仓库是否被启用
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/loadInventoryList.do")
+    public JsonResult loadInventoryList(Integer nowPage, String keywords, Integer warehouseStatus) {
+
+        //加载
+        Map<String, Object> map =
+                inventoryService.loadInventoryList(nowPage, rows, keywords, warehouseStatus, ownerId);
+
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 修改 仓库列表 状态
+     *
+     * @param warehouseId 仓库ID
+     * @param status      状态
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/updateUseDisable.do")
+    public JsonResult updateUseDisable(BigInteger warehouseId, Integer status) {
+
+        return new JsonResult(inventoryService.updateUseDisable(warehouseId, status, ownerId));
+    }
+
+    /**
+     * 保存新增修改仓库
+     *
+     * @param warehouseId       仓库ID
+     * @param userWarehouseCode 仓库编码
+     * @param warehouseName     仓库名称
+     * @param consignorName     联系人
+     * @param consignorTel      联系人电话
+     * @param regionId          地区ID
+     * @param userAddress       地址详细
+     * @param ownerId           主账号ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/saveAddUpdate.do")
+    public JsonResult inventoryListSaveAddUpdate(BigInteger warehouseId, String userWarehouseCode, String warehouseName,
+                                                 String consignorName, String consignorTel, BigInteger regionId, String userAddress) {
+
+        return new JsonResult(inventoryService.inventoryListSaveAddUpdate(warehouseId, userWarehouseCode, warehouseName,
+                consignorName, consignorTel, regionId, userAddress, ownerId)
+        );
+    }
+
+    /**
+     * 跳转 库位管理 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/location.do")
+    public String location() {
+        return "inventory/location";
+    }
+
+    /**
+     * 加载 库位管理列表 页面
+     *
+     * @param nowPage  当前页码
+     * @param keywords 关键字
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/loadLocation.do")
+    public JsonResult loadLocation(Integer nowPage, String keywords) {
+
+        //加载
+        Map<String, Object> map = inventoryService.loadLocation(nowPage, keywords, ownerId, rows);
+
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 获取商品内容 根据 库位ID
+     *
+     * @param locationId 库位ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/listItemByLocationId.do")
+    public JsonResult getItemByLocationId(BigInteger locationId) {
+
+        //返回
+        return new JsonResult(inventoryService.listItemByLocationId(locationId, ownerId));
+    }
+
+    /**
+     * 获取商品 内容  根据 关键字
+     *
+     * @param nowPage  当前页码
+     * @param keywords 关键字
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/listItemByKeywords.do")
+    public JsonResult listItemByKeywords(Integer nowPage, String keywords) {
+
+        //返回
+        return new JsonResult(inventoryService.listItemByKeywords(nowPage, keywords, ownerId, rows));
+    }
+
+    /**
+     * 获取商品 内容  根据 商品ID数组
+     *
+     * @param itemIds 商品ID数组
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/listItemByItemIds.do")
+    public JsonResult listItemByItemIds(BigInteger[] itemIds) {
+
+        //返回
+        return new JsonResult(inventoryService.listItemByItemIds(itemIds, ownerId));
+    }
+
+    /**
+     * 保存新增修改库位
+     *
+     * @param locationId            库位ID
+     * @param userStocklocationCode 用户自定义库位编码
+     * @param name                  库位名称
+     * @param itemIds               商品ID数组
+     * @param itemDelIds            商品ID数组 需要删除的
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/saveAddUpdate.do")
+    public JsonResult locationSaveAddUpdate(BigInteger locationId, String userStocklocationCode, String name,
+                                            BigInteger[] itemIds, BigInteger[] itemDelIds) {
+
+        return new JsonResult(inventoryService.locationSaveAddUpdate(locationId, userStocklocationCode,
+                name, itemIds, itemDelIds, ownerId));
+    }
+
+    /**
+     * 删除库位
+     *
+     * @param locationId 库位ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/location/removeLocationById.do")
+    public JsonResult removeLocationById(BigInteger locationId) {
+
+        //返回
+        return new JsonResult(inventoryService.removeLocationById(locationId, ownerId));
+    }
+
+    /**
+     * 跳转 库存同步 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/inventorySync.do")
+    public String inventorySync() {
+        return "inventory/inventorySync";
+    }
+
+    /**
+     * 加载 库位管理列表 页面
+     *
+     * @param nowPage      当前页码
+     * @param keywords     关键字
+     * @param autoSynchron 自动同步
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventorySync/loadInventorySync.do")
+    public JsonResult loadInventorySync(Integer nowPage, String keywords, Integer autoSynchron) {
+        //加载
+        Map<String, Object> map =
+                inventoryService.loadInventorySync(nowPage, rows, keywords, autoSynchron, ownerId);
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 加载 库存同步配置 根据商品ID数组
+     * @param itemIds 商品ID数组
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventorySync/listInventorySyncByItemIds.do")
+    public JsonResult listInventorySyncByItemId(BigInteger[] itemIds) {
+        //加载
+        List<Map<String, Object>> list = inventoryService.listInventorySyncByItemIds(itemIds, ownerId);
+        //返回
+        return new JsonResult(list);
+    }
+
+    /**
+     * 设置 库存同步配置
+     * @param request
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventorySync/updateInventorySyncConfiguations.do")
+    public JsonResult updateInventorySyncConfiguations(HttpServletRequest request) {
+        //获取配置
+        String configuations = request.getParameter("configuations");
+        //设置 库存同步配置
+        int row = inventoryService.updateInventorySyncConfiguations(configuations, ownerId);
+        //返回
+        return new JsonResult(row);
+    }
+}

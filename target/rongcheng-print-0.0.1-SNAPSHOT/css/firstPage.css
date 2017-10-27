@@ -1,0 +1,169 @@
+/*去除默认样式*/
+body,p,pre,form,input,h1,h2,h3,h4,h5,h6,ul,li,ol,dl,dd,dt{
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-style: normal;
+    font-weight: normal;
+    font-family: "\5FAE\8F6F\96C5\9ED1",tahoma;
+}
+ul,li,ol,dl,dd,dt{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+a{
+	text-decoration: none;
+	color: #333;
+}
+i{
+    font-style: normal;
+}
+img{
+	border:0;
+	vertical-align: middle;
+}
+*{
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+.over{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.overmore{
+    text-overflow:ellipsis; 
+    overflow:hidden;
+    display:-webkit-box; 
+    -webkit-line-clamp:3; 
+    -webkit-box-orient: vertical;
+}
+/*背景图*/
+body{
+    background: #fff;
+}
+.bg{
+    height: 3637px;
+    background: url(../images/firstPage.png)no-repeat top center;
+}
+
+.nk{
+    width: 1200px;
+    margin: 0 auto;
+    /*background: rgba(255,0,0,.2);*/
+}
+.logo{
+    padding: 16px 77px;
+}
+.system_Name{
+    width: 50%;
+    text-align: right;
+    margin-top: 80px;
+    padding-right: 50px;
+    height: 190px;
+}
+.system_Name>h1{
+    font-size: 58px;
+    font-weight: bold;
+    font-family: "黑体";
+    margin-bottom: 25px;
+    color: #4f535f;
+}
+.system_Name>p{
+    line-height: 45px;
+    font-size: 30px;
+    color: #4f535f;
+}
+.function_module{
+    margin-top: 950px;
+    height: 510px;
+    padding: 0 74px ;
+}
+.function_module>li{
+    float: left;
+    width: 33.333333333%;
+    height: 50%;
+   
+    position: relative;
+}
+.function_module>li>p{
+    position: absolute;
+    text-align: center;
+    font-size: 25px;
+    color: #5f636c;
+}
+.function_module>li:nth-child(1)>p{
+    left: 125px;
+    top: 95px;
+}
+.function_module>li:nth-child(2)>p{
+    left: 118px;
+    top: 83px;
+}
+.function_module>li:nth-child(3)>p{
+    left: 110px;
+    top: 98px;
+}
+.function_module>li:nth-child(4)>p{
+    left: 122px;
+    top: 114px;
+}
+.function_module>li:nth-child(5)>p{
+    left: 117px;
+    top: 114px;
+}
+.function_module>li:nth-child(6)>p{
+    left: 112px;
+    top: 114px;
+}
+.function_module>li p{
+    font-size: 25px;
+}
+.system_introduce{
+    width: 50%;
+    height: 160px;
+    text-align: center;
+}
+.system_introduce>p{
+    font-size: 24px;
+    color: #fff;
+    line-height: 55px;
+    margin-top: 308px;
+}
+.system_feature{
+    width: 100%;
+    height: 260px;
+    margin-top: 565px;
+    padding-left: 166px;
+}
+.system_feature li{
+    margin-bottom: 28px;
+}
+.system_feature li>p{
+    line-height: 35px;
+    font-size: 20px;
+    color: #fff;
+    padding-left: 30px; 
+    background: url(../images/firstPageCheck.png) no-repeat;
+}
+
+
+/*临时的登录按钮*/
+.login_box{
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background: #fafafa;
+    text-align: right;
+    border-bottom: 1px solid #BABEC4;
+}
+.login_box a{
+    /*display: inline-block;*/
+    /*width: ;*/
+    /*height: ;*/
+    /*background: #3D8CC4;*/
+    font-size: 20px;
+    color: #0D6DB4;
+    font-weight: bold;
+}

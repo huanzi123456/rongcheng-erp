@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Jxb_ItemCommonDAO" >
+  <resultMap id="BaseResultMap" type="com.rongcheng.erp.entity.ItemCommonInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="erp_item_num" property="erpItemNum" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="CHAR" />
+    <result column="platform_id" property="platformId" jdbcType="BIGINT" />
+    <result column="platform_item_sku" property="platformItemSku" jdbcType="BIGINT" />
+    <result column="user_shop_code" property="userShopCode" jdbcType="VARCHAR" />
+    <result column="user_item_code" property="userItemCode" jdbcType="VARCHAR" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="BIGINT" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="series" property="series" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="normal_price" property="normalPrice" jdbcType="DECIMAL" />
+    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="package_condition" property="packageCondition" jdbcType="VARCHAR" />
+    <result column="user_classification" property="userClassification" jdbcType="VARCHAR" />
+    <result column="is_presell" property="presell" jdbcType="BIT" />
+    <result column="is_commission_sell" property="commissionSell" jdbcType="BIT" />
+    <result column="is_gift" property="gift" jdbcType="BIT" />
+    <result column="bar_code_image" property="barCodeImage" jdbcType="VARCHAR" />
+    <result column="qr_code_image" property="qrCodeImage" jdbcType="VARCHAR" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="is_authorized" property="authorized" jdbcType="BIT" />
+    <result column="item_secret_key" property="itemSecretKey" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="spec" property="spec" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, erp_item_num, name, short_name, platform_id, platform_item_sku, user_shop_code, 
+    user_item_code, warehouse_id, image1, category, brand, series, color, size, normal_price, 
+    cost_price, promotion_price, bar_code, package_condition, user_classification, is_presell, 
+    is_commission_sell, is_gift, bar_code_image, qr_code_image, reserved1, note, is_authorized, 
+    item_secret_key, owner_id, shop_id, gmt_create, gmt_modified, operator_id, spec
+  </sql>
+  <select id="getMaxId" resultType="java.math.BigInteger">
+  	select MAX(id) from item_common_info
+  </select>
+	<insert id="insertListSelective">
+		insert into item_common_info
+			(
+			id,owner_id, gmt_create,
+			platform_id, shop_id,
+			erp_item_num, platform_item_sku, name, image1, category, brand, cost_price, normal_price, promotion_price, bar_code
+			)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(
+	         #{item.id},
+	         #{item.ownerId},
+	         #{item.gmtCreate},
+	         #{item.platformId},
+	         #{item.shopId},
+	         #{item.erpItemNum},
+	         #{item.platformItemSku},
+	         #{item.name},
+	         #{item.image1},
+	         #{item.category},
+	         #{item.brand},
+	         #{item.costPrice},
+	         #{item.normalPrice},
+	         #{item.promotionPrice},
+	         #{item.barCode}
+			)
+		</foreach>
+	</insert>
+	<select id="countSelective" parameterType="java.util.Map" resultType="int">
+		select count(*) from item_common_info
+			<where>
+			  <if test="record.operatorId != null" >
+		        operator_id = #{record.operatorId,jdbcType=BIGINT}
+		      </if>
+			  <if test="record.erpItemNum != null" >
+		        AND erp_item_num = #{record.erpItemNum,jdbcType=CHAR}
+		      </if>
+		      <if test="record.name != null" >
+		        AND name = #{record.name,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.shortName != null" >
+		        AND short_name = #{record.shortName,jdbcType=CHAR}
+		      </if>
+		      <if test="record.platformId != null" >
+		        AND platform_id = #{record.platformId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.platformItemSku != null" >
+		        AND platform_item_sku = #{record.platformItemSku,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.userShopCode != null" >
+		        AND user_shop_code = #{record.userShopCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.userItemCode != null" >
+		        AND user_item_code = #{record.userItemCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.image1 != null" >
+		        AND image1 = #{record.image1,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.category != null" >
+		        AND category = #{record.category,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.brand != null" >
+		        AND brand = #{record.brand,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.series != null" >
+		        AND series = #{record.series,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.color != null" >
+		        AND color = #{record.color,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.size != null" >
+		        AND size = #{record.size,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.normalPrice != null" >
+		        AND normal_price = #{record.normalPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.costPrice != null" >
+		        AND cost_price = #{record.costPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.promotionPrice != null" >
+		        AND promotion_price = #{record.promotionPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.barCode != null" >
+		        AND bar_code = #{record.barCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.packageCondition != null" >
+		        AND package_condition = #{record.packageCondition,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.userClassification != null" >
+		        AND user_classification = #{record.userClassification,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.presell != null" >
+		        AND is_presell = #{record.presell,jdbcType=BIT}
+		      </if>
+		      <if test="record.commissionSell != null" >
+		        AND is_commission_sell = #{record.commissionSell,jdbcType=BIT}
+		      </if>
+		      <if test="record.gift != null" >
+		        AND is_gift = #{record.gift,jdbcType=BIT}
+		      </if>
+		      <if test="record.barCodeImage != null" >
+		        AND bar_code_image = #{record.barCodeImage,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.qrCodeImage != null" >
+		        AND qr_code_image = #{record.qrCodeImage,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.reserved1 != null" >
+		        AND reserved1 = #{record.reserved1,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.note != null" >
+		        AND note = #{record.note,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.authorized != null" >
+		        AND is_authorized = #{record.authorized,jdbcType=BIT}
+		      </if>
+		      <if test="record.itemSecretKey != null" >
+		        AND item_secret_key = #{record.itemSecretKey,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.ownerId != null" >
+		        AND owner_id = #{record.ownerId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.shopId != null" >
+		        AND shop_id = #{record.shopId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.gmtCreate != null" >
+		        AND gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="record.gmtModified != null" >
+		        AND gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="record.spec != null" >
+		        AND spec = #{record.spec,jdbcType=VARCHAR}
+		      </if>
+		      
+		      <if test="keyword != null" >
+		        AND(
+			        erp_item_num like CONCAT('%',#{keyword},'%')
+			        OR name like CONCAT('%',#{keyword},'%')
+			        OR short_name like CONCAT('%',#{keyword},'%')
+			        OR platform_id like CONCAT('%',#{keyword},'%')
+			        OR platform_item_sku like CONCAT('%',#{keyword},'%')
+			        OR user_shop_code like CONCAT('%',#{keyword},'%')
+			        OR user_item_code like CONCAT('%',#{keyword},'%')
+			        OR image1 like CONCAT('%',#{keyword},'%')
+			        OR category like CONCAT('%',#{keyword},'%')
+			        OR brand like CONCAT('%',#{keyword},'%')
+			        OR series like CONCAT('%',#{keyword},'%')
+			        OR color like CONCAT('%',#{keyword},'%')
+			        OR size like CONCAT('%',#{keyword},'%')
+			        OR CONCAT(color,size) like CONCAT('%',#{keyword},'%')
+			        OR normal_price like CONCAT('%',#{keyword},'%')
+			        OR cost_price like CONCAT('%',#{keyword},'%')
+			        OR promotion_price like CONCAT('%',#{keyword},'%')
+			        OR bar_code like CONCAT('%',#{keyword},'%')
+			        OR package_condition like CONCAT('%',#{keyword},'%')
+			        OR user_classification like CONCAT('%',#{keyword},'%')
+			        OR is_presell like CONCAT('%',#{keyword},'%')
+			        OR is_commission_sell like CONCAT('%',#{keyword},'%')
+			        OR is_gift like CONCAT('%',#{keyword},'%')
+			        OR bar_code_image like CONCAT('%',#{keyword},'%')
+			        OR qr_code_image like CONCAT('%',#{keyword},'%')
+			        OR reserved1 like CONCAT('%',#{keyword},'%')
+			        OR note like CONCAT('%',#{keyword},'%')
+			        OR is_authorized like CONCAT('%',#{keyword},'%')
+			        OR item_secret_key like CONCAT('%',#{keyword},'%')
+			        OR owner_id like CONCAT('%',#{keyword},'%')
+			        OR shop_id like CONCAT('%',#{keyword},'%')
+			        OR gmt_create like CONCAT('%',#{keyword},'%')
+			        OR gmt_modified like CONCAT('%',#{keyword},'%')
+			        OR spec like CONCAT('%',#{keyword},'%')
+		        )
+		        </if>
+		   </where>
+	</select>
+
+	<select id="listAllBasicInfoByLimtSelective" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"/>
+		from
+			item_common_info
+			<where>
+			  <if test="record.operatorId != null" >
+		        operator_id = #{record.operatorId,jdbcType=BIGINT}
+		      </if>
+			  <if test="record.erpItemNum != null" >
+		        AND erp_item_num = #{record.erpItemNum,jdbcType=CHAR}
+		      </if>
+		      <if test="record.name != null" >
+		        AND name = #{record.name,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.shortName != null" >
+		        AND short_name = #{record.shortName,jdbcType=CHAR}
+		      </if>
+		      <if test="record.platformId != null" >
+		        AND platform_id = #{record.platformId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.platformItemSku != null" >
+		        AND platform_item_sku = #{record.platformItemSku,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.userShopCode != null" >
+		        AND user_shop_code = #{record.userShopCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.userItemCode != null" >
+		        AND user_item_code = #{record.userItemCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.image1 != null" >
+		        AND image1 = #{record.image1,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.category != null" >
+		        AND category = #{record.category,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.brand != null" >
+		        AND brand = #{record.brand,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.series != null" >
+		        AND series = #{record.series,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.color != null" >
+		        AND color = #{record.color,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.size != null" >
+		        AND size = #{record.size,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.normalPrice != null" >
+		        AND normal_price = #{record.normalPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.costPrice != null" >
+		        AND cost_price = #{record.costPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.promotionPrice != null" >
+		        AND promotion_price = #{record.promotionPrice,jdbcType=DECIMAL}
+		      </if>
+		      <if test="record.barCode != null" >
+		        AND bar_code = #{record.barCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.packageCondition != null" >
+		        AND package_condition = #{record.packageCondition,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.userClassification != null" >
+		        AND user_classification = #{record.userClassification,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.presell != null" >
+		        AND is_presell = #{record.presell,jdbcType=BIT}
+		      </if>
+		      <if test="record.commissionSell != null" >
+		        AND is_commission_sell = #{record.commissionSell,jdbcType=BIT}
+		      </if>
+		      <if test="record.gift != null" >
+		        AND is_gift = #{record.gift,jdbcType=BIT}
+		      </if>
+		      <if test="record.barCodeImage != null" >
+		        AND bar_code_image = #{record.barCodeImage,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.qrCodeImage != null" >
+		        AND qr_code_image = #{record.qrCodeImage,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.reserved1 != null" >
+		        AND reserved1 = #{record.reserved1,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.note != null" >
+		        AND note = #{record.note,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.authorized != null" >
+		        AND is_authorized = #{record.authorized,jdbcType=BIT}
+		      </if>
+		      <if test="record.itemSecretKey != null" >
+		        AND item_secret_key = #{record.itemSecretKey,jdbcType=VARCHAR}
+		      </if>
+		      <if test="record.ownerId != null" >
+		        AND owner_id = #{record.ownerId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.shopId != null" >
+		        AND shop_id = #{record.shopId,jdbcType=BIGINT}
+		      </if>
+		      <if test="record.gmtCreate != null" >
+		        AND gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="record.gmtModified != null" >
+		        AND gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="record.spec != null" >
+		        AND spec = #{record.spec,jdbcType=VARCHAR}
+		      </if>
+		      
+		      <if test="keyword != null" >
+		        AND(
+			        erp_item_num like CONCAT('%',#{keyword},'%')
+			        OR name like CONCAT('%',#{keyword},'%')
+			        OR short_name like CONCAT('%',#{keyword},'%')
+			        OR platform_id like CONCAT('%',#{keyword},'%')
+			        OR platform_item_sku like CONCAT('%',#{keyword},'%')
+			        OR user_shop_code like CONCAT('%',#{keyword},'%')
+			        OR user_item_code like CONCAT('%',#{keyword},'%')
+			        OR image1 like CONCAT('%',#{keyword},'%')
+			        OR category like CONCAT('%',#{keyword},'%')
+			        OR brand like CONCAT('%',#{keyword},'%')
+			        OR series like CONCAT('%',#{keyword},'%')
+			        OR color like CONCAT('%',#{keyword},'%')
+			        OR size like CONCAT('%',#{keyword},'%')
+			        OR CONCAT(color,size) like CONCAT('%',#{keyword},'%')
+			        OR normal_price like CONCAT('%',#{keyword},'%')
+			        OR cost_price like CONCAT('%',#{keyword},'%')
+			        OR promotion_price like CONCAT('%',#{keyword},'%')
+			        OR bar_code like CONCAT('%',#{keyword},'%')
+			        OR package_condition like CONCAT('%',#{keyword},'%')
+			        OR user_classification like CONCAT('%',#{keyword},'%')
+			        OR is_presell like CONCAT('%',#{keyword},'%')
+			        OR is_commission_sell like CONCAT('%',#{keyword},'%')
+			        OR is_gift like CONCAT('%',#{keyword},'%')
+			        OR bar_code_image like CONCAT('%',#{keyword},'%')
+			        OR qr_code_image like CONCAT('%',#{keyword},'%')
+			        OR reserved1 like CONCAT('%',#{keyword},'%')
+			        OR note like CONCAT('%',#{keyword},'%')
+			        OR is_authorized like CONCAT('%',#{keyword},'%')
+			        OR item_secret_key like CONCAT('%',#{keyword},'%')
+			        OR owner_id like CONCAT('%',#{keyword},'%')
+			        OR shop_id like CONCAT('%',#{keyword},'%')
+			        OR gmt_create like CONCAT('%',#{keyword},'%')
+			        OR gmt_modified like CONCAT('%',#{keyword},'%')
+			        OR spec like CONCAT('%',#{keyword},'%')
+		        )
+		        </if>
+		   </where>
+		order by
+			gmt_create desc
+		limit
+			#{start},#{rows}
+	</select>
+	<select id="listCategory" parameterType="java.math.BigInteger" resultType="java.lang.String">
+		SELECT 	
+			category
+		FROM 
+			item_common_info
+		WHERE
+			owner_id=#{ownerId}
+		GROUP BY
+			category
+	</select>
+	<select id="listBrand" parameterType="java.math.BigInteger" resultType="java.lang.String">
+		SELECT
+			brand
+		FROM
+			item_common_info
+		WHERE
+			owner_id=#{ownerId}
+		GROUP BY
+			brand
+	</select>
+	<select id="getLastCreateTime" resultType="java.util.Date">
+		SELECT 	
+			MAX(gmt_create)
+		FROM 
+			item_common_info
+		WHERE
+			owner_id=#{0}
+			and platform_id = #{1}
+	</select>
+</mapper>

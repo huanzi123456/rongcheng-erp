@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Jxb_AddressCarrierAllocationDAO" >
+  <resultMap id="BaseResultMap" type="com.rongcheng.erp.entity.AddressCarrierAllocation" >
+    <id column="region_id" property="regionId" jdbcType="BIGINT" />
+    <result column="region_code" property="regionCode" jdbcType="BIGINT" />
+    <result column="region_name" property="regionName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="region_level" property="regionLevel" jdbcType="BIT" />
+    <result column="region_order" property="regionOrder" jdbcType="BIGINT" />
+    <result column="region_name_en" property="regionNameEn" jdbcType="VARCHAR" />
+    <result column="region_short" property="regionShort" jdbcType="VARCHAR" />
+    <result column="carrier_id" property="carrierId" jdbcType="BIGINT" />
+    <result column="head_fee" property="headFee" jdbcType="DECIMAL" />
+    <result column="repeat_fee" property="repeatFee" jdbcType="DECIMAL" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="is_authorized" property="authorized" jdbcType="BIT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    region_id, region_code, region_name, parent_id, region_level, region_order, region_name_en, 
+    region_short, carrier_id, head_fee, repeat_fee, reserved1, note, owner_id, operator_id, 
+    is_authorized, gmt_create, gmt_modified
+  </sql>
+	<select id="getCarrierIdByRegionCode" resultType="java.math.BigInteger">
+		select
+			carrier_id
+		from
+			address_carrier_allocation
+		WHERE
+			region_code IN (#{param1,jdbcType=BIGINT}, #{param1,jdbcType=BIGINT} DIV 100*100, #{param1,jdbcType=BIGINT} DIV 10000*10000 )
+			AND owner_id = #{param2,jdbcType=BIGINT}
+			AND carrier_id IS NOT NULL
+		ORDER BY
+			region_code DESC
+		LIMIT 1
+	</select>
+	<select id="list" resultMap="BaseResultMap">
+		select
+			region_code, region_name, carrier_id, reserved1
+		from
+			address_carrier_allocation
+		WHERE
+			owner_id = #{ownerId,jdbcType=BIGINT}
+		ORDER BY
+			region_code
+	</select>
+	<update id="modifyCarrierAndReserved1">
+		UPDATE
+			address_carrier_allocation
+		<set >
+		<if test="param2 != null" >
+			carrier_id = #{param2,jdbcType=BIGINT},
+		</if>
+		<if test="param3 != null" >
+        	reserved1 = #{param3,jdbcType=VARCHAR},
+      	</if>
+		<if test="param2 != null and param3 == null" >
+        	reserved1 = (SELECT id FROM print_template WHERE owner_id IN (#{param1,jdbcType=BIGINT},0) and carrier_id=#{param2,jdbcType=BIGINT} order by owner_id desc ,id limit 0,1),
+      	</if>
+		<if test="param4 != null" >
+        	operator_id = #{param4,jdbcType=BIGINT},
+      	</if>
+      	</set>
+		WHERE
+			owner_id = #{param1,jdbcType=BIGINT}
+			AND region_code BETWEEN #{param4,jdbcType=BIGINT} AND #{param5,jdbcType=BIGINT}
+			AND carrier_id = (SELECT carrier_id FROM (SELECT carrier_id FROM address_carrier_allocation WHERE region_code = #{param4,jdbcType=BIGINT} AND owner_id = #{param1,jdbcType=BIGINT})aca)
+	</update>
+	<update id="cancelSpecialByRegionCode">
+		UPDATE
+			address_carrier_allocation
+		SET
+		carrier_id = (SELECT carrier_id FROM (SELECT carrier_id FROM address_carrier_allocation WHERE region_code = #{param4,jdbcType=BIGINT} AND owner_id = #{param1,jdbcType=BIGINT})aca)
+		,reserved1 = (SELECT reserved1 FROM (SELECT reserved1 FROM address_carrier_allocation WHERE region_code = #{param4,jdbcType=BIGINT} AND owner_id = #{param1,jdbcType=BIGINT})aca)
+		<if test="param4 != null" >
+        	,operator_id = #{param4,jdbcType=BIGINT}
+      	</if>
+		WHERE
+			owner_id = #{param1,jdbcType=BIGINT}
+			AND region_code BETWEEN #{param2,jdbcType=BIGINT} AND #{param3,jdbcType=BIGINT}
+			AND carrier_id = (SELECT carrier_id FROM (SELECT carrier_id FROM address_carrier_allocation WHERE region_code = #{param2,jdbcType=BIGINT} AND owner_id = #{param1,jdbcType=BIGINT})aca)
+	</update>
+</mapper>

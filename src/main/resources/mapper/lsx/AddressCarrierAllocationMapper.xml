@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.AddressCarrierAllocationDao">
+	
+	<select id="findListByRegionCode" 
+			  parameterType="Integer"
+			  resultType="Map">
+		select carrier_id as carrierId,
+		reserved1,
+		region_id as regionId,
+		region_code as regionCode,
+		region_name as regionName
+		from address_carrier_allocation 
+		 where region_code like '${_parameter}%'
+		 
+	</select>
+	<select id="findCityByRegionCode" 
+			  parameterType="Object"
+			  resultType="com.rongcheng.erp.entity.AddressCarrierAllocation">
+		select carrier_id as carrierId,
+		reserved1,
+		region_id as regionId,
+		region_code as regionCode,
+		region_name as regionName
+		from address_carrier_allocation 
+		 where region_code like CONCAT(#{0},'%',#{1})
+		 
+	</select>  
+	 <select id="findByRegionArea" 
+			  parameterType="Object"
+			  resultType="Map">
+		select carrier_id as carrierId,
+		region_id as regionId,
+		region_code as regionCode,
+		region_name as regionName
+		from address_carrier_allocation 
+		 where parent_id=#{parentId}
+	</select> 
+	
+	<select id="findByRegionName" 
+			  parameterType="String"
+			  resultType="com.rongcheng.erp.entity.AddressCarrierAllocation">
+		select region_code as regionCode,
+		region_id as regionId,
+		parent_id as parentId
+		from address_carrier_allocation 
+		 where region_name=#{regionName}
+	</select> 
+	<select id="findByRegionName1" 
+			  parameterType="String"
+			  resultType="com.rongcheng.erp.entity.AddressCarrierAllocation">
+		select region_code as regionCode,
+		region_id as regionId,
+		parent_id as parentId
+		from address_carrier_allocation 
+		 where region_name=#{regionName}
+	</select>
+	
+	 <select id="findAddressCarrierAllocation" resultType="java.util.Map">
+		select region_id as regionId, 
+		region_code as regionCode,
+		carrier_id  as carrierId,
+		region_name as regionName    
+		from address_carrier_allocation 
+		where region_code like CONCAT(#{0},'%',#{1}) AND carrier_id!=#{2} 
+	</select>
+	<select id="findAddressCarrierAllocationArea" resultType="java.util.Map">
+		select region_id as regionId, 
+		region_code as regionCode,
+		carrier_id  as carrierId,
+		region_name as regionName    
+		from address_carrier_allocation 
+		where region_code like CONCAT(#{0},'%') AND carrier_id=#{1} 
+	</select>
+	<select id="findAddressCarrierAllocation1" resultType="java.util.Map">
+		select region_id as regionId, 
+		region_code as regionCode,
+		carrier_id  as carrierId,
+		region_name as regionName    
+		from address_carrier_allocation 
+		where region_code like CONCAT(#{0},'%',#{1}) 
+	</select>  
+	
+	<select id="findRegionByPage" parameterType="int" resultType="java.util.Map">
+	select 
+			region_id as regionId,
+			region_code as regionCode,
+			region_name as regionName,
+			reserved1,
+			carrier_id as carrierId
+		from
+			address_carrier_allocation
+		where parent_id=1	
+		limit #{0},#{1}
+	</select>
+	<select id="findRegionCount" resultType="String">select count(region_id) from address_carrier_allocation where parent_id=1</select>	
+	<select id="findByRegionCode" parameterType="BigInteger" resultType="com.rongcheng.erp.entity.AddressCarrierAllocation">
+	select 
+			region_id as regionId,
+			region_code as regionCode,	
+			region_name as regionName,
+			parent_id as parentId,
+			region_level as regionLevel,
+			region_order as regionOrder,
+			region_name_en as regionNameEn,
+			region_short as  regionShort,
+			carrier_id as  carrierId,
+			head_fee as headFee,
+			repeat_fee as repeatFee,
+			reserved1 as reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_authorized as isAuthorized,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified
+		from
+			address_carrier_allocation 
+		where region_code=#{regionCode}
+	</select>
+	<select id="findByRegionCarrierId" parameterType="BigInteger" resultType="com.rongcheng.erp.entity.CarrierInfo">
+	select 
+			carrier_name as carrierName
+		from
+			carrier_info 
+		where id=#{id}
+	</select>
+	<update id="modifyRegionArea" parameterType="com.rongcheng.erp.entity.AddressCarrierAllocation">
+		update address_carrier_allocation 
+			set 
+				carrier_id=#{carrierId},
+				reserved1=#{reserved1}
+			where region_code=#{regionCode}
+	</update> 
+	<update id="modifyRegionList" parameterType="Map">
+		update address_carrier_allocation 
+			set 
+				carrier_id=#{carrierId},
+				reserved1=#{reserved1}
+			 where  region_code=#{regionCode}
+	</update>
+	<update id="modifyRegionList1" parameterType="Map">
+		update address_carrier_allocation 
+			set 
+				carrier_id=#{carrierId}
+			 where  region_code=#{regionCode}
+	</update>  
+	<!-- <delete id="delProvice" parameterType="BigInteger">
+	delete from address_carrier_allocation
+	where region_id=#{regionId}
+	</delete>
+	<select id="findByRegion" 
+			  parameterType="Object"
+			  resultType="Map">
+		select region_id as regionId
+		from address_carrier_allocation 
+		where parent_id=#{parentId}
+	</select>  -->
+</mapper>

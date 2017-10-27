@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.ZB_PrintDAO">
+	
+	<!-- /**
+     * 根据ID查询订单
+     * @param params 是否授权, 主账户ID, 订单ID[]
+     * @return List<OrderInfo> 订单的集合
+     * @author 赵滨
+     */ -->
+	<select id="listOrderInfoByIds" 
+            resultType="com.rongcheng.erp.entity.OrderInfo">
+        select
+		    id,
+		    erp_order_num as erpOrderNum,
+		    platform_order_id as platformOrderId,
+		    platform_id as platformId,
+		    shop_id as shopId,
+		    is_online_order as onlineOrder,
+		    platform_buyer_id as platformBuyerId,
+		    carrier_id as carrierId,
+		    is_electronic_waybill as electronicWaybill,
+		    tracking_num as trackingNum,
+		    buyer_word as buyerWord,
+		    seller_word as sellerWord,
+		    order_create as orderCreate,
+		    order_pay as orderPay,
+		    order_download as orderDownload,
+		    order_edit as orderEdit,
+		    order_upload as orderUpload,
+		    order_merge as orderMerge,
+		    order_split as orderSplit,
+		    order_check as orderCheck,
+		    express_sheet_print as expressSheetPrint,
+		    sale_bill_print as saleBillPrint,
+		    order_outbound as orderOutbound,
+		    order_inspect as orderInspect,
+		    order_departure as orderDeparture,
+		    refund_apply as refundApply,
+		    order_locked as orderLocked,
+		    order_closed as orderClosed,
+		    order_completed as orderCompleted,
+		    order_status as orderStatus,
+		    refund_close as refundClose,
+		    is_order_hold as orderHold,
+		    shipping_fee as shippingFee,
+		    is_postage_prepaid as postagePrepaid,
+		    is_order_cod as orderCod,
+		    is_order_special as orderSpecial,
+		    lot_code as lotCode,
+		    invoice_type as invoiceType,
+		    invoice_title as invoiceTitle,
+		    taxpayer_id as taxpayerId,
+		    invoice_detail as invoiceDetail,
+		    order_feedback_code as orderFeedbackCode,
+		    reserved1,
+		    reserved2,
+		    note,
+		    order_secret_key as orderSecretKey,
+		    owner_id as ownerId,
+		    operator_id as operatorId,
+		    is_authorized as authorized,
+		    gmt_create as gmtCreate,
+		    gmt_modified as gmtModified
+        from 
+            order_info
+        <trim prefix="WHERE" prefixOverrides="AND"> 
+            <!-- <if test="authorized != null">is_authorized = #{authorized} and </if>  -->
+            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="orderInfoIds!=null and orderInfoIds.length!=0">and id IN
+                <foreach collection="orderInfoIds" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+    </select>
+
+
+    <!-- /**
+     * 根据ID查询买家
+     * @param params 是否授权, 主账户ID, 买家ID[]
+     * @return List<BuyerInfo> 买家的集合
+     * @author 赵滨
+     */ -->
+    <select id="listBuyerInfoByIds" 
+            resultType="com.rongcheng.erp.entity.BuyerInfo">
+        select  
+            id,
+			platform_id as platformId,
+            shop_id as shopId,
+			buyer_account as buyerAccount,
+			nickname,
+			buyer_name as buyerName,
+			consignee_name as consigneeName,
+			consignee_tel as consigneeTel,
+			consignee_mobile as consigneeMobile,
+			region_id as regionId,
+			user_address as userAddress,
+			zip_code as zipCode,
+			reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_authorized as authorized,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified
+			
+        from 
+            buyer_info
+        <trim prefix="WHERE" prefixOverrides="AND"> 
+            <!-- <if test="authorized != null">is_authorized = #{authorized} and </if>  -->
+            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="buyerInfoIds != null and buyerInfoIds.length!=0">and id IN
+                <foreach collection="buyerInfoIds" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+    </select>
+
+    <!-- /**
+     * 根据ID查询店铺
+     * @param params 是否授权, 主账户ID, 店铺ID[]
+     * @return List<ShopInfo> 店铺的集合
+     * @author 赵滨
+     */ -->
+    <select id="listShopInfoById" 
+            resultType="com.rongcheng.erp.entity.ShopInfo">
+        select  
+            id,
+			name,
+			seller_account as sellerAccount,
+			platform_id as platformId,
+			user_shop_code as userShopCode,
+			type,
+			region_id as regionId,
+			user_address as userAddress,
+			zip_code as zipCode,
+			contact_name as contactName,
+			contact_tel as contactTel,
+			contact_mobile as contactMobile,
+			shop_url as shopUrl,
+			logo,
+			authority_due_date as authorityDueDate,
+			shop_status as shopStatus,
+			reserved1,
+			note,
+			shop_secret_key as shopSecretKey,
+			bar_code_image as barCodeImage,
+			qr_code_image as qrCodeImage,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_authorized as authorized,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified
+        from 
+            shop_info
+        <trim prefix="WHERE" prefixOverrides="AND"> 
+            <!-- <if test="authorized != null">is_authorized = #{authorized} and </if>  -->
+            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="shopInfoId!=null and shopInfoId.length!=0">and id IN
+                <foreach collection="shopInfoId" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+    </select>
+
+    <!-- /**
+     * 根据ID查询模版
+     * @param params 是否授权, 主账户ID, 模版ID[]
+     * @return List<PrintTemplate> 模版的集合
+     * @author 赵滨
+     */ -->
+    <!-- <select id="listPrintTemplateById" 
+            resultType="com.rongcheng.erpntity.PrintTemplate">
+        select
+            id,
+            carrier_id as carrierId,
+            carrier_name as carrierName,
+            template_name as templateName,
+            template_image as templateImage,
+            template_type as templateType,
+            is_electronic_waybill as electronicWaybill,
+            template_width as templateWidth,
+            template_height as templateHeight,
+            print_choice as printChoice,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from (select 
+	        id,
+	        carrier_id ,
+	        carrier_name ,
+	        template_name,
+	        template_image,
+	        template_type,
+	        is_electronic_waybill,
+	        template_width,
+	        template_height,
+	        print_choice,
+	        reserved1,
+	        note,
+	        owner_id ,
+	        operator_id ,
+	        is_authorized,
+	        gmt_create,
+	        gmt_modified 
+        from
+            print_template 
+        order by 
+            gmt_create  desc) as a 
+        <trim prefix="WHERE" prefixOverrides="AND"> 
+            <if test="authorized != null">is_authorized = #{authorized} and </if> 
+            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="carrierId!=null and carrierId.length!=0">and carrier_id IN
+                <foreach collection="carrierId" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+        group by  
+            carrier_id
+    </select> -->
+
+    <!-- /**
+     * 根据模版ID查询坐标
+     * @param templateId 模版ID
+     * @param authorized 是否授权
+     * @param ownerId   主账户ID
+     * @return List<FieldCoordinate> 坐标的集合
+     * @author 赵滨
+     */ -->
+    <select id="listFieldCoordinateByTemplateId"
+            resultType="com.rongcheng.erp.entity.FieldCoordinate">
+    
+        select  
+            id,
+            template_id as templateId,
+            field_name as fieldName,
+            coordinate_type as coordinateType,
+            x_coordinate as xCoordinate,
+            y_coordinate as yCoordinate,
+            x_length as xLength,
+            y_length as yLength,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from 
+            field_coordinate 
+        where 
+            template_id=#{0}
+        <!-- and
+            is_authorized=#{1} -->
+        and
+            owner_id=#{2}
+    
+    </select>
+
+    <!-- /**
+     * 根据订单ID查询商品
+     * @param orderInfoId 订单ID
+     * @param authorized  是否授权
+     * @param ownerId   主账户ID
+     * @return List<ItemCommonInfo> 商品的集合
+     * @return 赵滨
+     */ -->
+    <select id="listItemCommonInfoByOrderInfoId"
+            resultType="com.rongcheng.erp.entity.ItemCommonInfoOrderItemLink">
+    
+        select
+            i.id as id,
+			i.erp_item_num as erpItemNum,
+			i.name as name,
+			i.short_name as shortName,
+			i.platform_id as platformId,
+			i.platform_item_sku as platformItemSku,
+			i.warehouse_id as warehouseId,
+			i.user_shop_code as userShopCode,
+			i.user_item_code as userItemCode,
+			i.image1 as image1,
+			i.category as category,
+			i.brand as brand,
+			i.series as series,
+			i.color as color,
+			i.size as size,
+			i.normal_price as normalPrice,
+			i.cost_price as costPrice,
+			i.promotion_price as promotionPrice,
+			i.bar_code as barCode,
+			i.package_condition as packageCondition,
+			i.user_classification as userClassification,
+			i.is_presell as presell,
+			i.is_commission_sell as commissionSell,
+			i.is_gift as gift,
+			i.bar_code_image as barCodeImage,
+			i.qr_code_image as qrCodeImage,
+			i.reserved1 as reserved1,
+			i.note as note,
+			i.owner_id as ownerId,
+			i.shop_id as shopId,
+			i.operator_id as operatorId,
+			i.is_authorized as authorized,
+			i.item_secret_key as itemSecretKey,
+			i.gmt_create as gmtCreate,
+			i.gmt_modified as gmtModified,
+			l.quantity as quantity
+        from 
+            order_info as o,
+            order_item_link as l,
+            item_common_info as i 
+        where 
+            o.id=l.erp_order_id 
+        and 
+            i.id=l.order_item_id 
+        and 
+            o.id=#{0}
+        and 
+            l.owner_id=#{2}
+        and 
+            i.owner_id=#{2}
+        and
+            o.owner_id=#{2}
+            
+    </select>
+
+    <!-- /**
+     * 查询模版根据快递公司id
+     * @param carrierId 快递公司id
+     * @param authorized 是否授权
+     * @param ownerId   主账号id
+     * @return List<PrintTemplate> 模版的集合
+     * @author 赵滨
+     */ -->
+    <select id="listPrintTemplateByCarrierId" 
+            resultType="com.rongcheng.erp.entity.PrintTemplate">
+        select  
+            id,
+            carrier_id as carrierId,
+            carrier_name as carrierName,
+            template_name as templateName,
+            template_image as templateImage,
+            template_type as templateType,
+            is_electronic_waybill as electronicWaybill,
+            template_width as templateWidth,
+            template_height as templateHeight,
+            print_choice as printChoice,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from 
+            print_template 
+        where
+            carrier_id=#{0} 
+        <!-- and
+            is_authorized=#{1} -->
+        and
+            owner_id=#{2}
+    </select>
+    
+    <!-- /**
+     * 根据ID查询单条订单
+     * @param orderInfoId 订单id
+     * @param authorized 是否授权
+     * @param ownerId 主账号id
+     * @return OrderInfo 订单
+     * @author 赵滨
+     */ -->
+    <select id="getOrderInfoById" 
+            resultType="com.rongcheng.erp.entity.OrderInfo">
+        select
+            id,
+            erp_order_num as erpOrderNum,
+            platform_order_id as platformOrderId,
+            platform_id as platformId,
+            shop_id as shopId,
+            is_online_order as onlineOrder,
+            platform_buyer_id as platformBuyerId,
+            carrier_id as carrierId,
+            is_electronic_waybill as electronicWaybill,
+            tracking_num as trackingNum,
+            buyer_word as buyerWord,
+            seller_word as sellerWord,
+            order_create as orderCreate,
+            order_pay as orderPay,
+            order_download as orderDownload,
+            order_edit as orderEdit,
+            order_upload as orderUpload,
+            order_merge as orderMerge,
+            order_split as orderSplit,
+            order_check as orderCheck,
+            express_sheet_print as expressSheetPrint,
+            sale_bill_print as saleBillPrint,
+            order_outbound as orderOutbound,
+            order_inspect as orderInspect,
+            order_departure as orderDeparture,
+            refund_apply as refundApply,
+            order_locked as orderLocked,
+            order_closed as orderClosed,
+            order_completed as orderCompleted,
+            order_status as orderStatus,
+            refund_close as refundClose,
+            is_order_hold as orderHold,
+            shipping_fee as shippingFee,
+            is_postage_prepaid as postagePrepaid,
+            is_order_cod as orderCod,
+            is_order_special as orderSpecial,
+            lot_code as lotCode,
+            invoice_type as invoiceType,
+            invoice_title as invoiceTitle,
+            taxpayer_id as taxpayerId,
+            invoice_detail as invoiceDetail,
+            order_feedback_code as orderFeedbackCode,
+            reserved1,
+            reserved2,
+            note,
+            order_secret_key as orderSecretKey,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from 
+            order_info
+        where
+            id=#{0} 
+        <!-- and
+            is_authorized=#{1} -->
+        and
+            owner_id=#{2}
+    </select>
+
+    <!-- /**
+     * 更新订单
+     * @param orderInfo 订单
+     * @return row 行数
+     * @author 赵滨
+     */ -->
+    <update id="updateOrderInfo" 
+            parameterType="com.rongcheng.erp.entity.OrderInfo">
+        update 
+            order_info 
+        set
+		    <!-- id = #{id}, -->
+		    erp_order_num = #{erpOrderNum},
+		    platform_order_id = #{platformOrderId},
+		    platform_id = #{platformId},
+		    shop_id = #{shopId},
+		    is_online_order = #{onlineOrder},
+		    platform_buyer_id = #{platformBuyerId},
+		    carrier_id = #{carrierId},
+		    is_electronic_waybill = #{electronicWaybill},
+		    tracking_num = #{trackingNum},
+		    buyer_word = #{buyerWord},
+		    seller_word = #{sellerWord},
+		    order_create = #{orderCreate},
+		    order_pay = #{orderPay},
+		    order_download = #{orderDownload},
+		    order_edit = #{orderEdit},
+		    order_upload = #{orderUpload},
+		    order_merge = #{orderMerge},
+		    order_split = #{orderSplit},
+		    order_check = #{orderCheck},
+		    express_sheet_print = #{expressSheetPrint},
+		    sale_bill_print = #{saleBillPrint},
+		    order_outbound = #{orderOutbound},
+		    order_inspect = #{orderInspect},
+		    order_departure = #{orderDeparture},
+		    refund_apply = #{refundApply},
+		    order_locked = #{orderLocked},
+		    order_closed = #{orderClosed},
+		    order_completed = #{orderCompleted},
+		    order_status = #{orderStatus},
+		    refund_close = #{refundClose},
+		    is_order_hold = #{orderHold},
+		    shipping_fee = #{shippingFee},
+		    is_postage_prepaid = #{postagePrepaid},
+		    is_order_cod = #{orderCod},
+		    is_order_special = #{orderSpecial},
+		    lot_code = #{lotCode},
+		    invoice_type = #{invoiceType},
+		    invoice_title = #{invoiceTitle},
+		    taxpayer_id = #{taxpayerId},
+		    invoice_detail = #{invoiceDetail},
+		    order_feedback_code = #{orderFeedbackCode},
+		    reserved1 = #{reserved1},
+		    reserved2 = #{reserved2},
+		    note = #{note},
+		    order_secret_key = #{orderSecretKey},
+		    <!-- owner_id = #{ownerId}, -->
+		    operator_id = #{operatorId},
+		    is_authorized = #{authorized},
+		    <!-- gmt_create = #{gmtCreate}, -->
+		    gmt_modified = #{gmtModified}
+        where 
+            owner_id=#{ownerId} 
+       <!--  and 
+            is_authorized=#{authorized} -->
+        and 
+            id=#{id}
+    </update>
+
+    <!-- <select id="getAddressCarrierAllocationById" 
+            resultType="com.rongcheng.erpntity.AddressCarrierAllocation">
+        select  
+            region_id as regionId,
+			region_code as regionCode,
+			region_name as regionName,
+			parent_id as parentId,
+			region_level as regionLevel,
+			region_order as regionOrder,
+			region_name_en as regionNameEn,
+			region_short as regionShort,
+			carrier_id as carrierId,
+			head_fee as headFee,
+			repeat_fee as repeatFee,
+			reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_authorized as authorized,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified
+        from 
+            address_carrier_allocation
+        where 
+            region_id=#{id}
+    </select> -->
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+

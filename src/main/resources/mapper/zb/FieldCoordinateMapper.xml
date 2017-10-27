@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rongcheng.erp.dao.ZB_FieldCoordinateDAO">
+    
+    <!-- /**
+     * 保存字段坐标
+     * @param fieldCoordinate 字段坐标
+     * @return row 存储的行数
+     * @author 赵滨
+     */ -->
+    <insert id="saveFieldCoordinate"
+            parameterType="com.rongcheng.erp.entity.FieldCoordinate">
+        insert into field_coordinate 
+        (
+            template_id,
+			field_name,
+			coordinate_type,
+			x_coordinate,
+			y_coordinate,
+			x_length,
+            y_length,
+			reserved1,
+			note,
+			owner_id,
+			operator_id,
+			is_authorized,
+			gmt_create,
+			gmt_modified
+        )           
+        values 
+        (
+            #{templateId},
+            #{fieldName},
+            #{coordinateType},
+            #{xCoordinate},
+            #{yCoordinate},
+            #{xLength},
+            #{yLength},
+            #{reserved1},
+            #{note},
+            #{ownerId},
+            #{operatorId},
+            #{authorized},
+            #{gmtCreate},
+            #{gmtModified}
+        )
+    </insert>
+    
+    <!-- /**
+     * 查找字段坐标 根据模版id
+     * @param templateId 单据模版id
+     * @param authorized 是否授权
+     * @param ownerId 主账号id
+     * @return List<FieldCoordinate> 字段坐标集合
+     * @author 赵滨
+     */ -->
+    <select id="listFieldCoordinateByTemplateId"
+            resultType="com.rongcheng.erp.entity.FieldCoordinate">
+    
+        select  
+            id,
+            template_id as templateId,
+            field_name as fieldName,
+            coordinate_type as coordinateType,
+            x_coordinate as xCoordinate,
+            y_coordinate as yCoordinate,
+            x_length as xLength,
+            y_length as yLength,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from 
+            field_coordinate 
+        where 
+            <!-- is_authorized=#{1}
+        and -->
+            owner_id=#{2} 
+        and 
+            template_id=#{0}
+    
+    </select>
+    
+    <!-- /**
+     * 查找字段坐标 根据id
+     * @param id    坐标id
+     * @param authorized 是否授权
+     * @param ownerId 主账号id
+     * @return 字段坐标集
+     * @author 赵滨
+     */ -->
+    <select id="getFieldCoordinateById"
+            resultType="com.rongcheng.erp.entity.FieldCoordinate">
+    
+        select  
+            id,
+            template_id as templateId,
+            field_name as fieldName,
+            coordinate_type as coordinateType,
+            x_coordinate as xCoordinate,
+            y_coordinate as yCoordinate,
+            x_length as xLength,
+            y_length as yLength,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from 
+            field_coordinate 
+        where 
+            <!-- is_authorized=#{1}
+        and -->
+            owner_id=#{2} 
+        and 
+            id=#{0}
+    
+    </select>
+    
+    <!-- /**
+     * 更新字段坐标
+     * @param fieldCoordinate 字段坐标
+     * @return row 行数
+     * @author 赵滨
+     */ -->
+    <update id="updateFieldCoordinate" 
+            parameterType="com.rongcheng.erp.entity.FieldCoordinate">
+        update 
+            field_coordinate 
+        set
+            template_id=#{templateId},
+            field_name=#{fieldName},
+            coordinate_type=#{coordinateType},
+            x_coordinate=#{xCoordinate},
+            y_coordinate=#{yCoordinate},
+            x_length=#{xLength},
+            y_length=#{yLength},
+            reserved1=#{reserved1},
+            note=#{note},
+            <!-- owner_id=#{ownerId}, -->
+            operator_id=#{operatorId},
+            is_authorized=#{authorized},
+            <!-- gmt_create=#{gmtCreate}, -->
+            gmt_modified=#{gmtModified}
+        where 
+            owner_id=#{ownerId} 
+        and 
+           <!--  is_authorized=#{authorized}
+        and  -->
+            id=#{id}
+    </update>
+    
+    <!-- /**
+     * 移除字段坐标 根据模版id
+     * @param templateId 单据模版id
+     * @param authorized 是否授权
+     * @param ownerId 主账号id
+     * @return row 删除行数
+     * @author 赵滨
+     */ -->
+    <delete id="removeFieldCoordinateByTemplateId">
+        delete from 
+            field_coordinate 
+        where 
+            template_id=#{0}
+        and
+            owner_id=#{2} 
+       <!--  and 
+            is_authorized=#{1} -->
+    </delete>
+    
+    <!-- /**
+     * 移除字段坐标 根据id
+     * @param params id[] 是否授权 主账号id
+     * @return row 删除行数
+     * @author 赵滨
+     */ -->
+    <delete id="removeFieldCoordinateById">
+        delete from 
+            field_coordinate 
+        <trim prefix="WHERE" prefixOverrides="AND"> 
+            <!-- <if test="authorized != null">is_authorized = #{authorized} and </if>  -->
+            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="fieldCoordinateIdDel!=null and fieldCoordinateIdDel.length!=0">and id IN
+                <foreach collection="fieldCoordinateIdDel" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </trim>
+    </delete>
+    
+</mapper>
+
+
+
+
+
+
+
+
+

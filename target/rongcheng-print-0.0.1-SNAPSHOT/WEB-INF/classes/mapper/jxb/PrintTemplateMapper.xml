@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rongcheng.erp.dao.Jxb_PrintTemplateDAO">
+	<select id="listAll" resultType="com.rongcheng.erp.entity.PrintTemplate">
+		select
+			id,
+			carrier_id as carrierId,
+			carrier_name as carrierName,
+			template_name as templateName,
+			template_image as templateImage,
+			template_type as templateType,
+			is_electronic_waybill as electronicWaybill,
+			template_width as templateWidth,
+			template_height as templateHeight,
+			print_choice as printChoice,
+			reserved1,
+			note,
+			owner_id as ownerId,
+			operator_id as operatorId,
+			is_authorized as authorized,
+			gmt_create as gmtCreate,
+			gmt_modified as gmtModified
+		from
+			print_template
+		where owner_id in (#{ownerId,jdbcType=BIGINT},0)
+		order by owner_id desc , id
+	</select>
+</mapper>

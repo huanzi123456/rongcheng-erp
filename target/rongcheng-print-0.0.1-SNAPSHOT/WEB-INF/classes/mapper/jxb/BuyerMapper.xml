@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Jxb_BuyerDAO" >
+  <resultMap id="BaseResultMap" type="com.rongcheng.erp.entity.BuyerInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="platform_id" property="platformId" jdbcType="BIGINT" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="buyer_account" property="buyerAccount" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="buyer_name" property="buyerName" jdbcType="VARCHAR" />
+    <result column="consignee_name" property="consigneeName" jdbcType="VARCHAR" />
+    <result column="consignee_tel" property="consigneeTel" jdbcType="VARCHAR" />
+    <result column="consignee_mobile" property="consigneeMobile" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="BIGINT" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="INTEGER" />
+    <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="is_authorized" property="authorized" jdbcType="BIT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform_id, shop_id, buyer_account, nickname, buyer_name, consignee_name, consignee_tel, 
+    consignee_mobile, region_id, user_address, zip_code, reserved1, note, owner_id, operator_id, 
+    is_authorized, gmt_create, gmt_modified
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigInteger" >
+    delete from buyer_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.math.BigInteger" >
+    select 
+    <include refid="Base_Column_List" />
+    from buyer_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insertSelective" parameterType="com.rongcheng.erp.entity.BuyerInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into buyer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="buyerAccount != null" >
+        buyer_account,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="buyerName != null" >
+        buyer_name,
+      </if>
+      <if test="consigneeName != null" >
+        consignee_name,
+      </if>
+      <if test="consigneeTel != null" >
+        consignee_tel,
+      </if>
+      <if test="consigneeMobile != null" >
+        consignee_mobile,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="reserved1 != null" >
+        reserved1,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="authorized != null" >
+        is_authorized,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=BIGINT},
+      </if>
+      <if test="buyerAccount != null" >
+        #{buyerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerName != null" >
+        #{buyerName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeName != null" >
+        #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null" >
+        #{consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeMobile != null" >
+        #{consigneeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=BIGINT},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=INTEGER},
+      </if>
+      <if test="reserved1 != null" >
+        #{reserved1,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="authorized != null" >
+        #{authorized,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByIdSelective" parameterType="com.rongcheng.erp.entity.BuyerInfo" >
+	  update buyer_info
+	  <set >
+	    <if test="platformId != null" >
+	      platform_id = #{platformId,jdbcType=BIGINT},
+	    </if>
+	    <if test="buyerAccount != null" >
+	      buyer_account = #{buyerAccount,jdbcType=VARCHAR},
+	    </if>
+	    <if test="nickname != null" >
+	      nickname = #{nickname,jdbcType=VARCHAR},
+	    </if>
+	    <if test="buyerName != null" >
+	      buyer_name = #{buyerName,jdbcType=VARCHAR},
+	    </if>
+	    <if test="consigneeName != null" >
+	      consignee_name = #{consigneeName,jdbcType=VARCHAR},
+	    </if>
+	    <if test="consigneeTel != null" >
+	      consignee_tel = #{consigneeTel,jdbcType=VARCHAR},
+	    </if>
+	    <if test="consigneeMobile != null" >
+	      consignee_mobile = #{consigneeMobile,jdbcType=VARCHAR},
+	    </if>
+	    <if test="regionId != null" >
+	      region_id = #{regionId,jdbcType=BIGINT},
+	    </if>
+	    <if test="userAddress != null" >
+	      user_address = #{userAddress,jdbcType=VARCHAR},
+	    </if>
+	    <if test="zipCode != null" >
+	      zip_code = #{zipCode,jdbcType=INTEGER},
+	    </if>
+	    <if test="reserved1 != null" >
+	      reserved1 = #{reserved1,jdbcType=VARCHAR},
+	    </if>
+	    <if test="note != null" >
+	      note = #{note,jdbcType=VARCHAR},
+	    </if>
+	    <if test="shopId != null" >
+	      shop_id = #{shopId,jdbcType=BIGINT},
+	    </if>
+	    <if test="operatorId != null" >
+	      operator_id = #{operatorId,jdbcType=BIGINT},
+	    </if>
+	    <if test="authorized != null" >
+	      is_authorized = #{authorized,jdbcType=BIT},
+	    </if>
+	    <if test="gmtCreate != null" >
+	      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+	    </if>
+	    <if test="gmtModified != null" >
+	      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+	    </if>
+	  </set>
+	  where id = #{id,jdbcType=BIGINT}
+	  	and owner_id = #{ownerId,jdbcType=BIGINT}
+  </update>
+  <select id="getMaxId" resultType="java.math.BigInteger">
+ 	select MAX(id) from buyer_info
+  </select>
+  	<insert id="insertListSelective">
+		insert into buyer_info
+			(
+			id,owner_id, gmt_create,
+			shop_id, buyer_account, consignee_name, consignee_tel, consignee_mobile, user_address, region_id
+			)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(
+	         #{item.id},
+	         #{item.ownerId},
+	         now(),
+	         #{item.shopId},
+	         #{item.buyerAccount},
+	         #{item.consigneeName},
+	         #{item.consigneeTel},
+	         #{item.consigneeMobile},
+	         #{item.userAddress},
+	         #{item.regionId}
+			)
+		</foreach>
+	</insert>
+</mapper>

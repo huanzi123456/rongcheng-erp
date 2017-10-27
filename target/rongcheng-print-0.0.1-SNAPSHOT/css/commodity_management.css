@@ -1,0 +1,59 @@
+/* 这里只放置了商品管理的css代码*/
+.accredit-height .shopping_box .left_shopping{
+	padding-top: 0px;
+}
+.accredit-height .shopping_box .left_shopping>div{
+	height: 56px;
+	line-height: 56px;
+	border-bottom: 1px solid #ddd;
+}
+.btn_button{
+	padding: 3px;
+	border: 1px solid #00AAEE;
+	margin-top: 5px;
+	width: 30px;
+	border-radius: 2px;
+	margin-left: 3px;
+	color: #00AAEE;
+}
+.btn_button.red_color{
+	border: 1px solid #F81515;
+	color: #F81515;
+}
+.btn_button.red_color:hover{
+	background: #F81515;
+	color: #fff;
+}
+.btn_button:hover{
+	background: #00AAEE;
+	color: #fff;
+}
+.accredit-height .shopping_box .list_table .img_box{
+	display: inline-block;
+	vertical-align: middle;
+	width: 35px;
+	height: 35px;
+	position: relative;
+	border: 1px solid #ddd;
+}
+.accredit-height .shopping_box .list_table .img_box>img{
+	max-width: 100%;
+	max-height: 100%;
+}
+.accredit-height .shopping_box .list_table .img_box .img_show_box{
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	left: 100%;
+	top: 0;
+	z-index: 999;
+	display: none;
+	border: 1px solid #ddd;
+}
+.accredit-height .shopping_box .list_table .img_box .img_show_box>img{
+	max-height: 100%;
+	max-width: 100%;
+}
+.accredit-height .shopping_box .list_table .img_box:hover .img_show_box{
+	display: block;
+}

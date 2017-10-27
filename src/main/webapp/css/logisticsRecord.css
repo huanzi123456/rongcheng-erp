@@ -1,0 +1,53 @@
+.overflow_inh{
+	overflow: inherit!important;
+}
+.logistics-record{
+	position: relative;
+	width: 90px;
+	margin: 0 auto;
+}
+.logistics-record .logistics-record-box{
+	width: 460px;
+	height: 230px;
+	border: 1px solid #01AAEE;
+	position: absolute;
+	top: 33px;
+	right: 0;
+	background: #fff;
+	z-index: 9999;
+	padding: 5px;
+	border-radius: 3px;
+	display: none;
+	text-align: left;
+}    
+.logistics-record .logistics-record-box .logistics-record-date{
+	border-bottom: 1px solid #ddd;
+	padding-left: 20px;
+}
+.logistics-record .logistics-record-box .logistics-record-text{
+	height: 190px;
+	overflow: auto;
+}
+.logistics-record .logistics-record-box .logistics-record-text p{
+	margin: 0;
+	border-bottom: 1px solid #ddd;
+	padding-left: 10px;
+	height: 30px;
+	padding: 5px 10px;
+	line-height: 20px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.logistics-record_delBtn{
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	background: #f00;
+	color: #fff;
+	font-size: 20px;
+}

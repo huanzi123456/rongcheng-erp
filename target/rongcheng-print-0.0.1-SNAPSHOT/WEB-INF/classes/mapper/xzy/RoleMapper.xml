@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <!-- 角色管理页面的SQL语句 -->
+<mapper namespace="com.rongcheng.erp.dao.Xzy_RoleDao">
+<!-- 1.分页查询 -->
+  <!-- 1.1 统计角色表中的记录数(同一个owner_id下的) -->
+  <select id="findCountByRole" resultType="Integer" parameterType="BigInteger">
+    SELECT COUNT(id)
+    FROM role_management
+    WHERE owner_id=#{ownerId}
+  </select>  
+  <!-- 1.2 分页查询(查询角色id,角色名,创建时间,角色描述,拥有权限) -->
+   <select id="findPage" parameterType="com.rongcheng.erp.dto.XzyFindInfo" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT  roleId,roleName,gmtCreate,roleProfile,GROUP_CONCAT(role) strMouldName,GROUP_CONCAT(auId) strMouldId    
+    FROM (SELECT DISTINCT a.id AS roleId,a.role_name AS roleName,a.gmt_create AS gmtCreate,a.role_profile AS roleProfile, c.module_name AS role,c.id AS auId 
+          FROM role_management a 
+          JOIN user_role_authority b
+          ON a.id=b.role_id
+          JOIN authority_management c
+          ON c.id=b.mould_id
+          AND a.owner_id=b.owner_id=c.owner_id=#{ownerId}) g
+    GROUP BY roleId
+    LIMIT #{page},#{pageSize}
+  </select>
+<!-- 2.单击新建或修改按钮时,查询当前账户的ownerId下的所有的: 权限 -->
+  <select id="findAllAuthByOwnerId" parameterType="BigInteger" resultType="com.rongcheng.erp.dto.XzyFindInfo">
+    SELECT id AS parentModuleId,module_name AS parentModuleName,GROUP_CONCAT(a) childModuleId,GROUP_CONCAT(b) childModuleName
+    FROM (SELECT a.id,a.module_name,b.id AS a,b.module_name AS b
+          FROM authority_management a
+          JOIN authority_management b
+          ON a.id=b.parent_module
+          AND a.owner_id=b.owner_id=#{ownerId}) g
+    GROUP BY id
+  </select>
+<!-- 3.新建角色 -->
+  <!-- 3.1 查询角色名是否重复 -->
+  <select id="selectRoleNameByName" parameterType="com.rongcheng.erp.entity.RoleManagement" resultType="String">
+    SELECT role_name
+    FROM role_management
+    WHERE role_name=#{roleName}
+    AND owner_id=#{ownerId}
+  </select>
+  <!-- 3.2 向角色表中插入数据 并返回角色id值-->
+  <insert id="addRole" useGeneratedKeys="true" keyProperty="id" parameterType="com.rongcheng.erp.entity.RoleManagement">
+    INSERT INTO role_management  
+    (role_name,role_profile,owner_id,operator_id,gmt_create)          
+    VALUES
+    (#{roleName},#{roleProfile},#{ownerId},#{operatorId},#{gmtCreate})
+  </insert>
+  <!-- 3.3 向关联表中插入数据 -->
+  <insert id="addRoleAuth" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    INSERT INTO user_role_authority
+    (role_id,mould_id,owner_id,operator_id,gmt_create)
+    VALUES
+    (#{roleId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate})  
+  </insert>
+<!-- 4.修改角色 -->
+  <!-- 4.1 查询角色名是否重复 -->
+  <select id="selectRoleNameById" parameterType="com.rongcheng.erp.entity.RoleManagement" resultType="String">
+    SELECT role_name
+    FROM role_management
+    WHERE role_name=#{roleName}
+    AND owner_id=#{ownerId}
+    AND id != #{id}
+  </select>
+  <!-- 4.2 更新角色表中的数据 -->
+  <update id="updateRoleTable" parameterType="com.rongcheng.erp.entity.RoleManagement">
+    UPDATE role_management
+    SET role_name=#{roleName},role_profile=#{roleProfile},operator_id=#{operatorId},gmt_modified=#{gmtModified}
+    WHERE id=#{id}
+    AND owner_id=#{ownerId}
+  </update>
+  <!-- 4.3 更新关联表中的数据 userId为空
+                         注:(1)修改前后均有的权限ID保留            
+            (2)修改后新添加的权限id插入    
+            (3)修改后未被包含的权限id删除         
+  -->
+  <!-- (1) 修改前后均有的权限ID保留 -->
+  <!-- (2) 查询在同一个ownerId下的拥有该角色的用户id -->
+  <select id="seleUserId" parameterType="com.rongcheng.erp.entity.UserRoleAuthority" resultType="BigInteger">
+    SELECT DISTINCT user_id 
+    FROM user_role_authority
+    WHERE owner_id = #{ownerId}
+    AND role_id = #{roleId}
+    AND user_id IS NOT NULL
+  </select>
+  <!-- (3) 修改后未被包含的权限id删除 -->
+  <delete id="deleteURA" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    DELETE FROM user_role_authority
+    WHERE role_id=#{roleId}
+    AND mould_id=#{mouldId}
+    AND owner_id=#{ownerId}
+  </delete>
+  <!-- (4) 修改后新添加的权限id插入  -->
+  <insert id="saveUserRoleAuth" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    INSERT INTO user_role_authority
+    <if test="userId == null">
+      (role_id,mould_id,owner_id,operator_id,gmt_create)
+      VALUES
+      (#{roleId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate}) 
+    </if>
+    <if test="userId != null">
+      (user_id,role_id,mould_id,owner_id,operator_id,gmt_create)
+      VALUES
+      (#{userId},#{roleId},#{mouldId},#{ownerId},#{operatorId},#{gmtCreate}) 
+    </if>
+  </insert> 
+<!-- 5.删除角色 -->
+  <!-- 5.1 删除角色表中对应的角色 -->
+  <delete id="deleteRoleById" parameterType="com.rongcheng.erp.entity.RoleManagement">
+    DELETE 
+    FROM role_management
+    WHERE id=#{id}
+    AND owner_id = #{ownerId}
+  </delete>
+  <!-- 5.2 将关联表中的userId为空的对应的角色id删除 -->
+  <delete id="deleteRoleFromURA" parameterType="com.rongcheng.erp.entity.UserRoleAuthority">
+    DELETE FROM user_role_authority
+    WHERE role_id=#{roleId}   
+    AND owner_id = #{ownerId}
+  </delete>
+</mapper>
