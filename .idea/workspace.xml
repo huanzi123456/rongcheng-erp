@@ -7,6 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="erp项目">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/T3.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/T4.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/T5.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,100 +52,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ZB_InventoryService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
+      <file leaf-file-name="rongcheng-erp.iml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rongcheng-erp.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="201" column="0" lean-forward="false" selection-start-line="201" selection-start-column="0" selection-end-line="201" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="1099" column="0" lean-forward="false" selection-start-line="1099" selection-start-column="0" selection-end-line="1099" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="414" column="41" lean-forward="false" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="410" column="30" lean-forward="false" selection-start-line="410" selection-start-column="30" selection-end-line="410" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inventorySync.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1452">
-              <caret line="78" column="31" lean-forward="false" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inventory_sync.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/js/inventory_sync.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inventorySync.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="259" column="3" lean-forward="false" selection-start-line="259" selection-start-column="3" selection-end-line="259" selection-end-column="3" />
-              <folding>
-                <marker date="1509100730261" expanded="true" signature="10245:10263" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="10383:10401" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="10493:10511" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="12648:12666" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="13091:13108" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="13233:13284" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="13730:13747" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="13870:13921" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="15090:15108" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="15340:15358" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="21891:21905" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="22804:22818" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="23636:23650" ph="..." />
-                <marker date="1509100730261" expanded="true" signature="24178:24192" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+            <state relative-caret-position="200">
+              <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -345,10 +259,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -365,6 +278,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -385,22 +299,22 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.rongcheng.erp.dao" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\JavaProject\rongcheng-erp" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\utils" />
-      <recent name="E:\JavaProject\rongcheng-erp\out\artifacts\uril" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\test" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main" />
       <recent name="E:\JavaProject\rongcheng-erp\src\test\java" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\test" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src" />
+      <recent name="E:\JavaProject\rongcheng-erp" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\utils" />
+      <recent name="E:\JavaProject\rongcheng-erp\out\artifacts\uril" />
       <recent name="E:\JavaProject\rongcheng-erp\src\test\java" />
     </key>
   </component>
@@ -698,6 +612,7 @@
       <workItem from="1508981211322" duration="6402000" />
       <workItem from="1508989811661" duration="19563000" />
       <workItem from="1509068121941" duration="30451000" />
+      <workItem from="1509351618527" duration="376000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -756,11 +671,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106688000" />
+    <option name="totallyTimeSpent" value="107064000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -779,11 +693,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4610874" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1641791" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.50647247" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5038002" order="6" side_tool="true" content_ui="tabs" />
@@ -811,24 +725,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/META-INF/MANIFEST.MF" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/MANIFEST.MF" />
-    <entry file="file://$PROJECT_DIR$/rongcheng-erp.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/artifacts/rongcheng_erp_jar.xml" />
     <entry file="file://$PROJECT_DIR$/.idea/artifacts/rongcheng_erp_war.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -890,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -935,10 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
           <caret line="27" column="23" lean-forward="true" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding>
-            <element signature="e#369#370#0" expanded="false" />
-            <element signature="e#383#384#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -953,13 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="39" column="57" lean-forward="true" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
-          <folding>
-            <marker date="1508897255997" expanded="true" signature="10958:10991" ph="..." />
-            <marker date="1508897255997" expanded="true" signature="11391:11405" ph="..." />
-            <marker date="1508897255997" expanded="true" signature="12340:12354" ph="..." />
-            <marker date="1508897255997" expanded="true" signature="13192:13206" ph="..." />
-            <marker date="1508897255997" expanded="true" signature="13750:13764" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -974,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -982,7 +864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="23" column="8" lean-forward="true" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -990,13 +871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="358" column="0" lean-forward="true" selection-start-line="358" selection-start-column="0" selection-end-line="429" selection-end-column="1" />
-          <folding>
-            <marker date="1508751745697" expanded="true" signature="11522:11534" ph="..." />
-            <marker date="1508751745697" expanded="true" signature="13388:13402" ph="..." />
-            <marker date="1508751745697" expanded="true" signature="14337:14351" ph="..." />
-            <marker date="1508751745697" expanded="true" signature="15189:15203" ph="..." />
-            <marker date="1508751745697" expanded="true" signature="15747:15761" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,7 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="7" column="78" lean-forward="true" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="222" column="78" lean-forward="true" selection-start-line="222" selection-start-column="78" selection-end-line="222" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1020,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="273" column="24" lean-forward="true" selection-start-line="273" selection-start-column="24" selection-end-line="273" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,7 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="88" column="4" lean-forward="true" selection-start-line="88" selection-start-column="4" selection-end-line="93" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,18 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
           <caret line="807" column="2" lean-forward="false" selection-start-line="807" selection-start-column="2" selection-end-line="964" selection-end-column="11" />
-          <folding>
-            <marker date="1508738641209" expanded="true" signature="26841:26872" ph="select count... order_info" />
-            <marker date="1508738641209" expanded="true" signature="27079:27154" ph="insert into order_info... " />
-            <marker date="1508738641209" expanded="true" signature="27513:33706" ph="update order... " />
-            <marker date="1508738641209" expanded="true" signature="38005:40399" ph="SELECT oiw.i... id" />
-            <marker date="1508738641209" expanded="true" signature="38878:40399" ph="SELECT oi.id... id" />
-            <marker date="1508738641209" expanded="true" signature="39760:40399" ph="SELECT o.id,... " />
-            <marker date="1508738641209" expanded="true" signature="40437:40770" ph="o LEFT JOIN " />
-            <marker date="1508738641209" expanded="true" signature="40945:41223" ph="(SELECT FROM... " />
-            <marker date="1508738641209" expanded="true" signature="41331:41361" ph="select MAX(i... order_info" />
-            <marker date="1508738641209" expanded="true" signature="41438:41538" ph="SELECT MAX(g... order_info" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1055,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="33" column="68" lean-forward="true" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1063,7 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="38" column="27" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1071,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,11 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="103" column="2" lean-forward="false" selection-start-line="103" selection-start-column="2" selection-end-line="138" selection-end-column="11" />
-          <folding>
-            <marker date="1508738642051" expanded="true" signature="1373:1481" ph="select from platform_info" />
-            <marker date="1508738642051" expanded="true" signature="1571:1633" ph="delete from " />
-            <marker date="1508738642051" expanded="true" signature="3722:4816" ph="update platf... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1091,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1099,7 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1113,7 +961,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
+        <state relative-caret-position="10225">
           <caret line="414" column="41" lean-forward="false" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="41" />
           <folding />
         </state>
@@ -1121,7 +969,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
+        <state relative-caret-position="9575">
           <caret line="410" column="30" lean-forward="false" selection-start-line="410" selection-start-column="30" selection-end-line="410" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1131,7 +979,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
+        <state relative-caret-position="27100">
           <caret line="1099" column="0" lean-forward="false" selection-start-line="1099" selection-start-column="0" selection-end-line="1099" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1141,7 +989,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
+        <state relative-caret-position="1950">
           <caret line="78" column="31" lean-forward="false" selection-start-line="78" selection-start-column="31" selection-end-line="78" selection-end-column="31" />
           <folding />
         </state>
@@ -1151,7 +999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1167,51 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="1640" column="21" lean-forward="true" selection-start-line="1640" selection-start-column="21" selection-end-line="1640" selection-end-column="21" />
-          <folding>
-            <marker date="1509097126978" expanded="true" signature="569:3795" ph="select i.id,... " />
-            <marker date="1509097126978" expanded="true" signature="5386:8784" ph="select * fro... *" />
-            <marker date="1509097126978" expanded="true" signature="5435:8662" ph="select *, (s... id" />
-            <marker date="1509097126978" expanded="true" signature="9057:11203" ph="select count... *" />
-            <marker date="1509097126978" expanded="true" signature="9112:11119" ph="select *, (s... count" />
-            <marker date="1509097126978" expanded="true" signature="9218:11092" ph="select count... *" />
-            <marker date="1509097126978" expanded="true" signature="9448:10226" ph="select sum(l... order_item_link" />
-            <marker date="1509097126978" expanded="true" signature="11446:12053" ph="select id, u... warehouse_info" />
-            <marker date="1509097126978" expanded="true" signature="12380:12950" ph="select id, w... " />
-            <marker date="1509097126978" expanded="true" signature="13275:13966" ph="select id, w... " />
-            <marker date="1509097126978" expanded="true" signature="14259:14859" ph="insert into location_item_stock... " />
-            <marker date="1509097126978" expanded="true" signature="15155:15753" ph="update locat... " />
-            <marker date="1509097126978" expanded="true" signature="16040:16210" ph="delete from " />
-            <marker date="1509097126978" expanded="true" signature="16462:16595" ph="delete from " />
-            <marker date="1509097126978" expanded="true" signature="16964:17599" ph="select sum(l... order_item_link" />
-            <marker date="1509097126978" expanded="true" signature="18598:20985" ph="select i.id,... " />
-            <marker date="1509097126978" expanded="true" signature="22660:23761" ph="select id, u... warehouse_info" />
-            <marker date="1509097126978" expanded="true" signature="24991:25691" ph="insert into warehouse_info... " />
-            <marker date="1509097126978" expanded="true" signature="25966:26681" ph="update wareh... " />
-            <marker date="1509097126978" expanded="true" signature="27006:27628" ph="select id, u... warehouse_info" />
-            <marker date="1509097126978" expanded="true" signature="27986:28766" ph="select id, w... stocklocation_info" />
-            <marker date="1509097126978" expanded="true" signature="29772:30402" ph="select id, w... stocklocation_info" />
-            <marker date="1509097126978" expanded="true" signature="30706:31290" ph="insert into stocklocation_info... " />
-            <marker date="1509097126978" expanded="true" signature="31546:32168" ph="update stock... " />
-            <marker date="1509097126978" expanded="true" signature="32376:32492" ph="delete from " />
-            <marker date="1509097126978" expanded="true" signature="32807:34156" ph="select i.id,... stocklocation_info" />
-            <marker date="1509097126978" expanded="true" signature="34452:35929" ph="select id, e... " />
-            <marker date="1509097126978" expanded="true" signature="38850:41708" ph="select i.id,... " />
-            <marker date="1509097126978" expanded="true" signature="38967:41537" ph="select /* 商品... " />
-            <marker date="1509097126978" expanded="true" signature="38967:41563" ph="select /* 商品... " />
-            <marker date="1509097126978" expanded="true" signature="39417:39439" ph="/* 商品包装（是否破损... " />
-            <marker date="1509097126978" expanded="true" signature="40526:40543" ph="/*库存自动同步状况（开... " />
-            <marker date="1509097126978" expanded="true" signature="40810:40847" ph="/*1.系统商品信息表1... " />
-            <marker date="1509097126978" expanded="true" signature="40924:40946" ph="/*20.erp专用-库... " />
-            <marker date="1509097126978" expanded="true" signature="42021:43052" ph="select count... ifnull" />
-            <marker date="1509097126978" expanded="true" signature="42075:42931" ph="select /*库存自... item_common_info" />
-            <marker date="1509097126978" expanded="true" signature="42098:42115" ph="/*库存自动同步状况（开... " />
-            <marker date="1509097126978" expanded="true" signature="42140:42250" ph="select max(p... platform_erp_link" />
-            <marker date="1509097126978" expanded="true" signature="42140:42288" ph="select max(p... platform_erp_link" />
-            <marker date="1509097126978" expanded="true" signature="42140:42328" ph="select max(p... platform_erp_link" />
-            <marker date="1509097126978" expanded="true" signature="42382:42419" ph="/*1.系统商品信息表1... " />
-            <marker date="1509097126978" expanded="true" signature="43335:44618" ph="select id, i... platform_erp_link" />
-            <marker date="1509097126978" expanded="true" signature="44866:47018" ph="update platf... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1225,28 +1027,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
+        <state relative-caret-position="6475">
           <caret line="259" column="3" lean-forward="false" selection-start-line="259" selection-start-column="3" selection-end-line="259" selection-end-column="3" />
-          <folding>
-            <marker date="1509100730261" expanded="true" signature="10245:10263" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="10383:10401" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="10493:10511" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="12648:12666" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="13091:13108" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="13233:13284" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="13730:13747" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="13870:13921" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="15090:15108" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="15340:15358" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="21891:21905" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="22804:22818" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="23636:23650" ph="..." />
-            <marker date="1509100730261" expanded="true" signature="24178:24192" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/com/rongcheng/erp/jd/item/search/SearchItem.class">
+    <entry file="file://$PROJECT_DIR$/target/classes/com/rongcheng/erp/jd/item/search/SearchItem.class" />
+    <entry file="file://$PROJECT_DIR$/.gitignore" />
+    <entry file="file://$USER_HOME$/Desktop/rcERP/rongcheng-erp/src/main/resources/conf/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/rcERP/rongcheng-erp/src/main/resources/conf/spring-mvc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1254,10 +1051,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$USER_HOME$/Desktop/rcERP/rongcheng-erp/src/main/resources/conf/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="9" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/T3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="21" column="11" lean-forward="true" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rongcheng-erp.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding />
         </state>
       </provider>
