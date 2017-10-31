@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="erp项目">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/conf/jdbc.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/jdbc.properties" afterPath="$PROJECT_DIR$/src/main/resources/conf/jdbc.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" afterPath="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml" afterPath="$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,22 +52,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="jdbc.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/conf/jdbc.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="spring-mybatis.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="318">
+              <caret line="88" column="107" lean-forward="true" selection-start-line="88" selection-start-column="107" selection-end-line="88" selection-end-column="107" />
+              <folding>
+                <element signature="e#1312#1338#0" expanded="true" />
+                <element signature="e#1375#1389#0" expanded="true" />
+                <element signature="e#1430#1449#0" expanded="true" />
+                <element signature="e#1490#1509#0" expanded="true" />
+                <element signature="e#1585#1607#0" expanded="true" />
+                <element signature="e#1666#1686#0" expanded="true" />
+                <element signature="e#1743#1761#0" expanded="true" />
+                <element signature="e#1818#1836#0" expanded="true" />
+                <element signature="e#1896#1914#0" expanded="true" />
+                <element signature="e#2034#2060#0" expanded="true" />
+                <element signature="e#2275#2299#0" expanded="true" />
+                <element signature="e#2398#2421#0" expanded="true" />
+                <element signature="e#2520#2543#0" expanded="true" />
+                <element signature="e#2884#2924#0" expanded="true" />
+                <element signature="e#3095#3132#0" expanded="true" />
+                <element signature="e#3213#3239#0" expanded="true" />
+                <element signature="e#3320#3353#0" expanded="true" />
+                <element signature="e#3424#3447#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,9 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>String</find>
-      <find>Big</find>
-      <find>isA</find>
       <find>\n</find>
       <find>/inventorySync/listInventorySyncByItemId.do</find>
       <find>listPlatformErpLinkShopInfo</find>
@@ -114,6 +121,9 @@
       <find>&lt;jdk&gt;</find>
       <find>&lt;properties&gt;</find>
       <find>util</find>
+      <find>${</find>
+      <find>SqlSessionFactoryBean</find>
+      <find>ssf</find>
     </findStrings>
     <replaceStrings>
       <replace>/util/cookie_util.js</replace>
@@ -122,6 +132,7 @@
       <replace>A</replace>
       <replace>a</replace>
       <replace>platformErpLinkShopWarehouseInfo</replace>
+      <replace>${mysql.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,8 +194,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="D:/Java/apache-maven-3.5.0/conf/settings.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/conf/jdbc.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml" />
       </list>
     </option>
@@ -320,6 +331,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -363,9 +377,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -701,6 +712,7 @@
       <workItem from="1509068121941" duration="30451000" />
       <workItem from="1509351618527" duration="1848000" />
       <workItem from="1509413940668" duration="1076000" />
+      <workItem from="1509423405707" duration="515000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -766,7 +778,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109612000" />
+    <option name="totallyTimeSpent" value="110127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -821,48 +833,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/RequestUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/JsonpResult.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/jiml-util.jar!/com/jimlp/util/FileUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/LocationItemStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/OrderInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/工作中用到的技术/java工具包/myself/sql语句转换FileSqlTransformationTool(1).java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -934,13 +904,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/工作中用到的技术/WEB/js_jquery选择框_单选_全选.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="78" lean-forward="true" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Desktop/工作中用到的技术/WEB/js_jquery选择框_单选_全选.txt" />
     <entry file="file://$USER_HOME$/Desktop/rongcheng-Globalexpress/src/main/java/com/globalexpress/web/cms/controller/BlockChannelController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1064,7 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1097,7 +1060,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
           <caret line="186" column="7" lean-forward="true" selection-start-line="186" selection-start-column="7" selection-end-line="186" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1123,35 +1085,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml">
+    <entry file="file://$USER_HOME$/Desktop/spring-mybatis.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+        <state relative-caret-position="250">
+          <caret line="10" column="79" lean-forward="true" selection-start-line="10" selection-start-column="79" selection-end-line="10" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/conf/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/conf/jdbc.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="375">
+          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/spring-mybatis.xml">
+    <entry file="file://F:/forum-master/forum-master/src/main/resources/df.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/forum-master/forum-master/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/forum-master/forum-master/src/main/resources/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/forum-master/forum-master/src/main/resources/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="59" column="15" lean-forward="false" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/forum-master/forum-master/src/main/resources/application-context.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
-          <caret line="71" column="35" lean-forward="true" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+          <caret line="73" column="67" lean-forward="false" selection-start-line="73" selection-start-column="67" selection-end-line="73" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/conf/spring-mybatis.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="81" column="0" lean-forward="true" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="318">
+          <caret line="88" column="107" lean-forward="true" selection-start-line="88" selection-start-column="107" selection-end-line="88" selection-end-column="107" />
+          <folding>
+            <element signature="e#1312#1338#0" expanded="true" />
+            <element signature="e#1375#1389#0" expanded="true" />
+            <element signature="e#1430#1449#0" expanded="true" />
+            <element signature="e#1490#1509#0" expanded="true" />
+            <element signature="e#1585#1607#0" expanded="true" />
+            <element signature="e#1666#1686#0" expanded="true" />
+            <element signature="e#1743#1761#0" expanded="true" />
+            <element signature="e#1818#1836#0" expanded="true" />
+            <element signature="e#1896#1914#0" expanded="true" />
+            <element signature="e#2034#2060#0" expanded="true" />
+            <element signature="e#2275#2299#0" expanded="true" />
+            <element signature="e#2398#2421#0" expanded="true" />
+            <element signature="e#2520#2543#0" expanded="true" />
+            <element signature="e#2884#2924#0" expanded="true" />
+            <element signature="e#3095#3132#0" expanded="true" />
+            <element signature="e#3213#3239#0" expanded="true" />
+            <element signature="e#3320#3353#0" expanded="true" />
+            <element signature="e#3424#3447#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

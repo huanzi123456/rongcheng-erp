@@ -44,10 +44,13 @@
 			</set>
 		</property>
 	</bean>
+
+    <!--上传图片-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8" />
     </bean>
 
+    <!--加载配置文件config，在java中使用-->
 	<bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="location" value="classpath:conf/config.properties" />
 		<property name="fileEncoding" value="UTF-8" />
