@@ -11,12 +11,66 @@
 		   http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
-  
+
+	<!-- 引入数据库配置文件 -->
+	<bean id="propertyConfigurer"    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<!--<list>-->
+				<value>classpath:conf/jdbc.properties</value>
+				<!--<value>classpath:conf/redis.properties</value>-->
+			<!--</list>-->
+		</property>
+	</bean>
+
+    <!-- DBCP 1.4 -->
 	<bean id="dbcp" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="username" value="root"></property>
-		<property name="password" value="123456"></property>
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost/rongchengtech?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"></property>
+        <!--初级设置-->
+        <property name="driverClassName" 	value="${driverClassName}" />
+        <property name="url" 				value="${url}" />
+        <property name="username" 			value="${username}" />
+        <property name="password" 			value="${password}" />
+
+        <!--中级设置-->
+        <!-- 初始化连接大小 -->
+        <property name="initialSize"		value="${initialSize}"/>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive"			value="${maxActive}"/>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle"			value="${maxIdle}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle"			value="${minIdle}"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait"			value="${maxWait}"/>
+
+        <!--高级设置-->
+        <!--验证连接是否可用，使用的SQL语句，测试不成功就销毁连接(个人理解：用在连接后查看是否需要销毁)-->
+        <property name="validationQuery"    value="${validationQuery}"/>
+        <!--指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除。建议配置为true，
+        不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，
+        执行validationQuery检测连接是否有效。-->
+        <property name="testWhileIdle"      value="${testWhileIdle}"/>
+        <!--申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能-->
+        <property name="testOnBorrow"       value="${testOnBorrow}"/>
+        <!--归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能-->
+        <property name="testOnReturn"       value="${testOnReturn}"/>
+        <!-- 只要下面两个参数设置成小于8小时(MySql默认)，就能避免MySql的8小时自动断开连接问题 -->
+        <!--每30秒运行一次空闲连接回收器（独立线程）。并每次检查3个连接，如果连接空闲时间超过30分钟就销毁。
+        销毁连接后，连接数量就少了，如果小于minIdle数量，就新建连接，维护数量不少于minIdle，过行了新老更替。
+        有两个含义：
+        1) Destroy线程会检测连接的间隔时间
+        2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明-->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+        <!--池中的连接空闲30分钟后被回收,默认值就是30分钟。
+        Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接。-->
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+
+        <!--谨慎设置-->
+        <!-- 超过时间限制是否回收 -->
+        <property name="removeAbandoned" value="${removeAbandoned}"/>
+        <!-- 超时时间；单位为秒。180秒=3分钟 -->
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="${logAbandoned}"/>
 	</bean> 
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dbcp"></property>
