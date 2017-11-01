@@ -76,4 +76,45 @@
 .all_price li .span:nth-child(2){
 	margin-left: 450px;
 }
+.matching_box{
+	position: relative;
+}
+.matching_delBtn{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 18px;
+	background: #f00;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+}
+.widthSize{
+	margin-bottom: 10px;
 
+}
+.widthSize tr:last-child{
+	border-bottom: 1px solid #ddd;
+}
+.widthSize td{
+	width: 100px;
+	background: #eef;
+}
+.widthSize td>span{
+	display: inline-block;
+	width: 100px;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.matching_alert_box{
+	width: 100%;
+	height: 100%;
+	background: rgba();
+}
