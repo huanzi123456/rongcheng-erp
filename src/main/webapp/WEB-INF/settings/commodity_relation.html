@@ -6,17 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title></title>  
-    <link rel="stylesheet" href="../css/pintuer.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <script src="../js/jquery.js"></script>
-    <script src="../js/pintuer.js"></script>  
-    <link rel="stylesheet" href="../css/inventory_state.css">
-    <link rel="stylesheet" href="../css/alert_box.css">
-    <link rel="stylesheet" href="../css/commodity_relation.css">
-    <script src="../js/big_box.js"></script>
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <link rel="stylesheet" href="/css/commodity_relation.css">
+    <script src="/js/big_box.js"></script>
     <style>
-      .div_big_box{
-        overflow: hidden;
+      .div_big_box:after{
+      	content: "";
+      	display: inline-block;
+      	height: 0;
+      	clear: both;
       }
     </style>
 </head>
@@ -1460,7 +1463,7 @@
  			</div>
  		</div>
  	</div>
- 	<script src="../js/commodity_relation.js"></script>
+ 	<script src="/js/commodity_relation.js"></script>
 </body>
 <script>
 	var boxHeight=document.querySelector('.div_big_box').offsetHeight;
