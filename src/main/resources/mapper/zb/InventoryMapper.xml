@@ -7,7 +7,7 @@
 
 
 <mapper namespace="com.rongcheng.erp.dao.ZB_InventoryDAO">
-	
+
 	<!-- /**
      * 查询库存状态
      * 

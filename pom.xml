@@ -119,20 +119,6 @@
             <version>3.2.8.RELEASE</version>
         </dependency>
 
-        <!-- spring-redis实现 -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>1.6.2.RELEASE</version>
-        </dependency>
-
-        <!-- Redis客户端 -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.8.0</version>
-        </dependency>
-
         <!--mybatis框架组件-->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -163,7 +149,19 @@
           <artifactId>com.springsource.org.aopalliance</artifactId>
           <version>1.0.0</version>
           <classifier>sources</classifier>
-        </dependency>		
+        </dependency>
+
+        <!--log4j 2 日志处理-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.9.1</version>
+        </dependency>
 
 	</dependencies>
 </project>

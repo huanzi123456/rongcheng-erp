@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="rongcheng-erp:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="rongcheng-print-0.0.1-SNAPSHOT.war">
+    <root id="archive" name="rongcheng-erp-0.0.1-SNAPSHOT.war">
       <element id="artifact" artifact-name="rongcheng-erp:war exploded" />
     </root>
   </artifact>

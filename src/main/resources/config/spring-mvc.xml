@@ -52,7 +52,7 @@
 
     <!--加载配置文件config，在java中使用-->
 	<bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="location" value="classpath:conf/config.properties" />
+		<property name="location" value="classpath:config/config.properties" />
 		<property name="fileEncoding" value="UTF-8" />
 	</bean>
 
@@ -64,4 +64,5 @@
 	
 	<bean id="itemAutoIncrId" class="com.rongcheng.erp.jd.item.converter.incrId.ItemAutoIncrId"></bean>
 	<bean id="orderAutoIncrId" class="com.rongcheng.erp.jd.order.converter.incrId.OrderAutoIncrId"></bean>
+
 </beans>
