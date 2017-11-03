@@ -217,4 +217,28 @@ public interface ZB_InventoryService {
      * @author 赵滨
      */
     int updateInventorySyncConfiguations(String configuations, BigInteger ownerId);
+
+    /**
+     * 加载 仓库和库位 页面
+     *
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    Map<String, Object> loadWarehouseAndStocklocation(BigInteger ownerId);
+
+    /**
+     * 加载 云仓商品配对 页面
+     *
+     * @param nowPage     当前页数
+     * @param keywords    搜索关键字
+     * @param warehouseId 仓库ID
+     * @param warehouseId 库位ID
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    Map<String, Object> loadCommodityMatching(Integer nowPage, Integer rows,String keywords, BigInteger warehouseId,
+                              BigInteger stocklocationId, BigInteger ownerId);
+
 }

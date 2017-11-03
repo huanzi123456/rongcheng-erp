@@ -418,4 +418,45 @@ public interface ZB_InventoryDAO {
      */
     int updatePlatformErpLink(PlatformErpLink platformErpLink);
 
+    /**
+     * 查询 仓库信息
+     * @param ownerId 主账号ID
+     * @return
+     */
+    List<WarehouseInfo> listWarehouseInfo(BigInteger ownerId);
+
+    /**
+     * 查询 库位信息
+     * @param ownerId 主账号ID
+     * @return
+     */
+    List<StocklocationInfo> listStocklocationInfo(BigInteger ownerId);
+
+    /**
+     * 查询 云仓商品配对
+     * @param ownerId   主账号ID
+     * @param keywords  关键字
+     * @param warehouseId   仓库ID
+     * @param stocklocationId   库位ID
+     * @param start 开始
+     * @param row   行数
+     * @return listMap 云仓商品配对
+     * @author 赵滨
+     */
+    List<Map<String, Object>> listLocationItemStockAndItemByKeywords(
+            BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId, int start,
+            int row);
+
+    /**
+     * 查询 云仓商品配对 条数
+     * @param ownerId   主账号ID
+     * @param keywords  关键字
+     * @param warehouseId   仓库ID
+     * @param stocklocationId   库位ID
+     * @return row 条数
+     * @author 赵滨
+     */
+    int countLocationItemStockAndItemByKeywords(
+            BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId);
+
 }

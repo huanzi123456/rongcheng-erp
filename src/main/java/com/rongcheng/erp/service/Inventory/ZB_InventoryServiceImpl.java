@@ -1117,4 +1117,58 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
 
         return row;
     }
+
+    /**
+     * 加载 仓库和库位 页面
+     *
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public Map<String, Object> loadWarehouseAndStocklocation(BigInteger ownerId) {
+        //返回结果集
+        Map<String, Object> map = new HashMap<>();
+
+        //仓库集合
+        map.put("listWarehouseInfo", inventoryDAO.listWarehouseInfo(ownerId));
+        //库位集合
+        map.put("listStocklocationInfo", inventoryDAO.listStocklocationInfo(ownerId));
+
+        //返回
+        return map;
+    }
+
+    /**
+     * 加载 云仓商品配对 页面
+     *
+     * @param nowPage         当前页数
+     * @param keywords        搜索关键字
+     * @param warehouseId 仓库ID
+     * @param warehouseId 库位ID
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public Map<String, Object> loadCommodityMatching(
+            Integer nowPage, Integer rows,String keywords, BigInteger warehouseId, BigInteger stocklocationId,
+            BigInteger ownerId) {
+        //返回结果集
+        Map<String, Object> map = new HashMap<>();
+
+        //起始行数
+        int start = (nowPage - 1) * rows;
+
+        //查询配对信息
+        List<Map<String, Object>> listLocationItemStockAndItem = inventoryDAO.listLocationItemStockAndItemByKeywords(
+                ownerId, keywords, warehouseId, stocklocationId, start, rows);
+        map.put("listLocationItemStockAndItem", listLocationItemStockAndItem);
+
+        //查询条数
+        int maxPage = inventoryDAO.countLocationItemStockAndItemByKeywords(
+                ownerId, keywords, warehouseId, stocklocationId);
+        map.put("maxPage", Math.ceil((double)maxPage/(double)rows));
+
+        //返回
+        return map;
+    }
 }

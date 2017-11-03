@@ -1746,7 +1746,7 @@
             id,
             warehouse_id as warehouseId,
             user_stocklocation_code as userStocklocationCode,
-            'name',
+            name,
             stocklocation_status as stocklocationStatus,
             connection_code as connectionCode,
             distribution_region as distributionRegion,
@@ -1760,6 +1760,131 @@
             stocklocation_info
         where
             owner_id = #{ownerId}
+    </select>
+
+    <!--/**
+    * 查询 云仓商品配对
+    * @param ownerId   主账号ID
+    * @param keywords  关键字
+    * @param warehouseId   仓库ID
+    * @param stocklocationId   库位ID
+    * @param start 开始
+    * @param row   行数
+    * @return listMap 云仓商品配对
+    * @author 赵滨
+    */-->
+    <select id="listLocationItemStockAndItemByKeywords"  resultType="java.util.Map">
+        SELECT
+            <!--关联表ID-->
+            l.id,
+            <!--商品编码-->
+            ifnull(i.erp_item_num, '') as erpItemNum,
+            <!--商品名称-->
+            ifnull(i.name, '') as name,
+            <!--商品条码-->
+            ifnull(i.bar_code, '') as barCode,
+            <!--商品颜色-->
+            ifnull(i.color, '') as color,
+            <!--商品尺码-->
+            ifnull(i.size, '') as size,
+            <!--仓库-->
+            ifnull(w.warehouse_name, '') as warehouseName,
+            <!--库位-->
+            ifnull(s.name, '') as stocklocationName,
+            <!--库存总量-->
+            ifnull(l.stock_quantity,0) as sumQuantity,
+            <!--关联码-->
+            ifnull(l.bind_id,0) as bindId
+        FROM
+            location_item_stock as l
+            LEFT JOIN
+            warehouse_info as w
+            ON
+            l.warehouse_id = w.id
+            LEFT JOIN
+            stocklocation_info as s
+            ON
+            l.stocklocation_id = s.id
+            LEFT JOIN
+            item_common_info as i
+            ON
+            l.item_id = i.id
+        WHERE
+        l.owner_id = #{0}
+        AND l.item_id IN
+        (
+            SELECT item_id FROM
+            (
+                SELECT lson.item_id FROM location_item_stock as lson, item_common_info as ison
+                WHERE lson.owner_id = #{0}
+
+                <if test="param2 != '' and param2 != null">
+                AND
+                    (
+                    ison.erp_item_num like concat('%', #{1}, '%')
+                    or
+                    ison.name like concat('%',#{1}, '%')
+                    or
+                    ison.bar_code like concat('%',#{1}, '%')
+                    )
+                </if>
+
+                <if test="param3 != '' and param3 != null">
+                AND lson.warehouse_id = #{2}
+                </if>
+
+                <if test="param4 != '' and param4 != null">
+                AND lson.stocklocation_id = #{3}
+                </if>
+
+                GROUP BY lson.bind_id
+                ORDER BY lson.id
+                LIMIT #{4},#{5}
+            ) as tableson
+        )
+    </select>
+
+    <!--/**
+    * 查询 云仓商品配对 条数
+    * @param ownerId   主账号ID
+    * @param keywords  关键字
+    * @param warehouseId   仓库ID
+    * @param stocklocationId   库位ID
+    * @return row 条数
+    * @author 赵滨
+    */-->
+    <select id="countLocationItemStockAndItemByKeywords"  resultType="int">
+        SELECT count(*) FROM
+            location_item_stock as l
+        WHERE
+        l.owner_id = #{0}
+        AND l.item_id IN
+        (
+        SELECT lson.item_id FROM location_item_stock as lson, item_common_info as ison
+        WHERE lson.owner_id = #{0}
+
+        <if test="param2 != '' and param2 != null">
+            AND
+            (
+            ison.erp_item_num like concat('%', #{1}, '%')
+            or
+            ison.name like concat('%',#{1}, '%')
+            or
+            ison.bar_code like concat('%',#{1}, '%')
+            )
+        </if>
+
+        <if test="param3 != '' and param3 != null">
+            AND lson.warehouse_id = #{2}
+        </if>
+
+        <if test="param4 != '' and param4 != null">
+            AND lson.stocklocation_id = #{3}
+        </if>
+
+        GROUP BY lson.bind_id
+        ORDER BY lson.id
+        )
     </select>
 
 </mapper>

@@ -1,3 +1,4 @@
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -6,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title></title>  
-    <link rel="stylesheet" href="../css/pintuer.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <script src="../js/jquery.js"></script>
-    <script src="../js/pintuer.js"></script>  
-    <link rel="stylesheet" href="../css/inventory_state.css">
-    <link rel="stylesheet" href="../css/alert_box.css">
-    <script src="../js/big_box.js"></script>
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <script src="/js/big_box.js"></script>
     <style>
 		.div_big_box:after{
 			content: "";
@@ -21,29 +22,32 @@
 			clear: both;
 		}
     </style>
+
+	<script src="/util/cookie_util.js"></script>
+	<script src="/util/jiml-utils.js"></script>
+	<script src="/zb/inventory/commodityMatching.js"></script>
+
 </head>
 <body style="position: relative;min-height: 600px;">
 	<div class="div_big_box">
-	 	<div class="panel admin-panel accredit-height">
+	 	<div class="panel admin-panel accredit-height" id="commodityMatchingTableParent">
 	 		<div class="padding border-bottom matching_box">
 			    <ul class="search">
 			    	<li>查询：</li>
 			        <li>仓库：
-			          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-			            <option value="0">仓库1</option>
-			            <option value="1">仓库2</option>
-			            <option value="2">仓库3</option>
+			          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+                              id="selectWarehouseInfo">
+			            <%--加载仓库--%>
 			          </select>
 			        </li>
 			        <li>库位：
-			          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-			            <option value="0">库位1</option>
-			            <option value="1">库位2</option>
-			            <option value="2">库位3</option>
+			          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+                              id="selectStocklocationInfo">
+			            <%--加载库位--%>
 			          </select>
 			        </li>
 			        <li>商品：
-			          <input type="text" placeholder="商品名称/编码/规格" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
+			          <input type="text" placeholder="商品名称/编码/条码" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
 			          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
 			        </li>
 		     	</ul>
@@ -53,261 +57,8 @@
 		          <a href="javascript:;" class="button border-main alert_matching"> 云仓商品关联</a>
 		        </li>
 	     	</ul>
-		    <table class="table table-hover text-center list_table widthSize">
-				<tr>
-					<th>商品编码</th>
-					<th>商品名称</th>       
-					<th>商品条码</th>
-					<th>商品规格</th>
-					<th>仓库</th>
-					<th>库位</th>
-					<th>总量</th>
-					<th>订单占用量</th>
-					<th>可用量</th>
-					<th>编辑</th>
-				</tr>      
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-			</table>
-			<table class="table table-hover text-center list_table widthSize">
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-			</table>
-			<table class="table table-hover text-center list_table widthSize">
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>44444444444</span></td>
-					<td>
-						<p>
-							二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-						</p>
-					</td>  
-					<td><span>44984487489498</span></td> 
-					<td><span>T56953655</span></td> 
-					<td>
-						<p>
-							仓库1
-						</p>
-					</td>
-					<td>
-						<p>
-							库位1
-						</p>
-					</td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td><span>1000</span></td>
-					<td>
-						<a href="javascript:;" class="button border-red">删除</a>
-					</td>
-				</tr>
-			</table>
-			<div>
-				<div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div>
-			</div>
+		    <%--加载内容--%>
+            <%--加载页码--%>
 	 	</div>
  	</div>
  	<div class="matching_alert_box">
@@ -550,5 +301,5 @@
 	var matching_alert_box=document.querySelector(".matching_alert_box");
 	blackHeight(matching_alert_box,boxHeight);
 </script>
-<script src="../js/commodity_matching.js"></script>
+<script src="/js/commodity_matching.js"></script>
 </html>

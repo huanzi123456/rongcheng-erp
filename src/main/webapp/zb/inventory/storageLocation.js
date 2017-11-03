@@ -910,8 +910,7 @@ function createWarehouseInfo(list) {
 	
 	//默认第一个
 	var op = '<option value="">全部仓库</option>';
-	op += '<option value="0">默认仓库</option>';
-	
+
 	//遍历
 	for (var i = 0; i < list.length; i++) {
 		

@@ -728,9 +728,15 @@ function locationSave() {
 	
 	//填写库位名称
 	var name = $("#text_name").val();
-	
+
+    //如果没有库位编码
+    if (userStocklocationCode.trim() == "") {
+        showMessage("请填写库位编码");
+        return;
+    }
+
 	//如果没有库位名称
-	if (name == "") {
+	if (name.trim() == "") {
 		showMessage("请填写库位名称");
 		return;
 	}

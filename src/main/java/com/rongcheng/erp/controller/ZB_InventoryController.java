@@ -412,4 +412,54 @@ public class ZB_InventoryController {
         //返回
         return new JsonResult(row);
     }
+
+    /**
+     * 跳转 云仓商品配对 页面
+     *
+     * @return jsp页面
+     * @author 赵滨
+     */
+    @RequestMapping("/commodityMatching.do")
+    public String commodityMatching() {
+        return "inventory/commodityMatching";
+    }
+
+    /**
+     * 加载 仓库和库位 页面
+     *
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/loadWarehouseAndStocklocation.do")
+    public JsonResult loadWarehouseAndStocklocation() {
+        //加载
+        Map<String, Object> map = inventoryService.loadWarehouseAndStocklocation(ownerId);
+        //返回
+        return new JsonResult(map);
+    }
+
+    /**
+     * 加载 云仓商品配对 页面
+     *
+     * @param nowPage         当前页数
+     * @param keywords        搜索关键字
+     * @param warehouseId 仓库ID
+     * @param warehouseId 库位ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/loadCommodityMatching.do")
+    public JsonResult loadCommodityMatching(
+            Integer nowPage, String keywords, BigInteger warehouseId, BigInteger stocklocationId) {
+        //加载
+        Map<String, Object> map =
+                inventoryService.loadCommodityMatching(nowPage, rows, keywords, warehouseId, stocklocationId, ownerId);
+        //返回
+        return new JsonResult(map);
+    }
+
+
+
 }

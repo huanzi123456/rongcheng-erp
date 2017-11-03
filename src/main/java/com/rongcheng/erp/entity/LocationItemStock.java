@@ -21,48 +21,22 @@ public class LocationItemStock implements Serializable{
     /**
      * 构建参数
      */
-    //1.记录编号
-    private BigInteger id;
-    
-    //2.仓库编码
-    private BigInteger warehouseId;
-    
-    //3.库位编码
-    private BigInteger stocklocationId;
-    
-    //4.商品编号
-    private BigInteger itemId;
-    
-    //5.库存量
-    private Integer stockQuantity;
-    
-    //6.警戒量库存
-    private Integer alertStock;
-    
-    //7.该库存商品是否参与发货
-    private Integer sendoutStatus;
-    
-    //8.自定义内容1
-    private String reserved1;
-    
-    //9.备注
-    private String note;
-    
-    //10.用户主账户ID
-    private BigInteger ownerId;
-    
-    //11.操作人
-    private BigInteger operatorId;
-    
-    //12.该记录是否被授权
-    private Boolean authorization;
-    
-    //13.记录创建时间
-    private Timestamp gmtCreate;
-    
-    //14.记录修改时间
-    private Timestamp gmtModified;
-    
+    private BigInteger id;      //1.记录编号
+    private BigInteger warehouseId;     //2.仓库编码
+    private BigInteger stocklocationId;     //3.库位编码
+    private BigInteger itemId;      //4.商品编号
+    private Integer stockQuantity;      //5.库存量
+    private Integer alertStock;     //6.警戒量库存
+    private Integer sendoutStatus;      //7.该库存商品是否参与发货
+    private String bindId;          //8.表内商品关联码
+    private String reserved1;       //8.自定义内容1
+    private String note;        //9.备注
+    private BigInteger ownerId;     //10.用户主账户ID
+    private BigInteger operatorId;      //11.操作人
+    private Boolean authorization;      //12.该记录是否被授权
+    private Timestamp gmtCreate;        //13.记录创建时间
+    private Timestamp gmtModified;      //14.记录修改时间
+
     /**
      * 无参构造
      */
@@ -70,15 +44,15 @@ public class LocationItemStock implements Serializable{
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
     /**
      * 有参构造
      */
-    public LocationItemStock(BigInteger id, BigInteger warehouseId, BigInteger stocklocationId, BigInteger itemId,
-            Integer stockQuantity, Integer alertStock, Integer sendoutStatus, String reserved1, String note,
-            BigInteger ownerId, BigInteger operatorId, Boolean authorization, Timestamp gmtCreate,
+    public LocationItemStock(
+            BigInteger id, BigInteger warehouseId, BigInteger stocklocationId, BigInteger itemId,
+            Integer stockQuantity, Integer alertStock, Integer sendoutStatus, String bindId, String reserved1,
+            String note, BigInteger ownerId, BigInteger operatorId, Boolean authorization, Timestamp gmtCreate,
             Timestamp gmtModified) {
-        super();
         this.id = id;
         this.warehouseId = warehouseId;
         this.stocklocationId = stocklocationId;
@@ -86,6 +60,7 @@ public class LocationItemStock implements Serializable{
         this.stockQuantity = stockQuantity;
         this.alertStock = alertStock;
         this.sendoutStatus = sendoutStatus;
+        this.bindId = bindId;
         this.reserved1 = reserved1;
         this.note = note;
         this.ownerId = ownerId;
@@ -207,126 +182,90 @@ public class LocationItemStock implements Serializable{
     public void setGmtModified(Timestamp gmtModified) {
         this.gmtModified = gmtModified;
     }
-    
+
+    public String getBindId() {
+        return bindId;
+    }
+
+    public void setBindId(String bindId) {
+        this.bindId = bindId;
+    }
+
+    /**
+     * 重写equals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LocationItemStock that = (LocationItemStock) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (warehouseId != null ? !warehouseId.equals(that.warehouseId) : that.warehouseId != null) return false;
+        if (stocklocationId != null ? !stocklocationId.equals(that.stocklocationId) : that.stocklocationId != null)
+            return false;
+        if (itemId != null ? !itemId.equals(that.itemId) : that.itemId != null) return false;
+        if (stockQuantity != null ? !stockQuantity.equals(that.stockQuantity) : that.stockQuantity != null)
+            return false;
+        if (alertStock != null ? !alertStock.equals(that.alertStock) : that.alertStock != null) return false;
+        if (sendoutStatus != null ? !sendoutStatus.equals(that.sendoutStatus) : that.sendoutStatus != null)
+            return false;
+        if (bindId != null ? !bindId.equals(that.bindId) : that.bindId != null) return false;
+        if (reserved1 != null ? !reserved1.equals(that.reserved1) : that.reserved1 != null) return false;
+        if (note != null ? !note.equals(that.note) : that.note != null) return false;
+        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
+        if (operatorId != null ? !operatorId.equals(that.operatorId) : that.operatorId != null) return false;
+        if (authorization != null ? !authorization.equals(that.authorization) : that.authorization != null)
+            return false;
+        if (gmtCreate != null ? !gmtCreate.equals(that.gmtCreate) : that.gmtCreate != null) return false;
+        return gmtModified != null ? gmtModified.equals(that.gmtModified) : that.gmtModified == null;
+    }
+
     /**
      * 重写哈希code
      */
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((alertStock == null) ? 0 : alertStock.hashCode());
-        result = prime * result + ((authorization == null) ? 0 : authorization.hashCode());
-        result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
-        result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
-        result = prime * result + ((note == null) ? 0 : note.hashCode());
-        result = prime * result + ((operatorId == null) ? 0 : operatorId.hashCode());
-        result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
-        result = prime * result + ((reserved1 == null) ? 0 : reserved1.hashCode());
-        result = prime * result + ((sendoutStatus == null) ? 0 : sendoutStatus.hashCode());
-        result = prime * result + ((stockQuantity == null) ? 0 : stockQuantity.hashCode());
-        result = prime * result + ((stocklocationId == null) ? 0 : stocklocationId.hashCode());
-        result = prime * result + ((warehouseId == null) ? 0 : warehouseId.hashCode());
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (warehouseId != null ? warehouseId.hashCode() : 0);
+        result = 31 * result + (stocklocationId != null ? stocklocationId.hashCode() : 0);
+        result = 31 * result + (itemId != null ? itemId.hashCode() : 0);
+        result = 31 * result + (stockQuantity != null ? stockQuantity.hashCode() : 0);
+        result = 31 * result + (alertStock != null ? alertStock.hashCode() : 0);
+        result = 31 * result + (sendoutStatus != null ? sendoutStatus.hashCode() : 0);
+        result = 31 * result + (bindId != null ? bindId.hashCode() : 0);
+        result = 31 * result + (reserved1 != null ? reserved1.hashCode() : 0);
+        result = 31 * result + (note != null ? note.hashCode() : 0);
+        result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
+        result = 31 * result + (operatorId != null ? operatorId.hashCode() : 0);
+        result = 31 * result + (authorization != null ? authorization.hashCode() : 0);
+        result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
+        result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
         return result;
     }
-    
-    /**
-     * 重写equals
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        LocationItemStock other = (LocationItemStock) obj;
-        if (alertStock == null) {
-            if (other.alertStock != null)
-                return false;
-        } else if (!alertStock.equals(other.alertStock))
-            return false;
-        if (authorization == null) {
-            if (other.authorization != null)
-                return false;
-        } else if (!authorization.equals(other.authorization))
-            return false;
-        if (gmtCreate == null) {
-            if (other.gmtCreate != null)
-                return false;
-        } else if (!gmtCreate.equals(other.gmtCreate))
-            return false;
-        if (gmtModified == null) {
-            if (other.gmtModified != null)
-                return false;
-        } else if (!gmtModified.equals(other.gmtModified))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (itemId == null) {
-            if (other.itemId != null)
-                return false;
-        } else if (!itemId.equals(other.itemId))
-            return false;
-        if (note == null) {
-            if (other.note != null)
-                return false;
-        } else if (!note.equals(other.note))
-            return false;
-        if (operatorId == null) {
-            if (other.operatorId != null)
-                return false;
-        } else if (!operatorId.equals(other.operatorId))
-            return false;
-        if (ownerId == null) {
-            if (other.ownerId != null)
-                return false;
-        } else if (!ownerId.equals(other.ownerId))
-            return false;
-        if (reserved1 == null) {
-            if (other.reserved1 != null)
-                return false;
-        } else if (!reserved1.equals(other.reserved1))
-            return false;
-        if (sendoutStatus == null) {
-            if (other.sendoutStatus != null)
-                return false;
-        } else if (!sendoutStatus.equals(other.sendoutStatus))
-            return false;
-        if (stockQuantity == null) {
-            if (other.stockQuantity != null)
-                return false;
-        } else if (!stockQuantity.equals(other.stockQuantity))
-            return false;
-        if (stocklocationId == null) {
-            if (other.stocklocationId != null)
-                return false;
-        } else if (!stocklocationId.equals(other.stocklocationId))
-            return false;
-        if (warehouseId == null) {
-            if (other.warehouseId != null)
-                return false;
-        } else if (!warehouseId.equals(other.warehouseId))
-            return false;
-        return true;
-    }
-    
+
     /**
      * 重写toString
      */
     @Override
     public String toString() {
-        return "LocationItemStock [id=" + id + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId
-                + ", itemId=" + itemId + ", stockQuantity=" + stockQuantity + ", alertStock=" + alertStock
-                + ", sendoutStatus=" + sendoutStatus + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId="
-                + ownerId + ", operatorId=" + operatorId + ", authorization=" + authorization + ", gmtCreate="
-                + gmtCreate + ", gmtModified=" + gmtModified + "]";
+        return "LocationItemStock{" +
+                "id=" + id +
+                ", warehouseId=" + warehouseId +
+                ", stocklocationId=" + stocklocationId +
+                ", itemId=" + itemId +
+                ", stockQuantity=" + stockQuantity +
+                ", alertStock=" + alertStock +
+                ", sendoutStatus=" + sendoutStatus +
+                ", bindId='" + bindId + '\'' +
+                ", reserved1='" + reserved1 + '\'' +
+                ", note='" + note + '\'' +
+                ", ownerId=" + ownerId +
+                ", operatorId=" + operatorId +
+                ", authorization=" + authorization +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                '}';
     }
-
 }
