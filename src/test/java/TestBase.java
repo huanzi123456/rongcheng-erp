@@ -14,17 +14,17 @@ import java.math.BigInteger;
  * 测试基础类 使用说明：
  *
  * 1.请先复制本类，在新生成的测试类中使用
+ *
  * 2.在DAO层接口处，init方法中，更换需要测试的DAO
- * 3.日志对象中的参数为，当前测试类
- * 4.在@Test标注的测试方法中，使用logger.debug（dao.方法）直接测试
- * 5.生成的测试日志在logs文件夹下
+ *
+ * 3.生成的测试日志在项目根目录的logs文件夹下
  *
  * @author 赵滨
  */
 public class TestBase {
 
     //日志对象
-    private final static Logger logger = LogManager.getLogger(TestBase.class.getName());
+//    private final static Logger logger = LogManager.getLogger(TestBase.class.getName());
 
     //DAO层接口
     private ZB_InventoryDAO dao;
@@ -38,6 +38,7 @@ public class TestBase {
 
         //配置日志路径
         loggerSetConfigLocation();
+//        logger.debug("message");
     }
 
     //配置日志路径
@@ -50,7 +51,7 @@ public class TestBase {
 
     @Test
     public void Demo() {
-        logger.debug(dao.listItemCommonStockByKeywords(0, 5, new BigInteger("1"), "", new BigInteger("0"), false));
+        dao.listItemCommonStockByKeywords(0, 5, new BigInteger("1"), "", new BigInteger("0"), false);
     }
 
 }

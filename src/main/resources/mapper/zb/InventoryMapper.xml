@@ -1705,6 +1705,63 @@
         where id = #{id}
     </update>
 
+    <!--/**
+    * 查询 仓库
+    * @param ownerId 主账号ID
+    * @return
+    * @author 赵滨
+    */-->
+    <select id="listWarehouseInfo"  resultType="com.rongcheng.erp.entity.WarehouseInfo">
+        select
+            id,
+            user_warehouse_code as userWarehouseCode,
+            warehouse_name as warehouseName,
+            consignor_name as consignorName,
+            consignor_tel as consignorTel,
+            consignor_mobile as consignorMobile,
+            region_id as regionId,
+            user_address as userAddress,
+            warehouse_status as warehouseStatus,
+            connection_code as connectionCode,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from
+            warehouse_info
+        where
+            owner_id = #{ownerId}
+    </select>
+
+    <!--/**
+    * 查询 库位
+    * @param ownerId 主账号ID
+    * @return
+    * @author 赵滨
+    */-->
+    <select id="listStocklocationInfo"  resultType="com.rongcheng.erp.entity.StocklocationInfo">
+        select
+            id,
+            warehouse_id as warehouseId,
+            user_stocklocation_code as userStocklocationCode,
+            'name',
+            stocklocation_status as stocklocationStatus,
+            connection_code as connectionCode,
+            distribution_region as distributionRegion,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from
+            stocklocation_info
+        where
+            owner_id = #{ownerId}
+    </select>
+
 </mapper>
 
 
