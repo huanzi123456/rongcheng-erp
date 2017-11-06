@@ -23,7 +23,7 @@ public class PlatformErpLink implements Serializable{
     private BigInteger platformItemName;    //8.平台商品名称
     private String platformItemColor;   //9.平台商品颜色
     private String platformItemSize;    //10.平台商品尺码
-    private String platform_item_state; //后加字段(薛宗艳):平台商品状态 长度10
+    private String platformItemState; //后加字段(薛宗艳):平台商品状态 长度10
     private String platformUserCode;    //11.平台商品卖家自定义编码
     private String platformUserImg; //12.平台商品主图
     private BigInteger warehouseId;    //13.erp商品所属仓库编码
@@ -41,18 +41,10 @@ public class PlatformErpLink implements Serializable{
     private Boolean authorized;  //25.该记录是否被授权
     private Timestamp gmtCreate;    //26.记录创建时间
     private Timestamp gmtModified;  //27.记录修改时间
-
-    /**
-     * 无参构造
-     */
-    public PlatformErpLink() {
-
-    }
-    /**
-     * 有参构造
-     */
-    
-	public PlatformErpLink(BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemName, String platformItemColor, String platformItemSize, String platform_item_state, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio, Integer remnantStock, String reserved1, String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
+	public PlatformErpLink() {
+		super();
+	}
+	public PlatformErpLink(BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemName, String platformItemColor, String platformItemSize, String platformItemState, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio, Integer remnantStock, String reserved1, String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
@@ -64,7 +56,7 @@ public class PlatformErpLink implements Serializable{
 		this.platformItemName = platformItemName;
 		this.platformItemColor = platformItemColor;
 		this.platformItemSize = platformItemSize;
-		this.platform_item_state = platform_item_state;
+		this.platformItemState = platformItemState;
 		this.platformUserCode = platformUserCode;
 		this.platformUserImg = platformUserImg;
 		this.warehouseId = warehouseId;
@@ -83,7 +75,6 @@ public class PlatformErpLink implements Serializable{
 		this.gmtCreate = gmtCreate;
 		this.gmtModified = gmtModified;
 	}
-	//get和set
 	public BigInteger getId() {
 		return id;
 	}
@@ -144,11 +135,11 @@ public class PlatformErpLink implements Serializable{
 	public void setPlatformItemSize(String platformItemSize) {
 		this.platformItemSize = platformItemSize;
 	}
-	public String getPlatform_item_state() {
-		return platform_item_state;
+	public String getPlatformItemState() {
+		return platformItemState;
 	}
-	public void setPlatform_item_state(String platform_item_state) {
-		this.platform_item_state = platform_item_state;
+	public void setPlatformItemState(String platformItemState) {
+		this.platformItemState = platformItemState;
 	}
 	public String getPlatformUserCode() {
 		return platformUserCode;
@@ -255,7 +246,6 @@ public class PlatformErpLink implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-    //重写equals   
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -277,11 +267,11 @@ public class PlatformErpLink implements Serializable{
 		result = prime * result + ((platformItemName == null) ? 0 : platformItemName.hashCode());
 		result = prime * result + ((platformItemSize == null) ? 0 : platformItemSize.hashCode());
 		result = prime * result + ((platformItemSku == null) ? 0 : platformItemSku.hashCode());
+		result = prime * result + ((platformItemState == null) ? 0 : platformItemState.hashCode());
 		result = prime * result + ((platformShopId == null) ? 0 : platformShopId.hashCode());
 		result = prime * result + ((platformShopName == null) ? 0 : platformShopName.hashCode());
 		result = prime * result + ((platformUserCode == null) ? 0 : platformUserCode.hashCode());
 		result = prime * result + ((platformUserImg == null) ? 0 : platformUserImg.hashCode());
-		result = prime * result + ((platform_item_state == null) ? 0 : platform_item_state.hashCode());
 		result = prime * result + ((remnantStock == null) ? 0 : remnantStock.hashCode());
 		result = prime * result + ((reserved1 == null) ? 0 : reserved1.hashCode());
 		result = prime * result + ((shopId == null) ? 0 : shopId.hashCode());
@@ -290,7 +280,6 @@ public class PlatformErpLink implements Serializable{
 		result = prime * result + ((warehouseId == null) ? 0 : warehouseId.hashCode());
 		return result;
 	}
-	//重写hashCode
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -385,6 +374,11 @@ public class PlatformErpLink implements Serializable{
 				return false;
 		} else if (!platformItemSku.equals(other.platformItemSku))
 			return false;
+		if (platformItemState == null) {
+			if (other.platformItemState != null)
+				return false;
+		} else if (!platformItemState.equals(other.platformItemState))
+			return false;
 		if (platformShopId == null) {
 			if (other.platformShopId != null)
 				return false;
@@ -404,11 +398,6 @@ public class PlatformErpLink implements Serializable{
 			if (other.platformUserImg != null)
 				return false;
 		} else if (!platformUserImg.equals(other.platformUserImg))
-			return false;
-		if (platform_item_state == null) {
-			if (other.platform_item_state != null)
-				return false;
-		} else if (!platform_item_state.equals(other.platform_item_state))
 			return false;
 		if (remnantStock == null) {
 			if (other.remnantStock != null)
@@ -442,10 +431,9 @@ public class PlatformErpLink implements Serializable{
 			return false;
 		return true;
 	}
-    //重写toString
 	@Override
 	public String toString() {
-		return "PlatformErpLink [id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemName=" + platformItemName + ", platformItemColor=" + platformItemColor + ", platformItemSize=" + platformItemSize + ", platform_item_state=" + platform_item_state + ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock="
+		return "PlatformErpLink [id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemName=" + platformItemName + ", platformItemColor=" + platformItemColor + ", platformItemSize=" + platformItemSize + ", platformItemState=" + platformItemState + ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock="
 				+ availableStock + ", allocationRatio=" + allocationRatio + ", remnantStock=" + remnantStock + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized=" + authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	}
+	} 
 }

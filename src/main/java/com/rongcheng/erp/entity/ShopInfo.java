@@ -26,7 +26,7 @@ public class ShopInfo implements Serializable{
     private BigInteger platformId;
     
     //后加字段(薛宗艳 ):平台店铺id 长度20
-    private String platform_shop_id;
+    private String platformShopId;
     
     //5.自定义店铺编码  长度10  用于上传至平台的卖家编码处
     private String userShopCode;
@@ -93,19 +93,18 @@ public class ShopInfo implements Serializable{
 
     //26.是否启用
     private Boolean shopStatus;
-    //无参数的构造器
-    public ShopInfo() {
-        super();
-    }
 
-    //有参数的构造器
-    public ShopInfo(BigInteger id, String name, String sellerAccount, BigInteger platformId, String platform_shop_id, String userShopCode, String type, BigInteger regionId, String userAddress, Integer zipCode, String contactName, String contactTel, String contactMobile, String shopUrl, String logo, Timestamp authorityDueDate, String reserved1, String note, String shopSecretKey, String barCodeImage, String qrCodeImage, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified, Boolean shopStatus) {
+	public ShopInfo() {
+		super();
+	}
+
+	public ShopInfo(BigInteger id, String name, String sellerAccount, BigInteger platformId, String platformShopId, String userShopCode, String type, BigInteger regionId, String userAddress, Integer zipCode, String contactName, String contactTel, String contactMobile, String shopUrl, String logo, Timestamp authorityDueDate, String reserved1, String note, String shopSecretKey, String barCodeImage, String qrCodeImage, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified, Boolean shopStatus) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.sellerAccount = sellerAccount;
 		this.platformId = platformId;
-		this.platform_shop_id = platform_shop_id;
+		this.platformShopId = platformShopId;
 		this.userShopCode = userShopCode;
 		this.type = type;
 		this.regionId = regionId;
@@ -130,8 +129,7 @@ public class ShopInfo implements Serializable{
 		this.shopStatus = shopStatus;
 	}
 
-    //创建的setter和getter方法
-    public BigInteger getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
@@ -163,12 +161,12 @@ public class ShopInfo implements Serializable{
 		this.platformId = platformId;
 	}
 
-	public String getPlatform_shop_id() {
-		return platform_shop_id;
+	public String getPlatformShopId() {
+		return platformShopId;
 	}
 
-	public void setPlatform_shop_id(String platform_shop_id) {
-		this.platform_shop_id = platform_shop_id;
+	public void setPlatformShopId(String platformShopId) {
+		this.platformShopId = platformShopId;
 	}
 
 	public String getUserShopCode() {
@@ -350,13 +348,7 @@ public class ShopInfo implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	//重写toString
-	@Override
-	public String toString() {
-		return "ShopInfo [id=" + id + ", name=" + name + ", sellerAccount=" + sellerAccount + ", platformId=" + platformId + ", platform_shop_id=" + platform_shop_id + ", userShopCode=" + userShopCode + ", type=" + type + ", regionId=" + regionId + ", userAddress=" + userAddress + ", zipCode=" + zipCode + ", contactName=" + contactName + ", contactTel=" + contactTel + ", contactMobile=" + contactMobile + ", shopUrl=" + shopUrl + ", logo=" + logo + ", authorityDueDate=" + authorityDueDate + ", reserved1=" + reserved1 + ", note=" + note + ", shopSecretKey=" + shopSecretKey + ", barCodeImage=" + barCodeImage + ", qrCodeImage=" + qrCodeImage + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized="
-				+ authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", shopStatus=" + shopStatus + "]";
-	}
-	//重写equals重写hashCode
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -376,7 +368,7 @@ public class ShopInfo implements Serializable{
 		result = prime * result + ((operatorId == null) ? 0 : operatorId.hashCode());
 		result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
 		result = prime * result + ((platformId == null) ? 0 : platformId.hashCode());
-		result = prime * result + ((platform_shop_id == null) ? 0 : platform_shop_id.hashCode());
+		result = prime * result + ((platformShopId == null) ? 0 : platformShopId.hashCode());
 		result = prime * result + ((qrCodeImage == null) ? 0 : qrCodeImage.hashCode());
 		result = prime * result + ((regionId == null) ? 0 : regionId.hashCode());
 		result = prime * result + ((reserved1 == null) ? 0 : reserved1.hashCode());
@@ -390,6 +382,7 @@ public class ShopInfo implements Serializable{
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -474,10 +467,10 @@ public class ShopInfo implements Serializable{
 				return false;
 		} else if (!platformId.equals(other.platformId))
 			return false;
-		if (platform_shop_id == null) {
-			if (other.platform_shop_id != null)
+		if (platformShopId == null) {
+			if (other.platformShopId != null)
 				return false;
-		} else if (!platform_shop_id.equals(other.platform_shop_id))
+		} else if (!platformShopId.equals(other.platformShopId))
 			return false;
 		if (qrCodeImage == null) {
 			if (other.qrCodeImage != null)
@@ -535,5 +528,11 @@ public class ShopInfo implements Serializable{
 		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ShopInfo [id=" + id + ", name=" + name + ", sellerAccount=" + sellerAccount + ", platformId=" + platformId + ", platformShopId=" + platformShopId + ", userShopCode=" + userShopCode + ", type=" + type + ", regionId=" + regionId + ", userAddress=" + userAddress + ", zipCode=" + zipCode + ", contactName=" + contactName + ", contactTel=" + contactTel + ", contactMobile=" + contactMobile + ", shopUrl=" + shopUrl + ", logo=" + logo + ", authorityDueDate=" + authorityDueDate + ", reserved1=" + reserved1 + ", note=" + note + ", shopSecretKey=" + shopSecretKey + ", barCodeImage=" + barCodeImage + ", qrCodeImage=" + qrCodeImage + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized="
+				+ authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", shopStatus=" + shopStatus + "]";
 	}	
 }
