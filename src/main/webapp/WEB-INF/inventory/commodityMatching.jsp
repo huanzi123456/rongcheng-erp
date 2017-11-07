@@ -54,7 +54,7 @@
 		    </div>
 		    <ul class="search search_bottom">
 		        <li>
-		          <a href="javascript:;" class="button border-main alert_matching"> 云仓商品关联</a>
+		          <a href="javascript:;" class="button border-main alert_matching" id="alertMatching"> 云仓商品关联</a>
 		        </li>
 	     	</ul>
 		    <%--加载内容--%>
@@ -74,107 +74,26 @@
 					    <ul class="search">
 					    	<li>查询：</li>
 					        <li>仓库：
-					          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-					            <option value="0">仓库1</option>
-					            <option value="1">仓库2</option>
-					            <option value="2">仓库3</option>
+					          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+									  id="selectWarehouseInfo_top">
+					            <%--加载仓库--%>
 					          </select>
 					        </li>
 					        <li>库位：
-					          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-					            <option value="0">库位1</option>
-					            <option value="1">库位2</option>
-					            <option value="2">库位3</option>
+					          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+                                      id="selectStocklocationInfo_top">
+					            <%--加载库位--%>
 					          </select>
 					        </li>
 					        <li>商品：
-					          <input type="text" placeholder="商品名称/编码/规格" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
+					          <input type="text" placeholder="商品名称/编码/条码" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
 					          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
 					        </li>
 				     	</ul>
 				    </div>
-				    <table class="table table-hover text-center list_table">
-						<tr>
-							<th width="60">编号</th>
-							<th width="100">商品名称</th>       
-							<th>商品条码</th>
-							<th width="100">商品规格</th>
-							<th>仓库</th>
-							<th>库位</th>
-							<th>总量</th>
-							<th>订单占用量</th>
-							<th>可用量</th>
-							<th>操作</th>       
-						</tr>      
-						<tr>
-							<td>1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>
-								<a href="javascript:;" class="button border-main"> 关联至</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>
-								<a href="javascript:;" class="button border-main"> 关联至</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>
-								<a href="javascript:;" class="button border-main"> 关联至</a>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
-						</tr>
+				    <table class="table table-hover text-center list_table" id="tableTopOfAlert">
+						<%--加载顶部内容--%>
+                        <%--加载页码--%>
 					</table>
 			 	</div>
 			 	<div class="panel admin-panel accredit-height" style="margin-top: 20px;">
@@ -183,113 +102,27 @@
 					    <ul class="search">
 					    	<li>查询：</li>
 					        <li>仓库：
-					          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-					            <option value="0">仓库1</option>
-					            <option value="1">仓库2</option>
-					            <option value="2">仓库3</option>
+					          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+                                      id="selectWarehouseInfo_bottom">
+								  <%--加载仓库--%>
 					          </select>
 					        </li>
 					        <li>库位：
-					          <select class="input" style="width:100px; line-height:17px; display:inline-block">
-					            <option value="0">库位1</option>
-					            <option value="1">库位2</option>
-					            <option value="2">库位3</option>
+					          <select class="input" style="width:100px; line-height:17px; display:inline-block"
+                                      id="selectStocklocationInfo_bottom">
+								  <%--加载库位--%>
 					          </select>
 					        </li>
 					        <li>商品：
-					          <input type="text" placeholder="商品名称/编码/规格" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
+					          <input type="text" placeholder="商品名称/编码/条码" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
 					          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
 					        </li>
 				     	</ul>
 				    </div>
-				    <table class="table table-hover text-center list_table">
-						<tr>
-							<th width="80">
-							<input type="checkbox">
-							编号</th>
-							<th width="100">商品名称</th>       
-							<th>商品条码</th>
-							<th width="100">商品规格</th>
-							<th>仓库</th>
-							<th>库位</th>
-							<th>总量</th>
-							<th>订单占用量</th>
-							<th>可用量</th>
-						</tr>      
-						<tr>
-							<td><input type="checkbox">1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox">1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox">1</td>
-							<td>T56953655</td>
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>  
-							<td>44984487489498</td>  
-							<td>
-								<p>
-									二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
-								</p>
-							</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<td colspan="9">
-								<div class="pagelist"> 
-									<a href="">上一页</a> 
-									<span class="current">1</span>
-									<a href="">2</a>
-									<a href="">3</a>
-									<a href="">下一页</a>
-									<a href="">尾页</a> 
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="9" >
-								<a href="javascript:;" class="button border-main matching_bc"> 提交</a>
-							</td>
-						</tr>
+				    <table class="table table-hover text-center list_table" id="tableBottomOfAlert">
+                        <%--加载底部内容--%>
+                        <%--加载页码--%>
+                        <%--加载提交--%>
 					</table>
 			 	</div>
 			 </div>

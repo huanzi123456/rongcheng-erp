@@ -445,7 +445,7 @@ public class ZB_InventoryController {
      * @param nowPage         当前页数
      * @param keywords        搜索关键字
      * @param warehouseId 仓库ID
-     * @param warehouseId 库位ID
+     * @param stocklocationId 库位ID
      * @return
      * @author 赵滨
      */
@@ -460,6 +460,45 @@ public class ZB_InventoryController {
         return new JsonResult(map);
     }
 
+    /**
+     * 删除 商品 的云仓关联关系
+     *
+     * @param locationItemStockId 关联关系ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/deleteCommodityMatching.do")
+    public JsonResult deleteCommodityMatching(BigInteger locationItemStockId) {
+        //删除，返回
+        return new JsonResult(inventoryService.deleteCommodityMatching(locationItemStockId, ownerId));
+    }
 
-
+    /**
+     * 加载 云仓商品关联 弹出框
+     *
+     * @param nowPageTop    当前页面，顶部
+     * @param keyWordsTop   关键字，顶部
+     * @param warehouseIdTop    仓库ID，顶部
+     * @param stocklocationIdTop    库位ID，顶部
+     * @param nowPageBottom 当前页面，底部
+     * @param keyWordsBottom    关键字，底部
+     * @param warehouseIdBottom 仓库ID，底部
+     * @param stocklocationIdBottom 库位ID，底部
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/loadWarehouseAndStocklocationOfAlert.do")
+    public JsonResult loadWarehouseAndStocklocationOfAlert(
+            Integer nowPageTop, String keyWordsTop, BigInteger warehouseIdTop, BigInteger stocklocationIdTop,
+            Integer nowPageBottom, String keyWordsBottom, BigInteger warehouseIdBottom,
+            BigInteger stocklocationIdBottom) {
+        //加载
+        Map<String, Object> map = inventoryService.loadWarehouseAndStocklocationOfAlert(
+                nowPageTop, keyWordsTop, warehouseIdTop, stocklocationIdTop,
+                nowPageBottom, keyWordsBottom, warehouseIdBottom, stocklocationIdBottom, rows, ownerId);
+        //返回
+        return new JsonResult(map);
+    }
 }

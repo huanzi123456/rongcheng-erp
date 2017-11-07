@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
+import com.rongcheng.erp.utils.JsonResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -233,7 +234,8 @@ public interface ZB_InventoryService {
      * @param nowPage     当前页数
      * @param keywords    搜索关键字
      * @param warehouseId 仓库ID
-     * @param warehouseId 库位ID
+     * @param stocklocationId 库位ID
+     * @param rows 显示的行数
      * @param ownerId   主账号ID
      * @return
      * @author 赵滨
@@ -241,4 +243,34 @@ public interface ZB_InventoryService {
     Map<String, Object> loadCommodityMatching(Integer nowPage, Integer rows,String keywords, BigInteger warehouseId,
                               BigInteger stocklocationId, BigInteger ownerId);
 
+    /**
+     * 删除 商品 的云仓关联关系
+     *
+     * @param locationItemStockId 关联关系ID
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    int deleteCommodityMatching(BigInteger locationItemStockId, BigInteger ownerId);
+
+    /**
+     * 加载 云仓商品关联 弹出框
+     *
+     * @param nowPageTop    当前页面，顶部
+     * @param keyWordsTop   关键字，顶部
+     * @param warehouseIdTop    仓库ID，顶部
+     * @param stocklocationIdTop    库位ID，顶部
+     * @param nowPageBottom 当前页面，底部
+     * @param keyWordsBottom    关键字，底部
+     * @param warehouseIdBottom 仓库ID，底部
+     * @param stocklocationIdBottom 库位ID，底部
+     * @param rows 显示的行数
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    Map<String, Object> loadWarehouseAndStocklocationOfAlert(
+            Integer nowPageTop, String keyWordsTop, BigInteger warehouseIdTop, BigInteger stocklocationIdTop,
+            Integer nowPageBottom, String keyWordsBottom, BigInteger warehouseIdBottom,
+            BigInteger stocklocationIdBottom, Integer rows, BigInteger ownerId);
 }

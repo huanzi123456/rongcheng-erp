@@ -1144,7 +1144,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @param nowPage         当前页数
      * @param keywords        搜索关键字
      * @param warehouseId 仓库ID
-     * @param warehouseId 库位ID
+     * @param stocklocationId 库位ID
+     * @param rows 显示的行数
      * @param ownerId   主账号ID
      * @return
      * @author 赵滨
@@ -1171,4 +1172,91 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         //返回
         return map;
     }
+
+    /**
+     * 删除 商品 的云仓关联关系
+     *
+     * @param locationItemStockId 关联关系ID
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public int deleteCommodityMatching(BigInteger locationItemStockId, BigInteger ownerId) {
+        //当前时间
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+
+        //创建关联关系对象
+        LocationItemStock locationItemStock = new LocationItemStock();
+        //设置ID
+        locationItemStock.setId(locationItemStockId);
+        //设置主账号ID
+        locationItemStock.setOwnerId(ownerId);
+        //设置修改时间
+        locationItemStock.setGmtModified(time);
+
+        //把关联ID设置为null
+        return inventoryDAO.updateLocationItemStockOfBindIdSetNull(locationItemStock);
+    }
+
+    /**
+     * 加载 云仓商品关联 弹出框
+     *
+     * @param nowPageTop    当前页面，顶部
+     * @param keyWordsTop   关键字，顶部
+     * @param warehouseIdTop    仓库ID，顶部
+     * @param stocklocationIdTop    库位ID，顶部
+     * @param nowPageBottom 当前页面，底部
+     * @param keyWordsBottom    关键字，底部
+     * @param warehouseIdBottom 仓库ID，底部
+     * @param stocklocationIdBottom 库位ID，底部
+     * @param rows 显示的行数
+     * @param ownerId   主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public Map<String, Object> loadWarehouseAndStocklocationOfAlert(
+            Integer nowPageTop, String keyWordsTop, BigInteger warehouseIdTop, BigInteger stocklocationIdTop,
+            Integer nowPageBottom, String keyWordsBottom, BigInteger warehouseIdBottom,
+            BigInteger stocklocationIdBottom, Integer rows, BigInteger ownerId) {
+        //返回结果集
+        Map<String, Object> map = new HashMap<>();
+
+        //如果加载顶部
+        if (nowPageTop != null) {
+            //起始行数
+            int startTop = (nowPageTop - 1) * rows;
+
+            //查询 云仓商品关联 信息
+            List<Map<String, Object>> listLocationItemStockAndItemTop =
+                    inventoryDAO.listLocationItemStockAndItemByKeywordsOfAlert(
+                            ownerId, keyWordsTop, warehouseIdTop, stocklocationIdTop, startTop, rows);
+            map.put("listLocationItemStockAndItemTop", listLocationItemStockAndItemTop);
+
+            //查询条数
+            int maxPage = inventoryDAO.countLocationItemStockAndItemByKeywordsOfAlert(
+                    ownerId, keyWordsTop, warehouseIdTop, stocklocationIdTop);
+            map.put("maxPageTop", Math.ceil((double)maxPage/(double)rows));
+        }
+
+        //如果加载底部
+        if (nowPageBottom != null) {
+            //起始行数
+            int startBottom = (nowPageBottom - 1) * rows;
+
+            //查询 云仓商品关联 信息
+            List<Map<String, Object>> listLocationItemStockAndItemBottom =
+                    inventoryDAO.listLocationItemStockAndItemByKeywordsOfAlert(
+                            ownerId, keyWordsBottom, warehouseIdBottom, stocklocationIdBottom, startBottom, rows);
+            map.put("listLocationItemStockAndItemBottom", listLocationItemStockAndItemBottom);
+
+            //查询条数
+            int maxPage = inventoryDAO.countLocationItemStockAndItemByKeywordsOfAlert(
+                    ownerId, keyWordsBottom, warehouseIdBottom, stocklocationIdBottom);
+            map.put("maxPageBottom", Math.ceil((double)maxPage/(double)rows));
+        }
+
+        //返回
+        return map;
+    }
+
 }

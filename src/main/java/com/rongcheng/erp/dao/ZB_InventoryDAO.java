@@ -1,6 +1,8 @@
 package com.rongcheng.erp.dao;
 
 import java.math.BigInteger;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -459,4 +461,38 @@ public interface ZB_InventoryDAO {
     int countLocationItemStockAndItemByKeywords(
             BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId);
 
+    /**
+     * 把关联ID设置为null
+     * @param locationItemStock 关联关系
+     * @return row 条数
+     * @author 赵滨
+     */
+    int updateLocationItemStockOfBindIdSetNull(LocationItemStock locationItemStock);
+
+    /**
+     * 查询 云仓商品关联 弹出框
+     * @param ownerId   主账号ID
+     * @param keywords  关键字
+     * @param warehouseId   仓库ID
+     * @param stocklocationId   库位ID
+     * @param start 开始
+     * @param row   行数
+     * @return listMap 云仓商品配对
+     * @author 赵滨
+     */
+    List<Map<String, Object>> listLocationItemStockAndItemByKeywordsOfAlert(
+            BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId, int start,
+            int row);
+
+    /**
+     * 查询 云仓商品关联 弹出框 条数
+     * @param ownerId   主账号ID
+     * @param keywords  关键字
+     * @param warehouseId   仓库ID
+     * @param stocklocationId   库位ID
+     * @return row 条数
+     * @author 赵滨
+     */
+    int countLocationItemStockAndItemByKeywordsOfAlert(
+            BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId);
 }

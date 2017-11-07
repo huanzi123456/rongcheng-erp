@@ -1811,13 +1811,15 @@
             l.item_id = i.id
         WHERE
         l.owner_id = #{0}
-        AND l.item_id IN
+        AND l.bind_id IN
         (
-            SELECT item_id FROM
+            SELECT bind_id FROM
             (
-                SELECT lson.item_id FROM location_item_stock as lson, item_common_info as ison
+                SELECT lson.bind_id FROM location_item_stock as lson, item_common_info as ison
                 WHERE lson.owner_id = #{0}
-
+                AND lson.bind_id IS NOT NULL
+                AND lson.bind_id != ""
+                AND lson.item_id = ison.id
                 <if test="param2 != '' and param2 != null">
                 AND
                     (
@@ -1855,14 +1857,12 @@
     */-->
     <select id="countLocationItemStockAndItemByKeywords"  resultType="int">
         SELECT count(*) FROM
-            location_item_stock as l
-        WHERE
-        l.owner_id = #{0}
-        AND l.item_id IN
         (
-        SELECT lson.item_id FROM location_item_stock as lson, item_common_info as ison
+        SELECT lson.bind_id FROM location_item_stock as lson, item_common_info as ison
         WHERE lson.owner_id = #{0}
-
+        AND lson.bind_id IS NOT NULL
+        AND lson.bind_id != ""
+        AND lson.item_id = ison.id
         <if test="param2 != '' and param2 != null">
             AND
             (
@@ -1884,7 +1884,142 @@
 
         GROUP BY lson.bind_id
         ORDER BY lson.id
-        )
+        ) as row
+    </select>
+
+    <!--/**
+     * 把关联ID设置为null
+     * @param locationItemStockId 关联关系ID
+     * @param ownerId   主账号ID
+     * @param time   当前时间
+     * @return row 条数
+     * @author 赵滨
+     */-->
+    <update id="updateLocationItemStockOfBindIdSetNull"
+            parameterType="com.rongcheng.erp.entity.LocationItemStock">
+        update
+            location_item_stock
+        set
+            bind_id = NULL ,
+            gmt_modified = #{gmtModified}
+        where
+            id = #{id}
+        and
+            owner_id = #{ownerId}
+    </update>
+
+    <!--/**
+    * 查询 云仓商品关联 弹出框
+    * @param ownerId   主账号ID
+    * @param keywords  关键字
+    * @param warehouseId   仓库ID
+    * @param stocklocationId   库位ID
+    * @param start 开始
+    * @param row   行数
+    * @return listMap 云仓商品配对
+    * @author 赵滨
+    */-->
+    <select id="listLocationItemStockAndItemByKeywordsOfAlert"  resultType="java.util.Map">
+        SELECT
+        <!--关联表ID-->
+        l.id,
+        <!--商品编码-->
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        <!--商品名称-->
+        ifnull(i.name, '') as name,
+        <!--商品条码-->
+        ifnull(i.bar_code, '') as barCode,
+        <!--商品颜色-->
+        ifnull(i.color, '') as color,
+        <!--商品尺码-->
+        ifnull(i.size, '') as size,
+        <!--仓库-->
+        ifnull(w.warehouse_name, '') as warehouseName,
+        <!--库位-->
+        ifnull(s.name, '') as stocklocationName,
+        <!--库存总量-->
+        ifnull(l.stock_quantity,0) as sumQuantity,
+        <!--关联码-->
+        ifnull(l.bind_id,0) as bindId
+        FROM
+        location_item_stock as l
+        LEFT JOIN
+        warehouse_info as w
+        ON
+        l.warehouse_id = w.id
+        LEFT JOIN
+        stocklocation_info as s
+        ON
+        l.stocklocation_id = s.id
+        LEFT JOIN
+        item_common_info as i
+        ON
+        l.item_id = i.id
+        WHERE
+        l.owner_id = #{0}
+
+        <if test="param2 != '' and param2 != null">
+            AND
+            (
+            i.erp_item_num like concat('%', #{1}, '%')
+            or
+            i.name like concat('%',#{1}, '%')
+            or
+            i.bar_code like concat('%',#{1}, '%')
+            )
+        </if>
+
+        <if test="param3 != '' and param3 != null">
+            AND l.warehouse_id = #{2}
+        </if>
+
+        <if test="param4 != '' and param4 != null">
+            AND l.stocklocation_id = #{3}
+        </if>
+
+        ORDER BY l.id
+        LIMIT #{4},#{5}
+
+    </select>
+
+    <!--/**
+    * 查询 云仓商品关联 弹出框 条数
+    * @param ownerId   主账号ID
+    * @param keywords  关键字
+    * @param warehouseId   仓库ID
+    * @param stocklocationId   库位ID
+    * @return row 条数
+    * @author 赵滨
+    */-->
+    <select id="countLocationItemStockAndItemByKeywordsOfAlert"  resultType="int">
+        SELECT  count(*)
+        FROM
+        location_item_stock as l
+        LEFT JOIN
+        item_common_info as i
+        ON
+        l.item_id = i.id
+        WHERE
+        l.owner_id = #{0}
+
+        <if test="param2 != '' and param2 != null">
+            AND
+            (
+            i.erp_item_num like concat('%', #{1}, '%')
+            or
+            i.name like concat('%',#{1}, '%')
+            or
+            i.bar_code like concat('%',#{1}, '%')
+            )
+        </if>
+
+        <if test="param3 != '' and param3 != null">
+            AND l.warehouse_id = #{2}
+        </if>
+
+        <if test="param4 != '' and param4 != null">
+            AND l.stocklocation_id = #{3}
+        </if>
     </select>
 
 </mapper>
