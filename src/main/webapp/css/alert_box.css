@@ -1466,3 +1466,205 @@
 	color: #fff;
 	cursor: pointer;
 }
+
+
+
+
+
+/*云仓订单分发 选择商品弹出框*/
+.select_commodity_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.select_commodity_box .new_select_commodity{
+	width: 900px;
+	height: 550px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.select_commodity_box .new_select_commodity .select_commodity_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.select_commodity_box .new_select_commodity .select_commodity_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.select_commodity_box .new_select_commodity .select_commodity_title .select_commodity_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.select_commodity_box .new_select_commodity .select_commodity_content{
+	width: 100%;
+	height: 510px;
+	padding: 10px 20px;
+	overflow: auto;
+}
+
+
+
+
+/*云仓订单分发 发货商品匹配*/
+.goods_matching_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.goods_matching_box .new_goods_matching{
+	width: 500px;
+	height: 400px;
+	background: #fff;
+	margin: 140px auto 0;
+	border-radius: 5px;
+}
+.goods_matching_box .new_goods_matching .goods_matching_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.goods_matching_box .new_goods_matching .goods_matching_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.goods_matching_box .new_goods_matching .goods_matching_title .goods_matching_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+	display: inline-block;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content{
+	width: 100%;
+	height: 360px;
+	padding: 10px 20px;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top{
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top>p{
+	color: #f00;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top>p i{
+	color: #000;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top .select_goods_box{
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	position: relative;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top .select_goods_box .select_goods_btn{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top .select_goods_box .select_goods_content{
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	height: 260px;
+	background: #fff;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border: 1px solid #ddd;
+	display: none;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top .select_goods_box .select_goods_content>ul{
+	height: 210px;
+	overflow: auto;
+	padding: 0 10px;
+	border-bottom: 1px solid #ddd;
+}
+.goods_matching_box .new_goods_matching .goods_matching_content .inventory_top .select_goods_box .select_goods_content>ul li{
+	line-height: 30px;
+	overflow: hidden;
+	height: 30px;
+}
+
+
+/*云仓订单分发 覆盖区域规则设置弹出框*/
+.regional_rules_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.regional_rules_box .new_regional_rules{
+	width: 900px;
+	height: 550px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.regional_rules_box .new_regional_rules .regional_rules_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.regional_rules_box .new_regional_rules .regional_rules_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.regional_rules_box .new_regional_rules .regional_rules_title .regional_rules_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content{
+	width: 100%;
+	height: 510px;
+	padding: 10px 20px;
+	overflow: auto;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content>ol:after{
+	content: "";
+	display: inline-block;
+	height: 0;
+	clear: both;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content ul{
+	overflow: hidden;
+	padding: 0;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content ul>li{
+	line-height: 30px;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content>ol>li ul li:last-child{
+	float: right;
+	width: 80%;
+}
+.regional_rules_box .new_regional_rules .regional_rules_content>ol>li ul li:first-child{
+	width: 20%;
+	float: left;
+}
