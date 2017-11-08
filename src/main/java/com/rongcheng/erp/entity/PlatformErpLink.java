@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 /**
  * 系统商品对应关系关联表
- * @author 赵滨
+ * @author 薛宗艳
  */
 public class PlatformErpLink implements Serializable{
 
@@ -13,38 +13,50 @@ public class PlatformErpLink implements Serializable{
     private static final long serialVersionUID = -7280301959854021797L;
 
     //属性
-    private BigInteger id;      //1.记录编号
-    private BigInteger itemId;  //2.erp商品ID
-    private BigInteger platformId;  //3.来源（平台）编码
-    private BigInteger shopId;  //4.商品所属店铺ID
-    private String platformShopId;  //5.平台店铺id
-    private String platformShopName;  //6.店铺名称
-    private BigInteger platformItemSku; //7.平台（来源）商品编码
-    private BigInteger platformItemName;    //8.平台商品名称
-    private String platformItemColor;   //9.平台商品颜色
-    private String platformItemSize;    //10.平台商品尺码
-    private String platformItemState; //后加字段(薛宗艳):平台商品状态 长度10
-    private String platformUserCode;    //11.平台商品卖家自定义编码
-    private String platformUserImg; //12.平台商品主图
-    private BigInteger warehouseId;    //13.erp商品所属仓库编码
-    private BigInteger stocklocationId;    //14.erp商品所属库位编码
-    private Integer autoSynchron;  //15.库存自动同步状况（开关键）
-    private Integer autoOnsale;    //16.自动上架状况（开关键）
-    private Integer synchronException; //17.例外情况（库存低于警戒值不同步）
-    private Integer availableStock;    //18.库存可用量
-    private Integer allocationRatio;   //19.库存分配比例
-    private Integer remnantStock;  //20.库存零头
-    private String reserved1;   //21.自定义内容
-    private String note;    //22.备注
-    private BigInteger ownerId; //23.用户主账户ID
-    private BigInteger operatorId;  //24.操作人
-    private Boolean authorized;  //25.该记录是否被授权
-    private Timestamp gmtCreate;    //26.记录创建时间
-    private Timestamp gmtModified;  //27.记录修改时间
+    private BigInteger id;                      //1.记录编号
+    private BigInteger itemId;                  //2.erp商品ID
+    private BigInteger platformId;              //3.来源（平台）编码
+    private BigInteger shopId;                  //4.商品所属店铺ID
+    private String platformShopId;              //5.平台店铺id
+    private String platformShopName;            //6.店铺名称
+    private BigInteger platformItemSku;         //7.平台(来源)商品编码
+    private BigInteger platformItemWareid;      //8.京东商品wareid	
+    private String platformItemName;            //9.平台商品名称
+    private String platformItemAttrid1;         //10平台商品属性id1	
+    private String platformItemAttrvaluealias1; //11.平台商品属性别名1	
+    private String platformItemAttrvalue1;      //12.平台商品属性值1   
+    private String platformItemAttrid2;         //13.平台商品属性id2	
+    private String platformItemAttrvaluealias2; //14.平台商品属性别名2
+    private String platformItemAttrvalue2;      //15.平台商品属性值2    	
+    private String platformItemState;           //16.平台商品状态  1:上架 2:下架 4:删除 
+    private String platformUserCode;            //17.平台商品卖家自定义编码
+    private String platformUserImg;             //18.平台商品主图
+    private BigInteger warehouseId;             //19.erp商品所属仓库编码
+    private BigInteger stocklocationId;         //20.erp商品所属库位编码
+    private Integer autoSynchron;               //21.库存自动同步状况（开关键）
+    private Integer autoOnsale;                 //22.自动上架状况（开关键）
+    private Integer synchronException;          //23.例外情况（库存低于警戒值不同步）
+    private Integer availableStock;             //24.库存可用量
+    private Integer allocationRatio;            //25.库存分配比例
+    private Integer remnantStock;               //26.库存零头
+    private String reserved1;                   //27.自定义内容
+    private String note;                        //28.备注
+    private BigInteger ownerId;                 //29.用户主账户ID
+    private BigInteger operatorId;              //30.操作人
+    private Boolean authorized;                 //31.该记录是否被授权
+    private Timestamp gmtCreate;                //32.记录创建时间
+    private Timestamp gmtModified;              //33.记录修改时间
+    /**
+     * 无参构造
+     */
 	public PlatformErpLink() {
 		super();
 	}
-	public PlatformErpLink(BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemName, String platformItemColor, String platformItemSize, String platformItemState, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio, Integer remnantStock, String reserved1, String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
+    /**
+     * 有参构造
+     */
+	public PlatformErpLink(BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemWareid, String platformItemName, String platformItemAttrid1, String platformItemAttrvaluealias1, String platformItemAttrvalue1, String platformItemAttrid2, String platformItemAttrvaluealias2, String platformItemAttrvalue2, String platformItemState, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio, Integer remnantStock, String reserved1,
+			String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
@@ -53,9 +65,14 @@ public class PlatformErpLink implements Serializable{
 		this.platformShopId = platformShopId;
 		this.platformShopName = platformShopName;
 		this.platformItemSku = platformItemSku;
+		this.platformItemWareid = platformItemWareid;
 		this.platformItemName = platformItemName;
-		this.platformItemColor = platformItemColor;
-		this.platformItemSize = platformItemSize;
+		this.platformItemAttrid1 = platformItemAttrid1;
+		this.platformItemAttrvaluealias1 = platformItemAttrvaluealias1;
+		this.platformItemAttrvalue1 = platformItemAttrvalue1;
+		this.platformItemAttrid2 = platformItemAttrid2;
+		this.platformItemAttrvaluealias2 = platformItemAttrvaluealias2;
+		this.platformItemAttrvalue2 = platformItemAttrvalue2;
 		this.platformItemState = platformItemState;
 		this.platformUserCode = platformUserCode;
 		this.platformUserImg = platformUserImg;
@@ -75,6 +92,9 @@ public class PlatformErpLink implements Serializable{
 		this.gmtCreate = gmtCreate;
 		this.gmtModified = gmtModified;
 	}
+	/**
+	 * get/set
+	 */
 	public BigInteger getId() {
 		return id;
 	}
@@ -117,23 +137,53 @@ public class PlatformErpLink implements Serializable{
 	public void setPlatformItemSku(BigInteger platformItemSku) {
 		this.platformItemSku = platformItemSku;
 	}
-	public BigInteger getPlatformItemName() {
+	public BigInteger getPlatformItemWareid() {
+		return platformItemWareid;
+	}
+	public void setPlatformItemWareid(BigInteger platformItemWareid) {
+		this.platformItemWareid = platformItemWareid;
+	}
+	public String getPlatformItemName() {
 		return platformItemName;
 	}
-	public void setPlatformItemName(BigInteger platformItemName) {
+	public void setPlatformItemName(String platformItemName) {
 		this.platformItemName = platformItemName;
 	}
-	public String getPlatformItemColor() {
-		return platformItemColor;
+	public String getPlatformItemAttrid1() {
+		return platformItemAttrid1;
 	}
-	public void setPlatformItemColor(String platformItemColor) {
-		this.platformItemColor = platformItemColor;
+	public void setPlatformItemAttrid1(String platformItemAttrid1) {
+		this.platformItemAttrid1 = platformItemAttrid1;
 	}
-	public String getPlatformItemSize() {
-		return platformItemSize;
+	public String getPlatformItemAttrvaluealias1() {
+		return platformItemAttrvaluealias1;
 	}
-	public void setPlatformItemSize(String platformItemSize) {
-		this.platformItemSize = platformItemSize;
+	public void setPlatformItemAttrvaluealias1(String platformItemAttrvaluealias1) {
+		this.platformItemAttrvaluealias1 = platformItemAttrvaluealias1;
+	}
+	public String getPlatformItemAttrvalue1() {
+		return platformItemAttrvalue1;
+	}
+	public void setPlatformItemAttrvalue1(String platformItemAttrvalue1) {
+		this.platformItemAttrvalue1 = platformItemAttrvalue1;
+	}
+	public String getPlatformItemAttrid2() {
+		return platformItemAttrid2;
+	}
+	public void setPlatformItemAttrid2(String platformItemAttrid2) {
+		this.platformItemAttrid2 = platformItemAttrid2;
+	}
+	public String getPlatformItemAttrvaluealias2() {
+		return platformItemAttrvaluealias2;
+	}
+	public void setPlatformItemAttrvaluealias2(String platformItemAttrvaluealias2) {
+		this.platformItemAttrvaluealias2 = platformItemAttrvaluealias2;
+	}
+	public String getPlatformItemAttrvalue2() {
+		return platformItemAttrvalue2;
+	}
+	public void setPlatformItemAttrvalue2(String platformItemAttrvalue2) {
+		this.platformItemAttrvalue2 = platformItemAttrvalue2;
 	}
 	public String getPlatformItemState() {
 		return platformItemState;
@@ -246,6 +296,9 @@ public class PlatformErpLink implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	/**
+	 * 重写hashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -263,11 +316,16 @@ public class PlatformErpLink implements Serializable{
 		result = prime * result + ((operatorId == null) ? 0 : operatorId.hashCode());
 		result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
 		result = prime * result + ((platformId == null) ? 0 : platformId.hashCode());
-		result = prime * result + ((platformItemColor == null) ? 0 : platformItemColor.hashCode());
+		result = prime * result + ((platformItemAttrid1 == null) ? 0 : platformItemAttrid1.hashCode());
+		result = prime * result + ((platformItemAttrid2 == null) ? 0 : platformItemAttrid2.hashCode());
+		result = prime * result + ((platformItemAttrvalue1 == null) ? 0 : platformItemAttrvalue1.hashCode());
+		result = prime * result + ((platformItemAttrvalue2 == null) ? 0 : platformItemAttrvalue2.hashCode());
+		result = prime * result + ((platformItemAttrvaluealias1 == null) ? 0 : platformItemAttrvaluealias1.hashCode());
+		result = prime * result + ((platformItemAttrvaluealias2 == null) ? 0 : platformItemAttrvaluealias2.hashCode());
 		result = prime * result + ((platformItemName == null) ? 0 : platformItemName.hashCode());
-		result = prime * result + ((platformItemSize == null) ? 0 : platformItemSize.hashCode());
 		result = prime * result + ((platformItemSku == null) ? 0 : platformItemSku.hashCode());
 		result = prime * result + ((platformItemState == null) ? 0 : platformItemState.hashCode());
+		result = prime * result + ((platformItemWareid == null) ? 0 : platformItemWareid.hashCode());
 		result = prime * result + ((platformShopId == null) ? 0 : platformShopId.hashCode());
 		result = prime * result + ((platformShopName == null) ? 0 : platformShopName.hashCode());
 		result = prime * result + ((platformUserCode == null) ? 0 : platformUserCode.hashCode());
@@ -280,6 +338,9 @@ public class PlatformErpLink implements Serializable{
 		result = prime * result + ((warehouseId == null) ? 0 : warehouseId.hashCode());
 		return result;
 	}
+	/**
+	 * 重写equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -354,20 +415,40 @@ public class PlatformErpLink implements Serializable{
 				return false;
 		} else if (!platformId.equals(other.platformId))
 			return false;
-		if (platformItemColor == null) {
-			if (other.platformItemColor != null)
+		if (platformItemAttrid1 == null) {
+			if (other.platformItemAttrid1 != null)
 				return false;
-		} else if (!platformItemColor.equals(other.platformItemColor))
+		} else if (!platformItemAttrid1.equals(other.platformItemAttrid1))
+			return false;
+		if (platformItemAttrid2 == null) {
+			if (other.platformItemAttrid2 != null)
+				return false;
+		} else if (!platformItemAttrid2.equals(other.platformItemAttrid2))
+			return false;
+		if (platformItemAttrvalue1 == null) {
+			if (other.platformItemAttrvalue1 != null)
+				return false;
+		} else if (!platformItemAttrvalue1.equals(other.platformItemAttrvalue1))
+			return false;
+		if (platformItemAttrvalue2 == null) {
+			if (other.platformItemAttrvalue2 != null)
+				return false;
+		} else if (!platformItemAttrvalue2.equals(other.platformItemAttrvalue2))
+			return false;
+		if (platformItemAttrvaluealias1 == null) {
+			if (other.platformItemAttrvaluealias1 != null)
+				return false;
+		} else if (!platformItemAttrvaluealias1.equals(other.platformItemAttrvaluealias1))
+			return false;
+		if (platformItemAttrvaluealias2 == null) {
+			if (other.platformItemAttrvaluealias2 != null)
+				return false;
+		} else if (!platformItemAttrvaluealias2.equals(other.platformItemAttrvaluealias2))
 			return false;
 		if (platformItemName == null) {
 			if (other.platformItemName != null)
 				return false;
 		} else if (!platformItemName.equals(other.platformItemName))
-			return false;
-		if (platformItemSize == null) {
-			if (other.platformItemSize != null)
-				return false;
-		} else if (!platformItemSize.equals(other.platformItemSize))
 			return false;
 		if (platformItemSku == null) {
 			if (other.platformItemSku != null)
@@ -378,6 +459,11 @@ public class PlatformErpLink implements Serializable{
 			if (other.platformItemState != null)
 				return false;
 		} else if (!platformItemState.equals(other.platformItemState))
+			return false;
+		if (platformItemWareid == null) {
+			if (other.platformItemWareid != null)
+				return false;
+		} else if (!platformItemWareid.equals(other.platformItemWareid))
 			return false;
 		if (platformShopId == null) {
 			if (other.platformShopId != null)
@@ -431,9 +517,13 @@ public class PlatformErpLink implements Serializable{
 			return false;
 		return true;
 	}
+	/**
+	 * 重写toString
+	 */
 	@Override
 	public String toString() {
-		return "PlatformErpLink [id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemName=" + platformItemName + ", platformItemColor=" + platformItemColor + ", platformItemSize=" + platformItemSize + ", platformItemState=" + platformItemState + ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock="
-				+ availableStock + ", allocationRatio=" + allocationRatio + ", remnantStock=" + remnantStock + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized=" + authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
-	} 
+		return "PlatformErpLink [id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemWareid=" + platformItemWareid + ", platformItemName=" + platformItemName + ", platformItemAttrid1=" + platformItemAttrid1 + ", platformItemAttrvaluealias1=" + platformItemAttrvaluealias1 + ", platformItemAttrvalue1=" + platformItemAttrvalue1 + ", platformItemAttrid2=" + platformItemAttrid2 + ", platformItemAttrvaluealias2=" + platformItemAttrvaluealias2 + ", platformItemAttrvalue2=" + platformItemAttrvalue2 + ", platformItemState=" + platformItemState
+				+ ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock=" + availableStock + ", allocationRatio=" + allocationRatio + ", remnantStock=" + remnantStock + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized=" + authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+	}
+	
 }
