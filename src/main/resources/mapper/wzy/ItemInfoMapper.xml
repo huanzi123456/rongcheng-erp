@@ -500,10 +500,10 @@
             style_code,
         </if>
         <if test="reserved2 != null" >
-            reserved1,
+            reserved2,
         </if>
         <if test="reserved3 != null" >
-            reserved2,
+            reserved3,
         </if>
         <if test="note != null" >
             note,
