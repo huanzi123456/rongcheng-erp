@@ -30,19 +30,6 @@ public interface ZB_PrintTemplateService {
                                                 BigInteger operatorId, Integer[] templateType);
     
     /**
-     * 查询单据模板最大条数
-     * @param rows 显示的条数
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
-     * @param templateType 模版类型
-     * @return row 条数
-     * @author 赵滨
-     */
-    int countPrintTemplate(int rows, Boolean authorized, BigInteger ownerId, BigInteger operatorId,
-                           Integer[] templateType);
-    
-    /**
      * 查询单据模板图片 根据 模版类型（无重复）
      * @param authorized 是否授权
      * @param ownerId   主账号ID

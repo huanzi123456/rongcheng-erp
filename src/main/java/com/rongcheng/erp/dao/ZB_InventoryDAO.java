@@ -27,12 +27,11 @@ public interface ZB_InventoryDAO {
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
     List<Map<String, Object>> listItemCommonStockByKeywords(int start, int row, BigInteger ownerId, String keywords,
-                                                            BigInteger warehouseInfoId, Boolean defaultWarehouse);
+                                                            BigInteger warehouseInfoId);
 
     /**
      * 查询库存状态 条数
@@ -42,12 +41,10 @@ public interface ZB_InventoryDAO {
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
-    int countItemCommonStockByKeywords(BigInteger ownerId, String keywords, BigInteger warehouseInfoId,
-                                       Boolean defaultWarehouse);
+    int countItemCommonStockByKeywords(BigInteger ownerId, String keywords, BigInteger warehouseInfoId);
     
     /**
      * 查询库存状态
@@ -58,12 +55,11 @@ public interface ZB_InventoryDAO {
      * @param row 查询几条
      * @param ownerId 主账号ID
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
-    List<Map<String, Object>> listItemCommonStockByAlertStock(int start, int row, BigInteger ownerId,
-                                                              BigInteger warehouseInfoId, Boolean defaultWarehouse);
+    List<Map<String, Object>> listItemCommonStockByAlertStock(
+            int start, int row, BigInteger ownerId, BigInteger warehouseInfoId);
     
     /**
      * 查询库存状态 条数
@@ -72,11 +68,10 @@ public interface ZB_InventoryDAO {
      * 
      * @param ownerId 主账号ID
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
-    int countItemCommonStockByAlertStock(BigInteger ownerId, BigInteger warehouseInfoId, Boolean defaultWarehouse);
+    int countItemCommonStockByAlertStock(BigInteger ownerId, BigInteger warehouseInfoId);
     
     /**
      * 查询 库存所在的仓库 列表
@@ -166,12 +161,10 @@ public interface ZB_InventoryDAO {
      * 查询 库存相关统计
      * @param ownerId 主账号ID
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return
      * @author 赵滨
      */
-    Map<String, Object> getItemCommonStockByWarehouseInfoId(BigInteger ownerId, BigInteger warehouseInfoId,
-                                                            Boolean defaultWarehouse);
+    Map<String, Object> getItemCommonStockByWarehouseInfoId(BigInteger ownerId, BigInteger warehouseInfoId);
     
     /**
      * 查询 商品库存库位
@@ -183,13 +176,11 @@ public interface ZB_InventoryDAO {
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
-    List<Map<String, Object>> listItemCommonStocklocationByKeywords(int start, int row, BigInteger ownerId,
-                                                                    String keywords, BigInteger warehouseInfoId,
-                                                                    Boolean defaultWarehouse);
+    List<Map<String, Object>> listItemCommonStocklocationByKeywords(
+            int start, int row, BigInteger ownerId, String keywords, BigInteger warehouseInfoId);
     
     /**
      * 查询 商品库存库位 条数
@@ -199,12 +190,10 @@ public interface ZB_InventoryDAO {
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
-     * @param defaultWarehouse 是否默认仓库
      * @return list 结果集合
      * @author 赵滨
      */
-    int countItemCommonStocklocationByKeywords(BigInteger ownerId, String keywords, BigInteger warehouseInfoId,
-                                               Boolean defaultWarehouse);
+    int countItemCommonStocklocationByKeywords(BigInteger ownerId, String keywords, BigInteger warehouseInfoId);
     
     /**
      * 查询 仓库列表
@@ -495,4 +484,24 @@ public interface ZB_InventoryDAO {
      */
     int countLocationItemStockAndItemByKeywordsOfAlert(
             BigInteger ownerId, String keywords,BigInteger warehouseId, BigInteger stocklocationId);
+
+    /**
+     * 查询 云仓商品关联关系
+     *
+     * <p>根据 ID 查询
+     *
+     * @param locationItemStockId ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    LocationItemStock getLocationItemStockByLocationItemStockId(BigInteger locationItemStockId, BigInteger ownerId);
+
+    /**
+     * 更新 库位商品库存关联表
+     * @param locationItemStock 库位商品库存关联
+     * @return row 条数
+     * @author 赵滨
+     */
+    int updateLocationItemStock(LocationItemStock locationItemStock);
 }

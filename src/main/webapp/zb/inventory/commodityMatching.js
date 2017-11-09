@@ -58,8 +58,53 @@ $(function() {
     $("#tableBottomOfAlert").on("click", "input[name='id_bottom']" ,clickIdBottom);
 
     //13.点击'提交'
-
+    $("body").on("click", "#bind_commit", bindCommit);
 })
+
+/**
+ * 13.点击'提交'
+ * @author 赵滨
+ */
+function bindCommit() {
+    //获取顶部 选择框 ID
+    var topId = $("#tableTopOfAlert").find("input[name='id_top']:checked").val();
+    if (topId == null) {
+        showMessage("请在上方商品列表中，选择主关联商品")
+        return;
+    }
+    if (JSON.stringify(bind_map) == "{}") {
+        showMessage("当前关联关系没有改变，无需修改")
+        return;
+    }
+
+    //发送请求，提交云仓商品关联关系
+    $.ajax({
+        url : "/inventoryList/bindCommit.do",
+        type : "post",
+        //traditional : true,
+        data : {
+            "topId" : topId, // bigint
+            "bindMap" : JSON.stringify(bind_map) // json
+        },
+        dataType : "json",
+        success : function(result) {
+            //接受
+            var row = result.data
+            if (row > 0) {
+                showMessage("提交云仓商品关联成功");
+                //关闭弹窗
+                $(".matching_alert_box").css("display","none");
+                //加载页面
+                loadCommodityMatching(now_page, key_words, warehouse_id, stocklocation_id);
+            } else {
+                showMessage("提交云仓商品关联失败");
+            }
+        },
+        error : function() {
+            showMessage("提交云仓商品关联失败");
+        }
+    });
+}
 
 /**
  * 12.监听点击 底部 '单选'
@@ -84,7 +129,19 @@ function clickIdBottom() {
         if (bind_map[bottomId] != null) {
             delete bind_map[bottomId];
         } else {
-            bind_map[bottomId] = true;
+            //获取顶部 选择框 关联ID
+            var topBindId = $("#tableTopOfAlert").find("input[name='id_top']:checked")
+                .parent().parent().data("locationItemStockBindId");
+            //获取底部 选择框 关联ID
+            var bottomBindId = $(this).parent().parent().data("locationItemStockBindId");
+            //如果不相同，并且不为空，那么该底部选择框是别的关联信息
+            if (bottomBindId != topBindId && bottomBindId != 0 && topBindId != null) {
+                if (!confirm("这条商品已经和其他商品存在关联，您是否确认取消之前的关联，和当前商品新建关联？")) {
+                    $(this).prop("checked", false);
+                    return;
+                }
+            }
+            bind_map[bottomId] = true
         }
     }
 
@@ -117,21 +174,39 @@ function clickIdBottom() {
  * @author 赵滨
  */
 function clickIdBottomAll() {
+    //首次点击
+    var firstClick = true;
     //如果选中
     if ($(this).prop("checked") == true) {
         //遍历选择框
         $("input[name='id_bottom']").each(function() {
             //如果没有选中，那么改成选中
             if ($(this).prop("checked") == false) {
-                $(this).prop("checked", "true");
                 //获取底部ID
                 var bottomId = $(this).val();
                 //如果集合中已经存在，那么删除该key-value
                 if (bind_map[bottomId] != null) {
                     delete bind_map[bottomId];
                 } else {
+                    //获取顶部 选择框 关联ID
+                    var topBindId = $("#tableTopOfAlert").find("input[name='id_top']:checked")
+                        .parent().parent().data("locationItemStockBindId");
+                    //获取底部 选择框 关联ID
+                    var bottomBindId = $(this).parent().parent().data("locationItemStockBindId");
+                    //如果不相同，并且不为空，那么该底部选择框是别的关联信息
+                    if (bottomBindId != topBindId && bottomBindId != 0 &&
+                        topBindId != null && firstClick == true) {
+                        firstClick = false;
+                        if (!confirm(
+                            "下列商品已经和其他商品存在关联，您是否确认取消之前的关联，和当前商品新建关联？")) {
+                            $("input[name='id_bottom_all']").prop("checked", false);
+                            return false;
+                        }
+                    }
                     bind_map[bottomId] = true;
                 }
+                //选中 每个框
+                $(this).prop("checked", true);
             }
         });
 
@@ -140,7 +215,10 @@ function clickIdBottomAll() {
         $("input[name='id_bottom']").each(function() {
             //如果已经选中，那么取消选中
             if ($(this).prop("checked") == true) {
-                $(this).prop("checked", false);
+                //如果是可以使用的，才取消勾选
+                if ($(this).prop("disabled") == false) {
+                    $(this).prop("checked", false);
+                }
                 //获取底部ID
                 var bottomId = $(this).val();
                 //如果集合中已经存在，那么删除该key-value
@@ -172,7 +250,9 @@ function initializeBottom() {
     $("#tableBottomOfAlert").find("input[name='id_bottom']").prop("checked", false);
     $("#tableBottomOfAlert").find("input[name='id_bottom_all']").prop("checked", false);
     //清空 关联对象集合
-    bind_map = null;
+    bind_map = {};
+    //可以使用input
+    $("#tableBottomOfAlert").find("input[name='id_bottom']").prop("disabled", false);
 }
 
 /**
@@ -180,8 +260,8 @@ function initializeBottom() {
  * @author 赵滨
  */
 function checkedBindTopBottom() {
-    //清空 关联对象集合
-    bind_map = {};
+    //初始化底部信息
+    initializeBottom();
 
     //获取顶部 选择框 ID
     var topId = $("#tableTopOfAlert").find("input[name='id_top']:checked").val();
@@ -194,12 +274,21 @@ function checkedBindTopBottom() {
     for (var i = 0; i < bottomList.length; i++) {
         var bottomBindId = bottomList.eq(i).data("locationItemStockBindId");
         //相同就选中，不同就取消勾选
-        if (bottomBindId == topBindId) {
+        if (bottomBindId == topBindId && topBindId != 0 && bottomBindId != 0) {
             //选中
             bottomList.eq(i).find("input[name='id_bottom']").prop("checked", true);
         } else {
             //不选
             bottomList.eq(i).find("input[name='id_bottom']").prop("checked", false);
+        }
+
+        //获取底部 选择框 ID
+        var bottomId = bottomList.eq(i).find("input[name='id_bottom']").val();
+        //如果是ID相同，说明是同一内容
+        if (topId == bottomId) {
+            //不可使用
+            bottomList.eq(i).find("input[name='id_bottom']").prop("disabled", true);
+            bottomList.eq(i).find("input[name='id_bottom']").prop("checked", true);
         }
     }
 
@@ -300,8 +389,6 @@ function createAlertMatching(map) {
         var listLocationItemStockAndItem = map.listLocationItemStockAndItemTop;
         //创建部分弹出框
         createAlertPart(tableOfAlert, listLocationItemStockAndItem);
-        //创建页码
-        createPageList(tableOfAlert);
     }
 
     //如果存在底部内容
@@ -314,8 +401,6 @@ function createAlertMatching(map) {
         var listLocationItemStockAndItem = map.listLocationItemStockAndItemBottom;
         //创建部分弹出框
         createAlertPart(tableOfAlert, listLocationItemStockAndItem);
-        //创建页码
-        createPageList(tableOfAlert);
     }
 
     //创建部分弹出框
@@ -384,6 +469,11 @@ function createAlertMatching(map) {
             //插入页面
             $("#" + tableOfAlert + "").append($(tr).data("locationItemStockBindId", locationItemStockAndItem.bindId));
         }
+        //如果存在内容
+        if (listLocationItemStockAndItem.length > 0) {
+            //创建页码
+            createPageList(tableOfAlert);
+        }
     }
 
     //创建页码
@@ -401,9 +491,7 @@ function createAlertMatching(map) {
             nowPage = window["now_page_bottom"];
             maxPage = window["max_page_bottom"];
         }
-
         var tr = '';
-
         //开始部分
         tr += '<tr><td colspan="10">';
         tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
@@ -505,7 +593,7 @@ function createAlertMatching(map) {
         if (tableOfAlert == "tableBottomOfAlert") {
             tr = '<tr>' +
                 '<td colspan="9" >' +
-                '<a href="javascript:;" class="button border-main matching_bc"> 提交</a>' +
+                '<a href="javascript:;" class="button border-main matching_bc" id="bind_commit"> 提交</a>' +
                 '</td>' +
                 '</tr>';
             $("#" + tableOfAlert + "").append(tr);
@@ -964,6 +1052,8 @@ function createCommodityMatching(map) {
             //关联码替换
             lastBindId = bindId;
         }
+        //创建页码
+        createPageList();
 
     } else if (listLocationItemStockAndItem.length == 0) {
         //拼接块
@@ -985,113 +1075,116 @@ function createCommodityMatching(map) {
         $("#commodityMatchingTableParent").append(tb);
     }
 
-    //第三部分
-    var tr = '';
-    //开始部分
-    tr += '<div>';
-    tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
-    //中间部分
-    if (max_page > 5) {
-        //如果是页码前两个
-        if (now_page <= 3) {
-            //循环前三页码
-            for (var i = 1; i < 4; i++) {
+    //创建页码
+    function createPageList() {
+        //第三部分
+        var tr = '';
+        //开始部分
+        tr += '<div>';
+        tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
+        //中间部分
+        if (max_page > 5) {
+            //如果是页码前两个
+            if (now_page <= 3) {
+                //循环前三页码
+                for (var i = 1; i < 4; i++) {
 
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
+                    //如果选中当前页码，则变成蓝色背景
+                    if(i==now_page){
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
 
-                    //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
+                        //否则页码为白色背景
+                    }else{
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
                 }
-            }
-            //写出最后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += 5;
-            tr += '</a>……';
+                //写出最后两个
+                tr += '<a href="javascript:void(0)">';
+                tr += 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += 5;
+                tr += '</a>……';
 
-            //如果是页码最中间
-        } else if (now_page >= 4 && now_page <= max_page - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += now_page - 2;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page - 1;
-            tr += '</a>';
+                //如果是页码最中间
+            } else if (now_page >= 4 && now_page <= max_page - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += now_page - 2;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page - 1;
+                tr += '</a>';
 
-            //页码中间选中的
-            tr += '<span class="current" style="cursor:default">';
-            tr += now_page;
-            tr += '</span>';
-
-            //页码后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page + 1;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page + 2;
-            tr += '</a>……';
-            //如果是页码后两个
-        } else if (now_page > max_page - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += max_page - 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += max_page - 3;
-            tr += '</a>';
-
-            //循环后三页
-            for (var i = max_page - 2; i <= max_page; i++) {
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
-
-                    //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
-                }
-            }
-        }
-
-        //否则页数小于5页
-    } else {
-        var i = 1;
-        //循环页码
-        while (i <= max_page) {
-            //如果选中当前页码，则变成蓝色背景
-            if(i==now_page){
-                tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
-                tr += i;
+                //页码中间选中的
+                tr += '<span class="current" style="cursor:default">';
+                tr += now_page;
                 tr += '</span>';
 
-                //否则页码为白色背景
-            }else{
+                //页码后两个
                 tr += '<a href="javascript:void(0)">';
-                tr += i;
+                tr += now_page + 1;
                 tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page + 2;
+                tr += '</a>……';
+                //如果是页码后两个
+            } else if (now_page > max_page - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += max_page - 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += max_page - 3;
+                tr += '</a>';
+
+                //循环后三页
+                for (var i = max_page - 2; i <= max_page; i++) {
+                    //如果选中当前页码，则变成蓝色背景
+                    if(i==now_page){
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    }else{
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
             }
-            i++;
+
+            //否则页数小于5页
+        } else {
+            var i = 1;
+            //循环页码
+            while (i <= max_page) {
+                //如果选中当前页码，则变成蓝色背景
+                if(i==now_page){
+                    tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
+                    tr += i;
+                    tr += '</span>';
+
+                    //否则页码为白色背景
+                }else{
+                    tr += '<a href="javascript:void(0)">';
+                    tr += i;
+                    tr += '</a>';
+                }
+                i++;
+            }
         }
+        //结束部分
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '</div>';
+        //加入页面
+        $("#commodityMatchingTableParent").append(tr);
     }
-    //结束部分
-    tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
-    tr += '</div>';
-    //加入页面
-    $("#commodityMatchingTableParent").append(tr);
 }
 
 /**

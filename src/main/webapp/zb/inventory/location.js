@@ -1,32 +1,16 @@
-//0.全局变量，当前页面
-var now_page1 = 1;
+var now_page1 = 1;//0.全局变量，当前页面
+var max_page1 = 1;//0.全局变量，最大页面
+var key_words1 = "";//0.全局变量，关键字
 
-//0.全局变量，最大页面
-var max_page1 = 1;
+var now_page2 = 1;//0.全局变量，商品当前页面
+var max_page2 = 1;//0.全局变量，商品最大页面
+var key_words2 = "";//0.全局变量，商品关键字
 
-//0.全局变量，关键字
-var key_words1 = "";
-
-//0.全局变量，商品当前页面
-var now_page2 = 1;
-
-//0.全局变量，商品最大页面
-var max_page2 = 1;
-
-//0.全局变量，商品关键字
-var key_words2 = "";
-
-//0.全局变量，商品ID
-var item_id = [];
-
-//0.全局变量，商品ID 需删除
-var item_del_id = [];
-
-//0.全局变量，商品ID 删除
-var del_item_id = [];
+var item_id = [];//0.全局变量，商品ID
+var item_del_id = [];//0.全局变量，商品ID 需删除
+var del_item_id = [];//0.全局变量，商品ID 删除
 
 $(function() {
-	
 	//1.加载页面
 	loadLocation(now_page1, key_words1);
 	
@@ -83,7 +67,6 @@ $(function() {
 	
 	//19.监听点击页面的'删除'
 	$("#location_table").on("click", ".location_delete", locationDelete);
-	
 })
 
 /**
@@ -404,36 +387,27 @@ function itemKeywordsBlur() {
  * @author 赵滨
  */
 function addShopping() {
-	
 	//清空输入框
 	$("input[name='item_keywords']").val("");
-	
 	//获取关键字
 	key_words2 = $("input[name='item_keywords']").val();
-	
 	//重置页码
 	now_page2 = 1;
-	
 	//重置商品ID
 	item_id = [];
-	
 	//获取 商品 块
 	var itemTr = $("#item_table").find("tr");
-	
 	//遍历商品
 	for (var i = 0; i < itemTr.length; i++) {
-		
 		//如果 对象不为空
 		if (itemTr.eq(i).data("listItemCommonInfo") != null) {
 			//加入
 			item_id.push(itemTr.eq(i).data("listItemCommonInfo").id);
 		}
-		
 	}
 	
 	//获取商品
 	listItemByKeywords(now_page2, key_words2);
-	
 }
 
 /**
@@ -477,16 +451,13 @@ function listItemByKeywords(nowPage, keywords) {
  * @author 赵滨
  */
 function createListItemByKeywords(map) {
-	
 	//最大页码
 	max_page2 = map.maxPage;
-	
 	//清空页面
 	$("#listItem_table").children().remove();
 	
 	//定义拼接块
 	var tr = '';
-	
 	//第一部分
 	tr += '<tr>';
 	tr += '<th width="40">';
@@ -508,40 +479,29 @@ function createListItemByKeywords(map) {
 	tr += '单位';
 	tr += '</th>';
 	tr += '</tr>';
-	
 	//追加
 	$("#listItem_table").append(tr);
 	
 	//第二部分
 	tr = '';
-	
 	//获取商品集合
 	var listItemCommonInfo = map.listItemCommonInfo;
-	
 	//遍历商品集合
 	for (var i = 0; i < listItemCommonInfo.length; i++) {
-		
 		tr = '';
-		
 		tr += '<tr>';
 		tr += '<td>';
-		
 		tr += '<input type="checkbox" name="item_id[]" value="';
 		tr += listItemCommonInfo[i].id;		//商品ID
 		tr += '" class="check_coding" ';
-		
 		//遍历商品ID数组,选中存在的商品
 		for (var j = 0; j < item_id.length; j++) {
-			
 			//如果数组中 有 这条商品
 			if (item_id[j] == listItemCommonInfo[i].id) {
-				
 				tr += 'checked';
 			}
 		}
-		
 		tr += ' />';
-		
 		tr += '</td>';
 		tr += '<td>';
 		tr += listItemCommonInfo[i].erpItemNum;	//商品编码
@@ -557,160 +517,154 @@ function createListItemByKeywords(map) {
 		tr += '</p>';
 		tr += '</td>';
 		tr += '<td>';
-		
 		//如果为空
 		if (listItemCommonInfo[i].normalPrice == null) {
 			tr += '';
 
 		} else {
 			tr += listItemCommonInfo[i].normalPrice;	//商品价格
-
 		}
-		
 		tr += '</td>';
 		tr += '<td>';
 		tr += '';		//单位
 		tr += '</td>';
 		tr += '</tr>';
-		
 		//转换对象
 		$tr = $(tr);
-		
 		//绑定对象
 		$tr.data("listItemCommonInfo", listItemCommonInfo[i]);
-		
 		//插入 商品栏目 标题
 		$("#listItem_table").append($tr);
-		
 	}
-	
-	//第三部分
-	
-	$(".content_page").children().remove();
-	
-	tr = '';
-	//开始部分
-    tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
-    //中间部分
-    if (max_page2 > 5) {
-        //如果是页码前两个
-        if (now_page2 <= 3) {
-            //循环前三页码
-            for (var i = 1; i < 4; i++) {
-                
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page2){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
-                    
-                //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
-                }
-            }
-            //写出最后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += 5;
-            tr += '</a>……';
-            
-        //如果是页码最中间
-        } else if (now_page2 >= 4 && now_page2 <= max_page2 - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += now_page2 - 2;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page2 - 1;
-            tr += '</a>';
-            
-            //页码中间选中的
-            tr += '<span class="current" style="cursor:default">';
-            tr += now_page2;
-            tr += '</span>';
-            
-            //页码后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page2 + 1;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page2 + 2;
-            tr += '</a>……';
-        //如果是页码后两个
-        } else if (now_page2 > max_page2 - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += max_page2 - 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += max_page2 - 3;
-            tr += '</a>';
-            
-            //循环后三页
-            for (var i = max_page2 - 2; i <= max_page2; i++) {
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page2){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
-                    
-                //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
-                }
-            }
-        }
-    
-    //否则页数小于5页
-    } else {
-        var i = 1;
-        //循环页码
-        while (i <= max_page2) {
-            //如果选中当前页码，则变成蓝色背景
-            if(i==now_page2){
-                tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
-                tr += i;
-                tr += '</span>';
-                
-            //否则页码为白色背景
-            }else{
-                tr += '<a href="javascript:void(0)">';
-                tr += i;
-                tr += '</a>';
-            }
-            i++;
-        }
+
+    if (listItemCommonInfo.length > 0) {
+	    //创建页码
+        createPageList();
     }
-    
-    //结束部分
-    tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
-    
-    //加入页面
-    $(".content_page").append(tr);
-    
+
 	//获取所有选择框
 	var checkeds = $("input[name='item_id[]']");
-	
 	//遍历所有选择框
 	for (var i = 0; i < checkeds.length; i++) {
-		
 		//如果出现没有选中的
 		if (checkeds.eq(i).prop("checked") == false) {
 			//跳出
 			return;
 		}
 	}
-	
 	//结尾处，对于没有产生跳出的内容追加全选框
 	$("input[name='itemAll']").prop("checked", "true");
-	
+
+    function createPageList() {
+        //第三部分
+        $(".content_page").children().remove();
+        tr = '';
+        //开始部分
+        tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
+        //中间部分
+        if (max_page2 > 5) {
+            //如果是页码前两个
+            if (now_page2 <= 3) {
+                //循环前三页码
+                for (var i = 1; i < 4; i++) {
+
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page2) {
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+                //写出最后两个
+                tr += '<a href="javascript:void(0)">';
+                tr += 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += 5;
+                tr += '</a>……';
+
+                //如果是页码最中间
+            } else if (now_page2 >= 4 && now_page2 <= max_page2 - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += now_page2 - 2;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page2 - 1;
+                tr += '</a>';
+
+                //页码中间选中的
+                tr += '<span class="current" style="cursor:default">';
+                tr += now_page2;
+                tr += '</span>';
+
+                //页码后两个
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page2 + 1;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page2 + 2;
+                tr += '</a>……';
+                //如果是页码后两个
+            } else if (now_page2 > max_page2 - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += max_page2 - 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += max_page2 - 3;
+                tr += '</a>';
+
+                //循环后三页
+                for (var i = max_page2 - 2; i <= max_page2; i++) {
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page2) {
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+            }
+
+            //否则页数小于5页
+        } else {
+            var i = 1;
+            //循环页码
+            while (i <= max_page2) {
+                //如果选中当前页码，则变成蓝色背景
+                if (i == now_page2) {
+                    tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
+                    tr += i;
+                    tr += '</span>';
+
+                    //否则页码为白色背景
+                } else {
+                    tr += '<a href="javascript:void(0)">';
+                    tr += i;
+                    tr += '</a>';
+                }
+                i++;
+            }
+        }
+
+        //结束部分
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+
+        //加入页面
+        $(".content_page").append(tr);
+    }
 }
 
 /**
@@ -1184,16 +1138,13 @@ function loadLocation(nowPage, keywords) {
  * @author 赵滨
  */
 function createLocation(map) {
-	
 	//加载最大页数
 	max_page1 = map.maxPage;
-	
 	//清空页面
 	$("#location_table").children().remove();
 	
 	//第一部分
 	var tr = '';
-	
 	tr += '<tr>';
 	tr += '<th width="80"><input type="checkbox" name="allId" value="" class="check_coding" />序号</th>';
 	tr += '<th>库位编码</th>';
@@ -1201,21 +1152,16 @@ function createLocation(map) {
 	tr += '<th width="30%">商品列表</th>';
 	tr += '<th>操作</th>';
 	tr += '</tr>';
-	
 	//追加
 	$("#location_table").append(tr);
 	
 	//第二部分
 	tr = '';
-	
 	//获取库位列表
 	var listStocklocationInfo = map.listStocklocationInfo;
-	
 	//遍历库位列表
 	for (var i = 0; i < listStocklocationInfo.length; i++) {
-		
 		tr = '';
-		
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listStocklocationInfo[i].id+'" class="check_coding" />';
 		tr += (i + 1) + ((parseInt(now_page1) - 1) * parseInt(map.rows));	//序号
@@ -1238,130 +1184,130 @@ function createLocation(map) {
 		tr += '<a href="javascript:;" class="button border-red a_btn_sync location_delete"> 删除</a>';
 		tr += '</td>';
 		tr += '</tr>';
-		
 		//转换对象
 		$tr = $(tr);
-		
 		//绑定对象
 		$tr.data("listStocklocationInfo", listStocklocationInfo[i]);
-		
 		//追加
 		$("#location_table").append($tr);
-		
 	}
-	
-	//第三部分
-	
-	tr = '';
-	
-	//开始部分
-	tr += '<tr><td colspan="10">';
-    tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
-    //中间部分
-    if (max_page1 > 5) {
-        //如果是页码前两个
-        if (now_page1 <= 3) {
-            //循环前三页码
-            for (var i = 1; i < 4; i++) {
-                
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page1){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
-                    
-                //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
-                }
-            }
-            //写出最后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += 5;
-            tr += '</a>……';
-            
-        //如果是页码最中间
-        } else if (now_page1 >= 4 && now_page1 <= max_page1 - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += now_page1 - 2;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page1 - 1;
-            tr += '</a>';
-            
-            //页码中间选中的
-            tr += '<span class="current" style="cursor:default">';
-            tr += now_page1;
-            tr += '</span>';
-            
-            //页码后两个
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page1 + 1;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += now_page1 + 2;
-            tr += '</a>……';
-        //如果是页码后两个
-        } else if (now_page1 > max_page1 - 3) {
-            //页码前两个
-            tr += '……<a href="javascript:void(0)">';
-            tr += max_page1 - 4;
-            tr += '</a>';
-            tr += '<a href="javascript:void(0)">';
-            tr += max_page1 - 3;
-            tr += '</a>';
-            
-            //循环后三页
-            for (var i = max_page1 - 2; i <= max_page1; i++) {
-                //如果选中当前页码，则变成蓝色背景
-                if(i==now_page1){
-                    tr += '<span class="current" style="cursor:default">';
-                    tr += i;
-                    tr += '</span>';
-                    
-                //否则页码为白色背景
-                }else{
-                    tr += '<a href="javascript:void(0)">';
-                    tr += i;
-                    tr += '</a>';
-                }
-            }
-        }
-    
-    //否则页数小于5页
-    } else {
-        var i = 1;
-        //循环页码
-        while (i <= max_page1) {
-            //如果选中当前页码，则变成蓝色背景
-            if(i==now_page1){
-                tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
-                tr += i;
-                tr += '</span>';
-                
-            //否则页码为白色背景
-            }else{
-                tr += '<a href="javascript:void(0)">';
-                tr += i;
-                tr += '</a>';
-            }
-            i++;
-        }
+
+    if (listStocklocationInfo.length > 0) {
+        //创建页码
+        createPageList();
     }
-    
-    //结束部分
-    tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
-	tr += '</td></tr>';
-	
-    //加入页面
-    $("#location_table").append(tr);
-	
+
+    function createPageList() {
+        //第三部分
+        tr = '';
+        //开始部分
+        tr += '<tr><td colspan="10">';
+        tr += '<div class="pagelist"><a href="javascript:void(0)">首页</a><a href="javascript:void(0)">上一页</a> ';
+        //中间部分
+        if (max_page1 > 5) {
+            //如果是页码前两个
+            if (now_page1 <= 3) {
+                //循环前三页码
+                for (var i = 1; i < 4; i++) {
+
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page1) {
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+                //写出最后两个
+                tr += '<a href="javascript:void(0)">';
+                tr += 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += 5;
+                tr += '</a>……';
+
+                //如果是页码最中间
+            } else if (now_page1 >= 4 && now_page1 <= max_page1 - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += now_page1 - 2;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page1 - 1;
+                tr += '</a>';
+
+                //页码中间选中的
+                tr += '<span class="current" style="cursor:default">';
+                tr += now_page1;
+                tr += '</span>';
+
+                //页码后两个
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page1 + 1;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += now_page1 + 2;
+                tr += '</a>……';
+                //如果是页码后两个
+            } else if (now_page1 > max_page1 - 3) {
+                //页码前两个
+                tr += '……<a href="javascript:void(0)">';
+                tr += max_page1 - 4;
+                tr += '</a>';
+                tr += '<a href="javascript:void(0)">';
+                tr += max_page1 - 3;
+                tr += '</a>';
+
+                //循环后三页
+                for (var i = max_page1 - 2; i <= max_page1; i++) {
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page1) {
+                        tr += '<span class="current" style="cursor:default">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a href="javascript:void(0)">';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+            }
+
+            //否则页数小于5页
+        } else {
+            var i = 1;
+            //循环页码
+            while (i <= max_page1) {
+                //如果选中当前页码，则变成蓝色背景
+                if (i == now_page1) {
+                    tr += '<span class="current" href="javascript:void(0)" style="cursor:default">';
+                    tr += i;
+                    tr += '</span>';
+
+                    //否则页码为白色背景
+                } else {
+                    tr += '<a href="javascript:void(0)">';
+                    tr += i;
+                    tr += '</a>';
+                }
+                i++;
+            }
+        }
+
+        //结束部分
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '</td></tr>';
+
+        //加入页面
+        $("#location_table").append(tr);
+    }
 }
 
 

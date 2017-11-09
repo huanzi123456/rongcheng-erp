@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 
 /**
- * 库存信息表 实体类
+ * 库位商品库存关联表 实体类
  * 
  * @author 赵滨
  */

@@ -52,20 +52,13 @@ public class ZB_PrintTemplateServiceImpl implements ZB_PrintTemplateService {
      */
     public Map<String, Object> listPrintTemplateByPage(int page, int rows, Boolean authorized, BigInteger ownerId,
             BigInteger operatorId, Integer[] templateType) {
-        //判断主账号是否存在
-        // To Be Continued
-        
-        //判断操作人是否存在
-        // To Be Continued
-        
-        //判断是否授权
-        // To Be Continued
-        
         //获取start参数
         int start = (page-1)*rows;
-        
+        //定义map
+        Map<String, Object> map = new HashMap<>();
+
         //创建参数集合map
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("start", start);
         params.put("rows", rows);
         params.put("authorized", authorized);
@@ -75,10 +68,10 @@ public class ZB_PrintTemplateServiceImpl implements ZB_PrintTemplateService {
         //查询
         List<PrintTemplate> printTemplateList = 
                 printTemplateDAO.listPrintTemplateByPage(params);
-        
+        map.put("printTemplateList", printTemplateList);
+
         //定义CarrierInfo集合
-        List<CarrierInfo> carrierInfoList = new ArrayList<CarrierInfo>();
-        
+        List<CarrierInfo> carrierInfoList = new ArrayList<>();
         //遍历printTemplateList
         for (PrintTemplate printTemplate : printTemplateList) {
             //获取CarrierId
@@ -88,47 +81,20 @@ public class ZB_PrintTemplateServiceImpl implements ZB_PrintTemplateService {
             //CarrierInfoList中添加carrierInfo
             carrierInfoList.add(carrierInfo);
         }
-        
-        //定义map
-        Map<String, Object> map = new HashMap<String, Object>();
-        //map中添加printTemplateList
-        map.put("printTemplateList", printTemplateList);
-        //map中添加carrierInfoList
         map.put("carrierInfoList", carrierInfoList);
-        return map;
-    }
-    
-    /**
-     * 查询单据模板最大条数
-     * @param rows 显示的条数
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
-     * @param templateType 模版类型
-     * @return row 条数
-     * @author 赵滨
-     */
-    public int countPrintTemplate(int rows, Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType) {
-        //判断主账号是否存在
-        // To Be Continued
-        
-        //判断操作人是否存在
-        // To Be Continued
-        
-        //判断是否授权
-        // To Be Continued
-        
+
         //创建参数集合map
-        Map<String, Object> params = new HashMap<String, Object>();
+        params = new HashMap<>();
         params.put("authorized", authorized);
         params.put("ownerId", ownerId);
         params.put("templateType", templateType);
         //获取条数
         int row = printTemplateDAO.countPrintTemplate(params);
-        return (int) Math.ceil((double)row/(double)rows);
-    }
+        map.put("maxPage", Math.ceil((double) row / (double) rows));
 
+        return map;
+    }
+    
     /**
      * 查询单据模板图片 根据 模版类型（无重复）
      * @param authorized 是否授权
@@ -141,15 +107,6 @@ public class ZB_PrintTemplateServiceImpl implements ZB_PrintTemplateService {
      */
     public List<PrintTemplate> listPrintTemplateByType(Boolean authorized, BigInteger ownerId, 
             BigInteger operatorId, Integer[] templateType, Boolean preset) {
-        //判断主账号是否存在
-        // To Be Continued
-        
-        //判断操作人是否存在
-        // To Be Continued
-        
-        //判断是否授权
-        // To Be Continued
-        
         //创建参数集合map
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("authorized", authorized);

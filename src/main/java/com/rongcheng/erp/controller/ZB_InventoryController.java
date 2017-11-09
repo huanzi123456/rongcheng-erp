@@ -9,12 +9,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import com.jimlp.util.FileUtils;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongcheng.erp.service.Inventory.ZB_InventoryService;
@@ -131,11 +127,9 @@ public class ZB_InventoryController {
     @ResponseBody
     @RequestMapping("/storageLocation/loadStorageLocation.do")
     public JsonResult loadInventoryState(Integer nowPage, String keywords, BigInteger warehouseInfoId) {
-
         //加载
         Map<String, Object> map =
                 inventoryService.loadStorageLocation(nowPage, rows, keywords, ownerId, warehouseInfoId);
-
         //返回
         return new JsonResult(map);
     }
@@ -500,5 +494,23 @@ public class ZB_InventoryController {
                 nowPageBottom, keyWordsBottom, warehouseIdBottom, stocklocationIdBottom, rows, ownerId);
         //返回
         return new JsonResult(map);
+    }
+
+    /**
+     * 提交 云仓商品关联关系
+     * @param request
+     * @param topId 顶部关系ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/bindCommit.do")
+    public JsonResult bindCommit(HttpServletRequest request, BigInteger topId) {
+        //获取配置
+        String bindMap = request.getParameter("bindMap");
+        //提交 云仓商品关联关系
+        int row = inventoryService.bindCommit(topId, bindMap, ownerId);
+        //返回
+        return new JsonResult(row);
     }
 }

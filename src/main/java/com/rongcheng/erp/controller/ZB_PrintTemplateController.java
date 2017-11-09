@@ -62,26 +62,7 @@ public class ZB_PrintTemplateController {
                 operatorId, templateType);
         return new JsonResult(map);
     }
-    
-    /**
-     * 查询单据模板最大条数
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
-     * @param templateType 模版类型
-     * @return row 条数
-     * @author 赵滨
-     */
-    @ResponseBody
-    @RequestMapping("/expressTemplate/countExpressTemplate.do")
-    public JsonResult countExpressTemplate(Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType) {
-        
-        //获取条数
-        int row = printTemplateService.countPrintTemplate(rows, authorized, ownerId, operatorId, templateType);
-        return new JsonResult(row);
-    }
-    
+
     /**
      * 查询单据模板图片 （无重复）
      * @param authorized 是否授权
@@ -212,26 +193,7 @@ public class ZB_PrintTemplateController {
                 operatorId, templateType);
         return new JsonResult(map);
     }
-    
-    /**
-     * 查询自定义单据最大条数
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
-     * @param templateType 模版类型
-     * @return row 条数
-     * @author 赵滨
-     */
-    @ResponseBody
-    @RequestMapping("/invoiceTemplate/countInvoiceTemplate.do")
-    public JsonResult countInvoiceTemplate(Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType) {
-        
-        //获取条数
-        int row = printTemplateService.countPrintTemplate(rows, authorized, ownerId, operatorId, templateType);
-        return new JsonResult(row);
-    }
-    
+
     /**
      * 查询单据模板图片 （无重复）
      * @param authorized 是否授权

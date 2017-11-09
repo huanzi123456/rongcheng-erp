@@ -273,4 +273,14 @@ public interface ZB_InventoryService {
             Integer nowPageTop, String keyWordsTop, BigInteger warehouseIdTop, BigInteger stocklocationIdTop,
             Integer nowPageBottom, String keyWordsBottom, BigInteger warehouseIdBottom,
             BigInteger stocklocationIdBottom, Integer rows, BigInteger ownerId);
+
+    /**
+     * 提交 云仓商品关联关系
+     * @param topId 顶部关系ID
+     * @param bindMap 关系集合
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    int bindCommit(BigInteger topId, String bindMap, BigInteger ownerId);
 }

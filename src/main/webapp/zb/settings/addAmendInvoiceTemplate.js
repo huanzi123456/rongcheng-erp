@@ -527,7 +527,6 @@ function loadAddAmendInvoiceTemplate() {
 		},
 		dataType : "json",
 		success : function(result) {
-            console.log("success");
 
             if (result.state == 0) {
 				//获取map
@@ -551,7 +550,6 @@ function loadAddAmendInvoiceTemplate() {
 
 				//获取坐标集合  第二部分
 				var fieldCoordinateList = map.fieldCoordinateList;
-                console.log(fieldCoordinateList);
 
                 //如果有坐标
                 if (fieldCoordinateList) {

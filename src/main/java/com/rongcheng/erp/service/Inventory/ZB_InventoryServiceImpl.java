@@ -2,15 +2,14 @@ package com.rongcheng.erp.service.Inventory;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 
 import com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo;
 import com.rongcheng.erp.entity.*;
+import com.rongcheng.erp.utils.UUIDTool;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -41,14 +40,6 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
     public Map<String, Object> loadInventoryState(Integer nowPage, Integer rows, String keywords, 
             Boolean isAlertStock, BigInteger ownerId, BigInteger warehouseInfoId) {
         
-        //是否默认仓库
-        Boolean defaultWarehouse = false;
-        
-        //如果仓库是0，说明是默认仓库
-        if ((new BigInteger("0").equals(warehouseInfoId))) {
-            defaultWarehouse = true;
-        }
-        
         //起始行数
         int start = (nowPage - 1) * rows;
         
@@ -65,22 +56,18 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         if (isAlertStock == true) {
             //查询库存状态 低于警戒线
             listItemCommonStock = 
-                    inventoryDAO.listItemCommonStockByAlertStock(start, rows, ownerId, warehouseInfoId, 
-                            defaultWarehouse);
+                    inventoryDAO.listItemCommonStockByAlertStock(start, rows, ownerId, warehouseInfoId);
             
             //查询库存状态 条数 低于警戒线
-            maxPage = inventoryDAO.countItemCommonStockByAlertStock(ownerId, warehouseInfoId, 
-                    defaultWarehouse);
+            maxPage = inventoryDAO.countItemCommonStockByAlertStock(ownerId, warehouseInfoId);
             
         } else {
             //查询库存状态 根据关键字
             listItemCommonStock = 
-                    inventoryDAO.listItemCommonStockByKeywords(start, rows, ownerId, keywords, warehouseInfoId, 
-                            defaultWarehouse);
+                    inventoryDAO.listItemCommonStockByKeywords(start, rows, ownerId, keywords, warehouseInfoId);
           
             //查询库存状态 条数 根据关键字
-            maxPage = inventoryDAO.countItemCommonStockByKeywords(ownerId, keywords, warehouseInfoId,
-                    defaultWarehouse);
+            maxPage = inventoryDAO.countItemCommonStockByKeywords(ownerId, keywords, warehouseInfoId);
         }
         
         //加入库存状态
@@ -90,9 +77,9 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         map.put("maxPage", Math.ceil((double)maxPage/(double)rows));
         
         //获取总量查询信息
-        Map<String, Object> itemCommonStock = inventoryDAO.getItemCommonStockByWarehouseInfoId(ownerId, 
-                warehouseInfoId, defaultWarehouse);
-        
+        Map<String, Object> itemCommonStock =
+                inventoryDAO.getItemCommonStockByWarehouseInfoId(ownerId, warehouseInfoId);
+
         //加入总量
         map.put("itemCommonStock", itemCommonStock);
         
@@ -121,86 +108,24 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @author 赵滨
      */
     public int updateInventoryState(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId) {
-        
         //当前时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        
         //更新的行数
         int rows = 0;
         
         //遍历ID数组
         for (int i = 0; i < itemCommonId.length; i++) {
-            
             //根据 商品ID 查询 库存信息表
             LocationItemStock locationItemStock = 
                     inventoryDAO.getLocationItemStockByItemCommonId(itemCommonId[i], ownerId);
-            
             //如果没有该对象
-            if (locationItemStock == null) {
-                
-                //创建
-                locationItemStock = new LocationItemStock();
-                
-                //设置记录编号
-                locationItemStock.setId(null);
-                
-                //设置仓库编码
-                locationItemStock.setWarehouseId(null);
-                
-                //设置库位编码
-                locationItemStock.setStocklocationId(null);
-                
-                //设置商品编号
-                locationItemStock.setItemId(itemCommonId[i]);
-                
-                //设置库存量
-                locationItemStock.setStockQuantity(0);
-                
-                //设置警戒量库存
-                locationItemStock.setAlertStock(alertStockNum);
-                
-                //设置该库存商品是否参与发货
-                locationItemStock.setSendoutStatus(null);
-                
-                //设置自定义内容1
-                locationItemStock.setReserved1(null);
-
-                //设置备注
-                locationItemStock.setNote(null);
-
-                //设置用户主账户ID
-                locationItemStock.setOwnerId(ownerId);
-                
-                //设置操作人
-                locationItemStock.setOperatorId(null);
-                
-                //设置该记录是否被授权
-                locationItemStock.setAuthorization(null);
-                
-                //设置记录创建时间
-                locationItemStock.setGmtCreate(time);
-                
-                //设置记录修改时间
-                locationItemStock.setGmtModified(null);
-                
-                rows += inventoryDAO.saveLocationItemStock(locationItemStock);
-                
-            //如果有对象
-            } else {
-                
-                //设置警戒量
-                locationItemStock.setAlertStock(alertStockNum);
-                
-                //设置修改时间
-                locationItemStock.setGmtModified(time);
-                
+            if (locationItemStock != null) {
+                locationItemStock.setAlertStock(alertStockNum);                //设置警戒量
+                locationItemStock.setGmtModified(time);                //设置修改时间
                 //修改
                 rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
-                
             }
-            
         }
-        
         return rows;
     }
     
@@ -216,45 +141,26 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      */
     public Map<String, Object> loadStorageLocation(Integer nowPage, Integer rows, String keywords, 
             BigInteger ownerId, BigInteger warehouseInfoId) {
-      
-        //是否默认仓库
-        Boolean defaultWarehouse = false;
-        
-        //如果仓库是0，说明是默认仓库
-        if ((new BigInteger("0").equals(warehouseInfoId))) {
-            defaultWarehouse = true;
-        }
-        
         //起始行数
         int start = (nowPage - 1) * rows;
-        
         //创建返回集合map
         Map<String, Object> map = new HashMap<String, Object>();
         
         //查询 库存库位 根据关键字
         List<Map<String, Object>> listItemCommonStocklocation = 
-                inventoryDAO.listItemCommonStocklocationByKeywords(start, rows, ownerId, keywords, warehouseInfoId, 
-                        defaultWarehouse);
-        
-        //加入库存库位
+                inventoryDAO.listItemCommonStocklocationByKeywords(start, rows, ownerId, keywords, warehouseInfoId);
         map.put("listItemCommonStocklocation", listItemCommonStocklocation);
         
         //查询 库存库位 条数 根据关键字
-        int maxPage = inventoryDAO.countItemCommonStocklocationByKeywords(ownerId, keywords, warehouseInfoId, 
-                defaultWarehouse);
-        
-        //加入条数
+        int maxPage = inventoryDAO.countItemCommonStocklocationByKeywords(ownerId, keywords, warehouseInfoId);
         map.put("maxPage", Math.ceil((double)maxPage/(double)rows));
-        
+
         //获取总量查询信息
-        Map<String, Object> itemCommonStock = inventoryDAO.getItemCommonStockByWarehouseInfoId(ownerId, 
-                warehouseInfoId, defaultWarehouse);
-        
-        //加入总量
+        Map<String, Object> itemCommonStock =
+                inventoryDAO.getItemCommonStockByWarehouseInfoId(ownerId, warehouseInfoId);
         map.put("itemCommonStock", itemCommonStock);
         
         return map;
-        
     }
     
     /**
@@ -267,85 +173,24 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @author 赵滨
      */
     public int updateStorageLocation(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId) {
-        
         //当前时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        
         //更新的行数
         int rows = 0;
         
         //遍历ID数组
         for (int i = 0; i < itemCommonId.length; i++) {
-            
             //根据 商品ID 查询 库存信息表
             LocationItemStock locationItemStock = 
                     inventoryDAO.getLocationItemStockByItemCommonId(itemCommonId[i], ownerId);
-            
-            //如果没有该对象
-            if (locationItemStock == null) {
-                
-                //创建
-                locationItemStock = new LocationItemStock();
-                
-                //设置记录编号
-                locationItemStock.setId(null);
-                
-                //设置仓库编码
-                locationItemStock.setWarehouseId(null);
-                
-                //设置库位编码
-                locationItemStock.setStocklocationId(null);
-                
-                //设置商品编号
-                locationItemStock.setItemId(itemCommonId[i]);
-                
-                //设置库存量
-                locationItemStock.setStockQuantity(alertStockNum);
-                
-                //设置警戒量库存
-                locationItemStock.setAlertStock(0);
-                
-                //设置该库存商品是否参与发货
-                locationItemStock.setSendoutStatus(null);
-                
-                //设置自定义内容1
-                locationItemStock.setReserved1(null);
-
-                //设置备注
-                locationItemStock.setNote(null);
-
-                //设置用户主账户ID
-                locationItemStock.setOwnerId(ownerId);
-                
-                //设置操作人
-                locationItemStock.setOperatorId(null);
-                
-                //设置该记录是否被授权
-                locationItemStock.setAuthorization(null);
-                
-                //设置记录创建时间
-                locationItemStock.setGmtCreate(time);
-                
-                //设置记录修改时间
-                locationItemStock.setGmtModified(null);
-                
-                rows += inventoryDAO.saveLocationItemStock(locationItemStock);
-                
-            //如果有对象
-            } else {
-                
-                //设置库存
-                locationItemStock.setStockQuantity(alertStockNum);
-                
-                //设置修改时间
-                locationItemStock.setGmtModified(time);
-                
+            //如果有该对象
+            if (locationItemStock != null) {
+                locationItemStock.setStockQuantity(alertStockNum);                //设置库存
+                locationItemStock.setGmtModified(time);                //设置修改时间
                 //修改
                 rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
-                
             }
         }
-        
         return rows;
     }
     
@@ -1259,4 +1104,63 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         return map;
     }
 
+    /**
+     * 提交 云仓商品关联关系
+     * @param topId 顶部关系ID
+     * @param bindMap 关系集合
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public int bindCommit(BigInteger topId, String bindMap, BigInteger ownerId) {
+        //定义基本参数
+        int row = 0;
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+
+        //查询顶部关系ID，查看该条关系是否存在关联UUID，存在直接使用，不存在先创建
+        LocationItemStock locationItemStockTop = inventoryDAO.getLocationItemStockByLocationItemStockId(topId, ownerId);
+        //获取关联ID
+        String bindId = locationItemStockTop.getBindId();
+        if (bindId == null) {
+            //生成新的UUID
+            bindId = UUIDTool.createUUIDString();
+
+            //设置到关联关系中，并保存
+            LocationItemStock locationItemStock = new LocationItemStock();
+            locationItemStock.setId(locationItemStockTop.getId());
+            locationItemStock.setOwnerId(ownerId);
+            locationItemStock.setBindId(bindId);
+            locationItemStock.setGmtModified(time);
+            inventoryDAO.updateLocationItemStock(locationItemStock);
+        }
+
+        try {
+            //转换json对象
+            JSONObject jsonObject = JSONObject.fromObject(bindMap);
+            //迭代器遍历
+            Iterator keys = jsonObject.keys();
+            while (keys.hasNext()) {
+                String key = keys.next().toString();
+                String value = jsonObject.getString(key);
+
+                //创建底部关联对象，并设置相关信息
+                LocationItemStock locationItemStockBottom = new LocationItemStock();
+                locationItemStockBottom.setId(new BigInteger(key));
+                locationItemStockBottom.setOwnerId(ownerId);
+                locationItemStockBottom.setGmtModified(time);
+                //判断value的值，来确定是新增关联，还是取消关联
+                if ("true".equals(value)) {
+                    locationItemStockBottom.setBindId(bindId);
+                    //建立关联
+                    row += inventoryDAO.updateLocationItemStock(locationItemStockBottom);
+                } else if ("false".equals(value)) {
+                    //取消关联
+                    row += inventoryDAO.updateLocationItemStockOfBindIdSetNull(locationItemStockBottom);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return row;
+    }
 }

@@ -51,7 +51,7 @@ public class TestBase {
 
     @Test
     public void Demo() {
-        dao.listItemCommonStockByKeywords(0, 5, new BigInteger("1"), "", new BigInteger("0"), false);
+        dao.listItemCommonStockByKeywords(0, 5, new BigInteger("1"), "", new BigInteger("0"));
     }
 
 }

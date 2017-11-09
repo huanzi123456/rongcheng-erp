@@ -1,23 +1,14 @@
-	
-//0.全局变量 最大页数
-var max_page=1;
-	
-//0.全局变量 当前页数
-var now_page=1;
-
-//0.全局遍历 选中的id
-var checkId=null;
+var max_page=1;//0.全局变量 最大页数
+var now_page=1;//0.全局变量 当前页数
+var checkId=null;//0.全局遍历 选中的id
 
 $(function() {
-	
-	//1.加载校验
-	loadCheckpoint("../");
-	
-	//2.加载最大页数
-	countExpressTemplate(getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
-	
-	//3.加载快递面单页面	在方法2的回调函数中被调用
-	//loadExpressTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
+	//1.空
+
+    //2.空
+
+	//3.加载快递面单页面
+	loadExpressTemplate(parseInt(now_page), null, 1, null);
 	
 	//4.监听页码点击事件
 	$("#expressTemplate_table").on("click", ".pagelist a", pageClick);
@@ -140,8 +131,8 @@ function copyAdd() {
 					//提示
 					showMessage("复制的模版名称过长");
 				} else {
-					//加载页面
-					countExpressTemplate(getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
+                    //加载页面
+                    loadExpressTemplate(parseInt(now_page), null, 1, null);
 				}
 				//完成返回
 				returnAjax = true;
@@ -193,11 +184,8 @@ function expressTemplateRemove() {
 					//如果删除的行数，不是0行
 					if (row !=0 ) {
 						showMessage("删除成功!");
-						//加载最大页数
-						countExpressTemplate(getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
-						//加载页面 在上个方法中被调用
-						/*loadExpressTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), 
-								getCookie("operatorId"));*/
+                        //加载页面
+                        loadExpressTemplate(parseInt(now_page), null, 1, null);
 					} else {
 						showMessage("删除中失败!");
 					}
@@ -582,9 +570,7 @@ function loadExpressTemplate(page, authorized, ownerId, operatorId) {
 		error : function() {
 			showMessage("模版加载失败!");
 		}
-		
 	});
-	
 }
 
 /**
@@ -594,241 +580,190 @@ function loadExpressTemplate(page, authorized, ownerId, operatorId) {
  * @author 赵滨
  */
 function createPrintTemplate(map) {
+    //最大页数赋值
+    max_page = map.maxPage;
+    //获取printTemplate集合
+    var printTemplateList = map.printTemplateList;
+    //获取carrierInfo集合
+    var carrierInfoList = map.carrierInfoList;
+    //清空页面内容
+    $("#expressTemplate_table tr").remove();
 
-	//获取printTemplate集合
-	var printTemplateList = map.printTemplateList;
-	
-	//获取carrierInfo集合
-	var carrierInfoList = map.carrierInfoList;
-	
-	/*console.log(map);*/
-	
-	//清空页面内容
-	$("#expressTemplate_table tr").remove();
-	
-	//创建table用于加入tr内容
-	var $table = $("#expressTemplate_table");
-	
-	//创建tr拼接块
-	var tr = "";
-	
-	//第一部分 顶部
-	tr = "";
-	tr += '<tr>';
-	tr += '<th width="10%">ID</th>';
-	tr += '<th>图片</th>';
-	tr += '<th>名称</th>';
-	tr += '<th>物流公司</th>';
-	tr += '<th>模板类型</th>';
-	tr += '<th width="310">操作</th>';
-	tr += '</tr>';
-	
-	//将tr对象添加到expressTemplate_table身后
-	$table.append(tr);
-	
-	//第二部分 中部
-	for (var i = 0; i < printTemplateList.length; i++) {
-		
-		tr = '';
-		tr += '<tr style="cursor: pointer;" class="tr_expressTempLate">';
-		tr += '<td><input type="radio" name="checkExpressTempLate" style="cursor: pointer;"/>';
-		tr += printTemplateList[i].id;
-		tr += '</td>';
-		tr += '<td width="10%"><img src="';
-		tr += printTemplateList[i].templateImage;
-		tr += '" alt="" width="70" height="50" /></td>';
-		tr += '<td>';
-		tr += printTemplateList[i].templateName;
-		tr += '</td>';
-		tr += '<td>';
-		tr += carrierInfoList[i].carrierName;
-		tr += '</td>';
-		tr += '<td>';
-		/*//如果是电子面单
-		if (printTemplateList[i].electronicWaybill == true) {
-			tr += '电子面单';
-		//如果是纸质面单
-		}else if (printTemplateList[i].electronicWaybill == false) {
-			tr += '纸质面单';
-		}*/
-		
-		//如果是普通快递面单
-		if (printTemplateList[i].templateType == 7) {
-			tr += '普通快递面单';
-			
-		//如果是热敏电子面单
-		} else if (printTemplateList[i].templateType == 8) {
-			tr += '热敏电子面单';
-			
-		//如果是菜鸟电子面单
-		} else if (printTemplateList[i].templateType == 9) {
-			tr += '菜鸟电子面单';
-			
-		}
-		
-		tr += '</td>';
-		tr += '<td><div class="button-group"> ';
-		tr += '<a class="button border-main  expressTemplate_update" href="/addAmendExpressTemplate.do">';
-		tr += '<span class="icon-edit"></span> 修改</a> ';
-		tr += '<a class="button border-red expressTemplate_remove" >';/*href="javascript:void(0)"*/
-		tr += '<span class="icon-trash-o"></span> 删除</a> </div></td>';
-		tr += '</tr>';
-		
-		//转换对象，用于存储
-		var $tr=$(tr);
-		//将printTemplateId绑定到tr对象中
-		$tr.data("printTemplateId",printTemplateList[i].id);
-		//将tr对象添加到expressTemplate_table身后
-		$table.append($tr);
-		
-	}
-	
-	//第三部分 底部
-	tr = '';
-	tr += '<tr>';
-	
-	//尾页开始部分
-	tr += '<td colspan="8"><div class="pagelist"> <a>首页</a><a>上一页</a> ';
-	/*console.log(now_page);*/
-	//尾页中间部分
-	if (max_page > 5) {
-		//如果是页码前两个
-		if (now_page <= 3) {
-			//循环前三页码
-			for (var i = 1; i < 4; i++) {
-				
-				//如果选中当前页码，则变成蓝色背景
-				if(i==now_page){
-					tr += '<span class="current">';
-					tr += i;
-					tr += '</span>';
-					
-				//否则页码为白色背景
-				}else{
-					tr += '<a>';
-					tr += i;
-					tr += '</a>';
-				}
-			}
-			//写出最后两个
-			tr += '<a>';
-			tr += 4;
-			tr += '</a>';
-			tr += '<a>';
-			tr += 5;
-			tr += '</a>……';
-			
-		//如果是页码最中间
-		} else if (now_page >= 4 && now_page <= max_page - 3) {
-			//页码前两个
-			tr += '……<a>';
-			tr += now_page - 2;
-			tr += '</a>';
-			tr += '<a>';
-			tr += now_page - 1;
-			tr += '</a>';
-			
-			//页码中间选中的
-			tr += '<span class="current">';
-			tr += now_page;
-			tr += '</span>';
-			
-			//页码后两个
-			tr += '<a>';
-			tr += now_page + 1;
-			tr += '</a>';
-			tr += '<a>';
-			tr += now_page + 2;
-			tr += '</a>……';
-		//如果是页码后两个
-		} else if (now_page > max_page - 3) {
-			//页码前两个
-			tr += '……<a>';
-			tr += max_page - 4;
-			tr += '</a>';
-			tr += '<a>';
-			tr += max_page - 3;
-			tr += '</a>';
-			
-			//循环后三页
-			for (var i = max_page - 2; i <= max_page; i++) {
-				//如果选中当前页码，则变成蓝色背景
-				if(i==now_page){
-					tr += '<span class="current">';
-					tr += i;
-					tr += '</span>';
-					
-				//否则页码为白色背景
-				}else{
-					tr += '<a>';
-					tr += i;
-					tr += '</a>';
-				}
-			}
-		}
-	
-	//否则页数小于5页
-	} else {
-		var i = 1;
-		//循环页码
-		while (i <= max_page) {
-			//如果选中当前页码，则变成蓝色背景
-			if(i==now_page){
-				tr += '<span class="current">';
-				tr += i;
-				tr += '</span>';
-				
-			//否则页码为白色背景
-			}else{
-				tr += '<a>';
-				tr += i;
-				tr += '</a>';
-			}
-			i++;
-		}
-	}
+    //创建table用于加入tr内容
+    var $table = $("#expressTemplate_table");
+    //创建tr拼接块
+    var tr = "";
 
-	//尾页结束部分
-	tr += '<a>下一页</a><a>尾页</a> </div></td>';
-	tr += '</tr>';
-	//将tr对象添加到expressTemplate_table身后
-	$table.append(tr);
-}
+    //第一部分 顶部
+    tr = "";
+    tr += '<tr>';
+    tr += '<th width="10%">ID</th>';
+    tr += '<th>图片</th>';
+    tr += '<th>名称</th>';
+    tr += '<th>物流公司</th>';
+    tr += '<th>模板类型</th>';
+    tr += '<th width="310">操作</th>';
+    tr += '</tr>';
+    //将tr对象添加到expressTemplate_table身后
+    $table.append(tr);
+    //第二部分 中部
+    for (var i = 0; i < printTemplateList.length; i++) {
+        tr = '';
+        tr += '<tr style="cursor: pointer;" class="tr_expressTempLate">';
+        tr += '<td><input type="radio" name="checkExpressTempLate" style="cursor: pointer;"/>';
+        tr += printTemplateList[i].id;
+        tr += '</td>';
+        tr += '<td width="10%"><img src="';
+        tr += printTemplateList[i].templateImage;
+        tr += '" alt="" width="70" height="50" /></td>';
+        tr += '<td>';
+        tr += printTemplateList[i].templateName;
+        tr += '</td>';
+        tr += '<td>';
+        tr += carrierInfoList[i].carrierName;
+        tr += '</td>';
+        tr += '<td>';
+        //如果是普通快递面单
+        if (printTemplateList[i].templateType == 7) {
+            tr += '普通快递面单';
+            //如果是热敏电子面单
+        } else if (printTemplateList[i].templateType == 8) {
+            tr += '热敏电子面单';
+            //如果是菜鸟电子面单
+        } else if (printTemplateList[i].templateType == 9) {
+            tr += '菜鸟电子面单';
+        }
+        tr += '</td>';
+        tr += '<td><div class="button-group"> ';
+        tr += '<a class="button border-main  expressTemplate_update" href="/addAmendExpressTemplate.do">';
+        tr += '<span class="icon-edit"></span> 修改</a> ';
+        tr += '<a class="button border-red expressTemplate_remove" >';
+        /*href="javascript:void(0)"*/
+        tr += '<span class="icon-trash-o"></span> 删除</a> </div></td>';
+        tr += '</tr>';
+        //转换对象，用于存储
+        var $tr = $(tr);
+        //将printTemplateId绑定到tr对象中
+        $tr.data("printTemplateId", printTemplateList[i].id);
+        //将tr对象添加到expressTemplate_table身后
+        $table.append($tr);
+    }
 
-/**
- * 2.加载最大页数
- * @param authorized	是否授权
- * @param ownerId	主账户ID
- * @param operatorId 操作人ID
- * @returns
- * @author 赵滨
- */
-function countExpressTemplate(authorized, ownerId, operatorId) {
-	var templateType = [7, 8, 9];
-	//发送请求，加载最大页数
-	$.ajax({
-		url : path+"/expressTemplate/countExpressTemplate.do",
-		type : "post",
-		traditional : true,
-		data : {
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
-			"templateType" : templateType
-		},
-		dataType : "json",
-		success : function(result) {
-			if (result.state == 0){
-				//最大页数赋值
-				max_page = result.data;
-				//调用加载页面功能
-				loadExpressTemplate(parseInt(now_page), 
-						getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
-			}
-		},
-		error : function() {
-			showMessage("页数加载失败!");
-		}
-	});
+    if (printTemplateList.length > 0) {
+        //创建页码
+        createPageList();
+    }
+
+    function createPageList() {
+        //第三部分 底部
+        tr = '';
+        tr += '<tr>';
+        //尾页开始部分
+        tr += '<td colspan="8"><div class="pagelist"> <a>首页</a><a>上一页</a> ';
+        /*console.log(now_page);*/
+        //尾页中间部分
+        if (max_page > 5) {
+            //如果是页码前两个
+            if (now_page <= 3) {
+                //循环前三页码
+                for (var i = 1; i < 4; i++) {
+
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page) {
+                        tr += '<span class="current">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a>';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+                //写出最后两个
+                tr += '<a>';
+                tr += 4;
+                tr += '</a>';
+                tr += '<a>';
+                tr += 5;
+                tr += '</a>……';
+
+                //如果是页码最中间
+            } else if (now_page >= 4 && now_page <= max_page - 3) {
+                //页码前两个
+                tr += '……<a>';
+                tr += now_page - 2;
+                tr += '</a>';
+                tr += '<a>';
+                tr += now_page - 1;
+                tr += '</a>';
+
+                //页码中间选中的
+                tr += '<span class="current">';
+                tr += now_page;
+                tr += '</span>';
+
+                //页码后两个
+                tr += '<a>';
+                tr += now_page + 1;
+                tr += '</a>';
+                tr += '<a>';
+                tr += now_page + 2;
+                tr += '</a>……';
+                //如果是页码后两个
+            } else if (now_page > max_page - 3) {
+                //页码前两个
+                tr += '……<a>';
+                tr += max_page - 4;
+                tr += '</a>';
+                tr += '<a>';
+                tr += max_page - 3;
+                tr += '</a>';
+
+                //循环后三页
+                for (var i = max_page - 2; i <= max_page; i++) {
+                    //如果选中当前页码，则变成蓝色背景
+                    if (i == now_page) {
+                        tr += '<span class="current">';
+                        tr += i;
+                        tr += '</span>';
+
+                        //否则页码为白色背景
+                    } else {
+                        tr += '<a>';
+                        tr += i;
+                        tr += '</a>';
+                    }
+                }
+            }
+
+            //否则页数小于5页
+        } else {
+            var i = 1;
+            //循环页码
+            while (i <= max_page) {
+                //如果选中当前页码，则变成蓝色背景
+                if (i == now_page) {
+                    tr += '<span class="current">';
+                    tr += i;
+                    tr += '</span>';
+
+                    //否则页码为白色背景
+                } else {
+                    tr += '<a>';
+                    tr += i;
+                    tr += '</a>';
+                }
+                i++;
+            }
+        }
+
+        //尾页结束部分
+        tr += '<a>下一页</a><a>尾页</a> </div></td>';
+        tr += '</tr>';
+        //将tr对象添加到expressTemplate_table身后
+        $table.append(tr);
+    }
 }
 

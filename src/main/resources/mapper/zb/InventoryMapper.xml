@@ -93,7 +93,7 @@
             ifnull(s.alert_stock, 0) as alertStock
         from 
             location_item_stock as s  
-        right join 
+        LEFT join
             item_common_info as i
         on
             s.item_id = i.id
@@ -115,18 +115,11 @@
             i.bar_code like concat('%', #{3}, '%')
             )
         </if>
-        
-        <if test="param5 != '' and param5 != null and param6 == false">
+        <if test="param5 != '' and param5 != null">
         and
             t.warehouse_id = #{4}
         </if>
-        
-        <if test="param6 == true ">
-        and
-            t.warehouse_id is null
-        </if> 
-        
-        </where> 
+        </where>
         limit 
             #{0}, #{1}
     </select>
@@ -148,7 +141,7 @@
             count(i.id)
         from 
             location_item_stock as s  
-        right join 
+        LEFT join
             item_common_info as i
         on
             s.item_id = i.id
@@ -170,17 +163,11 @@
             i.bar_code like concat('%', #{1}, '%')
             )
         </if> 
-        <if test="param3 != '' and param3 != null and param4 == false"> 
+        <if test="param3 != '' and param3 != null">
         and
             t.warehouse_id = #{2}
         </if> 
-        
-        <if test="param4 == true">
-        and
-            t.warehouse_id is null
-        </if> 
-        
-        </where> 
+        </where>
     </select>
 
     <!-- /**
@@ -274,7 +261,7 @@
 		            ifnull(s.alert_stock, 0) as alertStock
 		        from 
 		            location_item_stock as s  
-		        right join 
+		        LEFT join
 		            item_common_info as i
 		        on
 		            s.item_id = i.id
@@ -286,13 +273,9 @@
 		           <!--  s.owner_id = #{2}
 		        and  -->
 		            i.owner_id = #{2}
-		        <if test="param4 != '' and param4 != null and param5 == false"> 
+		        <if test="param4 != '' and param4 != null">
 		        and
 		            t.warehouse_id = #{3}
-		        </if> 
-		        <if test="param5 == true">
-		        and
-		            t.warehouse_id is null
 		        </if> 
 		        </where>
             ) as innerLayer
@@ -352,7 +335,7 @@
                     ifnull(s.alert_stock, 0) as alertStock
                 from
                     location_item_stock as s
-                right join
+                LEFT join
                     item_common_info as i
                 on
                     s.item_id = i.id
@@ -364,13 +347,9 @@
                     <!-- s.owner_id = #{0}
                 and  -->
                     i.owner_id = #{0}
-                <if test="param2 != '' and param2 != null and param3 == false">
+                <if test="param2 != '' and param2 != null">
 		        and
 		            t.warehouse_id = #{1}
-		        </if>
-		        <if test="param3 == true">
-		        and
-		            t.warehouse_id is null
 		        </if>
                 </where>
             ) as innerLayer
@@ -434,6 +413,7 @@
 		    stock_quantity as stockQuantity,
 		    alert_stock as alertStock,
 		    sendout_status as sendoutStatus,
+        	bind_id as bindId,
 		    reserved1,
 		    note,
 		    owner_id as ownerId,
@@ -441,7 +421,7 @@
 		    is_authorization as authorization,
 		    gmt_create as gmtCreate,
 		    gmt_modified as gmtModified
-		   
+
 	   from 
 	   
 	       location_item_stock 
@@ -475,6 +455,7 @@
             stock_quantity as stockQuantity,
             alert_stock as alertStock,
             sendout_status as sendoutStatus,
+        	bind_id as bindId,
             reserved1,
             note,
             owner_id as ownerId,
@@ -645,7 +626,7 @@
             ), 0)) as useQuantity
         from 
            location_item_stock as s  
-        right join 
+        LEFT join
            item_common_info as i
         on
            s.item_id = i.id
@@ -657,14 +638,10 @@
            <!-- s.owner_id = #{0}
         and  -->
            i.owner_id = #{0}
-        <if test="param2 != '' and param2 != null and param3 == false"> 
+        <if test="param2 != '' and param2 != null">
             and
                 t.warehouse_id = #{1}
         </if>
-        <if test="param3 == true">
-        and
-            t.warehouse_id is null
-        </if> 
         </where>
     </select>
     
@@ -727,7 +704,7 @@
             ), 0) as useQuantity
         from 
             location_item_stock as s  
-        right join 
+        LEFT join
             item_common_info as i
         on
             s.item_id = i.id
@@ -751,15 +728,11 @@
             t.name like concat('%', #{3}, '%')
             )
         </if>
-        <if test="param5 != '' and param5 != null and param6 == false">
+        <if test="param5 != '' and param5 != null">
         and
             t.warehouse_id = #{4}
         </if> 
-        <if test="param6 == true">
-        and
-            t.warehouse_id is null
-        </if> 
-        </where> 
+        </where>
         limit 
             #{0}, #{1}
     </select>
@@ -781,7 +754,7 @@
             count(i.id)
         from 
             location_item_stock as s  
-        right join 
+        LEFT join
             item_common_info as i
         on
             s.item_id = i.id
@@ -805,15 +778,11 @@
             t.name like concat('%', #{1}, '%')
             )
         </if> 
-        <if test="param3 != '' and param3 != null and param4 == false"> 
+        <if test="param3 != '' and param3 != null">
         and
             t.warehouse_id = #{2}
         </if> 
-        <if test="param4 == true">
-        and
-            t.warehouse_id is null
-        </if> 
-        </where> 
+        </where>
     </select>
     
     <!-- /**
@@ -1562,8 +1531,15 @@
             from
                 /*1.系统商品信息表1（高频使用表）item_common_info*/
                 item_common_info as i
+            left join
+                /*20.erp专用-库位商品库存关联表*/
+                location_item_stock as s
+            on
+                s.item_id = i.id
             <where>
                 i.owner_id = #{0}
+                and
+                s.owner_id = #{0}
                 <if test="param2 != '' and param2 != null">
                     and
                     (
@@ -1685,9 +1661,6 @@
             </if>
             <if test="note != null" >
                 note = #{note},
-            </if>
-            <if test="ownerId != null" >
-                owner_id = #{ownerId},
             </if>
             <if test="operatorId != null" >
                 operator_id = #{operatorId},
@@ -1844,6 +1817,7 @@
                 LIMIT #{4},#{5}
             ) as tableson
         )
+        ORDER BY l.bind_id
     </select>
 
     <!--/**
@@ -2021,6 +1995,96 @@
             AND l.stocklocation_id = #{3}
         </if>
     </select>
+
+    <!-- /**
+     * 查询 云仓商品关联关系
+     *
+     * <p>根据 ID 查询
+     *
+     * @param locationItemStockId ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */ -->
+    <select id="getLocationItemStockByLocationItemStockId"
+            resultType="com.rongcheng.erp.entity.LocationItemStock">
+        select
+            id,
+		    warehouse_id as warehouseId,
+		    stocklocation_id as stocklocationId,
+		    item_id as itemId,
+		    stock_quantity as stockQuantity,
+		    alert_stock as alertStock,
+		    sendout_status as sendoutStatus,
+        	bind_id as bindId,
+		    reserved1,
+		    note,
+		    owner_id as ownerId,
+		    operator_id as operatorId,
+		    is_authorization as authorization,
+		    gmt_create as gmtCreate,
+		    gmt_modified as gmtModified
+        from
+            location_item_stock
+        where
+            owner_id = #{1}
+        and
+            id = #{0}
+    </select>
+
+    <!--/**
+     * 更新 库位商品库存关联表
+     * @param locationItemStock 库位商品库存关联
+     * @return row 条数
+     * @author 赵滨
+     */-->
+    <update id="updateLocationItemStock"
+            parameterType="com.rongcheng.erp.entity.LocationItemStock">
+        update
+            location_item_stock
+        <set>
+            <if test="warehouseId != null" >
+                warehouse_id = #{warehouseId},
+            </if>
+            <if test="stocklocationId != null" >
+                stocklocation_id = #{stocklocationId},
+            </if>
+            <if test="itemId != null" >
+                item_id = #{itemId},
+            </if>
+            <if test="stockQuantity != null" >
+                stock_quantity = #{stockQuantity},
+            </if>
+            <if test="alertStock != null" >
+                alert_stock = #{alertStock},
+            </if>
+            <if test="sendoutStatus != null" >
+                sendout_status = #{sendoutStatus},
+            </if>
+            <if test="bindId != null" >
+                bind_id = #{bindId},
+            </if>
+            <if test="reserved1 != null" >
+                reserved1 = #{reserved1},
+            </if>
+            <if test="note != null" >
+                note = #{note},
+            </if>
+            <if test="operatorId != null" >
+                operator_id = #{operatorId},
+            </if>
+            <if test="authorization != null" >
+                is_authorization = #{authorization},
+            </if>
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified}
+            </if>
+        </set>
+        where
+            id = #{id}
+        AND
+            owner_id = #{ownerId}
+    </update>
 
 </mapper>
 
