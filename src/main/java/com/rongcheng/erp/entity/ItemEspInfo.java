@@ -1,46 +1,51 @@
 package com.rongcheng.erp.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-public class ItemEspInfo {
-private BigInteger id;
-private String name;
-private BigInteger platformId;
-private BigInteger platformItemSku;
-private String spec;
-private String image2;
-private String image3;
-private String image4;
-private String image5;
-private String image6;
-private String unit;
-private BigDecimal length;
-private BigDecimal width;
-private BigDecimal height;
-private BigDecimal weight;
-private String batchCode;
-private Timestamp expireDate;
-private String styleCode;
-private BigInteger warehouseId;
-private String reserved1;
-private String reserved2;
-private String note;
-private Byte isAuthorized;
-private BigInteger itemId;
-private BigInteger ownerId;
-private Integer shopId;
-private Timestamp gmtCreate;
-private Timestamp gmtModified;
-private BigInteger operatorId;
-public ItemEspInfo() {
-	
+public class ItemEspInfo implements Serializable{
+    
+/**
+     * 
+     */
+    private static final long serialVersionUID = 2030330230605557236L;
+    private BigInteger id;
+    private String name;
+    private BigInteger platformId;
+    private BigInteger platformItemSku;
+    private String spec;
+    private String image2;
+    private String image3;
+    private String image4;
+    private String image5;
+    private String image6;
+    private String unit;
+    private BigDecimal length;
+    private BigDecimal width;
+    private BigDecimal height;
+    private BigDecimal weight;
+    private String batchCode;
+    private Timestamp expireDate;
+    private String styleCode;
+    private BigInteger warehouseId;
+    private String reserved2;
+    private String reserved3;
+    private String note;
+    private Boolean authorized;
+    private BigInteger itemId;
+    private BigInteger ownerId;
+    private Timestamp gmtCreate;
+    private Timestamp gmtModified;
+    private BigInteger operatorId;
+    public ItemEspInfo() {
+    	
 }
 public ItemEspInfo(BigInteger id, String name, BigInteger platformId, BigInteger platformItemSku, String spec,
 		String image2, String image3, String image4, String image5, String image6, String unit, BigDecimal length,
 		BigDecimal width, BigDecimal height, BigDecimal weight, String batchCode, Timestamp expireDate,
-		String styleCode, BigInteger warehouseId, String reserved1, String reserved2, String note, Byte isAuthorized,
+		String styleCode, BigInteger warehouseId, String reserved2, String reserved3, String note, Boolean authorized,
 		BigInteger itemId, BigInteger ownerId, Integer shopId, Timestamp gmtCreate, Timestamp gmtModified,
 		BigInteger operatorId) {
 	super();
@@ -63,13 +68,12 @@ public ItemEspInfo(BigInteger id, String name, BigInteger platformId, BigInteger
 	this.expireDate = expireDate;
 	this.styleCode = styleCode;
 	this.warehouseId = warehouseId;
-	this.reserved1 = reserved1;
 	this.reserved2 = reserved2;
+	this.reserved3 = reserved3;
 	this.note = note;
-	this.isAuthorized = isAuthorized;
+	this.authorized = authorized;
 	this.itemId = itemId;
 	this.ownerId = ownerId;
-	this.shopId = shopId;
 	this.gmtCreate = gmtCreate;
 	this.gmtModified = gmtModified;
 	this.operatorId = operatorId;
@@ -189,17 +193,17 @@ public BigInteger getWarehouseId() {
 public void setWarehouseId(BigInteger warehouseId) {
 	this.warehouseId = warehouseId;
 }
-public String getReserved1() {
-	return reserved1;
-}
-public void setReserved1(String reserved1) {
-	this.reserved1 = reserved1;
-}
 public String getReserved2() {
 	return reserved2;
 }
 public void setReserved2(String reserved2) {
 	this.reserved2 = reserved2;
+}
+public String getReserved3() {
+	return reserved3;
+}
+public void setReserved3(String reserved3) {
+	this.reserved3 = reserved3;
 }
 public String getNote() {
 	return note;
@@ -207,11 +211,11 @@ public String getNote() {
 public void setNote(String note) {
 	this.note = note;
 }
-public Byte getIsAuthorized() {
-	return isAuthorized;
+public Boolean getAuthorized() {
+	return authorized;
 }
-public void setIsAuthorized(Byte isAuthorized) {
-	this.isAuthorized = isAuthorized;
+public void setAuthorized(Boolean authorized) {
+	this.authorized = authorized;
 }
 public BigInteger getItemId() {
 	return itemId;
@@ -224,12 +228,6 @@ public BigInteger getOwnerId() {
 }
 public void setOwnerId(BigInteger ownerId) {
 	this.ownerId = ownerId;
-}
-public Integer getShopId() {
-	return shopId;
-}
-public void setShopId(Integer shopId) {
-	this.shopId = shopId;
 }
 public Timestamp getGmtCreate() {
 	return gmtCreate;
@@ -256,9 +254,9 @@ public String toString() {
 			+ platformItemSku + ", spec=" + spec + ", image2=" + image2 + ", image3=" + image3 + ", image4=" + image4
 			+ ", image5=" + image5 + ", image6=" + image6 + ", unit=" + unit + ", length=" + length + ", width=" + width
 			+ ", height=" + height + ", weight=" + weight + ", batchCode=" + batchCode + ", expireDate=" + expireDate
-			+ ", styleCode=" + styleCode + ", warehouseId=" + warehouseId + ", reserved1=" + reserved1 + ", reserved2="
-			+ reserved2 + ", note=" + note + ", isAuthorized=" + isAuthorized + ", itemId=" + itemId + ", ownerId="
-			+ ownerId + ", shopId=" + shopId + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+			+ ", styleCode=" + styleCode + ", warehouseId=" + warehouseId + ", reserved2=" + reserved2 + ", reserved3="
+			+ reserved3 + ", note=" + note + ", authorized=" + authorized + ", itemId=" + itemId + ", ownerId="
+			+ ownerId + ", shopId=" + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
 			+ ", operatorId=" + operatorId + "]";
 }
 @Override
