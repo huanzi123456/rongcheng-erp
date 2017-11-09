@@ -20,6 +20,8 @@
         overflow: hidden;
       }
     </style>
+    <script type="text/javascript" src="/xzy/commondityRelation.js"></script>
+    <script type="text/javascript" src="/util/jiml-utils.js"></script>
 </head>
 <body style="position: relative;">
   <div class="div_big_box">
@@ -90,7 +92,8 @@
               <a href="javascript:;">点击查看使用说明</a>
             </li>
         </ul>
-        <table class="table table-hover text-center list_table">
+        <table class="table table-hover text-center list_table" id="xzy_limit">
+        <!-- 
         <tr>
           <th width="30"><input type="checkbox"/>1</th>
           <th width="100">&nbsp;</th>
@@ -109,7 +112,7 @@
         <tr>
           <td>
             <input type="checkbox" name="id[]" value="1" class="check_coding" /><br>
-              1
+              9
           </td>
           <td>
             <div class="sjx" title="线上商品和系统商品编码不一致"></div>
@@ -131,9 +134,10 @@
           </td>
           <td>
             <div>
-              <div class="wh" title="线上商品的商家编码没有编写"></div>
+              <div class="wh" title="线上商品的商家编码没有编写">线上商品编码用sku</div>
               <!-- <span>2556496549595</span> -->
-              <span class="span50">2556496549595</span>
+              <!--
+              <span class="span50">线上商品规格</span>
             </div>
             <p>
               二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
@@ -186,7 +190,9 @@
           <td>
             <div>
               <div class="wh" title="线上商品的商家编码没有编写"></div>
+                -->
               <!-- <span>2556496549595</span> -->
+              <!-- 
               <span class="span50">2556496549595</span>
             </div>
             <p>
@@ -270,6 +276,7 @@
         <tr>
           <td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
         </tr>
+         -->
       </table>
     </div>
    </div>
@@ -649,7 +656,7 @@
           <input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。">
         </div>
         <div class="hs_code_table">
-          <table>
+          <table> 
             <tr>
               <th width="5">&nbsp;</th>
               <th width="19">
@@ -1137,8 +1144,9 @@
             <span>关键字：&nbsp;</span>
             <input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。">
           </div>
-          <div class="single_updating_table">
-            <table>
+          <div class="single_updating_table">         
+            <table id="xzy_limits">
+               <!--
               <tr>
                 <th width="5">&nbsp;</th>
                 <th width="19">
@@ -1260,6 +1268,7 @@
               <tr>
                 <td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
               </tr>
+             --> 
             </table>
           </div>
           <div class="single_updating_btn">

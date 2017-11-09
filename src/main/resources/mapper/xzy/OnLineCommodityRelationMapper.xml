@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<!-- 线上商品对应关系页面 --> 
+<mapper namespace="com.rongcheng.erp.dao.Xzy_OnlineCommodityRelationDao">
+<!-- 店铺商品-erp系统商品对应关系关联表 -->
+<resultMap id="xzyPlatformErpLink" type="com.rongcheng.erp.entity.PlatformErpLink" >
+   <id column="id" property="id"/>  
+   <result column="item_id" property="ownerId"/>  
+   <result column="platform_id" property="platformId"/>
+   <result column="shop_id" property="shopId"/>
+   <result column="platform_shop_id" property="platformShopId"/>
+   <result column="platform_shop_name" property="platformShopName"/>
+   <result column="platform_item_sku" property="platformItemSku"/>
+   <result column="platform_item_wareid" property="platformItemWareid"/>
+   <result column="platform_item_name" property="platformItemName"/>
+   <result column="platform_item_attrid1" property="platformItemAttrid1"/>   
+   <result column="platform_item_attrvaluealias1" property="platformItemAttrvaluealias1"/>
+   <result column="platform_item_attrvalue1" property="platformItemAttrvalue1"/>
+   <result column="platform_item_attrid2" property="platformItemAttrid2"/>  
+   <result column="platform_item_attrvaluealias2" property="platformItemAttrvaluealias2"/>
+   <result column="platform_item_attrvalue2" property="platformItemAttrvalue2"/>
+   <result column="platform_item_state" property="platformItemState"/>
+   <result column="platform_user_code" property="platformUserCode"/> 
+   <result column="platform_user_img" property="platformUserImg"/>
+   <result column="warehouse_id" property="warehouseId"/>
+   <result column="stocklocation_id" property="stocklocationId"/>
+   <result column="auto_synchron" property="autoSynchron"/>
+   <result column="auto_onsale" property="autoOnsale"/>
+   <result column="synchron_exception" property="synchronException"/>
+   <result column="available_stock" property="availableStock"/>
+   <result column="allocation_ratio" property="allocationRatio"/>
+   <result column="remnant_ stock" property="remnantStock"/>
+   <result column="reserved1" property="reserved1"/>
+   <result column="note" property="note"/>
+   <result column="owner_id" property="ownerId"/>
+   <result column="operator_id" property="operatorId"/>
+   <result column="is_authorized" property="authorized"/>
+   <result column="gmt_create" property="gmtCreate"/>
+   <result column="gmt_modified" property="gmtModified"/>
+</resultMap>
+<!-- 系统商品信息表1（高频使用表） -->
+<resultMap id="xzyItemCommonInfo" type="com.rongcheng.erp.entity.ItemCommonInfo">
+  <id column="id" property="id"/>
+     <result column="erp_item_num" property="erpItemNum"/>
+     <result column="name" property="name"/>
+     <result column="short_name" property="shortName"/>
+     <result column="platform_id" property="platformId"/>
+     <result column="platform_item_sku" property="platformItemSku"/>
+     <result column="warehouse_id" property="warehouseId"/>
+     <result column="user_shop_code" property="userShopCode"/>
+     <result column="user_item_code" property="userItemCode"/>
+     <result column="image1" property="image1"/>
+     <result column="category" property="category"/>
+     <result column="brand" property="brand"/>
+     <result column="series" property="series"/>
+     <result column="color" property="color"/>
+     <result column="size" property="size"/>
+     <result column="spec" property="spec"/>
+     <result column="normal_price" property="normalPrice"/>
+     <result column="cost_price" property="costPrice"/>
+     <result column="promotion_price" property="promotionPrice"/>
+     <result column="bar_code" property="barCode"/>
+     <result column="package_condition" property="packageCondition"/>
+     <result column="user_classification" property="userClassification"/>
+     <result column="is_presell" property="presell"/>
+     <result column="is_commission_sell" property="commissionSell"/>
+     <result column="is_gift" property="gift"/>
+     <result column="bar_code_image" property="barCodeImage"/>
+     <result column="qr_code_image" property="qrCodeImage"/>
+     <result column="reserved1" property="reserved1"/>
+     <result column="note" property="note"/>    
+     <result column="owner_id" property="ownerId"/>
+     <result column="shop_id" property="shopId"/>
+     <result column="operator_id" property="operatorId"/>
+     <result column="is_authorized" property="authorized"/>
+     <result column="item_secret_key" property="itemSecretKey"/>
+     <result column="gmt_create" property="gmtCreate"/>
+     <result column="gmt_modified" property="gmtModified"/>
+</resultMap>
+<!-- 
+  一.将京东的商品数据及店铺信息及其他表的关联数据
+        保存到表platform_erp_link中
+ -->
+<!-- 1.查询platform_erp_link表中的最大创建时间 -->
+<select id="seleLastCreatTime" parameterType="com.rongcheng.erp.entity.PlatformErpLink" resultType="java.util.Date">
+  SELECT MAX(gmt_modified)
+  FROM platform_erp_link
+  WHERE owner_id = #{ownerId}
+  AND platform_id = #{platformId}
+</select>
+<!-- 2.将数据插入表中 -->
+<select id="savePlatformErpLink" parameterType="com.rongcheng.erp.entity.PlatformErpLink">
+  INSERT INTO platform_erp_link
+  (item_id,platform_id,shop_id,platform_shop_id,platform_shop_name,platform_item_sku,platform_item_wareid,platform_item_name,platform_item_attrid1,platform_item_attrvaluealias1,platform_item_attrvalue1,platform_item_attrid2,platform_item_attrvaluealias2,platform_item_attrvalue2,platform_item_state,platform_user_code,platform_user_img,owner_id,gmt_create)
+  VALUES
+  (#{itemId},#{platformId},#{shopId},#{platformShopId},#{platformShopName},#{platformItemSku},#{platformItemWareid},#{platformItemName},#{platformItemAttrid1},#{platformItemAttrvaluealias1},#{platformItemAttrvalue1},#{platformItemAttrid2},#{platformItemAttrvaluealias2},#{platformItemAttrvalue2},#{platformItemState},#{platformUserCode},#{platformUserImg},#{ownerId},#{gmtCreate})
+</select>
+<!-- 3.根据platform_erp_link表中的platform_item_sku和platform_id查询item_common_info表中的id -->
+<select id="seleItemCommonInfoId" parameterType="com.rongcheng.erp.entity.ItemCommonInfo" resultType="java.math.BigInteger">
+  SELECT id
+  FROM item_common_info
+  WHERE platform_item_sku = #{platformItemSku}
+  AND platform_id = #{platformId}
+</select>
+<!-- 4.根据platform_erp_link表中的platform_shop_id和platform_id查询shop_info表中的id -->
+<select id="seleIdFromShopInfo" parameterType="com.rongcheng.erp.entity.ShopInfo" resultType="java.math.BigInteger">
+  SELECT id
+  FROM shop_info
+  WHERE platform_id = #{platformId}
+  AND platform_shop_id = #{platformShopId}
+</select>
+<!-- 
+  二.线上商品对应关系页面的处理
+ -->
+ <!-- 1.统计platform_erp_link表的记录数 -->
+ <select id="totalCount" resultType="int">
+   SELECT COUNT(id)
+   FROM platform_erp_link
+   WHERE owner_id  = #{ownerId}
+ </select>
+ <resultMap id="xzybaseResultMap" type="com.rongcheng.erp.entity.PlatformErpLink" extends="xzyPlatformErpLink">  
+   <association property="commonInfo" resultMap="userMap"/>
+ </resultMap>
+ <resultMap type="com.rongcheng.erp.entity.ItemCommonInfo" id="userMap" extends="xzyItemCommonInfo">  
+ </resultMap>
+<!-- 2.分页查询 --> 
+<select id="seleCommonInfo" resultMap="xzybaseResultMap">
+  SELECT 
+    a.id,
+    a.platform_shop_name,
+    a.platform_shop_id,
+    a.platform_item_sku,
+    a.platform_item_name,
+    a.platform_item_attrvaluealias1,
+    a.platform_item_attrvaluealias2,
+    a.platform_user_img,
+    b.id,
+    b.name,
+    b.image1,
+    b.color,
+    b.size
+  FROM platform_erp_link a
+  LEFT OUTER JOIN item_common_info b
+  ON a.platform_id = b.platform_id
+  AND a.platform_item_sku = b.platform_item_sku
+  AND a.owner_id = #{ownerId}
+  LIMIT #{page},#{pageSize}  
+</select>
+<!-- 3.统计系统商品信息表1（高频使用表）中的记录数 -->
+<select id="getTotalCount" resultType="int">
+  SELECT COUNT(id)
+   FROM item_common_info
+   WHERE owner_id  = #{ownerId}
+</select>
+<!-- 4."换"操作中"选择已有"弹出框页面的分页查询 -->
+<resultMap type="com.rongcheng.erp.dto.ItemCommonAndEspInfo" id="xzybasesResultMap">
+  <id column="id" property="id"/>
+  <result column="unit" property="unit"/>
+  <result column="owner_id" property="ownerId"/>
+  <association property="itemCommonInfo" resultMap="esp"/>
+</resultMap>
+<resultMap type="com.rongcheng.erp.entity.ItemCommonInfo" id="esp" extends="xzyItemCommonInfo">  
+</resultMap>
+<select id="seleEspInfo" resultMap="xzybasesResultMap">
+    SELECT 
+    a.id,
+    a.name,
+    a.color,
+    a.size,
+    a.normal_price,
+    b.unit
+  FROM item_common_info a
+  LEFT JOIN item_esp_info b
+  ON a.id = b.id
+  AND a.owner_id = b.owner_id = #{ownerId}
+  LIMIT #{page},#{pageSize}
+</select>
+</mapper>

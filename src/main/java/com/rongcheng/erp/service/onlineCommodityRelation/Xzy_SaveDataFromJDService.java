@@ -1,0 +1,12 @@
+package com.rongcheng.erp.service.onlineCommodityRelation;
+
+import javax.servlet.http.HttpSession;
+import com.jd.open.api.sdk.JdException;
+/**
+ * 读取京东的商品和店铺信息并保存到platform_erp_link表中
+ * @author 薛宗艳
+ *
+ */
+public interface Xzy_SaveDataFromJDService {
+    void save(HttpSession session)throws JdException;
+}
