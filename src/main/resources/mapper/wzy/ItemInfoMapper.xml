@@ -135,7 +135,7 @@
             t.item_secret_key, t.owner_id, t.shop_id, t.gmt_create, t.gmt_modified, t.operator_id, t.spec, 
 
             d.image2, d.image3, d.image4, d.image5, d.image6, d.unit, d.length, d.width, d.height, 
-            d.weight, d.batch_code, d.expire_date, d.style_code, d.reserved2, d.reserved3, d.item_id
+            d.weight, d.batch_code, d.expire_date, d.style_code, d.reserved2, d.reserved1 as reserved3, d.item_id
     </sql>
 
     <select id="findUserAllItemInfo" resultMap="ItemInfoMap">
@@ -203,15 +203,7 @@
     
     <select id="findItemInfoById" resultMap="ItemInfoMap">
         select
-            t.id, t.erp_item_num, t.name, t.short_name, t.platform_id, t.platform_item_sku, t.user_shop_code, 
-            t.user_item_code, t.warehouse_id, t.image1, t.category, t.brand, t.series, t.color, t.size, 
-            t.normal_price, t.cost_price, t.promotion_price, t.bar_code, t.package_condition, 
-            t.user_classification, t.is_presell, t.is_commission_sell, t.is_gift, t.bar_code_image, 
-            t.qr_code_image, t.reserved1, t.note, t.is_authorized, t.item_secret_key, t.owner_id, t.shop_id, 
-            t.gmt_create, t.gmt_modified, t.operator_id, t.spec,    
-        
-            d.image2, d.image3, d.image4, d.image5, d.image6, 
-            d.unit, d.length, d.width, d.height, d.weight, d.batch_code, d.expire_date, d.style_code
+        <include refid="selectItemInfo"/>
         from item_esp_info d, item_common_info t 
         where t.id = d.item_id and t.id = #{id,jdbcType=BIGINT}
     </select>
@@ -502,8 +494,8 @@
         <if test="reserved2 != null" >
             reserved2,
         </if>
-        <if test="reserved3 != null" >
-            reserved3,
+        <if test="reserved1 != null" >
+            reserved1,
         </if>
         <if test="note != null" >
             note,
@@ -532,16 +524,16 @@
 	            #{name, jdbcType=VARCHAR},
 	        </if>
 	        <if test="platformId != null" >
-	            #{platformId, jdbcType=VARCHAR},
+	            #{platformId, jdbcType=BIGINT},
 	        </if>
 	        <if test="platformItemSku != null" >
-	            #{platformItemSku, jdbcType=VARCHAR},
+	            #{platformItemSku, jdbcType=BIGINT},
 	        </if>
 	        <if test="spec != null" >
-	            #{spec, jdbcType=BIGINT},
+	            #{spec, jdbcType=VARCHAR},
 	        </if>
 	        <if test="image2 != null" >
-	            #{image2, jdbcType=BIGINT},
+	            #{image2, jdbcType=VARCHAR},
 	        </if>
 	        <if test="image3 != null" >
 	            #{image3, jdbcType=VARCHAR},
@@ -550,7 +542,7 @@
 	            #{image4, jdbcType=VARCHAR},
 	        </if>
 	        <if test="image5 != null" >
-	            #{image5, jdbcType=BIGINT},
+	            #{image5, jdbcType=VARCHAR},
 	        </if>
 	        <if test="image6 != null" >
 	            #{image6, jdbcType=VARCHAR},
@@ -559,31 +551,31 @@
 	            #{unit, jdbcType=VARCHAR},
 	        </if>
 	        <if test="length != null" >
-	            #{length, jdbcType=VARCHAR},
+	            #{length, jdbcType=DECIMAL},
 	        </if>
 	        <if test="width != null" >
-	            #{width, jdbcType=VARCHAR},
+	            #{width, jdbcType=DECIMAL},
 	        </if>
 	        <if test="height != null" >
-	            #{height, jdbcType=VARCHAR},
+	            #{height, jdbcType=DECIMAL},
 	        </if>
 	        <if test="weight != null" >
-	            #{weight, jdbcType=VARCHAR},
+	            #{weight, jdbcType=DECIMAL},
 	        </if>
 	        <if test="batchCode != null" >
                 #{batchCode, jdbcType=VARCHAR},
             </if>
 	        <if test="expireDate != null" >
-	            #{expireDate, jdbcType=DECIMAL},
+	            #{expireDate, jdbcType=TIMESTAMP},
 	        </if>
 	        <if test="styleCode != null" >
-	            #{styleCode, jdbcType=DECIMAL},
+	            #{styleCode, jdbcType=VARCHAR},
 	        </if>
 	        <if test="reserved2 != null" >
-	            #{reserved2, jdbcType=DECIMAL},
+	            #{reserved2, jdbcType=VARCHAR},
 	        </if>
-	        <if test="reserved3 != null" >
-	            #{reserved3, jdbcType=VARCHAR},
+	        <if test="reserved1 != null" >
+	            #{reserved1, jdbcType=VARCHAR},
 	        </if>
 	        <if test="note != null" >
 	            #{note, jdbcType=VARCHAR},
@@ -592,7 +584,7 @@
 	            #{authorized, jdbcType=TINYINT},
 	        </if>
 	        <if test="itemId != null" >
-	            #{itemId, jdbcType=VARCHAR},
+	            #{itemId, jdbcType=BIGINT},
 	        </if>
 	        <if test="ownerId != null" >
 	            #{ownerId, jdbcType=BIGINT},
@@ -717,16 +709,16 @@
                 name = #{name, jdbcType=VARCHAR},
             </if>
             <if test="platformId != null" >
-                platform_id = #{platformId, jdbcType=VARCHAR},
+                platform_id = #{platformId, jdbcType=BIGINT},
             </if>
             <if test="platformItemSku != null" >
-                platform_item_sku = #{platformItemSku, jdbcType=VARCHAR},
+                platform_item_sku = #{platformItemSku, jdbcType=BIGINT},
             </if>
             <if test="spec != null" >
-                spec = #{spec, jdbcType=BIGINT},
+                spec = #{spec, jdbcType=VARCHAR},
             </if>
             <if test="image2 != null" >
-                image2 = #{image2, jdbcType=BIGINT},
+                image2 = #{image2, jdbcType=VARCHAR},
             </if>
             <if test="image3 != null" >
                 image3 = #{image3, jdbcType=VARCHAR},
@@ -735,7 +727,7 @@
                 image4 = #{image4, jdbcType=VARCHAR},
             </if>
             <if test="image5 != null" >
-                image5 = #{image5, jdbcType=BIGINT},
+                image5 = #{image5, jdbcType=VARCHAR},
             </if>
             <if test="image6 != null" >
                 image6 = #{image6, jdbcType=VARCHAR},
@@ -744,28 +736,28 @@
                 unit = #{unit, jdbcType=VARCHAR},
             </if>
             <if test="length != null" >
-                length = #{length, jdbcType=VARCHAR},
+                length = #{length, jdbcType=DECIMAL},
             </if>
             <if test="width != null" >
-                width = #{width, jdbcType=VARCHAR},
+                width = #{width, jdbcType=DECIMAL},
             </if>
             <if test="height != null" >
-                height = #{height, jdbcType=VARCHAR},
+                height = #{height, jdbcType=DECIMAL},
             </if>
             <if test="weight != null" >
-                weight = #{weight, jdbcType=VARCHAR},
+                weight = #{weight, jdbcType=DECIMAL},
             </if>
             <if test="expireDate != null" >
-                expire_date = #{expireDate, jdbcType=DECIMAL},
+                expire_date = #{expireDate, jdbcType=TIMESTAMP},
             </if>
             <if test="styleCode != null" >
-                style_code = #{styleCode, jdbcType=DECIMAL},
+                style_code = #{styleCode, jdbcType=VARCHAR},
             </if>
             <if test="reserved2 != null" >
-                reserved2 = #{reserved2, jdbcType=DECIMAL},
+                reserved2 = #{reserved2, jdbcType=VARCHAR},
             </if>
-            <if test="reserved3 != null" >
-                reserved3 = #{reserved3, jdbcType=VARCHAR},
+            <if test="reserved1 != null" >
+                reserved1 = #{reserved1, jdbcType=VARCHAR},
             </if>
             <if test="note != null" >
                 note = #{note, jdbcType=VARCHAR},
@@ -774,7 +766,7 @@
                 is_authorized = #{authorized, jdbcType=TINYINT},
             </if>
             <if test="itemId != null" >
-                item_id = #{itemId, jdbcType=VARCHAR},
+                item_id = #{itemId, jdbcType=BIGINT},
             </if>
             <if test="ownerId != null" >
                 owner_id = #{ownerId, jdbcType=BIGINT},

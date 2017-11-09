@@ -110,7 +110,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         iei.setAuthorized(info.getAuthorized());
         iei.setOperatorId(info.getOperatorId());
         iei.setReserved2(info.getReserved2());
-        iei.setReserved3(info.getReserved3());
+        iei.setReserved1(info.getReserved3());
         iei.setSpec(info.getSpec());
         iei.setPlatformId(info.getPlatformId());
         iei.setPlatformItemSku(info.getPlatformItemSku());

@@ -31,7 +31,7 @@ public class ItemEspInfo implements Serializable{
     private String styleCode;
     private BigInteger warehouseId;
     private String reserved2;
-    private String reserved3;
+    private String reserved1;
     private String note;
     private Boolean authorized;
     private BigInteger itemId;
@@ -45,7 +45,7 @@ public class ItemEspInfo implements Serializable{
 public ItemEspInfo(BigInteger id, String name, BigInteger platformId, BigInteger platformItemSku, String spec,
 		String image2, String image3, String image4, String image5, String image6, String unit, BigDecimal length,
 		BigDecimal width, BigDecimal height, BigDecimal weight, String batchCode, Timestamp expireDate,
-		String styleCode, BigInteger warehouseId, String reserved2, String reserved3, String note, Boolean authorized,
+		String styleCode, BigInteger warehouseId, String reserved2, String reserved1, String note, Boolean authorized,
 		BigInteger itemId, BigInteger ownerId, Integer shopId, Timestamp gmtCreate, Timestamp gmtModified,
 		BigInteger operatorId) {
 	super();
@@ -69,7 +69,7 @@ public ItemEspInfo(BigInteger id, String name, BigInteger platformId, BigInteger
 	this.styleCode = styleCode;
 	this.warehouseId = warehouseId;
 	this.reserved2 = reserved2;
-	this.reserved3 = reserved3;
+	this.reserved1 = reserved1;
 	this.note = note;
 	this.authorized = authorized;
 	this.itemId = itemId;
@@ -199,11 +199,11 @@ public String getReserved2() {
 public void setReserved2(String reserved2) {
 	this.reserved2 = reserved2;
 }
-public String getReserved3() {
-	return reserved3;
+public String getReserved1() {
+	return reserved1;
 }
-public void setReserved3(String reserved3) {
-	this.reserved3 = reserved3;
+public void setReserved1(String reserved1) {
+	this.reserved1 = reserved1;
 }
 public String getNote() {
 	return note;
@@ -254,8 +254,8 @@ public String toString() {
 			+ platformItemSku + ", spec=" + spec + ", image2=" + image2 + ", image3=" + image3 + ", image4=" + image4
 			+ ", image5=" + image5 + ", image6=" + image6 + ", unit=" + unit + ", length=" + length + ", width=" + width
 			+ ", height=" + height + ", weight=" + weight + ", batchCode=" + batchCode + ", expireDate=" + expireDate
-			+ ", styleCode=" + styleCode + ", warehouseId=" + warehouseId + ", reserved2=" + reserved2 + ", reserved3="
-			+ reserved3 + ", note=" + note + ", authorized=" + authorized + ", itemId=" + itemId + ", ownerId="
+			+ ", styleCode=" + styleCode + ", warehouseId=" + warehouseId + ", reserved2=" + reserved2 + ", reserved1="
+			+ reserved1 + ", note=" + note + ", authorized=" + authorized + ", itemId=" + itemId + ", ownerId="
 			+ ownerId + ", shopId=" + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
 			+ ", operatorId=" + operatorId + "]";
 }

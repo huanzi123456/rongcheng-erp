@@ -95,7 +95,6 @@ public class Wzy_ItemInfoController {
     }
 
     //6.id查询
-    //6.id查询
     @RequestMapping("/findItemInfoById.do")
     @ResponseBody
     public JsonResult findItemInfoById(BigInteger id) {
