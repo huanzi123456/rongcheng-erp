@@ -867,10 +867,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
                                           BigInteger ownerId) {
         //起始行数
         int start = (nowPage - 1) * rows;
-
         //是否默认全部选择
         Boolean defaultAll = false;
-
         //如果是否启用为空，说明是全部
         if (autoSynchron == null) {
             //全部选择 为 是
@@ -879,17 +877,14 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
 
         //创建返回参数map
         Map<String, Object> map = new HashMap<String, Object>();
-
         //获取 自动同步
         List<Map<String, Object>> listItemCommonSync =
                 inventoryDAO.listItemCommonSyncByKeywords(start, rows, ownerId, keywords, autoSynchron, defaultAll);
-
         //加入参数
         map.put("listItemCommonSync", listItemCommonSync);
 
         //获取仓库列表 条数
         int maxPage = inventoryDAO.countItemCommonSyncByKeywords(ownerId, keywords, autoSynchron, defaultAll);
-
         //加入参数
         map.put("maxPage", Math.ceil((double)maxPage/(double)rows));
 
@@ -906,20 +901,30 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @return
      * @author 赵滨
      */
-    public List<Map<String, Object>> listInventorySyncByItemIds(BigInteger[] itemIds, BigInteger ownerId) {
+    public List<Map<String, Object>> listInventorySyncByItemBind(BigInteger[] itemIds, BigInteger ownerId) {
         //创建返回结果
         List<Map<String, Object>> list = new ArrayList<>();
-        //遍历ID数组
+
+        //遍历每一条商品，获取它的所有店铺和自动上传设置
         for (int i = 0; i < itemIds.length; i++) {
             BigInteger itemId = itemIds[i];
+
             Map<String, Object> map = new HashMap<>();
+            //根据itemId去查询线上商品对应关系表中的信息，要求是店铺名称不能重复，可以出现多个店铺名称
             //获取 系统商品对应关系关联表 同步信息
             List<PlatformErpLinkShopWarehouseInfo> platformErpLinkShopWarehouseInfoList =
                     inventoryDAO.listPlatformErpLinkShopWarehouseInfo(itemId, ownerId);
             map.put("platformErpLinkShopWarehouseInfoList", platformErpLinkShopWarehouseInfoList);
 
+            //根据itemId去查询库存关联表中的仓库和库位
+            //查询库位商品库存关联表 获取仓库和库位
+            List<Map<String, Object>> itemWarehouseStockLocationList =
+                    inventoryDAO.listItemWarehouseStockLocation(itemId, ownerId);
+            map.put("itemWarehouseStockLocationList", itemWarehouseStockLocationList);
+
             list.add(map);
         }
+
         return list;
     }
 

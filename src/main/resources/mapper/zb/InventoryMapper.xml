@@ -1469,19 +1469,19 @@
                     ), 0) as useQuantity,
                 /*库存自动同步状况（开关键）*/
                 ifnull((select max(p.auto_synchron)
-                from platform_erp_link as p
-                where p.item_id = i.id
-                and p.owner_id = #{2}
-                and p.auto_synchron = 1),0) as autoSynchron
+                    from platform_erp_link as p
+                    where p.item_id = i.id
+                    and p.owner_id = #{2}
+                    and p.auto_synchron = 1),0) as autoSynchron
             from
-                /*1.系统商品信息表1（高频使用表）item_common_info*/
-                item_common_info as i
-            left join
                 /*20.erp专用-库位商品库存关联表*/
                 location_item_stock as s
+            left join
+                /*1.系统商品信息表1（高频使用表）item_common_info*/
+                item_common_info as i
             on
                 s.item_id = i.id
-            <where>
+            where
                 i.owner_id = #{2}
                 and
                 s.owner_id = #{2}
@@ -1495,14 +1495,15 @@
                     i.bar_code like concat('%', #{3}, '%')
                     )
                 </if>
-            </where>
-            group by i.id
+            GROUP BY s.item_id
+            ORDER BY i.id
         ) as innerLayer
         <if test="param6 == false">
         where
             autoSynchron = #{4}
         </if>
         limit #{0}, #{1}
+
     </select>
 
     <!--/**
@@ -1536,7 +1537,7 @@
                 location_item_stock as s
             on
                 s.item_id = i.id
-            <where>
+            where
                 i.owner_id = #{0}
                 and
                 s.owner_id = #{0}
@@ -1550,8 +1551,8 @@
                     i.bar_code like concat('%', #{1}, '%')
                     )
                 </if>
-            </where>
-            group by i.id
+            GROUP BY s.item_id
+            ORDER BY i.id
         ) as innerLayer
         <if test="param4 == false">
         where
@@ -1560,55 +1561,73 @@
     </select>
 
    <!-- /**
-    * 查询系统商品对应关系关联表
+     * 查询系统商品对应关系关联表
+     * @param itemId 商品ID
+     * @param bindId 关联ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */-->
+    <select id="listPlatformErpLinkShopWarehouseInfo"
+            resultType="com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo">
+    SELECT
+      si.name                           AS shopName,
+      pel.id,
+      pel.item_id                       AS itemId,
+      pel.platform_id                   AS platformId,
+      pel.shop_id                       AS shopId,
+      pel.platform_item_sku             AS platformItemSku,
+      pel.warehouse_id                  AS warehouseId,
+      pel.stocklocation_id              AS stocklocationId,
+      ifnull(pel.auto_synchron, 0)      AS autoSynchron,
+      ifnull(pel.auto_onsale, 0)        AS autoOnsale,
+      ifnull(pel.synchron_exception, 0) AS synchronException,
+      ifnull(pel.available_stock, 0)    AS availableStock,
+      ifnull(pel.allocation_ratio, 0)   AS allocationRatio,
+      ifnull(pel.remnant_stock, 0)      AS remnantStock,
+      pel.reserved1,
+      pel.note,
+      pel.owner_id                      AS ownerId,
+      pel.operator_id                   AS operatorId,
+      pel.is_authorized                 AS athorized,
+      pel.gmt_create                    AS gmtCreate,
+      pel.gmt_modified                  AS gmtModified
+    FROM
+      platform_erp_link AS pel
+      LEFT JOIN
+      shop_info AS si
+        ON
+          pel.shop_id = si.id
+    WHERE
+      pel.owner_id = #{1}
+      AND
+      si.owner_id = #{1}
+      AND pel.item_id = #{0}
+    GROUP BY si.name
+    </select>
+
+    <!--/**
+    *查询库位商品库存关联表 获取仓库和库位
     * @param itemId 商品ID
     * @param ownerId 主账号ID
     * @return
     * @author 赵滨
     */-->
-    <select id="listPlatformErpLinkShopWarehouseInfo"
-            resultType="com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo">
-        select
-            l.id,
-            l.item_id as itemId,
-            l.platform_id as platformId,
-            l.shop_id as shopId,
-            l.platform_item_sku as platformItemSku,
-            l.warehouse_id as warehouseId,
-            l.stocklocation_id as stocklocationId,
-            l.auto_synchron as autoSynchron,
-            l.auto_onsale as autoOnsale,
-            l.synchron_exception as synchronException,
-            l.available_stock as availableStock,
-            l.allocation_ratio as allocationRatio,
-            l.remnant_stock as remnantStock,
-            l.reserved1,
-            l.note,
-            l.owner_id as ownerId,
-            l.operator_id as operatorId,
-            l.is_authorized as athorized,
-            l.gmt_create as gmtCreate,
-            l.gmt_modified as gmtModified,
-            s.name as shopName,
-            w.warehouse_name as warehouseName
-        from
-            platform_erp_link as l
-        left join
-            shop_info as s
-        on
-            l.shop_id = s.id
-        left join
-            warehouse_info as w
-        on
-            l.warehouse_id = w.id
-        where
-            l.owner_id = #{1}
-        and
-            s.owner_id = #{1}
-        and
-            w.owner_id = #{1}
-        and
-            l.item_id = #{0}
+    <select id="listItemWarehouseStockLocation"  resultType="java.util.Map">
+        SELECT
+          lis.id,
+          lis.item_id as itemId,
+          ifnull(wi.warehouse_name, '') as warehouseName,
+          ifnull(si.name, '') as stocklocationName
+        FROM location_item_stock AS lis
+        LEFT JOIN warehouse_info AS wi
+          ON lis.warehouse_id = wi.id
+        LEFT JOIN stocklocation_info AS si
+          ON lis.stocklocation_id = si.id
+        WHERE lis.owner_id = #{1}
+        AND wi.owner_id = #{1}
+        AND si.owner_id = #{1}
+        AND lis.item_id = #{0}
     </select>
 
     <!--/**

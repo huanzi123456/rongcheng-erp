@@ -208,7 +208,7 @@ public interface ZB_InventoryService {
      * @return
      * @author 赵滨
      */
-    List<Map<String, Object>> listInventorySyncByItemIds(BigInteger[] itemIds, BigInteger ownerId);
+    List<Map<String, Object>> listInventorySyncByItemBind(BigInteger[] itemIds, BigInteger ownerId);
 
     /**
      * 设置 库存同步配置

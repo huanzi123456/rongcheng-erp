@@ -382,10 +382,10 @@ public class ZB_InventoryController {
      * @author 赵滨
      */
     @ResponseBody
-    @RequestMapping("/inventorySync/listInventorySyncByItemIds.do")
-    public JsonResult listInventorySyncByItemId(BigInteger[] itemIds) {
+    @RequestMapping("/inventorySync/listInventorySyncByItemBind.do")
+    public JsonResult listInventorySyncByItemBind(BigInteger[] itemIds) {
         //加载
-        List<Map<String, Object>> list = inventoryService.listInventorySyncByItemIds(itemIds, ownerId);
+        List<Map<String, Object>> list = inventoryService.listInventorySyncByItemBind(itemIds, ownerId);
         //返回
         return new JsonResult(list);
     }

@@ -402,6 +402,15 @@ public interface ZB_InventoryDAO {
     List<PlatformErpLinkShopWarehouseInfo> listPlatformErpLinkShopWarehouseInfo(BigInteger itemId, BigInteger ownerId);
 
     /**
+     * 查询库位商品库存关联表 获取仓库和库位
+     * @param itemId 商品ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    List<Map<String, Object>> listItemWarehouseStockLocation(BigInteger itemId, BigInteger ownerId);
+
+    /**
      * 更新系统商品对应关系关联表
      * @param platformErpLink 系统商品对应关系关联表
      * @return row 行数
