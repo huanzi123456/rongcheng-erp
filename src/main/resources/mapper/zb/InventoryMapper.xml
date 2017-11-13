@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
+<?xml version="1.0" encoding="UTF-8" ?>
 
-<!DOCTYPE mapper 
- PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
-  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 
 <mapper namespace="com.rongcheng.erp.dao.ZB_InventoryDAO">
 
-	<!-- /**
+    <!-- /**
      * 查询库存状态
      * 
      * <p>根据关键字
@@ -21,109 +20,109 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="listItemCommonStockByKeywords"  resultType="java.util.Map">
-        select 
-            <!-- 商品ID -->
-            i.id,
-            <!-- 商品编码 -->
-            ifnull(i.erp_item_num, '') as erpItemNum,
-            <!-- 商品名称 -->
-            ifnull(i.name, '') as name,
-            <!-- 商品条码 -->
-            ifnull(i.bar_code, '') as barCode,
-            <!-- 商品颜色 -->
-            ifnull(i.color, '') as color,
-            <!-- 商品尺码 -->
-            ifnull(i.size, '') as size,
-            <!-- 商品包装（是否破损，包装完整等） -->
-            ifnull(i.package_condition, '') as packageCondition,
-            <!-- 库存总量 -->
-            ifnull(s.stock_quantity,0) as sumQuantity,
-            <!-- 订单占用量 -->
-            ifnull(
-            (
-                select 
-                    sum(l.quantity)
-                from 
-                    order_item_link as l ,
-                    item_common_info as it,
-                    order_info as o
-                where 
-                    it.id = l.order_item_id
-                and 
-                    l.erp_order_id = o.id
-                and 
-                    l.order_item_id = i.id
-                and 
-                    o.order_status in (2, 3, 4, 5, 6)
-                and 
-                    l.owner_id = #{2}
-                and 
-                    it.owner_id = #{2}
-                and 
-                    o.owner_id = #{2}
-            ), 0) as useQuantity,
-            <!-- 30天销量 -->
-            ifnull(
-            (
-                select 
-                    SUM(l.quantity)
-                from 
-                    order_item_link as l ,
-                    item_common_info as it,
-                    order_info as o
-                where 
-                    it.id = l.order_item_id
-                and 
-                    l.erp_order_id = o.id
-                and 
-                    l.order_item_id = i.id
-                and 
-                    o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
-                and 
-                    (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
-                and 
-                    l.owner_id = #{2}
-                and 
-                    it.owner_id = #{2}
-                and 
-                    o.owner_id = #{2}
-            ), 0) as salesQuantity,
-            <!-- 警戒量 -->
-            ifnull(s.alert_stock, 0) as alertStock
-        from 
-            location_item_stock as s  
+    <select id="listItemCommonStockByKeywords" resultType="java.util.Map">
+        select
+        <!-- 商品ID -->
+        i.id,
+        <!-- 商品编码 -->
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        <!-- 商品名称 -->
+        ifnull(i.name, '') as name,
+        <!-- 商品条码 -->
+        ifnull(i.bar_code, '') as barCode,
+        <!-- 商品颜色 -->
+        ifnull(i.color, '') as color,
+        <!-- 商品尺码 -->
+        ifnull(i.size, '') as size,
+        <!-- 商品包装（是否破损，包装完整等） -->
+        ifnull(i.package_condition, '') as packageCondition,
+        <!-- 库存总量 -->
+        ifnull(s.stock_quantity,0) as sumQuantity,
+        <!-- 订单占用量 -->
+        ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0) as useQuantity,
+        <!-- 30天销量 -->
+        ifnull(
+        (
+        select
+        SUM(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
+        and
+        (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0) as salesQuantity,
+        <!-- 警戒量 -->
+        ifnull(s.alert_stock, 0) as alertStock
+        from
+        location_item_stock as s
         LEFT join
-            item_common_info as i
+        item_common_info as i
         on
-            s.item_id = i.id
-        left join 
-            stocklocation_info as t
-        on 
-            s.stocklocation_id = t.id
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
         <where>
             <!-- s.owner_id = #{2}
         and  -->
             i.owner_id = #{2}
-        <if test="param4 != '' and param4 != null"> 
-        and 
-            (
-            i.erp_item_num like concat('%', #{3}, '%')
-        or 
-            i.name like concat('%', #{3}, '%')
-        or 
-            i.bar_code like concat('%', #{3}, '%')
-            )
-        </if>
-        <if test="param5 != '' and param5 != null">
-        and
-            t.warehouse_id = #{4}
-        </if>
+            <if test="param4 != '' and param4 != null">
+                and
+                (
+                i.erp_item_num like concat('%', #{3}, '%')
+                or
+                i.name like concat('%', #{3}, '%')
+                or
+                i.bar_code like concat('%', #{3}, '%')
+                )
+            </if>
+            <if test="param5 != '' and param5 != null">
+                and
+                t.warehouse_id = #{4}
+            </if>
         </where>
-        limit 
-            #{0}, #{1}
+        limit
+        #{0}, #{1}
     </select>
-    
+
     <!-- /**
      * 查询库存状态 条数
      * 
@@ -135,38 +134,38 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="countItemCommonStockByKeywords"  resultType="int">
-        select 
-            <!-- 库存状态条数 -->
-            count(i.id)
-        from 
-            location_item_stock as s  
+    <select id="countItemCommonStockByKeywords" resultType="int">
+        select
+        <!-- 库存状态条数 -->
+        count(i.id)
+        from
+        location_item_stock as s
         LEFT join
-            item_common_info as i
+        item_common_info as i
         on
-            s.item_id = i.id
-        left join 
-            stocklocation_info as t
-        on 
-            s.stocklocation_id = t.id
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
         <where>
             <!-- s.owner_id = #{0}
         and  -->
             i.owner_id = #{0}
-        <if test="param2 != '' and param2 != null"> 
-        and 
-            (
-            i.erp_item_num like concat('%', #{1}, '%')
-        or 
-            i.name like concat('%', #{1}, '%')
-        or 
-            i.bar_code like concat('%', #{1}, '%')
-            )
-        </if> 
-        <if test="param3 != '' and param3 != null">
-        and
-            t.warehouse_id = #{2}
-        </if> 
+            <if test="param2 != '' and param2 != null">
+                and
+                (
+                i.erp_item_num like concat('%', #{1}, '%')
+                or
+                i.name like concat('%', #{1}, '%')
+                or
+                i.bar_code like concat('%', #{1}, '%')
+                )
+            </if>
+            <if test="param3 != '' and param3 != null">
+                and
+                t.warehouse_id = #{2}
+            </if>
         </where>
     </select>
 
@@ -182,108 +181,108 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="listItemCommonStockByAlertStock"  resultType="java.util.Map">
-        select 
-            *
+    <select id="listItemCommonStockByAlertStock" resultType="java.util.Map">
+        select
+        *
         from (
-            select
-                *,
-                (sumQuantity-useQuantity) as availableQuantity
-            from(
-                select 
-		            <!-- 商品ID -->
-		            i.id,
-		            <!-- 商品编码 -->
-		            ifnull(i.erp_item_num, '') as erpItemNum,
-		            <!-- 商品名称 -->
-		            ifnull(i.name, '') as name,
-		            <!-- 商品条码 -->
-		            ifnull(i.bar_code, '') as barCode,
-		            <!-- 商品颜色 -->
-		            ifnull(i.color, '') as color,
-		            <!-- 商品尺码 -->
-		            ifnull(i.size, '') as size,
-		            <!-- 商品包装（是否破损，包装完整等） -->
-		            ifnull(i.package_condition, '') as packageCondition,
-		            <!-- 库存总量 -->
-		            ifnull(s.stock_quantity,0) as sumQuantity,
-		            <!-- 订单占用量 -->
-		            ifnull(
-		            (
-		                select 
-		                    sum(l.quantity)
-		                from 
-		                    order_item_link as l ,
-		                    item_common_info as it,
-		                    order_info as o
-		                where 
-		                    it.id = l.order_item_id
-		                and 
-		                    l.erp_order_id = o.id
-		                and 
-		                    l.order_item_id = i.id
-		                and 
-		                    o.order_status in (2, 3, 4, 5, 6)
-		                and 
-		                    l.owner_id = #{2}
-		                and 
-		                    it.owner_id = #{2}
-		                and 
-		                    o.owner_id = #{2}
-		            ), 0) as useQuantity,
-		            <!-- 30天销量 -->
-		            ifnull(
-		            (
-		                select 
-		                    SUM(l.quantity)
-		                from 
-		                    order_item_link as l ,
-		                    item_common_info as it,
-		                    order_info as o
-		                where 
-		                    it.id = l.order_item_id
-		                and 
-		                    l.erp_order_id = o.id
-		                and 
-		                    l.order_item_id = i.id
-		                and 
-		                    o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
-		                and 
-		                    (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
-		                and 
-		                    l.owner_id = #{2}
-		                and 
-		                    it.owner_id = #{2}
-		                and 
-		                    o.owner_id = #{2}
-		            ), 0) as salesQuantity,
-		            <!-- 警戒量 -->
-		            ifnull(s.alert_stock, 0) as alertStock
-		        from 
-		            location_item_stock as s  
-		        LEFT join
-		            item_common_info as i
-		        on
-		            s.item_id = i.id
-		        left join 
-                    stocklocation_info as t
-                on 
-                    s.stocklocation_id = t.id
-		        <where>
-		           <!--  s.owner_id = #{2}
-		        and  -->
-		            i.owner_id = #{2}
-		        <if test="param4 != '' and param4 != null">
-		        and
-		            t.warehouse_id = #{3}
-		        </if> 
-		        </where>
-            ) as innerLayer
+        select
+        *,
+        (sumQuantity-useQuantity) as availableQuantity
+        from(
+        select
+        <!-- 商品ID -->
+        i.id,
+        <!-- 商品编码 -->
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        <!-- 商品名称 -->
+        ifnull(i.name, '') as name,
+        <!-- 商品条码 -->
+        ifnull(i.bar_code, '') as barCode,
+        <!-- 商品颜色 -->
+        ifnull(i.color, '') as color,
+        <!-- 商品尺码 -->
+        ifnull(i.size, '') as size,
+        <!-- 商品包装（是否破损，包装完整等） -->
+        ifnull(i.package_condition, '') as packageCondition,
+        <!-- 库存总量 -->
+        ifnull(s.stock_quantity,0) as sumQuantity,
+        <!-- 订单占用量 -->
+        ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0) as useQuantity,
+        <!-- 30天销量 -->
+        ifnull(
+        (
+        select
+        SUM(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6, 7, 8, 9, 10)
+        and
+        (date_sub(curdate(), interval 30 day) &lt;= date(o.gmt_create))
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0) as salesQuantity,
+        <!-- 警戒量 -->
+        ifnull(s.alert_stock, 0) as alertStock
+        from
+        location_item_stock as s
+        LEFT join
+        item_common_info as i
+        on
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
+        <where>
+            <!--  s.owner_id = #{2}
+         and  -->
+            i.owner_id = #{2}
+            <if test="param4 != '' and param4 != null">
+                and
+                t.warehouse_id = #{3}
+            </if>
+        </where>
+        ) as innerLayer
         ) as outerLayer
         where
-            availableQuantity &lt; alertStock
-        limit 
-            #{0}, #{1}
+        availableQuantity &lt; alertStock
+        limit
+        #{0}, #{1}
     </select>
 
     <!-- /**
@@ -296,68 +295,68 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="countItemCommonStockByAlertStock"  resultType="int">
+    <select id="countItemCommonStockByAlertStock" resultType="int">
         select
-            count(*)
+        count(*)
         from (
-            select
-                *,
-                (sumQuantity-useQuantity) as availableQuantity
-            from(
-                select
-                    <!-- 库存总量 -->
-                    ifnull(s.stock_quantity,0) as sumQuantity,
-                    <!-- 订单占用量 -->
-                    ifnull(
-                    (
-                        select
-                            sum(l.quantity)
-                        from
-                            order_item_link as l ,
-                            item_common_info as it,
-                            order_info as o
-                        where
-                            it.id = l.order_item_id
-                        and
-                            l.erp_order_id = o.id
-                        and
-                            l.order_item_id = i.id
-                        and
-                            o.order_status in (2, 3, 4, 5, 6)
-                        and
-                            l.owner_id = #{0}
-                        and
-                            it.owner_id = #{0}
-                        and
-                            o.owner_id = #{0}
-                    ), 0) as useQuantity,
-                    <!-- 警戒量 -->
-                    ifnull(s.alert_stock, 0) as alertStock
-                from
-                    location_item_stock as s
-                LEFT join
-                    item_common_info as i
-                on
-                    s.item_id = i.id
-                left join
-                    stocklocation_info as t
-                on
-                    s.stocklocation_id = t.id
-                <where>
-                    <!-- s.owner_id = #{0}
-                and  -->
-                    i.owner_id = #{0}
-                <if test="param2 != '' and param2 != null">
-		        and
-		            t.warehouse_id = #{1}
-		        </if>
-                </where>
-            ) as innerLayer
+        select
+        *,
+        (sumQuantity-useQuantity) as availableQuantity
+        from(
+        select
+        <!-- 库存总量 -->
+        ifnull(s.stock_quantity,0) as sumQuantity,
+        <!-- 订单占用量 -->
+        ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{0}
+        and
+        it.owner_id = #{0}
+        and
+        o.owner_id = #{0}
+        ), 0) as useQuantity,
+        <!-- 警戒量 -->
+        ifnull(s.alert_stock, 0) as alertStock
+        from
+        location_item_stock as s
+        LEFT join
+        item_common_info as i
+        on
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
+        <where>
+            <!-- s.owner_id = #{0}
+        and  -->
+            i.owner_id = #{0}
+            <if test="param2 != '' and param2 != null">
+                and
+                t.warehouse_id = #{1}
+            </if>
+        </where>
+        ) as innerLayer
         ) as outerLayer
         where
-            availableQuantity &lt; alertStock
+        availableQuantity &lt; alertStock
     </select>
-    
+
     <!-- /**
      * 查询 库存所在的仓库 列表
      * 
@@ -367,7 +366,7 @@
      * @return
      * @author 赵滨
      */ -->
-    <select id="listStockOfWarehouse" 
+    <select id="listStockOfWarehouse"
             resultType="java.util.Map">
 		select
 		    id,
@@ -392,7 +391,7 @@
 		where
 		    owner_id = #{0}
     </select>
-    
+
     <!-- /**
      * 查询 库存信息表
      * 
@@ -402,8 +401,8 @@
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
-     */ -->    
-     <select id="getLocationItemStockByItemCommonId" 
+     */ -->
+    <select id="getLocationItemStockByItemCommonId"
             resultType="com.rongcheng.erp.entity.LocationItemStock">
         select
 		    id,
@@ -434,7 +433,7 @@
 	   
 	       item_id = #{0}
     </select>
-    
+
     <!-- /**
      * 查询 库存信息表
      * 
@@ -444,8 +443,8 @@
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
-     */ -->    
-     <select id="getLocationItemStockByItemlocationId" 
+     */ -->
+    <select id="getLocationItemStockByItemlocationId"
             resultType="com.rongcheng.erp.entity.LocationItemStock">
         select
             id,
@@ -473,7 +472,7 @@
        and
            stocklocation_id = #{2}
     </select>
-    
+
     <!-- /**
      * 保存 库存信息表
      * 
@@ -515,7 +514,7 @@
 		    #{gmtCreate},
 		    #{gmtModified})
     </insert>
-    
+
     <!-- /**
      * 修改 库存信息表
      * 
@@ -525,31 +524,31 @@
      * @return
      * @author 赵滨
      */ -->
-    <update id="modifyLocationItemStock" 
+    <update id="modifyLocationItemStock"
             parameterType="com.rongcheng.erp.entity.LocationItemStock">
         update
-		    location_item_stock
-		set
-		    <!-- id = #{id}, -->
-		    warehouse_id = #{warehouseId},
-		    stocklocation_id = #{stocklocationId},
-		    item_id = #{itemId},
-		    stock_quantity = #{stockQuantity},
-		    alert_stock = #{alertStock},
-		    sendout_status = #{sendoutStatus},
-		    reserved1 = #{reserved1},
-		    note = #{note},
-		    <!-- owner_id = #{ownerId}, -->
-		    operator_id = #{operatorId},
-		    is_authorization = #{authorization},
-		    <!-- gmt_create = #{gmtCreate}, -->
-		    gmt_modified=#{gmtModified}
-		where
-		    id = #{id}
-		and 
-	        owner_id=#{ownerId} 
+        location_item_stock
+        set
+        <!-- id = #{id}, -->
+        warehouse_id = #{warehouseId},
+        stocklocation_id = #{stocklocationId},
+        item_id = #{itemId},
+        stock_quantity = #{stockQuantity},
+        alert_stock = #{alertStock},
+        sendout_status = #{sendoutStatus},
+        reserved1 = #{reserved1},
+        note = #{note},
+        <!-- owner_id = #{ownerId}, -->
+        operator_id = #{operatorId},
+        is_authorization = #{authorization},
+        <!-- gmt_create = #{gmtCreate}, -->
+        gmt_modified=#{gmtModified}
+        where
+        id = #{id}
+        and
+        owner_id=#{ownerId}
     </update>
-    
+
     <!-- /**
      * 移除 库存信息表
      * 
@@ -571,7 +570,7 @@
         and 
             stocklocation_id=#{2}
     </delete>
-    
+
     <!-- /**
      * 移除 库存信息表
      * 
@@ -590,7 +589,7 @@
         and 
             stocklocation_id=#{1}
     </delete>
-    
+
     <!-- /**
      * 查询 库存相关统计
      * @param ownerId 主账号ID
@@ -599,52 +598,52 @@
      * @author 赵滨
      */ -->
     <select id="getItemCommonStockByWarehouseInfoId" resultType="java.util.Map">
-        select 
-            sum(ifnull(s.stock_quantity,0)) as sumQuantity,
-            sum(ifnull(
-            (
-                select 
-                    sum(l.quantity)
-                from 
-                    order_item_link as l ,
-                    item_common_info as it,
-                    order_info as o
-                where 
-                    it.id = l.order_item_id
-                and 
-                    l.erp_order_id = o.id
-                and 
-                    l.order_item_id = i.id
-                and 
-                    o.order_status in (2, 3, 4, 5, 6)
-                and 
-                    l.owner_id = #{0}
-                and 
-                    it.owner_id = #{0}
-                and 
-                    o.owner_id = #{0}
-            ), 0)) as useQuantity
-        from 
-           location_item_stock as s  
+        select
+        sum(ifnull(s.stock_quantity,0)) as sumQuantity,
+        sum(ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{0}
+        and
+        it.owner_id = #{0}
+        and
+        o.owner_id = #{0}
+        ), 0)) as useQuantity
+        from
+        location_item_stock as s
         LEFT join
-           item_common_info as i
+        item_common_info as i
         on
-           s.item_id = i.id
-        left join 
-           stocklocation_info as t
-        on 
-           s.stocklocation_id = t.id
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
         <where>
-           <!-- s.owner_id = #{0}
-        and  -->
-           i.owner_id = #{0}
-        <if test="param2 != '' and param2 != null">
-            and
+            <!-- s.owner_id = #{0}
+         and  -->
+            i.owner_id = #{0}
+            <if test="param2 != '' and param2 != null">
+                and
                 t.warehouse_id = #{1}
-        </if>
+            </if>
         </where>
     </select>
-    
+
     <!-- /**
      * 查询 商品库存库位
      * 
@@ -658,85 +657,85 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="listItemCommonStocklocationByKeywords"  resultType="java.util.Map">
-        select 
-            <!-- 商品ID -->
-            i.id,
-            <!-- 商品编码 -->
-            ifnull(i.erp_item_num, '') as erpItemNum,
-            <!-- 商品名称 -->
-            ifnull(i.name, '') as name,
-            <!-- 商品条码 -->
-            ifnull(i.bar_code, '') as barCode,
-            <!-- 商品颜色 -->
-            ifnull(i.color, '') as color,
-            <!-- 商品尺码 -->
-            ifnull(i.size, '') as size,
-            <!-- 商品包装（是否破损，包装完整等） -->
-            ifnull(i.package_condition, '') as packageCondition,
-            <!-- 库位名称 -->
-            ifnull(t.name, '') as locationName,
-            <!-- 库存总量 -->
-            ifnull(s.stock_quantity,0) as sumQuantity,
-            <!-- 订单占用量 -->
-            ifnull(
-            (
-                select 
-                    sum(l.quantity)
-                from 
-                    order_item_link as l ,
-                    item_common_info as it,
-                    order_info as o
-                where 
-                    it.id = l.order_item_id
-                and 
-                    l.erp_order_id = o.id
-                and 
-                    l.order_item_id = i.id
-                and 
-                    o.order_status in (2, 3, 4, 5, 6)
-                and 
-                    l.owner_id = #{2}
-                and 
-                    it.owner_id = #{2}
-                and 
-                    o.owner_id = #{2}
-            ), 0) as useQuantity
-        from 
-            location_item_stock as s  
+    <select id="listItemCommonStocklocationByKeywords" resultType="java.util.Map">
+        select
+        <!-- 商品ID -->
+        i.id,
+        <!-- 商品编码 -->
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        <!-- 商品名称 -->
+        ifnull(i.name, '') as name,
+        <!-- 商品条码 -->
+        ifnull(i.bar_code, '') as barCode,
+        <!-- 商品颜色 -->
+        ifnull(i.color, '') as color,
+        <!-- 商品尺码 -->
+        ifnull(i.size, '') as size,
+        <!-- 商品包装（是否破损，包装完整等） -->
+        ifnull(i.package_condition, '') as packageCondition,
+        <!-- 库位名称 -->
+        ifnull(t.name, '') as locationName,
+        <!-- 库存总量 -->
+        ifnull(s.stock_quantity,0) as sumQuantity,
+        <!-- 订单占用量 -->
+        ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0) as useQuantity
+        from
+        location_item_stock as s
         LEFT join
-            item_common_info as i
+        item_common_info as i
         on
-            s.item_id = i.id
-        left join 
-            stocklocation_info as t
-        on 
-            s.stocklocation_id = t.id
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
         <where>
             <!-- s.owner_id = #{2}
         and  -->
             i.owner_id = #{2}
-        <if test="param4 != '' and param4 != null"> 
-        and 
-            (
-            i.erp_item_num like concat('%', #{3}, '%')
-        or 
-            i.name like concat('%', #{3}, '%')
-        or 
-            i.bar_code like concat('%', #{3}, '%')
-        or
-            t.name like concat('%', #{3}, '%')
-            )
-        </if>
-        <if test="param5 != '' and param5 != null">
-        and
-            t.warehouse_id = #{4}
-        </if> 
+            <if test="param4 != '' and param4 != null">
+                and
+                (
+                i.erp_item_num like concat('%', #{3}, '%')
+                or
+                i.name like concat('%', #{3}, '%')
+                or
+                i.bar_code like concat('%', #{3}, '%')
+                or
+                t.name like concat('%', #{3}, '%')
+                )
+            </if>
+            <if test="param5 != '' and param5 != null">
+                and
+                t.warehouse_id = #{4}
+            </if>
         </where>
-        limit 
-            #{0}, #{1}
+        limit
+        #{0}, #{1}
     </select>
-    
+
     <!-- /**
      * 查询 商品库存库位 条数
      * 
@@ -748,43 +747,43 @@
      * @return list 结果集合
      * @author 赵滨
      */ -->
-    <select id="countItemCommonStocklocationByKeywords"  resultType="int">
-        select 
-            <!-- 库存状态条数 -->
-            count(i.id)
-        from 
-            location_item_stock as s  
+    <select id="countItemCommonStocklocationByKeywords" resultType="int">
+        select
+        <!-- 库存状态条数 -->
+        count(i.id)
+        from
+        location_item_stock as s
         LEFT join
-            item_common_info as i
+        item_common_info as i
         on
-            s.item_id = i.id
-        left join 
-            stocklocation_info as t
-        on 
-            s.stocklocation_id = t.id
+        s.item_id = i.id
+        left join
+        stocklocation_info as t
+        on
+        s.stocklocation_id = t.id
         <where>
             <!-- s.owner_id = #{0}
         and  -->
             i.owner_id = #{0}
-        <if test="param2 != '' and param2 != null"> 
-        and 
-            (
-            i.erp_item_num like concat('%', #{1}, '%')
-        or 
-            i.name like concat('%', #{1}, '%')
-        or 
-            i.bar_code like concat('%', #{1}, '%')
-        or
-            t.name like concat('%', #{1}, '%')
-            )
-        </if> 
-        <if test="param3 != '' and param3 != null">
-        and
-            t.warehouse_id = #{2}
-        </if> 
+            <if test="param2 != '' and param2 != null">
+                and
+                (
+                i.erp_item_num like concat('%', #{1}, '%')
+                or
+                i.name like concat('%', #{1}, '%')
+                or
+                i.bar_code like concat('%', #{1}, '%')
+                or
+                t.name like concat('%', #{1}, '%')
+                )
+            </if>
+            <if test="param3 != '' and param3 != null">
+                and
+                t.warehouse_id = #{2}
+            </if>
         </where>
     </select>
-    
+
     <!-- /**
      * 查询 仓库列表
      * 
@@ -799,49 +798,49 @@
      */ -->
     <select id="listWarehouseInfoByKeywords" resultType="com.rongcheng.erp.entity.WarehouseInfo">
         select
-		    id,
-		    user_warehouse_code as userWarehouseCode,
-		    warehouse_name as warehouseName,
-		    consignor_name as consignorName,
-		    consignor_tel as consignorTel,
-		    consignor_mobile as consignorMobile,
-		    region_id as regionId,
-		    user_address as userAddress,
-		    warehouse_status as warehouseStatus,
-		    connection_code as connectionCode,
-		    note,
-		    owner_id as ownerId,
-		    operator_id as operatorId,
-		    is_authorized as authorized,
-		    gmt_create as gmtCreate,
-		    gmt_modified as gmtModified
-		from
-		    warehouse_info
-		<where>
+        id,
+        user_warehouse_code as userWarehouseCode,
+        warehouse_name as warehouseName,
+        consignor_name as consignorName,
+        consignor_tel as consignorTel,
+        consignor_mobile as consignorMobile,
+        region_id as regionId,
+        user_address as userAddress,
+        warehouse_status as warehouseStatus,
+        connection_code as connectionCode,
+        note,
+        owner_id as ownerId,
+        operator_id as operatorId,
+        is_authorized as authorized,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified
+        from
+        warehouse_info
+        <where>
             owner_id = #{0}
-	        <if test="param3 != '' and param3 != null"> 
-	        and 
-	            (
-	            user_warehouse_code like concat('%', #{2}, '%')
-	        or 
-	            warehouse_name like concat('%', #{2}, '%')
-	            )
-	        </if>
-	        
-	        <if test="param4 == false">
-	        and
-	            warehouse_status = #{1}
-	        </if>
-	        
-	        <if test="param4 == true ">
-	        
-	        </if> 
-        
-        </where> 
-        limit 
-            #{4}, #{5}
+            <if test="param3 != '' and param3 != null">
+                and
+                (
+                user_warehouse_code like concat('%', #{2}, '%')
+                or
+                warehouse_name like concat('%', #{2}, '%')
+                )
+            </if>
+
+            <if test="param4 == false">
+                and
+                warehouse_status = #{1}
+            </if>
+
+            <if test="param4 == true ">
+
+            </if>
+
+        </where>
+        limit
+        #{4}, #{5}
     </select>
-    
+
     <!-- /**
      * 查询 仓库列表 条数
      * 
@@ -856,32 +855,32 @@
      */ -->
     <select id="countWarehouseInfoByKeywords" resultType="int">
         select
-            count(id)
+        count(id)
         from
-            warehouse_info
+        warehouse_info
         <where>
             owner_id = #{0}
-            <if test="param3 != '' and param3 != null"> 
-            and 
+            <if test="param3 != '' and param3 != null">
+                and
                 (
                 user_warehouse_code like concat('%', #{2}, '%')
-            or 
+                or
                 warehouse_name like concat('%', #{2}, '%')
                 )
             </if>
-            
+
             <if test="param4 == false">
-            and
+                and
                 warehouse_status = #{1}
             </if>
-            
+
             <if test="param4 == true ">
-            
-            </if> 
-        
-        </where> 
+
+            </if>
+
+        </where>
     </select>
-    
+
     <!-- /**
      * 保存 仓库列表
      * 
@@ -928,7 +927,7 @@
 		    #{gmtCreate},
 		    #{gmtModified})
     </insert>
-    
+
     <!-- /**
      * 修改 仓库列表
      * 
@@ -938,33 +937,33 @@
      * @return
      * @author 赵滨
      */ -->
-     <update id="modifyWarehouseInfo"
+    <update id="modifyWarehouseInfo"
             parameterType="com.rongcheng.erp.entity.WarehouseInfo">
         update
-	        warehouse_info
-		set
-		    <!-- id = #{id}, -->
-		    user_warehouse_code = #{userWarehouseCode},
-		    warehouse_name = #{warehouseName},
-		    consignor_name = #{consignorName},
-		    consignor_tel = #{consignorTel},
-		    consignor_mobile = #{consignorMobile},
-		    region_id = #{regionId},
-		    user_address = #{userAddress},
-		    warehouse_status = #{warehouseStatus},
-		    connection_code = #{connectionCode},
-		    note = #{note},
-		    <!-- owner_id = #{ownerId}, -->
-		    operator_id = #{operatorId},
-		    is_authorized = #{authorized},
-		    <!-- gmt_create = #{gmtCreate}, -->
-		    gmt_modified = #{gmtModified}
-		where
-		    id = #{id}
-        and 
-            owner_id=#{ownerId} 
-    </update> 
-    
+        warehouse_info
+        set
+        <!-- id = #{id}, -->
+        user_warehouse_code = #{userWarehouseCode},
+        warehouse_name = #{warehouseName},
+        consignor_name = #{consignorName},
+        consignor_tel = #{consignorTel},
+        consignor_mobile = #{consignorMobile},
+        region_id = #{regionId},
+        user_address = #{userAddress},
+        warehouse_status = #{warehouseStatus},
+        connection_code = #{connectionCode},
+        note = #{note},
+        <!-- owner_id = #{ownerId}, -->
+        operator_id = #{operatorId},
+        is_authorized = #{authorized},
+        <!-- gmt_create = #{gmtCreate}, -->
+        gmt_modified = #{gmtModified}
+        where
+        id = #{id}
+        and
+        owner_id=#{ownerId}
+    </update>
+
     <!-- /**
      * 获取 仓库列表
      * 
@@ -1001,7 +1000,7 @@
 		and
 		    owner_id = #{1}
     </select>
-    
+
     <!-- /**
      * 获取 库位列表
      * 
@@ -1015,39 +1014,39 @@
      * @author 赵滨
      */ -->
     <select id="listStocklocationInfoByCode" resultType="com.rongcheng.erp.entity.StocklocationInfo">
-        
+
         select
-		    id,
-		    warehouse_id as warehouseId,
-		    user_stocklocation_code as userStocklocationCode,
-		    name,
-		    stocklocation_status as stocklocationStatus,
-		    connection_code as connectionCode,
-		    distribution_region as distributionRegion,
-		    note,
-		    owner_id as ownerId,
-		    operator_id as operatorId,
-		    is_authorized as authorized,
-		    gmt_create as gmtCreate,
-		    gmt_modified as gmtModified
-		from
-		    stocklocation_info
-		<where>
-		    owner_id = #{1}
-		    <if test="param1 != '' and param1 != null">
-                and 
-		            (
-		            user_stocklocation_code like concat('%', #{0}, '%')
-		        or 
-		            name like concat('%', #{0}, '%')
-		            )
+        id,
+        warehouse_id as warehouseId,
+        user_stocklocation_code as userStocklocationCode,
+        name,
+        stocklocation_status as stocklocationStatus,
+        connection_code as connectionCode,
+        distribution_region as distributionRegion,
+        note,
+        owner_id as ownerId,
+        operator_id as operatorId,
+        is_authorized as authorized,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified
+        from
+        stocklocation_info
+        <where>
+            owner_id = #{1}
+            <if test="param1 != '' and param1 != null">
+                and
+                (
+                user_stocklocation_code like concat('%', #{0}, '%')
+                or
+                name like concat('%', #{0}, '%')
+                )
             </if>
-		</where>
-		limit
-		    #{2}, #{3}
-        
+        </where>
+        limit
+        #{2}, #{3}
+
     </select>
-    
+
     <!-- /**
      * 获取 库位列表 条数
      * 
@@ -1059,25 +1058,25 @@
      * @author 赵滨
      */ -->
     <select id="countStocklocationInfoByCode" resultType="int">
-        
+
         select
-            count(id)
+        count(id)
         from
-            stocklocation_info
+        stocklocation_info
         <where>
             owner_id = #{1}
             <if test="param1 != '' and param1 != null">
-                and 
-                    (
-                    user_stocklocation_code like concat('%', #{0}, '%')
-                or 
-                    name like concat('%', #{0}, '%')
-                    )
+                and
+                (
+                user_stocklocation_code like concat('%', #{0}, '%')
+                or
+                name like concat('%', #{0}, '%')
+                )
             </if>
         </where>
-        
+
     </select>
-    
+
     <!-- /**
      * 获取 库位列表 单条
      * 
@@ -1112,14 +1111,14 @@
             owner_id = #{1}
         
     </select>
-    
+
     <!-- /**
      * 保存 仓库库位
      * @param stocklocationInfo 库位
      * @return
      * @author 赵滨
      */ -->
-    <insert id="saveStocklocationInfoByCode" useGeneratedKeys="true" keyProperty="id" 
+    <insert id="saveStocklocationInfoByCode" useGeneratedKeys="true" keyProperty="id"
             parameterType="com.rongcheng.erp.entity.StocklocationInfo">
         insert into stocklocation_info(
 	        id,
@@ -1150,37 +1149,37 @@
 		    #{gmtCreate},
 		    #{gmtModified})
     </insert>
-    
+
     <!-- /**
      * 修改 仓库库位
      * @param stocklocationInfo 库位
      * @return
      * @author 赵滨
      */ -->
-    <update id="modifyStocklocationInfoByCode" 
+    <update id="modifyStocklocationInfoByCode"
             parameterType="com.rongcheng.erp.entity.StocklocationInfo">
         update
-		    stocklocation_info
-		set
-		    <!-- id = #{id}, -->
-		    warehouse_id = #{warehouseId},
-		    user_stocklocation_code = #{userStocklocationCode},
-		    name = #{name},
-		    stocklocation_status = #{stocklocationStatus},
-		    connection_code = #{connectionCode},
-		    distribution_region = #{distributionRegion},
-		    note = #{note},
-		    <!-- owner_id = #{ownerId}, -->
-		    operator_id = #{operatorId},
-		    is_authorized = #{authorized},
-		    <!-- gmt_create = #{gmtCreate}, -->
-		    gmt_modified = #{gmtModified}
+        stocklocation_info
+        set
+        <!-- id = #{id}, -->
+        warehouse_id = #{warehouseId},
+        user_stocklocation_code = #{userStocklocationCode},
+        name = #{name},
+        stocklocation_status = #{stocklocationStatus},
+        connection_code = #{connectionCode},
+        distribution_region = #{distributionRegion},
+        note = #{note},
+        <!-- owner_id = #{ownerId}, -->
+        operator_id = #{operatorId},
+        is_authorized = #{authorized},
+        <!-- gmt_create = #{gmtCreate}, -->
+        gmt_modified = #{gmtModified}
         where
-            id = #{id}
-        and 
-            owner_id = #{ownerId} 
+        id = #{id}
+        and
+        owner_id = #{ownerId}
     </update>
-    
+
     <!-- /**
      * 删除 仓库库位
      * @param id 栏目ID
@@ -1196,7 +1195,7 @@
         and
             owner_id=#{1} 
     </delete>
-    
+
     <!-- /**
      * 获取商品内容 根据 库位ID
      * @param locationId 库位ID
@@ -1258,7 +1257,7 @@
 		and 
 		    s.owner_id = #{1}
     </select>
-    
+
     <!-- /**
      * 获取商品内容 根据 关键字
      * @param keywords 关键字
@@ -1270,59 +1269,59 @@
      */ -->
     <select id="listItemByKeywords" resultType="com.rongcheng.erp.entity.ItemCommonInfo">
         select
-	        id,
-	        erp_item_num as erpItemNum,
-	        name,
-	        short_name as shortName,
-	        platform_id as platformId,
-	        platform_item_sku as platformItemSku,
-	        user_shop_code as userShopCode,
-	        user_item_code as userItemCode,
-	        warehouse_id as warehouseId,
-	        image1,
-	        category,
-	        brand,
-	        series,
-	        color,
-	        size,
-	        normal_price as normalPrice,
-	        cost_price as costPrice,
-	        promotion_price as promotionPrice,
-	        bar_code as barCode,
-	        package_condition as packageCondition,
-	        user_classification as userClassification,
-	        is_presell as isPresell,
-	        is_commission_sell as isCommissionSell,
-	        is_gift as isGift,
-	        bar_code_image as barCodeImage,
-	        qr_code_image as qrCodeImage,
-	        reserved1,
-	        note,
-	        is_authorized as isAuthorized,
-	        item_secret_key as itemSecretKey,
-	        owner_id as ownerId,
-	        shop_id as shopId,
-	        gmt_create as gmtCreate,
-	        gmt_modified as gmtModified,
-	        operator_id as operatorId,
-	        spec
-	    from
-	        item_common_info
-	    <where>
-	       owner_id = #{1}
-	       <if test="param1 != '' and param1 != null">
-	       and 
-	           (
-	           erp_item_num like concat('%', #{0}, '%')
-	       or 
-	           name like concat('%', #{0}, '%')
-	           )
-	       </if>
-	    </where>
-	    limit
-	       #{2}, #{3}
+        id,
+        erp_item_num as erpItemNum,
+        name,
+        short_name as shortName,
+        platform_id as platformId,
+        platform_item_sku as platformItemSku,
+        user_shop_code as userShopCode,
+        user_item_code as userItemCode,
+        warehouse_id as warehouseId,
+        image1,
+        category,
+        brand,
+        series,
+        color,
+        size,
+        normal_price as normalPrice,
+        cost_price as costPrice,
+        promotion_price as promotionPrice,
+        bar_code as barCode,
+        package_condition as packageCondition,
+        user_classification as userClassification,
+        is_presell as isPresell,
+        is_commission_sell as isCommissionSell,
+        is_gift as isGift,
+        bar_code_image as barCodeImage,
+        qr_code_image as qrCodeImage,
+        reserved1,
+        note,
+        is_authorized as isAuthorized,
+        item_secret_key as itemSecretKey,
+        owner_id as ownerId,
+        shop_id as shopId,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified,
+        operator_id as operatorId,
+        spec
+        from
+        item_common_info
+        <where>
+            owner_id = #{1}
+            <if test="param1 != '' and param1 != null">
+                and
+                (
+                erp_item_num like concat('%', #{0}, '%')
+                or
+                name like concat('%', #{0}, '%')
+                )
+            </if>
+        </where>
+        limit
+        #{2}, #{3}
     </select>
-    
+
     <!-- /**
      * 获取商品 条数 根据 关键字
      * @param keywords 关键字
@@ -1332,22 +1331,22 @@
      */ -->
     <select id="countItemByKeywords" resultType="int">
         select
-            count(id)
+        count(id)
         from
-            item_common_info
+        item_common_info
         <where>
-           owner_id = #{1}
-           <if test="param1 != '' and param1 != null">
-           and 
-               (
-               erp_item_num like concat('%', #{0}, '%')
-           or 
-               name like concat('%', #{0}, '%')
-               )
-           </if>
+            owner_id = #{1}
+            <if test="param1 != '' and param1 != null">
+                and
+                (
+                erp_item_num like concat('%', #{0}, '%')
+                or
+                name like concat('%', #{0}, '%')
+                )
+            </if>
         </where>
     </select>
-    
+
     <!-- /**
      * 获取商品 内容  根据 商品ID数组
      * @param locationId 商品ID数组
@@ -1358,52 +1357,52 @@
     List<ItemCommonInfo> listItemByItemIds(Map<String, Object> params); -->
     <select id="listItemByItemIds" resultType="com.rongcheng.erp.entity.ItemCommonInfo">
         select
-            id,
-            erp_item_num as erpItemNum,
-            name,
-            short_name as shortName,
-            platform_id as platformId,
-            platform_item_sku as platformItemSku,
-            user_shop_code as userShopCode,
-            user_item_code as userItemCode,
-            warehouse_id as warehouseId,
-            image1,
-            category,
-            brand,
-            series,
-            color,
-            size,
-            normal_price as normalPrice,
-            cost_price as costPrice,
-            promotion_price as promotionPrice,
-            bar_code as barCode,
-            package_condition as packageCondition,
-            user_classification as userClassification,
-            is_presell as isPresell,
-            is_commission_sell as isCommissionSell,
-            is_gift as isGift,
-            bar_code_image as barCodeImage,
-            qr_code_image as qrCodeImage,
-            reserved1,
-            note,
-            is_authorized as isAuthorized,
-            item_secret_key as itemSecretKey,
-            owner_id as ownerId,
-            shop_id as shopId,
-            gmt_create as gmtCreate,
-            gmt_modified as gmtModified,
-            operator_id as operatorId,
-            spec
+        id,
+        erp_item_num as erpItemNum,
+        name,
+        short_name as shortName,
+        platform_id as platformId,
+        platform_item_sku as platformItemSku,
+        user_shop_code as userShopCode,
+        user_item_code as userItemCode,
+        warehouse_id as warehouseId,
+        image1,
+        category,
+        brand,
+        series,
+        color,
+        size,
+        normal_price as normalPrice,
+        cost_price as costPrice,
+        promotion_price as promotionPrice,
+        bar_code as barCode,
+        package_condition as packageCondition,
+        user_classification as userClassification,
+        is_presell as isPresell,
+        is_commission_sell as isCommissionSell,
+        is_gift as isGift,
+        bar_code_image as barCodeImage,
+        qr_code_image as qrCodeImage,
+        reserved1,
+        note,
+        is_authorized as isAuthorized,
+        item_secret_key as itemSecretKey,
+        owner_id as ownerId,
+        shop_id as shopId,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified,
+        operator_id as operatorId,
+        spec
         from
-            item_common_info
-        <trim prefix="WHERE" prefixOverrides="AND"> 
+        item_common_info
+        <trim prefix="WHERE" prefixOverrides="AND">
             owner_id = #{ownerId}
             <if test="itemIds!=null and itemIds.length!=0">and id IN
                 <foreach collection="itemIds" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
-        </trim> 
+        </trim>
     </select>
 
     <!--/**
@@ -1420,86 +1419,86 @@
     * @return list 结果集合
     * @author 赵滨
     */-->
-    <select id="listItemCommonSyncByKeywords"  resultType="java.util.Map">
+    <select id="listItemCommonSyncByKeywords" resultType="java.util.Map">
         select
-            *,
-            (sumQuantity-useQuantity) as availableQuantity /*--可用量*/
+        *,
+        (sumQuantity-useQuantity) as availableQuantity /*--可用量*/
         from(
-            select
-                /* 商品ID */
-                i.id,
-                /* 商品编码 */
-                ifnull(i.erp_item_num, '') as erpItemNum,
-                /* 商品名称 */
-                ifnull(i.name, '') as name,
-                /* 商品条码 */
-                ifnull(i.bar_code, '') as barCode,
-                /* 商品颜色 */
-                ifnull(i.color, '') as color,
-                /* 商品尺码 */
-                ifnull(i.size, '') as size,
-                /* 商品包装（是否破损，包装完整等） */
-                ifnull(i.package_condition, '') as packageCondition,
-                /* 库存总量 */
-                ifnull(s.stock_quantity,0) as sumQuantity,
---                 s.stock_quantity as sumQuantity,
-                /* 订单占用量 */
-                ifnull(
-                    (
-                    select
-                        sum(l.quantity)
-                    from
-                        order_item_link as l ,
-                        item_common_info as it,
-                        order_info as o
-                    where
-                        it.id = l.order_item_id
-                        and
-                        l.erp_order_id = o.id
-                        and
-                        l.order_item_id = i.id
-                        and
-                        o.order_status in (2, 3, 4, 5, 6)
-                        and
-                        l.owner_id = #{2}
-                        and
-                        it.owner_id = #{2}
-                        and
-                        o.owner_id = #{2}
-                    ), 0) as useQuantity,
-                /*库存自动同步状况（开关键）*/
-                ifnull((select max(p.auto_synchron)
-                    from platform_erp_link as p
-                    where p.item_id = i.id
-                    and p.owner_id = #{2}
-                    and p.auto_synchron = 1),0) as autoSynchron
-            from
-                /*20.erp专用-库位商品库存关联表*/
-                location_item_stock as s
-            left join
-                /*1.系统商品信息表1（高频使用表）item_common_info*/
-                item_common_info as i
-            on
-                s.item_id = i.id
-            where
-                i.owner_id = #{2}
-                and
-                s.owner_id = #{2}
-                <if test="param4 != '' and param4 != null">
-                    and
-                    (
-                    i.erp_item_num like concat('%', #{3}, '%')
-                    or
-                    i.name like concat('%', #{3}, '%')
-                    or
-                    i.bar_code like concat('%', #{3}, '%')
-                    )
-                </if>
-            GROUP BY s.item_id
-            ORDER BY i.id
+        select
+        /* 商品ID */
+        i.id,
+        /* 商品编码 */
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        /* 商品名称 */
+        ifnull(i.name, '') as name,
+        /* 商品条码 */
+        ifnull(i.bar_code, '') as barCode,
+        /* 商品颜色 */
+        ifnull(i.color, '') as color,
+        /* 商品尺码 */
+        ifnull(i.size, '') as size,
+        /* 商品包装（是否破损，包装完整等） */
+        ifnull(i.package_condition, '') as packageCondition,
+        /* 库存总量 */
+        sum(ifnull(s.stock_quantity,0)) as sumQuantity,
+        -- s.stock_quantity as sumQuantity,
+        /* 订单占用量 */
+        sum(ifnull(
+        (
+        select
+        sum(l.quantity)
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = i.id
+        and
+        o.order_status in (2, 3, 4, 5, 6)
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+        ), 0)) as useQuantity,
+        /*库存自动同步状况（开关键）*/
+        ifnull((select max(p.auto_synchron)
+        from platform_erp_link as p
+        where p.item_id = i.id
+        and p.owner_id = #{2}
+        and p.auto_synchron = 1),0) as autoSynchron
+        from
+        /*20.erp专用-库位商品库存关联表*/
+        location_item_stock as s
+        left join
+        /*1.系统商品信息表1（高频使用表）item_common_info*/
+        item_common_info as i
+        on
+        s.item_id = i.id
+        where
+        i.owner_id = #{2}
+        and
+        s.owner_id = #{2}
+        <if test="param4 != '' and param4 != null">
+            and
+            (
+            i.erp_item_num like concat('%', #{3}, '%')
+            or
+            i.name like concat('%', #{3}, '%')
+            or
+            i.bar_code like concat('%', #{3}, '%')
+            )
+        </if>
+        GROUP BY s.item_id
+        ORDER BY i.id
         ) as innerLayer
         <if test="param6 == false">
-        where
+            where
             autoSynchron = #{4}
         </if>
         limit #{0}, #{1}
@@ -1518,56 +1517,56 @@
     * @return list 结果集合
     * @author 赵滨
     */-->
-    <select id="countItemCommonSyncByKeywords"  resultType="int">
+    <select id="countItemCommonSyncByKeywords" resultType="int">
         select
-            count(*)
+        count(*)
         from(
-            select
-                /*库存自动同步状况（开关键）*/
-                ifnull((select max(p.auto_synchron)
-                from platform_erp_link as p
-                where p.item_id = i.id
-                and p.owner_id = #{0}
-                and p.auto_synchron = 1),0) as autoSynchron
-            from
-                /*1.系统商品信息表1（高频使用表）item_common_info*/
-                item_common_info as i
-            left join
-                /*20.erp专用-库位商品库存关联表*/
-                location_item_stock as s
-            on
-                s.item_id = i.id
-            where
-                i.owner_id = #{0}
-                and
-                s.owner_id = #{0}
-                <if test="param2 != '' and param2 != null">
-                    and
-                    (
-                    i.erp_item_num like concat('%', #{1}, '%')
-                    or
-                    i.name like concat('%', #{1}, '%')
-                    or
-                    i.bar_code like concat('%', #{1}, '%')
-                    )
-                </if>
-            GROUP BY s.item_id
-            ORDER BY i.id
+        select
+        /*库存自动同步状况（开关键）*/
+        ifnull((select max(p.auto_synchron)
+        from platform_erp_link as p
+        where p.item_id = i.id
+        and p.owner_id = #{0}
+        and p.auto_synchron = 1),0) as autoSynchron
+        from
+        /*1.系统商品信息表1（高频使用表）item_common_info*/
+        item_common_info as i
+        left join
+        /*20.erp专用-库位商品库存关联表*/
+        location_item_stock as s
+        on
+        s.item_id = i.id
+        where
+        i.owner_id = #{0}
+        and
+        s.owner_id = #{0}
+        <if test="param2 != '' and param2 != null">
+            and
+            (
+            i.erp_item_num like concat('%', #{1}, '%')
+            or
+            i.name like concat('%', #{1}, '%')
+            or
+            i.bar_code like concat('%', #{1}, '%')
+            )
+        </if>
+        GROUP BY s.item_id
+        ORDER BY i.id
         ) as innerLayer
         <if test="param4 == false">
-        where
+            where
             autoSynchron = #{2}
         </if>
     </select>
 
-   <!-- /**
-     * 查询系统商品对应关系关联表
-     * @param itemId 商品ID
-     * @param bindId 关联ID
-     * @param ownerId 主账号ID
-     * @return
-     * @author 赵滨
-     */-->
+    <!-- /**
+      * 查询系统商品对应关系关联表
+      * @param itemId 商品ID
+      * @param bindId 关联ID
+      * @param ownerId 主账号ID
+      * @return
+      * @author 赵滨
+      */-->
     <select id="listPlatformErpLinkShopWarehouseInfo"
             resultType="com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo">
     SELECT
@@ -1603,7 +1602,7 @@
       AND
       si.owner_id = #{1}
       AND pel.item_id = #{0}
-    GROUP BY si.name
+    GROUP BY si.id
     </select>
 
     <!--/**
@@ -1613,10 +1612,12 @@
     * @return
     * @author 赵滨
     */-->
-    <select id="listItemWarehouseStockLocation"  resultType="java.util.Map">
+    <select id="listItemWarehouseStockLocation" resultType="java.util.Map">
         SELECT
           lis.id,
           lis.item_id as itemId,
+          lis.warehouse_id as warehouseId,
+          lis.stocklocation_id as stocklocationId,
           ifnull(wi.warehouse_name, '') as warehouseName,
           ifnull(si.name, '') as stocklocationName
         FROM location_item_stock AS lis
@@ -1636,61 +1637,61 @@
      * @return row 行数
      * @author 赵滨
      */-->
-    <update id="updatePlatformErpLink" parameterType="com.rongcheng.erp.entity.PlatformErpLink" >
+    <update id="updatePlatformErpLink" parameterType="com.rongcheng.erp.entity.PlatformErpLink">
         update platform_erp_link
-        <set >
-            <if test="itemId != null" >
+        <set>
+            <if test="itemId != null">
                 item_id = #{itemId},
             </if>
-            <if test="platformId != null" >
+            <if test="platformId != null">
                 platform_id = #{platformId},
             </if>
-            <if test="shopId != null" >
+            <if test="shopId != null">
                 shop_id = #{shopId},
             </if>
-            <if test="platformItemSku != null" >
+            <if test="platformItemSku != null">
                 platform_item_sku = #{platformItemSku},
             </if>
-            <if test="warehouseId != null" >
+            <if test="warehouseId != null">
                 warehouse_id = #{warehouseId},
             </if>
-            <if test="stocklocationId != null" >
+            <if test="stocklocationId != null">
                 stocklocation_id = #{stocklocationId},
             </if>
-            <if test="autoSynchron != null" >
+            <if test="autoSynchron != null">
                 auto_synchron = #{autoSynchron},
             </if>
-            <if test="autoOnsale != null" >
+            <if test="autoOnsale != null">
                 auto_onsale = #{autoOnsale},
             </if>
-            <if test="synchronException != null" >
+            <if test="synchronException != null">
                 synchron_exception = #{synchronException},
             </if>
-            <if test="availableStock != null" >
+            <if test="availableStock != null">
                 available_stock = #{availableStock},
             </if>
-            <if test="allocationRatio != null" >
+            <if test="allocationRatio != null">
                 allocation_ratio = #{allocationRatio},
             </if>
-            <if test="remnantStock != null" >
+            <if test="remnantStock != null">
                 remnant_stock = #{remnantStock},
             </if>
-            <if test="reserved1 != null" >
+            <if test="reserved1 != null">
                 reserved1 = #{reserved1},
             </if>
-            <if test="note != null" >
+            <if test="note != null">
                 note = #{note},
             </if>
-            <if test="operatorId != null" >
+            <if test="operatorId != null">
                 operator_id = #{operatorId},
             </if>
-            <if test="authorized != null" >
+            <if test="authorized != null">
                 is_authorized = #{authorized},
             </if>
-            <if test="gmtCreate != null" >
+            <if test="gmtCreate != null">
                 gmt_create = #{gmtCreate},
             </if>
-            <if test="gmtModified != null" >
+            <if test="gmtModified != null">
                 gmt_modified = #{gmtModified},
             </if>
         </set>
@@ -1703,7 +1704,7 @@
     * @return
     * @author 赵滨
     */-->
-    <select id="listWarehouseInfo"  resultType="com.rongcheng.erp.entity.WarehouseInfo">
+    <select id="listWarehouseInfo" resultType="com.rongcheng.erp.entity.WarehouseInfo">
         select
             id,
             user_warehouse_code as userWarehouseCode,
@@ -1733,7 +1734,7 @@
     * @return
     * @author 赵滨
     */-->
-    <select id="listStocklocationInfo"  resultType="com.rongcheng.erp.entity.StocklocationInfo">
+    <select id="listStocklocationInfo" resultType="com.rongcheng.erp.entity.StocklocationInfo">
         select
             id,
             warehouse_id as warehouseId,
@@ -1765,76 +1766,76 @@
     * @return listMap 云仓商品配对
     * @author 赵滨
     */-->
-    <select id="listLocationItemStockAndItemByKeywords"  resultType="java.util.Map">
+    <select id="listLocationItemStockAndItemByKeywords" resultType="java.util.Map">
         SELECT
-            <!--关联表ID-->
-            l.id,
-            <!--商品编码-->
-            ifnull(i.erp_item_num, '') as erpItemNum,
-            <!--商品名称-->
-            ifnull(i.name, '') as name,
-            <!--商品条码-->
-            ifnull(i.bar_code, '') as barCode,
-            <!--商品颜色-->
-            ifnull(i.color, '') as color,
-            <!--商品尺码-->
-            ifnull(i.size, '') as size,
-            <!--仓库-->
-            ifnull(w.warehouse_name, '') as warehouseName,
-            <!--库位-->
-            ifnull(s.name, '') as stocklocationName,
-            <!--库存总量-->
-            ifnull(l.stock_quantity,0) as sumQuantity,
-            <!--关联码-->
-            ifnull(l.bind_id,0) as bindId
+        <!--关联表ID-->
+        l.id,
+        <!--商品编码-->
+        ifnull(i.erp_item_num, '') as erpItemNum,
+        <!--商品名称-->
+        ifnull(i.name, '') as name,
+        <!--商品条码-->
+        ifnull(i.bar_code, '') as barCode,
+        <!--商品颜色-->
+        ifnull(i.color, '') as color,
+        <!--商品尺码-->
+        ifnull(i.size, '') as size,
+        <!--仓库-->
+        ifnull(w.warehouse_name, '') as warehouseName,
+        <!--库位-->
+        ifnull(s.name, '') as stocklocationName,
+        <!--库存总量-->
+        ifnull(l.stock_quantity,0) as sumQuantity,
+        <!--关联码-->
+        ifnull(l.bind_id,0) as bindId
         FROM
-            location_item_stock as l
-            LEFT JOIN
-            warehouse_info as w
-            ON
-            l.warehouse_id = w.id
-            LEFT JOIN
-            stocklocation_info as s
-            ON
-            l.stocklocation_id = s.id
-            LEFT JOIN
-            item_common_info as i
-            ON
-            l.item_id = i.id
+        location_item_stock as l
+        LEFT JOIN
+        warehouse_info as w
+        ON
+        l.warehouse_id = w.id
+        LEFT JOIN
+        stocklocation_info as s
+        ON
+        l.stocklocation_id = s.id
+        LEFT JOIN
+        item_common_info as i
+        ON
+        l.item_id = i.id
         WHERE
         l.owner_id = #{0}
         AND l.bind_id IN
         (
-            SELECT bind_id FROM
+        SELECT bind_id FROM
+        (
+        SELECT lson.bind_id FROM location_item_stock as lson, item_common_info as ison
+        WHERE lson.owner_id = #{0}
+        AND lson.bind_id IS NOT NULL
+        AND lson.bind_id != ""
+        AND lson.item_id = ison.id
+        <if test="param2 != '' and param2 != null">
+            AND
             (
-                SELECT lson.bind_id FROM location_item_stock as lson, item_common_info as ison
-                WHERE lson.owner_id = #{0}
-                AND lson.bind_id IS NOT NULL
-                AND lson.bind_id != ""
-                AND lson.item_id = ison.id
-                <if test="param2 != '' and param2 != null">
-                AND
-                    (
-                    ison.erp_item_num like concat('%', #{1}, '%')
-                    or
-                    ison.name like concat('%',#{1}, '%')
-                    or
-                    ison.bar_code like concat('%',#{1}, '%')
-                    )
-                </if>
+            ison.erp_item_num like concat('%', #{1}, '%')
+            or
+            ison.name like concat('%',#{1}, '%')
+            or
+            ison.bar_code like concat('%',#{1}, '%')
+            )
+        </if>
 
-                <if test="param3 != '' and param3 != null">
-                AND lson.warehouse_id = #{2}
-                </if>
+        <if test="param3 != '' and param3 != null">
+            AND lson.warehouse_id = #{2}
+        </if>
 
-                <if test="param4 != '' and param4 != null">
-                AND lson.stocklocation_id = #{3}
-                </if>
+        <if test="param4 != '' and param4 != null">
+            AND lson.stocklocation_id = #{3}
+        </if>
 
-                GROUP BY lson.bind_id
-                ORDER BY lson.id
-                LIMIT #{4},#{5}
-            ) as tableson
+        GROUP BY lson.bind_id
+        ORDER BY lson.id
+        LIMIT #{4},#{5}
+        ) as tableson
         )
         ORDER BY l.bind_id
     </select>
@@ -1848,7 +1849,7 @@
     * @return row 条数
     * @author 赵滨
     */-->
-    <select id="countLocationItemStockAndItemByKeywords"  resultType="int">
+    <select id="countLocationItemStockAndItemByKeywords" resultType="int">
         SELECT count(*) FROM
         (
         SELECT lson.bind_id FROM location_item_stock as lson, item_common_info as ison
@@ -1912,7 +1913,7 @@
     * @return listMap 云仓商品配对
     * @author 赵滨
     */-->
-    <select id="listLocationItemStockAndItemByKeywordsOfAlert"  resultType="java.util.Map">
+    <select id="listLocationItemStockAndItemByKeywordsOfAlert" resultType="java.util.Map">
         SELECT
         <!--关联表ID-->
         l.id,
@@ -1984,8 +1985,8 @@
     * @return row 条数
     * @author 赵滨
     */-->
-    <select id="countLocationItemStockAndItemByKeywordsOfAlert"  resultType="int">
-        SELECT  count(*)
+    <select id="countLocationItemStockAndItemByKeywordsOfAlert" resultType="int">
+        SELECT count(*)
         FROM
         location_item_stock as l
         LEFT JOIN
@@ -2060,49 +2061,49 @@
     <update id="updateLocationItemStock"
             parameterType="com.rongcheng.erp.entity.LocationItemStock">
         update
-            location_item_stock
+        location_item_stock
         <set>
-            <if test="warehouseId != null" >
+            <if test="warehouseId != null">
                 warehouse_id = #{warehouseId},
             </if>
-            <if test="stocklocationId != null" >
+            <if test="stocklocationId != null">
                 stocklocation_id = #{stocklocationId},
             </if>
-            <if test="itemId != null" >
+            <if test="itemId != null">
                 item_id = #{itemId},
             </if>
-            <if test="stockQuantity != null" >
+            <if test="stockQuantity != null">
                 stock_quantity = #{stockQuantity},
             </if>
-            <if test="alertStock != null" >
+            <if test="alertStock != null">
                 alert_stock = #{alertStock},
             </if>
-            <if test="sendoutStatus != null" >
+            <if test="sendoutStatus != null">
                 sendout_status = #{sendoutStatus},
             </if>
-            <if test="bindId != null" >
+            <if test="bindId != null">
                 bind_id = #{bindId},
             </if>
-            <if test="reserved1 != null" >
+            <if test="reserved1 != null">
                 reserved1 = #{reserved1},
             </if>
-            <if test="note != null" >
+            <if test="note != null">
                 note = #{note},
             </if>
-            <if test="operatorId != null" >
+            <if test="operatorId != null">
                 operator_id = #{operatorId},
             </if>
-            <if test="authorization != null" >
+            <if test="authorization != null">
                 is_authorization = #{authorization},
             </if>
-            <if test="gmtModified != null" >
+            <if test="gmtModified != null">
                 gmt_modified = #{gmtModified}
             </if>
         </set>
         where
-            id = #{id}
+        id = #{id}
         AND
-            owner_id = #{ownerId}
+        owner_id = #{ownerId}
     </update>
 
 </mapper>

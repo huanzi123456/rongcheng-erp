@@ -2,6 +2,7 @@ var now_page = 1;   //0.全局变量，当前页面
 var max_page = 1;   //0.全局变量，最大页面
 var key_words = ""; //0.全局变量，关键字
 var auto_synchron = "";//0.全局变量，自动同步
+var warehouseStockLocation = {};
 
 $(function () {
     //1.加载页面
@@ -348,19 +349,8 @@ function inventorySyncBatchSync() {
  * @author 赵滨
  */
 function createInventorySyncBatchSync(list) {
-    console.log(list);
     //插入标题
-    var tr = '<tr> ' +
-        '<th width="9%" style="padding-top: 10px;"> ' +
-        '<input type="checkbox" name="allAutoSynchron">全选 ' +
-        '</th> ' +
-        '<th width="13%" style="padding-top: 10px;">店铺</th> ' +
-        '<th width="13%">同步库存至该店铺的仓库</th> ' +
-        '<th width="45%" style="padding-top: 10px;">规则</th> ' +
-        '<th width="10%">有库存时自动上架</th> ' +
-        '<th width="10%">库存低于警戒值不同步</th> ' +
-        '</tr>';
-    $("#inventorySync_syncTable").append(tr);
+    insertTitle($("#inventorySync_syncTable"));
 
     //遍历每条商品记录
     for (var listIndex = 0; listIndex < list.length; listIndex++) {
@@ -388,8 +378,6 @@ function createInventorySyncBatchSync(list) {
 
         //插入内容
         for (var i = 0; i < platformErpLinkShopWarehouseInfoList.length; i++) {
-            //获取同步配置列表，在循环外面获取，可以防止获取新插入的数据
-            var syncTableTrs = $("#inventorySync_syncTable").find("tr");
             //这条商品信息 的 单条关联信息
             var platformErpLinkShopWarehouseInfo = platformErpLinkShopWarehouseInfoList[i];
             //如果是最后一条记录，那么查看'全选'是否需要选中
@@ -398,128 +386,229 @@ function createInventorySyncBatchSync(list) {
                     "autoSynchron", platformErpLinkShopWarehouseInfo.autoSynchron);
             }
 
-            //遍历已经显示的配置列表，如果找到相同店铺的列表，合并到仓库下拉框中
-            for (var trIndex = 0; trIndex < syncTableTrs.length; trIndex++) {
-                var syncTableTr = syncTableTrs.eq(trIndex);
-                //如果 找到相同的店铺
-                if (syncTableTr.find("p:first").html() == platformErpLinkShopWarehouseInfo.shopName) {
-                    /*//获取该店铺下面的仓库下拉框
-                    var warehouseSelect = syncTableTr.find(".warehouse_select");
-                    //因为长度会变，所以保存成固定长度
-                    var optionLenght = warehouseSelect.find("option").length;
+            //是否存在相同店铺
+            var existRepetitionShopTr = existRepetitionShop(
+                $("#inventorySync_syncTable").find("tr").not(":first"), platformErpLinkShopWarehouseInfo.shopId);
 
+            if (existRepetitionShopTr == -1) {
+                //插入同步配置
+                insertSyncConfiguration(
+                    $("#inventorySync_syncTable"), platformErpLinkShopWarehouseInfo, itemWarehouseStockLocationList);
+            } else{
+                //获取这个tr的data
+                var itemWarehouseStockLocationListOld = existRepetitionShopTr.data("itemWarehouseStockLocationList");
+                var platformErpLinkShopWarehouseInfoOld = existRepetitionShopTr.data("platformErpLinkShopWarehouseInfo");
+                //把旧的数组全部追加到新的数组中
+                Array.prototype.push.apply(itemWarehouseStockLocationList, itemWarehouseStockLocationListOld);
+                //调出选中的同步
+                if (platformErpLinkShopWarehouseInfoOld.autoSynchron == 1) {
+                    //重新赋值
+                    platformErpLinkShopWarehouseInfo = platformErpLinkShopWarehouseInfoOld;
+                }
+                //删除旧的tr
+                existRepetitionShopTr.remove();
 
-                    //把仓库库位内容插入进去，后期优化分成两个下拉框
+                //插入同步配置
+                insertSyncConfiguration(
+                    $("#inventorySync_syncTable"), platformErpLinkShopWarehouseInfoOld, itemWarehouseStockLocationList);
+            }
+            //把仓库库位内容插入进去
+            insertSelectOption(
+                $("#inventorySync_syncTable").find(".warehouse_select:last"),
+                $("#inventorySync_syncTable").find(".stockLocation_select:last"),
+                itemWarehouseStockLocationList, platformErpLinkShopWarehouseInfo
+            );
+        }
+    }
 
-                    for (var warehouseStockLocationIndex = 0;
-                         warehouseStockLocationIndex < itemWarehouseStockLocationList.length;
-                         warehouseStockLocationIndex++) {
-                        var itemWarehouseStockLocation = itemWarehouseStockLocationList[warehouseStockLocationIndex];
-                        //拼接名称
-                        var name = itemWarehouseStockLocation.warehouseName + "--&gt;" +  //仓库名称
-                            itemWarehouseStockLocation.stocklocationName;    //库位名称
-                        console.log(name);
-                        console.log(isExistName(warehouseSelect, optionLenght, name) == -1);
+    //监听切换'仓库'，切换仓库下面的库位
+    $("#inventorySync_syncTable").on("change", ".warehouse_select", warehouseSelectOnChange);
 
-                        //如果不存在下拉框中，才插入
-                        if (isExistName(warehouseSelect, optionLenght, name) == -1) {
-                            //插入到最后一个下拉框内
-                            warehouseSelect.append(
-                                '<option value="' + itemWarehouseStockLocation.id + '">' + name + '</option>'
-                            );
-                        }
+    //监听切换'库位'，查看仓库是否改变
+    $("#inventorySync_syncTable").on("change", ".stockLocation_select", function () {
+        if ($(this).parent().parent().find(".warehouse_select").val() == 0) {
+            showMessage("如果指定库位，请先选择仓库")
+            $(this).find("option:first").prop("selected", true);
+        }
+    });
+
+    //显示 警戒库 弹出框
+    $(".inventory_sync_box").css("display", "block");
+
+    //插入标题
+    function insertTitle(appendObject) {
+        var tr = '<tr> ' +
+            '<th width="8%" style="padding-top: 10px;"> ' +
+            '<input type="checkbox" name="allAutoSynchron">全选 ' +
+            '</th> ' +
+            '<th width="12%" style="padding-top: 10px;">店铺</th> ' +
+            '<th width="11%" style="padding-top: 10px;">仓库</th> ' +
+            '<th width="11%" style="padding-top: 10px;">库位</th> ' +
+            '<th width="38%" style="padding-top: 10px;">规则</th> ' +
+            '<th width="10%">有库存时自动上架</th> ' +
+            '<th width="10%">库存低于警戒值不同步</th> ' +
+            '</tr>';
+        appendObject.append(tr);
+    }
+
+    //插入下拉框
+    function insertSelectOption(
+        warehouseSelect, stockLocationSelect, itemWarehouseStockLocationList, platformErpLinkShopWarehouseInfo) {
+        for (var i = 0; i < itemWarehouseStockLocationList.length; i++) {
+            var itemWarehouseStockLocation = itemWarehouseStockLocationList[i];
+
+            //查看仓库是否存在重复，如果重复则不插入
+            var warehouseExistRepetition = existRepetitionWarehouseStockLocation(
+                warehouseSelect.children("option"), itemWarehouseStockLocation.warehouseId);
+            if (warehouseExistRepetition == -1) {
+                var selected = '';
+                //如果下拉框中的ID与这条记录的ID匹配
+                if (itemWarehouseStockLocation.warehouseId == platformErpLinkShopWarehouseInfo.warehouseId) {
+                    selected = ' selected=true ';
+                }
+                //插入到仓库最后一个下拉框内
+                warehouseSelect.append(
+                    '<option ' + selected +     //是否选中
+                    'value="' + itemWarehouseStockLocation.warehouseId + '">' + //仓库ID
+                    itemWarehouseStockLocation.warehouseName    //仓库名称
+                    + '</option>'
+                );
+            }
+
+            //定义仓库ID，用于判断选中哪些库位
+            var warehouseId = warehouseSelect.val();
+            //首先，选择全部仓库，可以显示；其次选中的仓库，和原始数据匹配成功，可以显示
+            if (warehouseId == 0 || warehouseId == itemWarehouseStockLocation.warehouseId) {
+                //查看库位是否存在重复，如果重复则不插入
+                var stocklocationExistRepetition = existRepetitionWarehouseStockLocation(
+                    stockLocationSelect.children("option"), itemWarehouseStockLocation.stocklocationId);
+                if (stocklocationExistRepetition == -1) {
+                    var selected = '';
+                    //如果下拉框中的ID与这条记录的ID匹配
+                    if (itemWarehouseStockLocation.stocklocationId == platformErpLinkShopWarehouseInfo.stocklocationId) {
+                        selected = ' selected=true ';
                     }
-
-                    break;*/
-                //如果是最后一条记录，那么直接插入到页面列表中
-                } else if (trIndex == syncTableTrs.length - 1) {
-                    var tr = '' +
-                        '<tr>' +
-                        '  <td style="padding-top: 15px;">' +
-                        '    <input type="checkbox" name="autoSynchron"'+
-                               (platformErpLinkShopWarehouseInfo.autoSynchron == 1?"checked":"")+'>' +
-                        '  </td>' +
-                        '  <td>' +
-                        '    <p>'+platformErpLinkShopWarehouseInfo.shopName+'</p>' +    //店铺名称
-                        '  </td>' +
-
-                        '  <td style="padding-top: 2px;">' +
-                        '    <select class="input warehouse_select" ' +
-                        '               style="width:100px; line-height:17px; display:inline-block">' +
-                        '      <option value="0">全部仓库</option>'+     //仓库ID，仓库名称
-                        '    </select>' +
-                        '  </td>' +
-
-                        '  <td style="padding-top: 2px;">' +
-                        '    <select class="input availableStock" ' +
-                        '               style="width:250px; line-height:17px; display:inline-block">' +
-                        '      <option value="0"'+(platformErpLinkShopWarehouseInfo.availableStock == 0?"selected":"")+
-                        '               >可用量(订单量买家付款后扣减)</option>' +
-                        '      <option value="1"'+(platformErpLinkShopWarehouseInfo.availableStock == 1?"selected":"")+
-                        '               >可用量(订单量审核后扣减)</option>' +
-                        '      <option value="2"'+(platformErpLinkShopWarehouseInfo.availableStock == 2?"selected":"")+
-                        '               >总量</option>' +
-                        '    </select>' +
-                        '    <span>X</span>' +
-                        '    <input type="text" class="input" name="allocationRatio" ' +
-                        '               value="'+platformErpLinkShopWarehouseInfo.allocationRatio+'">' +//库存分配比例
-                        '    <span>%+</span>' +
-                        '    <input type="text" class="input" name="remnantStock" ' +
-                        '               value="'+platformErpLinkShopWarehouseInfo.remnantStock+'">' +   //库存零头
-                        '  </td>' +
-
-                        '  <td style="padding-top: 15px;"><input type="checkbox" name="autoOnsale"'+
-                                (platformErpLinkShopWarehouseInfo.autoOnsale == 1?"checked":"")+'>' +  //自动上架状况
-                        '  </td>' +
-
-                        '  <td style="padding-top: 15px;"><input type="checkbox" name="synchronException"'+
-                                (platformErpLinkShopWarehouseInfo.synchronException == 1?"checked":"")+'>' + //例外情况
-                        '  </td>' +
-                        '</tr>';
-                    //插入内容
-                    $("#inventorySync_syncTable").append(tr);
-
-                    //把仓库库位内容插入进去，后期优化分成两个下拉框
-                    insertSelectOption($("#inventorySync_syncTable").find(".warehouse_select:last"));
+                    //插入到库位最后一个下拉框内
+                    stockLocationSelect.append(
+                        '<option ' + selected +     //是否选中
+                        'value="' + itemWarehouseStockLocation.stocklocationId + '">' + //库位ID
+                        itemWarehouseStockLocation.stocklocationName    //库位名称
+                        + '</option>'
+                    );
                 }
             }
         }
     }
-    //显示 警戒库 弹出框
-    $(".inventory_sync_box").css("display", "block");
-
-    function insertSelectOption(appendObject) {
-        for (var warehouseStockLocationIndex = 0;
-             warehouseStockLocationIndex < itemWarehouseStockLocationList.length;
-             warehouseStockLocationIndex++) {
-            var itemWarehouseStockLocation = itemWarehouseStockLocationList[warehouseStockLocationIndex];
-            //插入到最后一个下拉框内
-            appendObject.append(
-                '<option value="' + itemWarehouseStockLocation.id + '">' +
-                itemWarehouseStockLocation.warehouseName + "-->" +  //仓库名称
-                itemWarehouseStockLocation.stocklocationName    //库位名称
-                + '</option>'
-            );
-        }
-    }
-    // 是否已经在仓库中存在
-    function isExistName(warehouseSelect, optionLenght, name) {
-        // 遍历该下拉框，查看是否存在相同仓库，
-        // 如果存在相同仓库，加入到全局变量中；
-        // 如果不存在相同仓库，加入到下拉框中，和全局变量中
-        for (var j = 0; j < optionLenght; j++) {
-            var option = warehouseSelect.find("option").eq(j);
-            console.log(option.html().trim());
-            console.log(name.trim());
-            console.log(option.html().trim() == name.trim());
-            if (option.html().trim() == name.trim()) {
+    //查看仓库库位是否存在重复,如果出现重复返回1，如果没有出现重复返回-1
+    function existRepetitionWarehouseStockLocation(optionObjectList, id) {
+        for (var i = 0; i < optionObjectList.length; i++) {
+            var optionObject = optionObjectList.eq(i);
+            if (optionObject.val() == id) {
                 return 1;
             }
         }
         return -1;
     }
+    //是否存在相同店铺
+    function existRepetitionShop(objectList, id) {
+        for (var i = 0; i < objectList.length; i++) {
+            var shopId = objectList.eq(i).data("platformErpLinkShopWarehouseInfo").shopId;
+            if (shopId == id) {
+                return objectList.eq(i);
+            }
+        }
+        return -1;
+    }
+    //插入同步配置
+    function insertSyncConfiguration(appendObject, platformErpLinkShopWarehouseInfo, itemWarehouseStockLocationList) {
+        var tr = '' +
+            '<tr>' +
+            '  <td style="padding-top: 15px;">' +
+            '    <input type="checkbox" name="autoSynchron"'+
+            (platformErpLinkShopWarehouseInfo.autoSynchron == 1?"checked":"")+'>' +
+            '  </td>' +
+            '  <td>' +
+            '    <p>'+platformErpLinkShopWarehouseInfo.shopName+'</p>' +    //店铺名称
+            '  </td>' +
 
-    /**/
+            '  <td style="padding-top: 2px;">' +
+            '    <select class="input warehouse_select" ' +
+            '               style="width:100px; line-height:17px; display:inline-block">' +
+            '      <option value="0">全部仓库</option>'+     //仓库ID，仓库名称
+            '    </select>' +
+            '  </td>' +
+
+            '  <td style="padding-top: 2px;">' +
+            '    <select class="input stockLocation_select" ' +
+            '               style="width:100px; line-height:17px; display:inline-block">' +
+            '      <option value="0">全部库位</option>'+     //库位ID，库位名称
+            '    </select>' +
+            '  </td>' +
+
+            '  <td style="padding-top: 2px;">' +
+            '    <select class="input availableStock" ' +
+            '               style="width:215px; line-height:17px; display:inline-block">' +
+            '      <option value="0"'+(platformErpLinkShopWarehouseInfo.availableStock == 0?"selected":"")+
+            '               >可用量(订单量买家付款后扣减)</option>' +
+            '      <option value="1"'+(platformErpLinkShopWarehouseInfo.availableStock == 1?"selected":"")+
+            '               >可用量(订单量审核后扣减)</option>' +
+            '      <option value="2"'+(platformErpLinkShopWarehouseInfo.availableStock == 2?"selected":"")+
+            '               >总量</option>' +
+            '    </select>' +
+            '    <span>X</span>' +
+            '    <input type="text" class="input" name="allocationRatio" ' +
+            '               value="'+platformErpLinkShopWarehouseInfo.allocationRatio+'">' +//库存分配比例
+            '    <span>%+</span>' +
+            '    <input type="text" class="input" name="remnantStock" ' +
+            '               value="'+platformErpLinkShopWarehouseInfo.remnantStock+'">' +   //库存零头
+            '  </td>' +
+
+            '  <td style="padding-top: 15px;"><input type="checkbox" name="autoOnsale"'+
+            (platformErpLinkShopWarehouseInfo.autoOnsale == 1?"checked":"")+'>' +  //自动上架状况
+            '  </td>' +
+
+            '  <td style="padding-top: 15px;"><input type="checkbox" name="synchronException"'+
+            (platformErpLinkShopWarehouseInfo.synchronException == 1?"checked":"")+'>' + //例外情况
+            '  </td>' +
+            '</tr>';
+        var $tr = $(tr);
+        $tr.data("itemWarehouseStockLocationList", itemWarehouseStockLocationList);
+        $tr.data("platformErpLinkShopWarehouseInfo", platformErpLinkShopWarehouseInfo);
+        //插入内容
+        appendObject.append($tr);
+    }
+    //监听切换'仓库'，切换仓库下面的库位
+    function warehouseSelectOnChange() {
+        //仓库库位原始数据集合
+        var itemWarehouseStockLocationList = $(this).parent().parent().data("itemWarehouseStockLocationList");
+        //库位下拉框
+        var stockLocationSelect = $(this).parent().parent().find(".stockLocation_select");
+        //当前选中的仓库ID
+        var warehouseId = $(this).find("option:selected").val();
+
+        //清空库位下拉框
+        stockLocationSelect.children().remove();
+        //插入全部库位
+        stockLocationSelect.append('<option value="0">全部库位</option>');
+
+        for (var i = 0; i < itemWarehouseStockLocationList.length; i++) {
+            var itemWarehouseStockLocation = itemWarehouseStockLocationList[i];
+            //首先，选择全部仓库，可以显示；其次选中的仓库，和原始数据匹配成功，可以显示
+            if (warehouseId == 0 || warehouseId == itemWarehouseStockLocation.warehouseId) {
+                //查看库位是否存在重复，如果重复则不插入
+                var stocklocationExistRepetition =
+                    existRepetitionWarehouseStockLocation(stockLocationSelect.children("option"), itemWarehouseStockLocation.stocklocationId);
+                if (stocklocationExistRepetition == -1) {
+                    //插入到库位最后一个下拉框内
+                    stockLocationSelect.append(
+                        '<option value="' + itemWarehouseStockLocation.stocklocationId + '">' + //库位ID
+                        itemWarehouseStockLocation.stocklocationName    //库位名称
+                        + '</option>'
+                    );
+                }
+            }
+        }
+    }
 }
 
 /**
