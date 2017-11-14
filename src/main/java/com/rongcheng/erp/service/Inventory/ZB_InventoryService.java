@@ -46,12 +46,12 @@ public interface ZB_InventoryService {
      * 修改 警戒库存
      * 
      * @param alertStockNum 警戒库存
-     * @param itemCommonId 商品ID
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    int updateInventoryState(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId);
+    int updateInventoryState(Integer alertStockNum, BigInteger[] locationItemStockId, BigInteger ownerId);
     
     /**
      * 加载 库存库位 页面
@@ -70,22 +70,22 @@ public interface ZB_InventoryService {
      * 修改 库位库存
      * 
      * @param alertStockNum 库存
-     * @param itemCommonId 商品ID
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    int updateStorageLocation(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId);
+    int updateStorageLocation(Integer alertStockNum, BigInteger[] locationItemStockId, BigInteger ownerId);
     
     /**
      * 修改 库存清零
-     * 
-     * @param itemCommonId 商品ID
+     *
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    int updateStocksEmpty(BigInteger[] itemCommonId, BigInteger ownerId);
+    int updateStocksEmpty(BigInteger[] locationItemStockId, BigInteger ownerId);
     
     /**
      * 加载 仓库列表 页面
@@ -213,11 +213,12 @@ public interface ZB_InventoryService {
     /**
      * 设置 库存同步配置
      * @param configuations 配置信息，json字符串
+     * @param itemIds 商品ID数组
      * @param ownerId   主账号ID
      * @return 修改的条数
      * @author 赵滨
      */
-    int updateInventorySyncConfiguations(String configuations, BigInteger ownerId);
+    int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId);
 
     /**
      * 加载 仓库和库位 页面

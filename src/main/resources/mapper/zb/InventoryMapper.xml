@@ -22,8 +22,10 @@
      */ -->
     <select id="listItemCommonStockByKeywords" resultType="java.util.Map">
         select
+        <!-- 库位库存ID -->
+        s.id,
         <!-- 商品ID -->
-        i.id,
+        i.id as itemId,
         <!-- 商品编码 -->
         ifnull(i.erp_item_num, '') as erpItemNum,
         <!-- 商品名称 -->
@@ -96,13 +98,9 @@
         item_common_info as i
         on
         s.item_id = i.id
-        left join
-        stocklocation_info as t
-        on
-        s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{2}
-        and  -->
+            s.owner_id = #{2}
+        and
             i.owner_id = #{2}
             <if test="param4 != '' and param4 != null">
                 and
@@ -116,7 +114,7 @@
             </if>
             <if test="param5 != '' and param5 != null">
                 and
-                t.warehouse_id = #{4}
+                s.warehouse_id = #{4}
             </if>
         </where>
         limit
@@ -125,9 +123,9 @@
 
     <!-- /**
      * 查询库存状态 条数
-     * 
+     *
      * <p>根据关键字
-     * 
+     *
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
@@ -137,20 +135,16 @@
     <select id="countItemCommonStockByKeywords" resultType="int">
         select
         <!-- 库存状态条数 -->
-        count(i.id)
+        count(s.id)
         from
         location_item_stock as s
         LEFT join
         item_common_info as i
         on
         s.item_id = i.id
-        left join
-        stocklocation_info as t
-        on
-        s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{0}
-        and  -->
+            s.owner_id = #{0}
+        and
             i.owner_id = #{0}
             <if test="param2 != '' and param2 != null">
                 and
@@ -164,16 +158,16 @@
             </if>
             <if test="param3 != '' and param3 != null">
                 and
-                t.warehouse_id = #{2}
+                s.warehouse_id = #{2}
             </if>
         </where>
     </select>
 
     <!-- /**
      * 查询库存状态
-     * 
+     *
      * <p>低于警戒线
-     * 
+     *
      * @param start 开始位置
      * @param row 查询几条
      * @param ownerId 主账号ID
@@ -190,8 +184,10 @@
         (sumQuantity-useQuantity) as availableQuantity
         from(
         select
+        <!-- 库位库存ID -->
+        s.id,
         <!-- 商品ID -->
-        i.id,
+        i.id as itemId,
         <!-- 商品编码 -->
         ifnull(i.erp_item_num, '') as erpItemNum,
         <!-- 商品名称 -->
@@ -264,17 +260,13 @@
         item_common_info as i
         on
         s.item_id = i.id
-        left join
-        stocklocation_info as t
-        on
-        s.stocklocation_id = t.id
         <where>
-            <!--  s.owner_id = #{2}
-         and  -->
+             s.owner_id = #{2}
+         and
             i.owner_id = #{2}
             <if test="param4 != '' and param4 != null">
                 and
-                t.warehouse_id = #{3}
+                s.warehouse_id = #{3}
             </if>
         </where>
         ) as innerLayer
@@ -287,9 +279,9 @@
 
     <!-- /**
      * 查询库存状态 条数
-     * 
+     *
      * <p>低于警戒线
-     * 
+     *
      * @param ownerId 主账号ID
      * @param warehouseInfoId 仓库ID
      * @return list 结果集合
@@ -338,17 +330,13 @@
         item_common_info as i
         on
         s.item_id = i.id
-        left join
-        stocklocation_info as t
-        on
-        s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{0}
-        and  -->
+            s.owner_id = #{0}
+        and
             i.owner_id = #{0}
             <if test="param2 != '' and param2 != null">
                 and
-                t.warehouse_id = #{1}
+                s.warehouse_id = #{1}
             </if>
         </where>
         ) as innerLayer
@@ -359,9 +347,9 @@
 
     <!-- /**
      * 查询 库存所在的仓库 列表
-     * 
+     *
      * <p>仓库的名称和ID
-     * 
+     *
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
@@ -387,16 +375,16 @@
 		    gmt_modified as gmtModified
 		from
 		    warehouse_info
-		    
+
 		where
 		    owner_id = #{0}
     </select>
 
     <!-- /**
      * 查询 库存信息表
-     * 
+     *
      * <p>根据商品ID 关联查询
-     * 
+     *
      * @param itemCommonId 商品ID
      * @param ownerId 主账号ID
      * @return
@@ -421,24 +409,24 @@
 		    gmt_create as gmtCreate,
 		    gmt_modified as gmtModified
 
-	   from 
-	   
-	       location_item_stock 
-	       
-	   where 
-	   
+	   from
+
+	       location_item_stock
+
+	   where
+
 	       owner_id = #{1}
-	       
-	   and 
-	   
+
+	   and
+
 	       item_id = #{0}
     </select>
 
     <!-- /**
      * 查询 库存信息表
-     * 
-     * <p>根据商品ID 
-     * 
+     *
+     * <p>根据商品ID
+     *
      * @param itemCommonId 商品ID
      * @param ownerId 主账号ID
      * @return
@@ -462,12 +450,12 @@
             is_authorization as authorization,
             gmt_create as gmtCreate,
             gmt_modified as gmtModified
-           
-       from 
-           location_item_stock 
-       where 
+
+       from
+           location_item_stock
+       where
            owner_id = #{1}
-       and 
+       and
            item_id = #{0}
        and
            stocklocation_id = #{2}
@@ -475,9 +463,9 @@
 
     <!-- /**
      * 保存 库存信息表
-     * 
+     *
      * <p>传入库存信息表对象，MyBatis使用对象保存栏目表。
-     * 
+     *
      * @param locationItemStock 库存信息表
      * @return
      * @author 赵滨
@@ -517,9 +505,9 @@
 
     <!-- /**
      * 修改 库存信息表
-     * 
+     *
      * <p>传入库存信息表对象修改栏目内容
-     * 
+     *
      * @param locationItemStock 库存信息表
      * @return
      * @author 赵滨
@@ -528,21 +516,41 @@
             parameterType="com.rongcheng.erp.entity.LocationItemStock">
         update
         location_item_stock
-        set
-        <!-- id = #{id}, -->
-        warehouse_id = #{warehouseId},
-        stocklocation_id = #{stocklocationId},
-        item_id = #{itemId},
-        stock_quantity = #{stockQuantity},
-        alert_stock = #{alertStock},
-        sendout_status = #{sendoutStatus},
-        reserved1 = #{reserved1},
-        note = #{note},
-        <!-- owner_id = #{ownerId}, -->
-        operator_id = #{operatorId},
-        is_authorization = #{authorization},
-        <!-- gmt_create = #{gmtCreate}, -->
-        gmt_modified=#{gmtModified}
+        <set>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId},
+            </if>
+            <if test="stocklocationId != null">
+                stocklocation_id = #{stocklocationId},
+            </if>
+            <if test="itemId != null">
+                item_id = #{itemId},
+            </if>
+            <if test="stockQuantity != null">
+                stock_quantity = #{stockQuantity},
+            </if>
+            <if test="alertStock != null">
+                alert_stock = #{alertStock},
+            </if>
+            <if test="sendoutStatus != null">
+                sendout_status = #{sendoutStatus},
+            </if>
+            <if test="reserved1 != null">
+                reserved1 = #{reserved1},
+            </if>
+            <if test="note != null">
+                note = #{note},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId},
+            </if>
+            <if test="authorization != null">
+                is_authorization = #{authorization},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified},
+            </if>
+        </set>
         where
         id = #{id}
         and
@@ -551,9 +559,9 @@
 
     <!-- /**
      * 移除 库存信息表
-     * 
+     *
      * <p>根据商品ID 关联查询
-     * 
+     *
      * @param itemCommonId 商品ID
      * @param ownerId 主账号ID
      * @param locationId 库位ID
@@ -561,32 +569,32 @@
      * @author 赵滨
      */ -->
     <delete id="removeLocationItemStockByItemCommonId">
-        delete from 
+        delete from
             location_item_stock
-        where 
+        where
             item_id=#{0}
         and
-            owner_id=#{1} 
-        and 
+            owner_id=#{1}
+        and
             stocklocation_id=#{2}
     </delete>
 
     <!-- /**
      * 移除 库存信息表
-     * 
+     *
      * <p>根据商品ID 关联查询
-     * 
+     *
      * @param ownerId 主账号ID
      * @param locationId 库位ID
      * @return
      * @author 赵滨
      */ -->
     <delete id="removeLocationItemStockByLocationId">
-        delete from 
+        delete from
             location_item_stock
-        where 
-            owner_id=#{0} 
-        and 
+        where
+            owner_id=#{0}
+        and
             stocklocation_id=#{1}
     </delete>
 
@@ -629,26 +637,22 @@
         item_common_info as i
         on
         s.item_id = i.id
-        left join
-        stocklocation_info as t
-        on
-        s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{0}
-         and  -->
+             s.owner_id = #{0}
+         and
             i.owner_id = #{0}
             <if test="param2 != '' and param2 != null">
                 and
-                t.warehouse_id = #{1}
+                s.warehouse_id = #{1}
             </if>
         </where>
     </select>
 
     <!-- /**
      * 查询 商品库存库位
-     * 
+     *
      * <p>根据关键字
-     * 
+     *
      * @param start 开始位置
      * @param row 查询几条
      * @param ownerId 主账号ID
@@ -659,8 +663,10 @@
      */ -->
     <select id="listItemCommonStocklocationByKeywords" resultType="java.util.Map">
         select
+        <!-- 库位库存ID -->
+        s.id,
         <!-- 商品ID -->
-        i.id,
+        i.id as itemId,
         <!-- 商品编码 -->
         ifnull(i.erp_item_num, '') as erpItemNum,
         <!-- 商品名称 -->
@@ -707,13 +713,13 @@
         item_common_info as i
         on
         s.item_id = i.id
-        left join
+        LEFT JOIN
         stocklocation_info as t
-        on
+        ON
         s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{2}
-        and  -->
+            s.owner_id = #{2}
+        and
             i.owner_id = #{2}
             <if test="param4 != '' and param4 != null">
                 and
@@ -729,7 +735,7 @@
             </if>
             <if test="param5 != '' and param5 != null">
                 and
-                t.warehouse_id = #{4}
+                s.warehouse_id = #{4}
             </if>
         </where>
         limit
@@ -738,9 +744,9 @@
 
     <!-- /**
      * 查询 商品库存库位 条数
-     * 
+     *
      * <p>根据关键字
-     * 
+     *
      * @param ownerId 主账号ID
      * @param keywords 关键字
      * @param warehouseInfoId 仓库ID
@@ -750,20 +756,20 @@
     <select id="countItemCommonStocklocationByKeywords" resultType="int">
         select
         <!-- 库存状态条数 -->
-        count(i.id)
+        count(s.id)
         from
         location_item_stock as s
         LEFT join
         item_common_info as i
         on
         s.item_id = i.id
-        left join
+        LEFT JOIN
         stocklocation_info as t
-        on
+        ON
         s.stocklocation_id = t.id
         <where>
-            <!-- s.owner_id = #{0}
-        and  -->
+            s.owner_id = #{0}
+        and
             i.owner_id = #{0}
             <if test="param2 != '' and param2 != null">
                 and
@@ -779,16 +785,16 @@
             </if>
             <if test="param3 != '' and param3 != null">
                 and
-                t.warehouse_id = #{2}
+                s.warehouse_id = #{2}
             </if>
         </where>
     </select>
 
     <!-- /**
      * 查询 仓库列表
-     * 
+     *
      * <p>根据 关键字
-     * 
+     *
      * @param ownerId 主账号ID
      * @param warehouseStatus 该仓库是否被启用
      * @param keywords 关键字
@@ -843,9 +849,9 @@
 
     <!-- /**
      * 查询 仓库列表 条数
-     * 
+     *
      * <p>根据 关键字
-     * 
+     *
      * @param ownerId 主账号ID
      * @param warehouseStatus 该仓库是否被启用
      * @param keywords 关键字
@@ -883,9 +889,9 @@
 
     <!-- /**
      * 保存 仓库列表
-     * 
+     *
      * <p>传入对象，MyBatis使用对象保存。
-     * 
+     *
      * @param warehouseInfo 仓库列表
      * @return
      * @author 赵滨
@@ -930,9 +936,9 @@
 
     <!-- /**
      * 修改 仓库列表
-     * 
+     *
      * <p>传入对象修改内容
-     * 
+     *
      * @param warehouseInfo 仓库列表
      * @return
      * @author 赵滨
@@ -966,9 +972,9 @@
 
     <!-- /**
      * 获取 仓库列表
-     * 
+     *
      * <p>根据ID
-     * 
+     *
      * @param id
      * @param ownerId 主账号ID
      * @return
@@ -1003,9 +1009,9 @@
 
     <!-- /**
      * 获取 库位列表
-     * 
+     *
      * <p>根据 库位编码
-     * 
+     *
      * @param userStocklocationCode库位编码
      * @param ownerId 主账号ID
      * @param start 开始
@@ -1049,9 +1055,9 @@
 
     <!-- /**
      * 获取 库位列表 条数
-     * 
+     *
      * <p>根据 库位编码
-     * 
+     *
      * @param userStocklocationCode库位编码
      * @param ownerId 主账号ID
      * @return
@@ -1079,16 +1085,16 @@
 
     <!-- /**
      * 获取 库位列表 单条
-     * 
+     *
      * <p>根据 ID
-     * 
+     *
      * @param id ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */ -->
     <select id="getStocklocationInfoById" resultType="com.rongcheng.erp.entity.StocklocationInfo">
-        
+
         select
             id,
             warehouse_id as warehouseId,
@@ -1109,7 +1115,7 @@
             id = #{0}
         and
             owner_id = #{1}
-        
+
     </select>
 
     <!-- /**
@@ -1188,12 +1194,12 @@
      * @author 赵滨
      */ -->
     <delete id="removeStocklocationInfoById">
-        delete from 
+        delete from
             stocklocation_info
-        where 
+        where
             id=#{0}
         and
-            owner_id=#{1} 
+            owner_id=#{1}
     </delete>
 
     <!-- /**
@@ -1205,7 +1211,7 @@
      */
     List<> (BigInteger locationId, BigInteger ownerId); -->
     <select id="listItemByLocationId" resultType="com.rongcheng.erp.entity.ItemCommonInfo">
-        select 
+        select
 		    i.id,
 		    i.erp_item_num as erpItemNum,
 		    i.name,
@@ -1242,19 +1248,19 @@
 		    i.gmt_modified as gmtModified,
 		    i.operator_id as operatorId,
 		    i.spec
-		from 
+		from
 	        stocklocation_info as s
-		left join 
-		    location_item_stock as l 
-		on 
+		left join
+		    location_item_stock as l
+		on
 		    s.id = l.stocklocation_id
-		join 
+		join
 		    item_common_info as i
 		on
 		    l.item_id = i.id
-		where 
+		where
 	        s.id = #{0}
-		and 
+		and
 		    s.owner_id = #{1}
     </select>
 
@@ -1351,7 +1357,7 @@
      * 获取商品 内容  根据 商品ID数组
      * @param locationId 商品ID数组
      * @param ownerId   主账号ID
-     * @return 
+     * @return
      * @author 赵滨
      */
     List<ItemCommonInfo> listItemByItemIds(Map<String, Object> params); -->
@@ -1567,7 +1573,7 @@
       * @return
       * @author 赵滨
       */-->
-    <select id="listPlatformErpLinkShopWarehouseInfo"
+    <select id="listPlatformErpLinkShopWarehouseInfoByGroup"
             resultType="com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo">
     SELECT
       si.name                           AS shopName,
@@ -1602,7 +1608,9 @@
       AND
       si.owner_id = #{1}
       AND pel.item_id = #{0}
-    GROUP BY si.id
+    <if test="param3 != '' and param3 != null">
+        GROUP BY si.id
+    </if>
     </select>
 
     <!--/**
@@ -1612,7 +1620,7 @@
     * @return
     * @author 赵滨
     */-->
-    <select id="listItemWarehouseStockLocation" resultType="java.util.Map">
+    <select id="listItemWarehouseStocklocation" resultType="java.util.Map">
         SELECT
           lis.id,
           lis.item_id as itemId,

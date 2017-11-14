@@ -94,7 +94,7 @@ public interface ZB_InventoryDAO {
      * @return
      * @author 赵滨
      */
-    LocationItemStock getLocationItemStockByItemCommonId(BigInteger itemCommonId, BigInteger ownerId);
+    List<LocationItemStock> listLocationItemStockByItemCommonId(BigInteger itemCommonId, BigInteger ownerId);
     
     /**
      * 查询 库存信息表
@@ -305,7 +305,7 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     int saveStocklocationInfoByCode(StocklocationInfo stocklocationInfo);
-    
+
     /**
      * 修改 仓库库位
      * @param stocklocationInfo 库位
@@ -313,7 +313,7 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     int modifyStocklocationInfoByCode(StocklocationInfo stocklocationInfo);
-    
+
     /**
      * 删除 仓库库位
      * @param id 栏目ID
@@ -322,7 +322,7 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     int removeStocklocationInfoById(BigInteger id, BigInteger ownerId);
-    
+
     /**
      * 获取商品内容 根据 库位ID
      * @param locationId 库位ID
@@ -331,7 +331,7 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     List<ItemCommonInfo> listItemByLocationId(BigInteger locationId, BigInteger ownerId);
-    
+
     /**
      * 获取商品内容 根据 关键字
      * @param keywords 关键字
@@ -342,7 +342,7 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     List<ItemCommonInfo> listItemByKeywords(String keywords, BigInteger ownerId, int start, int row);
-    
+
     /**
      * 获取商品 条数 根据 关键字
      * @param keywords 关键字
@@ -351,12 +351,12 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     int countItemByKeywords(String keywords, BigInteger ownerId);
-    
+
     /**
      * 获取商品 内容  根据 商品ID数组
      * @param itemIds 商品ID数组
      * @param ownerId   主账号ID
-     * @return 
+     * @return
      * @author 赵滨
      */
     List<ItemCommonInfo> listItemByItemIds(Map<String, Object> params);
@@ -396,10 +396,12 @@ public interface ZB_InventoryDAO {
      * 查询系统商品对应关系关联表
      * @param itemId 商品ID
      * @param ownerId 主账号ID
+     * @param isGroup 按照分组
      * @return
      * @author 赵滨
      */
-    List<PlatformErpLinkShopWarehouseInfo> listPlatformErpLinkShopWarehouseInfo(BigInteger itemId, BigInteger ownerId);
+    List<PlatformErpLinkShopWarehouseInfo> listPlatformErpLinkShopWarehouseInfoByGroup(
+            BigInteger itemId, BigInteger ownerId, Boolean isGroup);
 
     /**
      * 查询库位商品库存关联表 获取仓库和库位
@@ -408,7 +410,7 @@ public interface ZB_InventoryDAO {
      * @return
      * @author 赵滨
      */
-    List<Map<String, Object>> listItemWarehouseStockLocation(BigInteger itemId, BigInteger ownerId);
+    List<Map<String, Object>> listItemWarehouseStocklocation(BigInteger itemId, BigInteger ownerId);
 
     /**
      * 更新系统商品对应关系关联表

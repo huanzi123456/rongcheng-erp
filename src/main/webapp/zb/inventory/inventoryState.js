@@ -3,7 +3,7 @@ var max_page = 1;//0.全局变量，最大页面
 var key_words = "";//0.全局变量，关键字
 var is_alert_stock = false;//0.全局变量，警戒线
 var warehouse_info_id = "";//0.全局变量，仓库
-var item_common_id = [];//0.全局变量，商品ID
+var location_item_stock_id = [];//0.全局变量，ID
 
 $(function() {
 	//1.加载仓库
@@ -123,27 +123,24 @@ function allId() {
  * @author 赵滨
  */
 function alertStockConfirm() {
-	
 	//获取警戒库存
 	var alertStockNum = $("#alertStock_num").val().trim();
 	
 	//如果不是数字
 	if (!isPInt(alertStockNum)) {
-		
 		showMessage("请输入正整数");
 		return;
 	}
 	
 	//如果没有填写内容
 	if (alertStockNum == "" || alertStockNum == null) {
-		
 		showMessage("请输入正整数");
 		return;
 	}
 	
 	//关闭弹出框
 	$(".inventory_state_box").css("display", "none");
-	
+
 	//发送请求，修改警戒库存
 	$.ajax({
 		url : "/inventoryState/updateInventoryState.do",
@@ -151,7 +148,7 @@ function alertStockConfirm() {
 		traditional : true,
 		data : {
 			"alertStockNum" : alertStockNum, //int
-			"itemCommonId" : item_common_id, //bigint[]
+			"locationItemStockId" : location_item_stock_id, //bigint[]
 		},
 		dataType : "json",
 		success : function(result) {
@@ -161,8 +158,9 @@ function alertStockConfirm() {
 			if (rows > 0) {
 				//加载页面
 				loadInventoryState(now_page, key_words, is_alert_stock, warehouse_info_id);
+                showMessage("修改警戒库存成功");
 			} else {
-                showMessage("修改警戒库存失败");
+                showMessage("0条警戒库存被修改");
             }
 			
 		},
@@ -217,8 +215,8 @@ function alertStocks() {
     //显示 警戒库 弹出框
 	$(".inventory_state_box").css("display", "block");
     
-    //赋值商品ID
-    item_common_id = temp;
+    //赋值ID
+    location_item_stock_id = temp;
     
     //输入库存框内
 	$("#alertStock_num").val("");
@@ -241,8 +239,8 @@ function alertStock() {
 	//赋值商品ID
 	temp.push(parseInt($(this).parent().parent().find("input[name='id[]']").val()));
 	
-	//赋值商品ID
-    item_common_id = temp;
+	//赋值ID
+    location_item_stock_id = temp;
 	
 	//获取 警戒量
 	var itemCommonAlertStock = $(this).parent().parent().data("itemCommonAlertStock");
@@ -455,7 +453,7 @@ function createInventoryState(map) {
 		tr = '';
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listItemCommonStock[i].id+'" class="check_coding" />';
-		tr += listItemCommonStock[i].id;	//ID
+		tr += listItemCommonStock[i].itemId;	//ID
 		tr += '</td>';
 		tr += '<td>';
 		tr += listItemCommonStock[i].erpItemNum;	//编码

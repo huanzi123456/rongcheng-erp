@@ -2,7 +2,7 @@ var now_page = 1;//0.全局变量，当前页面
 var max_page = 1;//0.全局变量，最大页面
 var key_words = "";//0.全局变量，关键字
 var warehouse_info_id = "";//0.全局变量，仓库
-var item_common_id = [];//0.全局变量，商品ID
+var location_item_stock_id = [];//0.全局变量，ID
 
 $(function() {
 	//1.加载仓库
@@ -85,7 +85,7 @@ function stocksEmpty() {
 			type : "post",
 			traditional : true,
 			data : {
-				"itemCommonId" : temp //bigint[]
+				"locationItemStockId" : temp //bigint[]
 			},
 			dataType : "json",
 			success : function(result) {
@@ -94,13 +94,12 @@ function stocksEmpty() {
 				
 				//如果是修改完成
 				if (rows > 0) {
-					
 					//加载页面
 					loadStorageLocation(now_page, key_words, warehouse_info_id);
-					
 					showMessage("您把"+rows+"条库存成功清零");
-					
-				}
+				} else {
+                    showMessage("0条库存被清零");
+                }
 			},
 			error : function() {
 				showMessage("库存清零失败");
@@ -219,7 +218,7 @@ function alertStocksConfirm() {
 		traditional : true,
 		data : {
 			"alertStockNum" : alertStockNum, //int
-			"itemCommonId" : item_common_id, //bigint[]
+			"locationItemStockId" : location_item_stock_id, //bigint[]
 		},
 		dataType : "json",
 		success : function(result) {
@@ -230,12 +229,13 @@ function alertStocksConfirm() {
 			if (rows > 0) {
 				//加载页面
 				loadStorageLocation(now_page, key_words, warehouse_info_id);
+                showMessage("调整库存成功");
 			} else {
-                showMessage("调整库存存失败");
+                showMessage("调整库存失败");
             }
 		},
 		error : function() {
-			showMessage("调整库存存失败");
+			showMessage("调整库存失败");
 		}
 	});
 }
@@ -274,7 +274,7 @@ function alertStockConfirm() {
 		traditional : true,
 		data : {
 			"alertStockNum" : alertStockNum, //int
-			"itemCommonId" : item_common_id, //bigint[]
+			"locationItemStockId" : location_item_stock_id, //bigint[]
 		},
 		dataType : "json",
 		success : function(result) {
@@ -285,12 +285,13 @@ function alertStockConfirm() {
 			if (rows > 0) {
 				//加载页面
 				loadStorageLocation(now_page, key_words, warehouse_info_id);
+                showMessage("调整库存成功");
 			} else {
-                showMessage("调整库存存失败");
+                showMessage("调整库存失败");
             }
 		},
 		error : function() {
-			showMessage("调整库存存失败");
+			showMessage("调整库存失败");
 		}
 	});
 }
@@ -312,13 +313,10 @@ function isPInt(str) {
  * @author 赵滨
  */
 function stockAdjustmentDelbtn() {
-	
 	//关闭弹出框
 	$(".stock_adjustment_box").css("display", "none");
-	
 	//关闭弹出框
 	$(".adjustment_box").css("display", "none");
-	
 }
 
 /**
@@ -352,11 +350,11 @@ function alertStocks() {
     //显示 警戒库 弹出框
 	$(".stock_adjustment_box").css("display", "block");
     
-    //赋值商品ID
-    item_common_id = temp;
+    //赋值ID
+    location_item_stock_id = temp;
 
     //输入记录条数
-	$(".stock_adjustment_content").find("i:first").html(item_common_id.length);
+	$(".stock_adjustment_content").find("i:first").html(location_item_stock_id.length);
 	
     //输入库存框内
 	$("#alertStocks_num").val("");
@@ -379,8 +377,8 @@ function alertStock() {
 	//赋值商品ID
 	temp.push(parseInt($(this).parent().parent().find("input[name='id[]']").val()));
 	
-	//赋值商品ID
-    item_common_id = temp;
+	//赋值ID
+    location_item_stock_id = temp;
 	
 	//获取商品编码
 	var erpItemNum = $(this).parent().parent().data("erpItemNum");
@@ -595,7 +593,7 @@ function createStorageLocation(map) {
 		tr = '';
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listItemCommonStock[i].id+'" class="check_coding" />';
-		tr += listItemCommonStock[i].id;	//ID
+		tr += listItemCommonStock[i].itemId;	//ID
 		tr += '</td>';
 		tr += '<td>';
 		tr += listItemCommonStock[i].erpItemNum;	//编码

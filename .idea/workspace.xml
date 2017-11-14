@@ -8,8 +8,14 @@
   <component name="ChangeListManager">
     <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,150 +56,7 @@
     <favorites_list name="rongcheng-erp" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="inventorySync.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
-              <folding>
-                <element signature="e#11049#11218#0" expanded="false" />
-                <element signature="e#11294#11462#0" expanded="false" />
-                <element signature="e#11790#11966#0" expanded="false" />
-                <marker date="1510569317932" expanded="true" signature="14298:14316" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="14448:14466" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="14516:14534" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="14584:14602" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="14652:14670" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="18129:18147" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="18480:18497" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="18598:18649" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="18805:18822" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="18927:18978" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="19134:19151" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="19250:19301" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="20290:20308" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="20496:20514" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="28745:28759" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="29766:29780" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="30690:30704" ph="..." />
-                <marker date="1510569317932" expanded="true" signature="31304:31318" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8900">
-              <caret line="379" column="0" lean-forward="false" selection-start-line="379" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5025">
-              <caret line="210" column="78" lean-forward="false" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="900" column="14" lean-forward="true" selection-start-line="900" selection-start-column="14" selection-end-line="900" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZB_InventoryDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="403" column="7" lean-forward="false" selection-start-line="403" selection-start-column="7" selection-end-line="403" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InventoryMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="1580" column="55" lean-forward="false" selection-start-line="1580" selection-start-column="43" selection-end-line="1580" selection-end-column="55" />
-              <folding>
-                <marker date="1510557713214" expanded="true" signature="573:3137" ph="select i.id,... " />
-                <marker date="1510557713214" expanded="true" signature="4615:7087" ph="select * fro... *" />
-                <marker date="1510557713214" expanded="true" signature="4655:6974" ph="select *, (s... id" />
-                <marker date="1510557713214" expanded="true" signature="7359:8742" ph="select count... *" />
-                <marker date="1510557713214" expanded="true" signature="7406:8662" ph="select *, (s... ifnull" />
-                <marker date="1510557713214" expanded="true" signature="7638:8068" ph="select sum(l... order_item_link" />
-                <marker date="1510557713214" expanded="true" signature="8980:9587" ph="select id, u... warehouse_info" />
-                <marker date="1510557713214" expanded="true" signature="9904:10497" ph="select id, w... " />
-                <marker date="1510557713214" expanded="true" signature="10812:11531" ph="select id, w... " />
-                <marker date="1510557713214" expanded="true" signature="11820:12420" ph="insert into location_item_stock... " />
-                <marker date="1510557713214" expanded="true" signature="12711:13357" ph="update locat... " />
-                <marker date="1510557713214" expanded="true" signature="13639:13809" ph="delete from " />
-                <marker date="1510557713214" expanded="true" signature="14057:14190" ph="delete from " />
-                <marker date="1510557713214" expanded="true" signature="14534:14964" ph="select sum(l... order_item_link" />
-                <marker date="1510557713214" expanded="true" signature="15829:17843" ph="select i.id,... " />
-                <marker date="1510557713214" expanded="true" signature="19432:20588" ph="select id, u... warehouse_info" />
-                <marker date="1510557713214" expanded="true" signature="21765:22465" ph="insert into warehouse_info... " />
-                <marker date="1510557713214" expanded="true" signature="22735:23490" ph="update wareh... " />
-                <marker date="1510557713214" expanded="true" signature="23809:24431" ph="select id, u... warehouse_info" />
-                <marker date="1510557713214" expanded="true" signature="24777:25635" ph="select id, w... stocklocation_info" />
-                <marker date="1510557713214" expanded="true" signature="26583:27213" ph="select id, w... stocklocation_info" />
-                <marker date="1510557713214" expanded="true" signature="27512:28096" ph="insert into stocklocation_info... " />
-                <marker date="1510557713214" expanded="true" signature="28347:28994" ph="update stock... " />
-                <marker date="1510557713214" expanded="true" signature="29197:29313" ph="delete from " />
-                <marker date="1510557713214" expanded="true" signature="29624:30973" ph="select i.id,... stocklocation_info" />
-                <marker date="1510557713214" expanded="true" signature="31265:32759" ph="select id, e... " />
-                <marker date="1510557713214" expanded="true" signature="35528:37696" ph="select *, (s... id" />
-                <marker date="1510557713214" expanded="true" signature="35633:37547" ph="select /* 商品... " />
-                <marker date="1510557713214" expanded="true" signature="35979:36001" ph="/* 商品包装（是否破损... " />
-                <marker date="1510557713214" expanded="true" signature="36710:36727" ph="/*库存自动同步状况（开... " />
-                <marker date="1510557713214" expanded="true" signature="36942:36964" ph="/*20.erp专用-库... " />
-                <marker date="1510557713214" expanded="true" signature="37024:37061" ph="/*1.系统商品信息表1... " />
-                <marker date="1510557713214" expanded="true" signature="38055:38907" ph="select /*库存自... item_common_info" />
-                <marker date="1510557713214" expanded="true" signature="38070:38087" ph="/*库存自动同步状况（开... " />
-                <marker date="1510557713214" expanded="true" signature="38104:38260" ph="select max(p... platform_erp_link" />
-                <marker date="1510557713214" expanded="true" signature="38302:38339" ph="/*1.系统商品信息表1... " />
-                <marker date="1510557713214" expanded="true" signature="38396:38418" ph="/*20.erp专用-库... " />
-                <marker date="1510557713214" expanded="true" signature="39351:40650" ph="SELECT si.na... platform_erp_link" />
-                <marker date="1510557713214" expanded="true" signature="39351:40652" ph="SELECT si.na... platform_erp_link" />
-                <marker date="1510557713214" expanded="true" signature="40882:41471" ph="SELECT lis.i... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="41718:43753" ph="update platf... " />
-                <marker date="1510557713214" expanded="true" signature="43957:44683" ph="select id, u... warehouse_info" />
-                <marker date="1510557713214" expanded="true" signature="44895:45497" ph="select id, w... stocklocation_info" />
-                <marker date="1510557713214" expanded="true" signature="45857:47751" ph="SELECT * FRO... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="45857:47778" ph="SELECT l.id,... " />
-                <marker date="1510557713214" expanded="true" signature="46865:47741" ph="SELECT item_... item_id" />
-                <marker date="1510557713214" expanded="true" signature="46903:47715" ph="SELECT lson.... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="46903:47719" ph="SELECT lson.... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="48080:48928" ph="SELECT count... bind_id" />
-                <marker date="1510557713214" expanded="true" signature="48111:48912" ph="SELECT * FRO... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="48119:48911" ph="SELECT lson.... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="48911:48912" ph="SELECT lson.... location_item_stock" />
-                <marker date="1510557713214" expanded="true" signature="49260:49464" ph="update locat... " />
-                <marker date="1510557713214" expanded="true" signature="49835:51352" ph="SELECT l.id,... " />
-                <marker date="1510557713214" expanded="true" signature="51666:52358" ph="SELECT l.id,... " />
-                <marker date="1510557713214" expanded="true" signature="52684:53264" ph="select id, w... " />
-                <marker date="1510557713214" expanded="true" signature="53525:54937" ph="update locat... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -206,36 +69,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>not nu</find>
-      <find>listItemCommonSync[i].</find>
-      <find>var configuations</find>
-      <find>{}</find>
-      <find>var configuations = new Array();</find>
-      <find>requ</find>
-      <find>/inventorySync/listInventorySyncByItemIds.do</find>
-      <find>listInventorySyncByItem</find>
-      <find>JSONObject</find>
-      <find>configuations</find>
-      <find>if</find>
-      <find>&lt;if test=&quot;p</find>
-      <find>console.log(JSON.stringify(configuations));</find>
-      <find>platformErpLinkShopWarehouseInfoList</find>
-      <find>018bd1cb-a71f-4af1-b4fa-c17aeab7c7c9</find>
-      <find>/inventorySync/listInventorySyncByItemBind.do</find>
-      <find>BigInteger</find>
-      <find>listInventorySyncByItemBind</find>
-      <find>listItemCommonSyncByKeywords</find>
+      <find>&lt;if test=&quot;param</find>
       <find>getLocationItemStockByItemCommonId</find>
-      <find>getLocationItemStockByItemlocationId</find>
-      <find>ByItem</find>
-      <find>listPlatformErpLinkShopWarehouseInfo</find>
-      <find>synchronize_id_map</find>
-      <find>warehouseStockLocation</find>
-      <find>existRepetitionShop</find>
-      <find>existRepetition</find>
-      <find>data</find>
-      <find>insertSelectOption</find>
+      <find>&lt;if</find>
+      <find>modifyLocationItemStockByItemId</find>
+      <find>listStockOfWarehouse</find>
+      <find>listLocationItemStockByItemCommonId</find>
+      <find>库存状态条数</find>
+      <find>库存状态</find>
+      <find>modifyLocationItemStock</find>
+      <find>/inventoryState/updateInventoryState.do</find>
+      <find>/storageLocation/loadStorageLocation.do</find>
+      <find>s.owner_id = #{0}</find>
+      <find>listItemCommonStockByAlertStock</find>
+      <find>countItemCommonStockByAlertStock</find>
+      <find>listItemCommonStockByKeywords</find>
+      <find>countItemCommonStockByKeywords</find>
+      <find>getItemCommonStockByWarehouseInfoId</find>
+      <find>listItemCommonStocklocationByKeywords</find>
+      <find>countItemCommonStocklocationByKeywords</find>
+      <find>t</find>
+      <find>item_common_id</find>
+      <find>location_item_stock_id</find>
+      <find>/storageLocation/updateStorageLocation.do</find>
+      <find>locationItemStockId</find>
+      <find>/storageLocation/updateStocksEmpty.do</find>
+      <find>存存</find>
       <find>console</find>
+      <find>console.log</find>
+      <find>tocklocation</find>
+      <find>conso</find>
     </findStrings>
     <replaceStrings>
       <replace>/util/cookie_util.js</replace>
@@ -250,9 +113,18 @@
       <replace>locationItemStockAndItem</replace>
       <replace>nowPage</replace>
       <replace>maxPage</replace>
+      <replace>Stocklocation</replace>
+      <replace>stocklocation_select</replace>
+      <replace>tocklocation</replace>
+      <replace>location_item_stock_id</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="赵滨" />
+      </list>
+    </option>
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -298,8 +170,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/js/commodity_matching.js" />
         <option value="$PROJECT_DIR$/src/test/java/TestBase.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateService.java" />
@@ -308,12 +178,14 @@
         <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendInvoiceTemplate.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/T1.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/T1.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
       </list>
     </option>
@@ -462,9 +334,8 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -520,6 +391,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="inventory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="zb" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -535,6 +423,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -905,7 +794,8 @@
       <workItem from="1510104736836" duration="24213000" />
       <workItem from="1510190537637" duration="25485000" />
       <workItem from="1510277619747" duration="24905000" />
-      <workItem from="1510536860381" duration="26537000" />
+      <workItem from="1510536860381" duration="26575000" />
+      <workItem from="1510623230055" duration="25268000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -991,22 +881,17 @@
       <option name="project" value="LOCAL" />
       <updated>1510308303056</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="日常上传">
+      <created>1510569345828</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1510569345828</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="T1_t10 - 2017.11.10 at 16h 13m 07s.xml">
-      <configuration name="T1.t10" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="T1_t11 - 2017.11.10 at 11h 56m 35s.xml">
-      <configuration name="T1.t11" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="T1_t11 - 2017.11.10 at 11h 56m 52s.xml">
-      <configuration name="T1.t11" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="T1_t11 - 2017.11.10 at 11h 57m 15s.xml">
-      <configuration name="T1.t11" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="T1_t11 - 2017.11.10 at 11h 59m 18s.xml">
       <configuration name="T1.t11" configurationId="JUnit" />
     </history-entry>
@@ -1025,9 +910,21 @@
     <history-entry file="T1_t14 - 2017.11.13 at 16h 31m 33s.xml">
       <configuration name="T1.t14" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="T1_t14 - 2017.11.14 at 15h 31m 15s.xml">
+      <configuration name="T1.t14" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T1_t14 - 2017.11.14 at 15h 31m 27s.xml">
+      <configuration name="T1.t14" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T1_t14 - 2017.11.14 at 15h 32m 41s.xml">
+      <configuration name="T1.t14" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="T1_t14 - 2017.11.14 at 15h 33m 12s.xml">
+      <configuration name="T1.t14" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="333671000" />
+    <option name="totallyTimeSpent" value="358977000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1058,11 +955,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32391304" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17697228" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17857143" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.50647247" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5038002" order="6" side_tool="true" content_ui="tabs" />
@@ -1116,7 +1013,9 @@
     <MESSAGE value="日常上传，全部完成“云仓商品配对”" />
     <MESSAGE value="修复所有页码显示BUG" />
     <MESSAGE value="库存同步未完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="库存同步未完成" />
+    <MESSAGE value="日常上传" />
+    <MESSAGE value="仓库管理模块完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="仓库管理模块完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1125,46 +1024,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/logs/error.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/StockInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/StocklocationInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/spring-mybatis.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="66" column="19" lean-forward="true" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
-          <folding>
-            <element signature="e#2888#2928#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/jdbc.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -1183,14 +1042,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformErpLink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1258,22 +1109,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/commodityMatching.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/LocationItemStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="55" column="21" lean-forward="true" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/ItemCommonInfo/ItemCommonInfoServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -1288,67 +1123,6 @@
           <folding>
             <element signature="e#1463#1464#0" expanded="false" />
             <element signature="e#1564#1565#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="577" column="41" lean-forward="true" selection-start-line="577" selection-start-column="41" selection-end-line="577" selection-end-column="41" />
-          <folding>
-            <marker date="1510190883622" expanded="true" signature="10791:10824" ph="..." />
-            <marker date="1510190883622" expanded="true" signature="11248:11262" ph="..." />
-            <marker date="1510190883622" expanded="true" signature="12269:12283" ph="..." />
-            <marker date="1510190883622" expanded="true" signature="13193:13207" ph="..." />
-            <marker date="1510190883622" expanded="true" signature="13807:13821" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="644" column="39" lean-forward="true" selection-start-line="644" selection-start-column="39" selection-end-line="644" selection-end-column="39" />
-          <folding>
-            <marker date="1510191538427" expanded="true" signature="11447:11459" ph="..." />
-            <marker date="1510191538427" expanded="true" signature="13434:13448" ph="..." />
-            <marker date="1510191538427" expanded="true" signature="14457:14471" ph="..." />
-            <marker date="1510191538427" expanded="true" signature="15385:15399" ph="..." />
-            <marker date="1510191538427" expanded="true" signature="16005:16019" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4235">
-          <caret line="526" column="9" lean-forward="false" selection-start-line="526" selection-start-column="9" selection-end-line="526" selection-end-column="9" />
-          <folding>
-            <marker date="1510191253564" expanded="true" signature="13492:13525" ph="..." />
-            <marker date="1510191253564" expanded="true" signature="13953:13967" ph="..." />
-            <marker date="1510191253564" expanded="true" signature="14976:14990" ph="..." />
-            <marker date="1510191253564" expanded="true" signature="15904:15918" ph="..." />
-            <marker date="1510191253564" expanded="true" signature="16524:16538" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="549" column="54" lean-forward="true" selection-start-line="549" selection-start-column="54" selection-end-line="549" selection-end-column="54" />
-          <folding>
-            <marker date="1510192061590" expanded="true" signature="10426:10440" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="11454:11468" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="12392:12406" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="13014:13028" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="22096:22108" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="22229:22241" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="23312:23326" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="24340:24354" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="25278:25292" ph="..." />
-            <marker date="1510192061590" expanded="true" signature="25900:25914" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1401,13 +1175,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
           <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding>
-            <marker date="1509507461333" expanded="true" signature="7775:8479" ph="select id, t... field_coordinate" />
-            <marker date="1509507461333" expanded="true" signature="8836:10309" ph="select i.id " />
-            <marker date="1509507461333" expanded="true" signature="10653:11481" ph="select id, c... print_template" />
-            <marker date="1509507461333" expanded="true" signature="11783:14008" ph="select id, e... order_info" />
-            <marker date="1509507461333" expanded="true" signature="14234:16341" ph="update order... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1415,14 +1182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
           <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-          <folding>
-            <marker date="1509507461333" expanded="true" signature="2013:2966" ph="insert into print_template... " />
-            <marker date="1509507461333" expanded="true" signature="3195:3308" ph="delete from " />
-            <marker date="1509507461333" expanded="true" signature="3603:4462" ph="update print... " />
-            <marker date="1509507461333" expanded="true" signature="7013:7835" ph="select id, c... print_template" />
-            <marker date="1509507461333" expanded="true" signature="8159:8989" ph="select id, c... print_template" />
-            <marker date="1509507461333" expanded="true" signature="9330:10201" ph="select id, c... print_template" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1468,10 +1227,200 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="211" column="6" lean-forward="false" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformErpLinkShopWarehouseInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-110">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/math/BigInteger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="3517" column="15" lean-forward="false" selection-start-line="3517" selection-start-column="15" selection-end-line="3517" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventorySync.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryList.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-31">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryState.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/location.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/storageLocation.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="18" column="43" lean-forward="true" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/commodityMatching.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformErpLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="208" column="16" lean-forward="false" selection-start-line="208" selection-start-column="16" selection-end-line="208" selection-end-column="16" />
+          <folding>
+            <element signature="e#8178#8179#0" expanded="true" />
+            <element signature="e#8215#8216#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/T1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="159" column="0" lean-forward="true" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+          <folding>
+            <element signature="method#t7#0;class#T1#0" expanded="false" />
+            <element signature="method#t8#0;class#T1#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/LocationItemStock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="93" column="14" lean-forward="true" selection-start-line="93" selection-start-column="14" selection-end-line="93" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="759" column="12" lean-forward="true" selection-start-line="759" selection-start-column="12" selection-end-line="759" selection-end-column="12" />
+          <folding>
+            <element signature="e#6118#6122#0" expanded="true" />
+            <element signature="e#6816#6820#0" expanded="true" />
+            <element signature="e#8397#8401#0" expanded="true" />
+            <marker date="1510650210166" expanded="true" signature="573:2478" ph="select i.id,... " />
+            <marker date="1510650210166" expanded="true" signature="573:3080" ph="select i.id,... " />
+            <marker date="1510650210166" expanded="true" signature="4449:6864" ph="select * fro... *" />
+            <marker date="1510650210166" expanded="true" signature="4489:6751" ph="select *, (s... id" />
+            <marker date="1510650210166" expanded="true" signature="7134:8412" ph="select count... *" />
+            <marker date="1510650210166" expanded="true" signature="7181:8332" ph="select *, (s... ifnull" />
+            <marker date="1510650210166" expanded="true" signature="7413:7843" ph="select sum(l... order_item_link" />
+            <marker date="1510650210166" expanded="true" signature="8648:9249" ph="select id, u... warehouse_info" />
+            <marker date="1510650210166" expanded="true" signature="9564:10125" ph="select id, w... " />
+            <marker date="1510650210166" expanded="true" signature="10437:11141" ph="select id, w... " />
+            <marker date="1510650210166" expanded="true" signature="11428:12028" ph="insert into location_item_stock... " />
+            <marker date="1510650210166" expanded="true" signature="12317:13634" ph="update locat... " />
+            <marker date="1510650210166" expanded="true" signature="13914:14080" ph="delete from " />
+            <marker date="1510650210166" expanded="true" signature="14326:14455" ph="delete from " />
+            <marker date="1510650210166" expanded="true" signature="14799:15229" ph="select sum(l... order_item_link" />
+            <marker date="1510650210166" expanded="true" signature="15988:18040" ph="select i.id,... " />
+            <marker date="1510650210166" expanded="true" signature="19615:20771" ph="select id, u... warehouse_info" />
+            <marker date="1510650210166" expanded="true" signature="21944:22644" ph="insert into warehouse_info... " />
+            <marker date="1510650210166" expanded="true" signature="22912:23667" ph="update wareh... " />
+            <marker date="1510650210166" expanded="true" signature="23984:24606" ph="select id, u... warehouse_info" />
+            <marker date="1510650210166" expanded="true" signature="24950:25808" ph="select id, w... stocklocation_info" />
+            <marker date="1510650210166" expanded="true" signature="26744:27374" ph="select id, w... stocklocation_info" />
+            <marker date="1510650210166" expanded="true" signature="27665:28249" ph="insert into stocklocation_info... " />
+            <marker date="1510650210166" expanded="true" signature="28500:29147" ph="update stock... " />
+            <marker date="1510650210166" expanded="true" signature="29350:29464" ph="delete from " />
+            <marker date="1510650210166" expanded="true" signature="29774:31115" ph="select i.id,... stocklocation_info" />
+            <marker date="1510650210166" expanded="true" signature="31407:32901" ph="select id, e... " />
+            <marker date="1510650210166" expanded="true" signature="35669:37837" ph="select *, (s... id" />
+            <marker date="1510650210166" expanded="true" signature="35774:37688" ph="select /* 商品... " />
+            <marker date="1510650210166" expanded="true" signature="36120:36142" ph="/* 商品包装（是否破损... " />
+            <marker date="1510650210166" expanded="true" signature="36851:36868" ph="/*库存自动同步状况（开... " />
+            <marker date="1510650210166" expanded="true" signature="37083:37105" ph="/*20.erp专用-库... " />
+            <marker date="1510650210166" expanded="true" signature="37165:37202" ph="/*1.系统商品信息表1... " />
+            <marker date="1510650210166" expanded="true" signature="38196:39048" ph="select /*库存自... item_common_info" />
+            <marker date="1510650210166" expanded="true" signature="38211:38228" ph="/*库存自动同步状况（开... " />
+            <marker date="1510650210166" expanded="true" signature="38245:38401" ph="select max(p... platform_erp_link" />
+            <marker date="1510650210166" expanded="true" signature="38443:38480" ph="/*1.系统商品信息表1... " />
+            <marker date="1510650210166" expanded="true" signature="38537:38559" ph="/*20.erp专用-库... " />
+            <marker date="1510650210166" expanded="true" signature="39499:40863" ph="SELECT si.na... platform_erp_link" />
+            <marker date="1510650210166" expanded="true" signature="41092:41681" ph="SELECT lis.i... location_item_stock" />
+            <marker date="1510650210166" expanded="true" signature="41928:43963" ph="update platf... " />
+            <marker date="1510650210166" expanded="true" signature="44167:44893" ph="select id, u... warehouse_info" />
+            <marker date="1510650210166" expanded="true" signature="45105:45707" ph="select id, w... stocklocation_info" />
+            <marker date="1510650210166" expanded="true" signature="46067:47988" ph="SELECT l.id,... " />
+            <marker date="1510650210166" expanded="true" signature="48290:49138" ph="SELECT count... bind_id" />
+            <marker date="1510650210166" expanded="true" signature="48329:49121" ph="SELECT lson.... location_item_stock" />
+            <marker date="1510650210166" expanded="true" signature="49470:49674" ph="update locat... " />
+            <marker date="1510650210166" expanded="true" signature="50045:51562" ph="SELECT l.id,... " />
+            <marker date="1510650210166" expanded="true" signature="52894:53474" ph="select id, w... " />
+            <marker date="1510650210166" expanded="true" signature="53735:55147" ph="update locat... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="203" column="62" lean-forward="true" selection-start-line="203" selection-start-column="62" selection-end-line="203" selection-end-column="62" />
+          <folding>
+            <element signature="e#24836#24852#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="87" column="80" lean-forward="true" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+        <state relative-caret-position="330">
+          <caret line="333" column="18" lean-forward="false" selection-start-line="333" selection-start-column="7" selection-end-line="333" selection-end-column="18" />
           <folding>
             <element signature="e#31474#32158#0" expanded="false" />
             <marker date="1510190720550" expanded="true" signature="15915:15929" ph="..." />
@@ -1486,172 +1435,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/math/BigInteger.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-377">
-          <caret line="604" column="11" lean-forward="false" selection-start-line="604" selection-start-column="11" selection-end-line="604" selection-end-column="11" />
+        <state relative-caret-position="341">
+          <caret line="644" column="39" lean-forward="true" selection-start-line="644" selection-start-column="39" selection-end-line="644" selection-end-column="39" />
           <folding>
-            <element signature="e#22896#22897#0" expanded="false" />
-            <element signature="e#22925#22926#0" expanded="false" />
+            <marker date="1510191538427" expanded="true" signature="11447:11459" ph="..." />
+            <marker date="1510191538427" expanded="true" signature="13434:13448" ph="..." />
+            <marker date="1510191538427" expanded="true" signature="14457:14471" ph="..." />
+            <marker date="1510191538427" expanded="true" signature="15385:15399" ph="..." />
+            <marker date="1510191538427" expanded="true" signature="16005:16019" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8900">
-          <caret line="379" column="0" lean-forward="false" selection-start-line="379" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
+        <state relative-caret-position="334">
+          <caret line="155" column="34" lean-forward="true" selection-start-line="155" selection-start-column="34" selection-end-line="155" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5025">
-          <caret line="210" column="78" lean-forward="false" selection-start-line="210" selection-start-column="58" selection-end-line="210" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/PlatformErpLinkShopWarehouseInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="36" column="22" lean-forward="false" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="403" column="7" lean-forward="false" selection-start-line="403" selection-start-column="7" selection-end-line="403" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="211" column="6" lean-forward="false" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/T1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="174" column="0" lean-forward="true" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
-          <folding>
-            <element signature="method#t7#0;class#T1#0" expanded="false" />
-            <element signature="method#t8#0;class#T1#0" expanded="false" />
-            <element signature="e#3630#3631#0" expanded="true" />
-            <element signature="e#3730#3731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="900" column="14" lean-forward="true" selection-start-line="900" selection-start-column="14" selection-end-line="900" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="1580" column="55" lean-forward="false" selection-start-line="1580" selection-start-column="43" selection-end-line="1580" selection-end-column="55" />
-          <folding>
-            <marker date="1510557713214" expanded="true" signature="573:3137" ph="select i.id,... " />
-            <marker date="1510557713214" expanded="true" signature="4615:7087" ph="select * fro... *" />
-            <marker date="1510557713214" expanded="true" signature="4655:6974" ph="select *, (s... id" />
-            <marker date="1510557713214" expanded="true" signature="7359:8742" ph="select count... *" />
-            <marker date="1510557713214" expanded="true" signature="7406:8662" ph="select *, (s... ifnull" />
-            <marker date="1510557713214" expanded="true" signature="7638:8068" ph="select sum(l... order_item_link" />
-            <marker date="1510557713214" expanded="true" signature="8980:9587" ph="select id, u... warehouse_info" />
-            <marker date="1510557713214" expanded="true" signature="9904:10497" ph="select id, w... " />
-            <marker date="1510557713214" expanded="true" signature="10812:11531" ph="select id, w... " />
-            <marker date="1510557713214" expanded="true" signature="11820:12420" ph="insert into location_item_stock... " />
-            <marker date="1510557713214" expanded="true" signature="12711:13357" ph="update locat... " />
-            <marker date="1510557713214" expanded="true" signature="13639:13809" ph="delete from " />
-            <marker date="1510557713214" expanded="true" signature="14057:14190" ph="delete from " />
-            <marker date="1510557713214" expanded="true" signature="14534:14964" ph="select sum(l... order_item_link" />
-            <marker date="1510557713214" expanded="true" signature="15829:17843" ph="select i.id,... " />
-            <marker date="1510557713214" expanded="true" signature="19432:20588" ph="select id, u... warehouse_info" />
-            <marker date="1510557713214" expanded="true" signature="21765:22465" ph="insert into warehouse_info... " />
-            <marker date="1510557713214" expanded="true" signature="22735:23490" ph="update wareh... " />
-            <marker date="1510557713214" expanded="true" signature="23809:24431" ph="select id, u... warehouse_info" />
-            <marker date="1510557713214" expanded="true" signature="24777:25635" ph="select id, w... stocklocation_info" />
-            <marker date="1510557713214" expanded="true" signature="26583:27213" ph="select id, w... stocklocation_info" />
-            <marker date="1510557713214" expanded="true" signature="27512:28096" ph="insert into stocklocation_info... " />
-            <marker date="1510557713214" expanded="true" signature="28347:28994" ph="update stock... " />
-            <marker date="1510557713214" expanded="true" signature="29197:29313" ph="delete from " />
-            <marker date="1510557713214" expanded="true" signature="29624:30973" ph="select i.id,... stocklocation_info" />
-            <marker date="1510557713214" expanded="true" signature="31265:32759" ph="select id, e... " />
-            <marker date="1510557713214" expanded="true" signature="35528:37696" ph="select *, (s... id" />
-            <marker date="1510557713214" expanded="true" signature="35633:37547" ph="select /* 商品... " />
-            <marker date="1510557713214" expanded="true" signature="35979:36001" ph="/* 商品包装（是否破损... " />
-            <marker date="1510557713214" expanded="true" signature="36710:36727" ph="/*库存自动同步状况（开... " />
-            <marker date="1510557713214" expanded="true" signature="36942:36964" ph="/*20.erp专用-库... " />
-            <marker date="1510557713214" expanded="true" signature="37024:37061" ph="/*1.系统商品信息表1... " />
-            <marker date="1510557713214" expanded="true" signature="38055:38907" ph="select /*库存自... item_common_info" />
-            <marker date="1510557713214" expanded="true" signature="38070:38087" ph="/*库存自动同步状况（开... " />
-            <marker date="1510557713214" expanded="true" signature="38104:38260" ph="select max(p... platform_erp_link" />
-            <marker date="1510557713214" expanded="true" signature="38302:38339" ph="/*1.系统商品信息表1... " />
-            <marker date="1510557713214" expanded="true" signature="38396:38418" ph="/*20.erp专用-库... " />
-            <marker date="1510557713214" expanded="true" signature="39351:40650" ph="SELECT si.na... platform_erp_link" />
-            <marker date="1510557713214" expanded="true" signature="39351:40652" ph="SELECT si.na... platform_erp_link" />
-            <marker date="1510557713214" expanded="true" signature="40882:41471" ph="SELECT lis.i... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="41718:43753" ph="update platf... " />
-            <marker date="1510557713214" expanded="true" signature="43957:44683" ph="select id, u... warehouse_info" />
-            <marker date="1510557713214" expanded="true" signature="44895:45497" ph="select id, w... stocklocation_info" />
-            <marker date="1510557713214" expanded="true" signature="45857:47751" ph="SELECT * FRO... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="45857:47778" ph="SELECT l.id,... " />
-            <marker date="1510557713214" expanded="true" signature="46865:47741" ph="SELECT item_... item_id" />
-            <marker date="1510557713214" expanded="true" signature="46903:47715" ph="SELECT lson.... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="46903:47719" ph="SELECT lson.... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="48080:48928" ph="SELECT count... bind_id" />
-            <marker date="1510557713214" expanded="true" signature="48111:48912" ph="SELECT * FRO... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="48119:48911" ph="SELECT lson.... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="48911:48912" ph="SELECT lson.... location_item_stock" />
-            <marker date="1510557713214" expanded="true" signature="49260:49464" ph="update locat... " />
-            <marker date="1510557713214" expanded="true" signature="49835:51352" ph="SELECT l.id,... " />
-            <marker date="1510557713214" expanded="true" signature="51666:52358" ph="SELECT l.id,... " />
-            <marker date="1510557713214" expanded="true" signature="52684:53264" ph="select id, w... " />
-            <marker date="1510557713214" expanded="true" signature="53525:54937" ph="update locat... " />
+            <marker date="1510651173542" expanded="true" signature="10861:10894" ph="..." />
+            <marker date="1510651173542" expanded="true" signature="11318:11332" ph="..." />
+            <marker date="1510651173542" expanded="true" signature="12339:12353" ph="..." />
+            <marker date="1510651173542" expanded="true" signature="13263:13277" ph="..." />
+            <marker date="1510651173542" expanded="true" signature="13877:13891" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="583" column="0" lean-forward="false" selection-start-line="583" selection-start-column="0" selection-end-line="583" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="252" column="0" lean-forward="true" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
           <folding>
-            <element signature="e#11049#11218#0" expanded="false" />
-            <element signature="e#11294#11462#0" expanded="false" />
-            <element signature="e#11790#11966#0" expanded="false" />
-            <marker date="1510569317932" expanded="true" signature="14298:14316" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="14448:14466" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="14516:14534" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="14584:14602" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="14652:14670" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="18129:18147" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="18480:18497" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="18598:18649" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="18805:18822" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="18927:18978" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="19134:19151" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="19250:19301" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="20290:20308" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="20496:20514" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="28745:28759" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="29766:29780" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="30690:30704" ph="..." />
-            <marker date="1510569317932" expanded="true" signature="31304:31318" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="14062:14080" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="14212:14230" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="14280:14298" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="14348:14366" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="14416:14434" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="17893:17911" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="18244:18261" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="18362:18413" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="18569:18586" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="18691:18742" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="18898:18915" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="19014:19065" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="20054:20072" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="20260:20278" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="28547:28561" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="29568:29582" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="30492:30506" ph="..." />
+            <marker date="1510651484938" expanded="true" signature="31106:31120" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="53" column="11" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
+          <folding>
+            <marker date="1510192061590" expanded="true" signature="10426:10440" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="11454:11468" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="12392:12406" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="13014:13028" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="22096:22108" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="22229:22241" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="23312:23326" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="24340:24354" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="25278:25292" ph="..." />
+            <marker date="1510192061590" expanded="true" signature="25900:25914" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="312" column="13" lean-forward="true" selection-start-line="312" selection-start-column="13" selection-end-line="312" selection-end-column="13" />
+          <folding>
+            <marker date="1510651432784" expanded="true" signature="13678:13711" ph="..." />
+            <marker date="1510651432784" expanded="true" signature="14139:14153" ph="..." />
+            <marker date="1510651432784" expanded="true" signature="15162:15176" ph="..." />
+            <marker date="1510651432784" expanded="true" signature="16090:16104" ph="..." />
+            <marker date="1510651432784" expanded="true" signature="16710:16724" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="152" column="14" lean-forward="true" selection-start-line="152" selection-start-column="14" selection-end-line="152" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -67,11 +67,9 @@ public class ZB_InventoryController {
     @RequestMapping("/inventoryState/loadInventoryState.do")
     public JsonResult loadInventoryState(Integer nowPage, String keywords, Boolean isAlertStock,
                                          BigInteger warehouseInfoId) {
-
         //加载
         Map<String, Object> map =
                 inventoryService.loadInventoryState(nowPage, rows, keywords, isAlertStock, ownerId, warehouseInfoId);
-
         //返回
         return new JsonResult(map);
     }
@@ -93,15 +91,15 @@ public class ZB_InventoryController {
      * 修改 警戒库存
      *
      * @param alertStockNum 警戒库存
-     * @param itemCommonId  商品ID
+     * @param locationItemStockId  库位库存ID
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/inventoryState/updateInventoryState.do")
-    public JsonResult updateInventoryState(Integer alertStockNum, BigInteger[] itemCommonId) {
+    public JsonResult updateInventoryState(Integer alertStockNum, BigInteger[] locationItemStockId) {
 
-        return new JsonResult(inventoryService.updateInventoryState(alertStockNum, itemCommonId, ownerId));
+        return new JsonResult(inventoryService.updateInventoryState(alertStockNum, locationItemStockId, ownerId));
     }
 
     /**
@@ -138,29 +136,28 @@ public class ZB_InventoryController {
      * 修改 库位库存
      *
      * @param alertStockNum 库存
-     * @param itemCommonId  商品ID
+     * @param locationItemStockId  库位库存ID
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/storageLocation/updateStorageLocation.do")
-    public JsonResult updateStorageLocation(Integer alertStockNum, BigInteger[] itemCommonId) {
-
-        return new JsonResult(inventoryService.updateStorageLocation(alertStockNum, itemCommonId, ownerId));
+    public JsonResult updateStorageLocation(Integer alertStockNum, BigInteger[] locationItemStockId) {
+        return new JsonResult(inventoryService.updateStorageLocation(alertStockNum, locationItemStockId, ownerId));
     }
 
     /**
      * 修改 库存清零
      *
-     * @param itemCommonId 商品ID
+     * @param locationItemStockId  库位库存ID
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/storageLocation/updateStocksEmpty.do")
-    public JsonResult updateStocksEmpty(BigInteger[] itemCommonId) {
+    public JsonResult updateStocksEmpty(BigInteger[] locationItemStockId) {
 
-        return new JsonResult(inventoryService.updateStocksEmpty(itemCommonId, ownerId));
+        return new JsonResult(inventoryService.updateStocksEmpty(locationItemStockId, ownerId));
     }
 
     /**
@@ -393,16 +390,17 @@ public class ZB_InventoryController {
     /**
      * 设置 库存同步配置
      * @param request
+     * @param itemIds 商品ID数组
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/inventorySync/updateInventorySyncConfiguations.do")
-    public JsonResult updateInventorySyncConfiguations(HttpServletRequest request) {
+    public JsonResult updateInventorySyncConfiguations(HttpServletRequest request, BigInteger[] itemIds) {
         //获取配置
         String configuations = request.getParameter("configuations");
         //设置 库存同步配置
-        int row = inventoryService.updateInventorySyncConfiguations(configuations, ownerId);
+        int row = inventoryService.updateInventorySyncConfiguations(configuations, itemIds, ownerId);
         //返回
         return new JsonResult(row);
     }

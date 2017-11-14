@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo;
 import com.rongcheng.erp.entity.*;
 import com.rongcheng.erp.utils.UUIDTool;
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,6 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      */
     public Map<String, Object> loadInventoryState(Integer nowPage, Integer rows, String keywords, 
             Boolean isAlertStock, BigInteger ownerId, BigInteger warehouseInfoId) {
-        
         //起始行数
         int start = (nowPage - 1) * rows;
         
@@ -102,29 +100,26 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * 修改 警戒库存
      * 
      * @param alertStockNum 警戒库存
-     * @param itemCommonId 商品ID
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    public int updateInventoryState(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId) {
+    public int updateInventoryState(Integer alertStockNum, BigInteger[] locationItemStockId, BigInteger ownerId) {
         //当前时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
         //更新的行数
         int rows = 0;
         
         //遍历ID数组
-        for (int i = 0; i < itemCommonId.length; i++) {
-            //根据 商品ID 查询 库存信息表
-            LocationItemStock locationItemStock = 
-                    inventoryDAO.getLocationItemStockByItemCommonId(itemCommonId[i], ownerId);
-            //如果没有该对象
-            if (locationItemStock != null) {
-                locationItemStock.setAlertStock(alertStockNum);                //设置警戒量
-                locationItemStock.setGmtModified(time);                //设置修改时间
-                //修改
-                rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
-            }
+        for (int i = 0; i < locationItemStockId.length; i++) {
+            LocationItemStock locationItemStock = new LocationItemStock();
+            locationItemStock.setId(locationItemStockId[i]);    //设置ID
+            locationItemStock.setOwnerId(ownerId);              //设置主账号ID
+            locationItemStock.setAlertStock(alertStockNum);     //设置警戒量
+            locationItemStock.setGmtModified(time);             //设置修改时间
+            //修改
+            rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
         }
         return rows;
     }
@@ -167,121 +162,54 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * 修改 库位库存
      * 
      * @param alertStockNum 库存
-     * @param itemCommonId 商品ID
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    public int updateStorageLocation(Integer alertStockNum, BigInteger[] itemCommonId, BigInteger ownerId) {
+    public int updateStorageLocation(Integer alertStockNum, BigInteger[] locationItemStockId, BigInteger ownerId) {
         //当前时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
         //更新的行数
         int rows = 0;
-        
+
         //遍历ID数组
-        for (int i = 0; i < itemCommonId.length; i++) {
-            //根据 商品ID 查询 库存信息表
-            LocationItemStock locationItemStock = 
-                    inventoryDAO.getLocationItemStockByItemCommonId(itemCommonId[i], ownerId);
-            //如果有该对象
-            if (locationItemStock != null) {
-                locationItemStock.setStockQuantity(alertStockNum);                //设置库存
-                locationItemStock.setGmtModified(time);                //设置修改时间
-                //修改
-                rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
-            }
+        for (int i = 0; i < locationItemStockId.length; i++) {
+            LocationItemStock locationItemStock = new LocationItemStock();
+            locationItemStock.setId(locationItemStockId[i]);    //设置ID
+            locationItemStock.setOwnerId(ownerId);              //设置主账号ID
+            locationItemStock.setStockQuantity(alertStockNum);  //设置库存
+            locationItemStock.setGmtModified(time);             //设置修改时间
+            //修改
+            rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
         }
         return rows;
     }
     
     /**
      * 修改 库存清零
-     * 
-     * @param itemCommonId 商品ID
+     *
+     * @param locationItemStockId  库位库存ID
      * @param ownerId 主账号ID
      * @return
      * @author 赵滨
      */
-    public int updateStocksEmpty(BigInteger[] itemCommonId, BigInteger ownerId) {
-        
+    public int updateStocksEmpty(BigInteger[] locationItemStockId, BigInteger ownerId) {
         //当前时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        
         //更新的行数
         int rows = 0;
-        
+
         //遍历ID数组
-        for (int i = 0; i < itemCommonId.length; i++) {
-            
-            //根据 商品ID 查询 库存信息表
-            LocationItemStock locationItemStock = 
-                    inventoryDAO.getLocationItemStockByItemCommonId(itemCommonId[i], ownerId);
-            
-            //如果没有该对象
-            if (locationItemStock == null) {
-                
-                //创建
-                locationItemStock = new LocationItemStock();
-                
-                //设置记录编号
-                locationItemStock.setId(null);
-                
-                //设置仓库编码
-                locationItemStock.setWarehouseId(null);
-                
-                //设置库位编码
-                locationItemStock.setStocklocationId(null);
-                
-                //设置商品编号
-                locationItemStock.setItemId(itemCommonId[i]);
-                
-                //设置库存量
-                locationItemStock.setStockQuantity(0);
-                
-                //设置警戒量库存
-                locationItemStock.setAlertStock(0);
-                
-                //设置该库存商品是否参与发货
-                locationItemStock.setSendoutStatus(null);
-                
-                //设置自定义内容1
-                locationItemStock.setReserved1(null);
-
-                //设置备注
-                locationItemStock.setNote(null);
-
-                //设置用户主账户ID
-                locationItemStock.setOwnerId(ownerId);
-                
-                //设置操作人
-                locationItemStock.setOperatorId(null);
-                
-                //设置该记录是否被授权
-                locationItemStock.setAuthorization(null);
-                
-                //设置记录创建时间
-                locationItemStock.setGmtCreate(time);
-                
-                //设置记录修改时间
-                locationItemStock.setGmtModified(null);
-                
-                rows += inventoryDAO.saveLocationItemStock(locationItemStock);
-                
-            //如果有对象
-            } else {
-                
-                //设置库存
-                locationItemStock.setStockQuantity(0);
-                
-                //设置修改时间
-                locationItemStock.setGmtModified(time);
-                
-                //修改
-                rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
-                
-            }
+        for (int i = 0; i < locationItemStockId.length; i++) {
+            LocationItemStock locationItemStock = new LocationItemStock();
+            locationItemStock.setId(locationItemStockId[i]);    //设置ID
+            locationItemStock.setOwnerId(ownerId);              //设置主账号ID
+            locationItemStock.setStockQuantity(0);  //设置库存
+            locationItemStock.setGmtModified(time);             //设置修改时间
+            //修改
+            rows += inventoryDAO.modifyLocationItemStock(locationItemStock);
         }
-        
         return rows;
     }
     
@@ -913,14 +841,14 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
             //根据itemId去查询线上商品对应关系表中的信息，要求是店铺名称不能重复，可以出现多个店铺名称
             //获取 系统商品对应关系关联表 同步信息
             List<PlatformErpLinkShopWarehouseInfo> platformErpLinkShopWarehouseInfoList =
-                    inventoryDAO.listPlatformErpLinkShopWarehouseInfo(itemId, ownerId);
+                    inventoryDAO.listPlatformErpLinkShopWarehouseInfoByGroup(itemId, ownerId, true);
             map.put("platformErpLinkShopWarehouseInfoList", platformErpLinkShopWarehouseInfoList);
 
             //根据itemId去查询库存关联表中的仓库和库位
             //查询库位商品库存关联表 获取仓库和库位
-            List<Map<String, Object>> itemWarehouseStockLocationList =
-                    inventoryDAO.listItemWarehouseStockLocation(itemId, ownerId);
-            map.put("itemWarehouseStockLocationList", itemWarehouseStockLocationList);
+            List<Map<String, Object>> itemWarehouseStocklocationList =
+                    inventoryDAO.listItemWarehouseStocklocation(itemId, ownerId);
+            map.put("itemWarehouseStocklocationList", itemWarehouseStocklocationList);
 
             list.add(map);
         }
@@ -931,12 +859,53 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
     /**
      * 设置 库存同步配置
      * @param configuations 配置信息，json字符串
+     * @param itemIds 商品ID数组
      * @param ownerId   主账号ID
      * @return 修改的条数
      * @author 赵滨
      */
-    public int updateInventorySyncConfiguations(String configuations, BigInteger ownerId) {
+    public int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId) {
         int row = 0;
+
+        //遍历每一条商品，获取它的所有店铺和自动上传设置  eg:101,102
+        for (int i = 0; i < itemIds.length; i++) {
+            BigInteger itemId = itemIds[i];
+
+            //根据itemId去查询线上商品对应关系表中的信息，要求是店铺名称不能重复，可以出现多个店铺名称
+            //获取 系统商品对应关系关联表 同步信息
+            List<PlatformErpLinkShopWarehouseInfo> platformErpLinkShopWarehouseInfoList =
+                    inventoryDAO.listPlatformErpLinkShopWarehouseInfoByGroup(itemId, ownerId, false);
+
+            //根据itemId去查询库存关联表中的仓库和库位
+            //查询库位商品库存关联表 获取仓库和库位
+            List<Map<String, Object>> itemWarehouseStocklocationList =
+                    inventoryDAO.listItemWarehouseStocklocation(itemId, ownerId);
+
+            //遍历 系统商品对应关系关联表 同步信息，获取每一条 去与前台数据匹配，然后进行修改  eq:101的关联集合
+            for (int j = 0; j < platformErpLinkShopWarehouseInfoList.size(); j++) {
+                PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo =
+                        platformErpLinkShopWarehouseInfoList.get(j);
+                //检查配置，如果匹配到这条信息就修改
+                row += checkInventorySyncConfiguations(
+                        configuations, platformErpLinkShopWarehouseInfo, itemWarehouseStocklocationList);
+            }
+        }
+        return row;
+    }
+
+    /**
+     * 检查配置，如果匹配到这条信息就修改  eq:101的关联集合 中的 单条
+     * @param configuations 配置JSON字符串
+     * @param platformErpLinkShopWarehouseInfo 库位商品库存关联单条对象
+     * @param itemWarehouseStocklocationList 单条对象存放的仓库库位集合
+     * @return
+     */
+    private int checkInventorySyncConfiguations(
+            String configuations, PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo,
+            List<Map<String, Object>> itemWarehouseStocklocationList) {
+        //获取店铺ID
+        BigInteger shopId = platformErpLinkShopWarehouseInfo.getShopId();
+        //解析JSON，遍历其中的每一条店铺信息，匹配相关的内容
         try {
             // 把字符串转换为JSONArray对象
             JSONArray jsonArray = JSONArray.fromObject(configuations);
@@ -945,27 +914,100 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
                 for(int i = 0; i < jsonArray.size(); i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    //创建 系统商品对应关系关联表 然后设置信息
-                    PlatformErpLink platformErpLink = new PlatformErpLink();
+                    //如果店铺相同，继续检查
+                    if (shopId.toString().equals(jsonObject.get("shopId").toString())) {
+                        String warehouseId = jsonObject.get("warehouseId").toString();
+                        String stocklocationId = jsonObject.get("stocklocationId").toString();
 
-                    platformErpLink.setId(new BigInteger(jsonObject.get("id").toString()));
-                    platformErpLink.setAutoSynchron(new Integer(jsonObject.get("autoSynchron").toString()));
-                    platformErpLink.setAutoOnsale(new Integer(jsonObject.get("autoOnsale").toString()));
-                    platformErpLink.setSynchronException(new Integer(jsonObject.get("synchronException").toString()));
-                    platformErpLink.setAvailableStock(new Integer(jsonObject.get("availableStock").toString()));
-                    platformErpLink.setAllocationRatio(new Integer(jsonObject.get("allocationRatio").toString()));
-                    platformErpLink.setRemnantStock(new Integer(jsonObject.get("remnantStock").toString()));
-                    platformErpLink.setGmtModified(new Timestamp(System.currentTimeMillis()));
+                        //选中 全部仓库 全部库位
+                        if ("0".equals(warehouseId) && "0".equals(stocklocationId)) {
+                            //修改
+                            return updateInventorySyncConfiguation(
+                                    jsonObject, platformErpLinkShopWarehouseInfo.getId());
+                        }
 
-                    //修改
-                    row += inventoryDAO.updatePlatformErpLink(platformErpLink);
+                        //选中 其他仓库 全部库位
+                        if (!"0".equals(warehouseId) && "0".equals(stocklocationId)) {
+                            //检查是否存在相同仓库库位
+                            Boolean ExistRepetition =
+                                    ExistRepetitionWarehouseStocklocation(
+                                            itemWarehouseStocklocationList, warehouseId, "");
+                            if (ExistRepetition) {
+                                //修改
+                                return updateInventorySyncConfiguation(
+                                        jsonObject, platformErpLinkShopWarehouseInfo.getId());
+                            }
+                        }
+
+                        //选中 其他仓库 其他库位
+                        if (!"0".equals(warehouseId) && !"0".equals(stocklocationId)) {
+                            //检查是否存在相同仓库库位
+                            Boolean ExistRepetition =
+                                    ExistRepetitionWarehouseStocklocation(
+                                            itemWarehouseStocklocationList, warehouseId, stocklocationId);
+                            if (ExistRepetition) {
+                                //修改
+                                return updateInventorySyncConfiguation(
+                                        jsonObject, platformErpLinkShopWarehouseInfo.getId());
+                            }
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
+    }
 
-        return row;
+    /**
+     * 是否存在相同 仓库 库位
+     * @param itemWarehouseStocklocationList 需要查找的集合
+     * @param warehouseId 被检查的仓库
+     * @param stocklocationId 被检查的库位
+     * @return
+     * @author 赵滨
+     */
+    private Boolean ExistRepetitionWarehouseStocklocation(
+            List<Map<String, Object>> itemWarehouseStocklocationList, String warehouseId, String stocklocationId) {
+        //检查仓库和库位是否存在集合中，可以同时存在，也可以只检查仓库
+        //遍历集合
+        for (int i = 0; i < itemWarehouseStocklocationList.size(); i++) {
+            Map<String, Object> itemWarehouseStocklocation = itemWarehouseStocklocationList.get(i);
+            //仓库相同
+            if (itemWarehouseStocklocation.get("warehouseId").toString().equals(warehouseId)) {
+                //库位相同 或者 不检查库位
+                if (itemWarehouseStocklocation.get("stocklocationId").toString().equals(stocklocationId) ||
+                        "".toString().equals(stocklocationId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 修改 系统商品对应关系关联表 调用DAO层方法
+     * @param jsonObject 参数JSON对象
+     * @param platformErpLinkId 需要修改的ID
+     * @return
+     * @author 赵滨
+     */
+    private int updateInventorySyncConfiguation(JSONObject jsonObject, BigInteger platformErpLinkId) {
+        //创建 系统商品对应关系关联表 然后设置信息
+        PlatformErpLink platformErpLink = new PlatformErpLink();
+        platformErpLink.setId(platformErpLinkId);
+        platformErpLink.setAutoSynchron(new Integer(jsonObject.get("autoSynchron").toString()));
+        platformErpLink.setAutoOnsale(new Integer(jsonObject.get("autoOnsale").toString()));
+        platformErpLink.setSynchronException(new Integer(jsonObject.get("synchronException").toString()));
+        platformErpLink.setAvailableStock(new Integer(jsonObject.get("availableStock").toString()));
+        platformErpLink.setAllocationRatio(new Integer(jsonObject.get("allocationRatio").toString()));
+        platformErpLink.setRemnantStock(new Integer(jsonObject.get("remnantStock").toString()));
+        platformErpLink.setWarehouseId(new BigInteger(jsonObject.get("warehouseId").toString()));
+        platformErpLink.setStocklocationId(new BigInteger(jsonObject.get("stocklocationId").toString()));
+        platformErpLink.setGmtModified(new Timestamp(System.currentTimeMillis()));
+        //修改
+        return inventoryDAO.updatePlatformErpLink(platformErpLink);
     }
 
     /**
