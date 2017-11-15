@@ -1,10 +1,8 @@
 package com.rongcheng.erp.service.onlineCommodityRelation;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
     private String pageSize;
     
     /**
-     * 1.线上商品对应关系页面的分页查询
+     * 线上商品对应关系页面的分页查询
      */
 	@Override
 	public XzyJsonResult commonPage(BigInteger ownerId, Integer page) {		
@@ -51,10 +49,9 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
 		result.setMsg(ownerId.toString());
 		result.setStatus(0);
 		return result;
-	}
-	
+	}	
 	/**
-	 * 2."换"操作中"选择已有"弹出框页面的分页查询
+	 * "换"弹出框中"选择已有"页面的分页查询
 	 */
 	@Override
 	public XzyJsonResult commonPages(BigInteger ownerId, Integer page) {
@@ -77,9 +74,10 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
 		result.setData(link);
 		result.setStatus(0);
 		return result;
-	}   
+	} 
+	
 	/**
-	 * 3."换"操作中"选择已有"弹出框页面的模糊查询
+	 * "换"弹出框中"选择已有"页面的模糊查询
 	 */
 	@Override
 	public XzyJsonResult likeSele(String str, BigInteger ownerId,Integer page) {
@@ -91,7 +89,7 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
     	try {
     		item.setId(new BigInteger(str));
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}   	
     	item.setColor(str);
     	item.setSize(str);
@@ -113,7 +111,7 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
     	try {
     		id = new BigInteger(str);
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
     	map.put("id",id);
     	map.put("size", str);
@@ -124,6 +122,20 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
     	result.setMaxPage(max_page);
     	result.setPageSize(new Integer(pageSize));
     	result.setData(link);
+		result.setStatus(0);
+		return result;
+	}
+    /**
+     * "换"弹出框中"选择已有"页面的保存按钮
+     */
+	@Override
+	public XzyJsonResult modifyLinkInfo(BigInteger currentOwnerId, BigInteger common_id, BigInteger platformErpLinkId) {
+		XzyJsonResult result = new XzyJsonResult();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("ownerId", currentOwnerId);
+		map.put("itemId", common_id);
+		map.put("id", platformErpLinkId);
+		dao.updatePlatformErpLink(map);
 		result.setStatus(0);
 		return result;
 	}	

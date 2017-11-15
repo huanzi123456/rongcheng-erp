@@ -1,44 +1,81 @@
-/**
- * 线上商品对应关系页面
- */
 var currentOwnerId;             //当前用户的ownerid
-var now_page;//线上商品对应关系主页中分页查询的   当前页
-var input_change_page;//线上商品对应关系"换"操作中查询   当前页
+var now_page;                   //线上商品对应关系主页中分页查询的   当前页
 $(function(){
-	/**
-     * 1.线上商品对应关系的分页查询
-     */
+	//线上商品对应关系的分页查询
 	commonPage(1);
-	/**
-	 * 2."换"  操作中  "选择已有"  弹出框页面的分页查询
-	 */
-	$("#xzy_input_change").click(popoverPages(1));
-	/**
-	 * 3."选择已有" 弹出框页面的关键字查询
-	 */
+	//"换" 操作按钮(分页查询,保存按钮)
+	$("#xzy_limit").on("click","#xzy_input_change",change_input);
+	//"换" 弹出框的 "选择已有" 页面的关键字查询
 	$(".xzy_onBlur").blur(function(){popoverPages(1);});
-	/**
-	 * 4."选择已有" 弹出框页面的保存按钮
+	/*
+	 * 全选
 	 */
-	$("#xzy_save").click(function(){
-		var input_length = $("#xzy_limits tr").find("input[name='NumOne']").length;
-		console.log("leng:"+input_length);
-		//var boolean = $("#xzy_limits tr").find("input[name='NumOne']").prop("checked",true);
-		//$('input:radio[name="sex"]:checked')
-		for(var i=0;i<input_length;i++){
-			var bool = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").prop("checked");
-			if(bool){
-				var input_i = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").parent();
-				var common_id = input_i.next().text();//商品id
-				console.log("id:"+common_id);
-			}			
+	$("#xzy_limit").on("click",".xzy_checkAll",function(){
+		var ok = $(this).prop("checked");//选中状态
+		var num = $("#xzy_limit").find("input[name='id[]']").length;
+		if(ok){
+			for(var i=0;i<num;i++){
+				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",true);
+			}
+		}else{
+			for(var i=0;i<num;i++){
+				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",false);
+			}
 		}
-		
 	});
 });
 /**
- * 2."换"  操作中  "选择已有"  弹出框页面的分页查询
- * 3."选择已有" 弹出框页面的关键字查询
+ * "换" 操作按钮(分页查询,保存按钮)
+ */
+function change_input(){	
+	//线上商品关联表的id
+	var platformErpLinkId = $(this).parent().parent().find("td:first").attr("val");	
+	//清空关键字的输入框内容
+	$(".xzy_onBlur").val("");
+	//1.分页查询
+	popoverPages(1);
+	//2.保存按钮
+	$("#xzy_save").unbind("click").click(function(){
+		save_input(platformErpLinkId);
+	});
+}
+/**
+ * "换" 弹出框的 "选择已有" 页面的保存按钮
+ * @param platformErpLinkId:线上商品关联表的id
+ * @returns
+ */
+function save_input(platformErpLinkId){	
+	var input_length = $("#xzy_limits tr").find("input[name='NumOne']").length;
+	var common_id;
+	for(var i=0;i<input_length;i++){
+		var bool = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").prop("checked");
+		if(bool){
+			var input_i = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").parent();
+			//系统商品信息表1的id
+			common_id = input_i.next().text();
+		}			
+	}
+	//单选框的状态为选中时,才会修改信息
+	if(common_id != undefined){
+		$.ajax({
+			url:"/onLineCommodity/modifyInfo.do",
+			type:"post",
+			data:{"currentOwnerId":currentOwnerId,"common_id":common_id,"platformErpLinkId":platformErpLinkId},
+			dataType:"json",
+			success:function(result){
+				if(result.status == 0){					
+					commonPage(now_page);
+				}
+			},
+			error:function(){
+				alert("页面飞到瓜哇国去了....");
+			}
+		});
+	}
+}
+/**
+ * "换" 操作中 "选择已有" 弹出框页面的分页查询
+ * "换" 操作中 "选择已有" 弹出框页面的关键字查询
  * @param page
  * @returns 
  */
@@ -60,7 +97,7 @@ function popoverPages(page){
 					var list = datas[i].itemCommonInfo;
 					var color = list[0].color;
 					var size = list[0].size;
-					var commonSpecification;                             //商品规格
+					var commonSpecification;                            //商品规格
 					if(color == null){
 						commonSpecification = size;
 					}else{
@@ -90,13 +127,15 @@ function popoverPages(page){
 				$("#xzy_limits").append($table_tr);
 				//动态添加页码
 				pagination(maxPage,page,"novels","popoverPages",{num:2});
+				//添加 "换" 弹出框(点击保存按钮时,弹出框取消)
+				pop_up_box();
 			}
 		},
 		error:function(){"哎呀..页面不见了!"}
 	});
 }
 /**
- * 1.线上商品对应关系的分页查询
+ * 线上商品对应关系的分页查询
  * @param page:当前页
  * @returns
  */
@@ -107,8 +146,7 @@ function commonPage(page){
 		url:"/onLineCommodity/commonPage.do",
 		type:"post",
 		data:{"page":page},
-		dataType:"json",
-		async:false,
+		dataType:"json",		
 		success:function(result){
 			if(result.status == 0){
 				var pageSize = result.pageSize;                        //每页的记录数
@@ -117,12 +155,7 @@ function commonPage(page){
 				currentOwnerId = result.msg;
 				var five_tr ;
 				for(var i=0;i<datas.length;i++){
-					//线上商品信息
-					//var platformErpLinkId = datas[i].id;               //线上商品关联表的id
-					//var platformShopId = datas[i].platformShopId;      //平台店铺id
-					//var platformShopName = datas[i].platformShopName;  //平台店铺名称
-					//var platformItemSku = datas[i].platformItemSku;    //平台(来源)商品编码
-					//var platformItemName = datas[i].platformItemName;  //平台商品名称		
+					//线上商品信息	
 					var attr1 = datas[i].platformItemAttrvaluealias1;
 					var attr2 = datas[i].platformItemAttrvaluealias2;
 					var onlineSpecification;                           //线上商品规格
@@ -131,12 +164,8 @@ function commonPage(page){
 					}else{
 						onlineSpecification = attr1+"*"+attr2;
 					}
-					//var onlineImg = datas[i].platformUserImg;          //线上商品图片
 					//系统商品信息
 		    		var list = datas[i].itemCommonInfo;	;
-		    		//var itemCommonInfoId = list[0].id;                 //系统商品信息表的id
-		    		//var name = list[0].name;	                       //系统商品名称	
-		    		//var offlineImg = list[0].image1;                   //系统商品图片
 		    		var size = list[0].size;
 		    		var color = list[0].color;
 		    		var offlineSpecification;                          //系统商品规格
@@ -149,7 +178,7 @@ function commonPage(page){
 						offlineSpecification = "未设置系统商品规格";
 					}
 				    var one_tr = '<tr>'+
-			          '<td val='+datas[i].id+'>'+//线上商品关联表的id
+			          '<td val='+datas[i].platformErpLinkId+'>'+//线上商品关联表的id
 			            '<input type="checkbox" name="id[]" value="1" class="check_coding" /><br>'+
 			            ((page-1)*pageSize+(i+1))+
 			          '</td>'+
@@ -231,7 +260,7 @@ function commonPage(page){
  * 添加 "换" 弹出框
  * @returns
  */
-function pop_up_box(){
+function pop_up_box(){	
 	var single_updating_box=$(".single_updating_box"),
 		single_updating_bc=$(".single_updating_bc"),
 		single_new_bc=$(".single_new_bc"),

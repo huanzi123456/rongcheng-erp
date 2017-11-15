@@ -51,4 +51,6 @@ public interface Xzy_OnlineCommodityRelationDao {
      */
     Integer seleCountId(ItemCommonInfo item);
     List<ItemCommonAndEspInfo> likeEspInfo(Map<String,Object> map);
+    //4."换"操作中"选择已有"弹出框页面的保存按钮
+    void updatePlatformErpLink(Map<String,Object> map);
 }

@@ -9,24 +9,32 @@ import com.rongcheng.erp.dto.XzyJsonResult;
  */
 public interface Xzy_OnlineCommonRelationService {
 	/**
-	 * 分页查询
+	 * 线上商品对应关系页面的分页查询
 	 * @param ownerId
 	 * @param page
 	 * @return
 	 */
 	XzyJsonResult commonPage(BigInteger ownerId,Integer page);
 	/**
-	 * "换"操作中"选择已有"弹出框页面的分页查询
+	 * "换"弹出框中"选择已有"页面的分页查询
 	 * @param ownerId
 	 * @param page
 	 * @return
 	 */
 	XzyJsonResult commonPages(BigInteger ownerId,Integer page);
 	/**
-	 * "换"操作中"选择已有"弹出框页面的模糊查询
+	 * "换"弹出框中"选择已有"页面的模糊查询
 	 * @param str
 	 * @param ownerId
 	 * @return
 	 */
 	XzyJsonResult likeSele(String str,BigInteger ownerId,Integer page);
+	/**
+	 * "换"弹出框中"选择已有"页面的保存按钮
+	 * @param currentOwnerId
+	 * @param common_id
+	 * @param platformErpLinkId
+	 * @return
+	 */
+	XzyJsonResult modifyLinkInfo(BigInteger currentOwnerId,BigInteger common_id,BigInteger platformErpLinkId);
 }

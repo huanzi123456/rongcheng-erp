@@ -235,4 +235,14 @@
   OR    c.color LIKE CONCAT_WS('', '%', #{color}, '%')
   LIMIT #{page},#{pageSize}
 </select>
+<!-- 
+  4."换"操作中"选择已有"弹出框页面的保存按钮 
+ -->
+<update id="updatePlatformErpLink" parameterType="java.util.Map">
+  UPDATE platform_erp_link
+  SET
+  item_id = #{itemId,jdbcType=BIGINT,javaType=BIGINTEGER}
+  WHERE id = #{id,jdbcType=BIGINT,javaType=BIGINTEGER}
+  AND owner_id = #{ownerId,jdbcType=BIGINT,javaType=BIGINTEGER}
+</update>
 </mapper>

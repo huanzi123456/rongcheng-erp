@@ -32,7 +32,7 @@ public class Xzy_OnLineCommodityRelationController {
     	return "settings/commodityRelation";
     }
 	/**
-	 * 1.线上商品对应关系页面的分页查询
+	 * 线上商品对应关系页面的分页查询
 	 * @param page:当前页
 	 * @return
 	 */
@@ -46,9 +46,11 @@ public class Xzy_OnLineCommodityRelationController {
 		return result;
 	}
 	/**
-	 * 2."换"操作中"选择已有"弹出框页面的分页查询
-	 * @param page
-	 * @param request
+	 * "换"弹出框中"选择已有"页面的分页查询
+	 * 换"弹出框中"选择已有"页面的关键字查询
+	 * @param inputs           :关键字
+	 * @param page             :当前页
+	 * @param currentOwnerId   :ownerId
 	 * @return
 	 */
 	@RequestMapping("/commonPages.do")
@@ -61,17 +63,18 @@ public class Xzy_OnLineCommodityRelationController {
 			result = services.likeSele(inputs, currentOwnerId,page);
 		}
 		return result;
-	}
+	}	
 	/**
-	 * 3."换"操作中"选择已有"弹出框页面的关键字查询
-	 * @param inputs
-	 * @param currentOwnerId
+	 * "换"弹出框中"选择已有"页面的保存按钮
+	 * @param currentOwnerId     :ownerId
+	 * @param common_id          :系统商品信息表1的id
+	 * @param platformErpLinkId  :店铺商品-erp系统商品对应关系关联表的id
 	 * @return
 	 */
-//	@RequestMapping("/changeRelation.do")
-//	@ResponseBody
-//	public XzyJsonResult changeRelation(String inputs,BigInteger currentOwnerId,Integer page){	
-//		XzyJsonResult result = services.likeSele(inputs, currentOwnerId,page);
-//		return result;
-//	}
+	@RequestMapping("/modifyInfo.do")
+	@ResponseBody
+	public XzyJsonResult modifyInfo(BigInteger currentOwnerId,BigInteger common_id,BigInteger platformErpLinkId){
+		XzyJsonResult result = services.modifyLinkInfo(currentOwnerId, common_id, platformErpLinkId);	
+		return result;
+	}
 }
