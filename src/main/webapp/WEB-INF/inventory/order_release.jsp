@@ -48,7 +48,7 @@
 	            </tr>
 	        </thead>    
 	        <tbody id="list_body">  
-	            <tr>
+	            <!-- <tr>
 	                <td>1</td>
 	                <td>
 	                    <p>
@@ -130,7 +130,7 @@
 	                    </p>
 	                    <a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
 	                </td>
-	            </tr>
+	            </tr> -->
 	        </tbody>
 	        <tfoot id="list_foot">
 	        </tfoot>

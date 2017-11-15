@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.rongcheng.erp.dao.Wzy_InventoryOrderReleaseDAO;
 import com.rongcheng.erp.entity.vo.AddressCarrierAllocation;
 import com.rongcheng.erp.entity.vo.WarehouseRegionShopVO;
+import com.rongcheng.erp.exception.OrderOutNumberException;
 
 
 @Service("orderReleaseService")
@@ -25,7 +26,7 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
     
     //查询仓库信息
     @Override
-    public Map<String,Object> findAllWarehouseByOwnerId(BigInteger ownerId, Integer nowPage, Integer row){
+    public Map<String,Object> findAllWarehouseByOwnerId(BigInteger ownerId, Integer nowPage, Integer row) throws RuntimeException{
         if(ownerId == null) {
             throw new RuntimeException("数据获取失败");
         }
@@ -62,9 +63,9 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
     //对仓库的覆盖范围进行更新
     @Override
     public int updateWarehouseCoverArea(
-            String insertArea, String deleteArea, Integer warehouseId, Integer stocklocationId, BigInteger ownerId) {
+            String insertArea, String deleteArea, Integer warehouseId, Integer stocklocationId, BigInteger ownerId) throws OrderOutNumberException{
         if((insertArea == "" || insertArea == null) && (deleteArea == "" || deleteArea == null)) {
-            throw new RuntimeException("您更改的数据没有变化，因此不进行数据更新");
+            throw new OrderOutNumberException("您更改的数据没有变化，因此不进行数据更新");
         }
         
         //删除夺取的覆盖范围

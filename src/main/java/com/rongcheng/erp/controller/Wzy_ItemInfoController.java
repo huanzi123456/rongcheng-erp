@@ -20,7 +20,7 @@ import com.rongcheng.erp.utils.JsonResult;
 @Controller
 public class Wzy_ItemInfoController {
 
-    private Integer row = 5;
+    private Integer row = 8;
     @Resource
     private ItemInfoService service;
 

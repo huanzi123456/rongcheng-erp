@@ -19,12 +19,12 @@ var selectArea = new Array();
 //已经设定好的全国地址
 var coverArea = new Array();
 
-//即将添加的集合
+//即将添加的数据
 var insertArea = "";
 
-//即将删除的集合
+//即将删除的数据
 var deleteArea = "";
-insertArea
+
 $(function(){
 	
 	//加载页面
@@ -81,7 +81,6 @@ function ClickMonitor(){
 	
 	$("input[name='citys']").change(function(){
 		var obj = $(this);
-		console.log(obj.val())
 		var subOptions = obj.parent().parent().children();
 		var parentOption = obj.parent().parent().prev().children();
 		for(i=0;i<subOptions.length;i++){
@@ -163,21 +162,29 @@ function doUpdateCoverArea(){
 	selectArea =[];
     
 	//ajax
-    var url = "updateCoverArea.do";
-    var param = {
+    $.ajax({
+    	url:"/updateCoverArea.do",
+    	type:"post",
+    	data:{
     		warehouseId:warehouseId,
     		stocklocationId:stocklocationId,
     		deleteList:deleteArea,
-    		insertList:insertArea,
-    }
-    console.log(param)
-    $.post(url,param,function(result){
-    	
-    	$(".select_commodity_box").removeData("warehouseId");
-    	$(".select_commodity_box").removeData("stocklocationId");
-    	$(".regional_rules_box").css("display","none");
-    })
-    
+    		insertList:insertArea
+    	},
+    	dataType:"json",
+    	success:function(result){
+    		showMessage(result.message);
+        	$(".select_commodity_box").removeData("warehouseId");
+        	$(".select_commodity_box").removeData("stocklocationId");
+        	$(".regional_rules_box").css("display","none");
+    	},
+    	error:function(){
+    		showMessage("数据更新成功");
+    		$(".select_commodity_box").removeData("warehouseId");
+        	$(".select_commodity_box").removeData("stocklocationId");
+        	$(".regional_rules_box").css("display","none");
+    	}
+    });
 }
 
 //制作全国列表
@@ -237,9 +244,22 @@ function setCoverArea(){
 			warehouseId:warehouseId,
 			stocklocationId:stocklocationId
 	}
-	$.post(url,param,function(result){
-		dosetCoverArea(result.data);
+	$.ajax({
+		url:"/getCoverArea.do",
+		type:"post",
+		data:{
+			warehouseId:warehouseId,
+			stocklocationId:stocklocationId
+		},
+		dateType:"json",
+		success:function(result){
+			dosetCoverArea(result.data);
+		}
+		
 	})
+//		url,param,function(result){
+//		dosetCoverArea(result.data);
+//	})
 }
 
 //监听商品设置
@@ -424,7 +444,6 @@ function loadOrderRelease(now_page, max_page){
 	$.ajax({
 		url : "/loadOrderRelease.do",
 		type : "post",
-		//traditional : true,
 		data : {
 			"nowPage" : now_page, // int
 		},

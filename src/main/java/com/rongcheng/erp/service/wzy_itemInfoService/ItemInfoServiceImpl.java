@@ -27,8 +27,8 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     //分页查询全部
     @Override
     public Map<String,Object> findUserByKeyWord(
-            BigInteger ownerId, Integer row, Integer nowPage, String keyWord) {
-        
+            BigInteger ownerId, Integer row, Integer nowPage, String keyWord) throws RuntimeException{
+
         //账号判断
         if(ownerId == null) {
             throw new RuntimeException("您的账号已超时");
@@ -65,7 +65,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //添加商品表1
     @Override
-    public int saveItemCommonInfo(ItemInfo Item) {
+    public int saveItemCommonInfo(ItemInfo Item) throws RuntimeException{
         if(Item == null) {
             throw new RuntimeException("未得到数据");
         }
@@ -75,7 +75,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 
     //添加商品表2
     @Override
-    public int saveItemEspInfo(ItemInfo Item) {
+    public int saveItemEspInfo(ItemInfo Item) throws RuntimeException{
         if(Item == null) {
             throw new RuntimeException("未得到数据");
         }
@@ -157,7 +157,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //商品更新
     @Override
-    public int updateItemInfo(ItemInfo info, BigInteger ownerId) {
+    public int updateItemInfo(ItemInfo info, BigInteger ownerId) throws RuntimeException{
         if(info == null) {
             throw new RuntimeException("未找到修改的数据");
         }
@@ -174,7 +174,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //商品删除
     @Override
-    public int removeItemInfo(String id) {
+    public int removeItemInfo(String id) throws RuntimeException{
         if(id==null) {
             throw new RuntimeException("数据获取异常");
         }
@@ -195,7 +195,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 
     //商品id查询
     @Override
-    public List<ItemInfo> findItemInfoById(BigInteger id) {
+    public List<ItemInfo> findItemInfoById(BigInteger id) throws RuntimeException{
         if(id == null) {
             throw new RuntimeException("未找到修改的数据");
         }
