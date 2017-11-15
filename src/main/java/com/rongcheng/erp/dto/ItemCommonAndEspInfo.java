@@ -92,5 +92,4 @@ public class ItemCommonAndEspInfo implements Serializable{
 	public String toString() {
 		return "ItemCommonAndEspInfo [id=" + id + ", unit=" + unit + ", ownerId=" + ownerId + ", itemCommonInfo=" + itemCommonInfo + "]";
 	}
-	
 }

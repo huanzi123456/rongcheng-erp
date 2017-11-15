@@ -22,4 +22,11 @@ public interface Xzy_OnlineCommonRelationService {
 	 * @return
 	 */
 	XzyJsonResult commonPages(BigInteger ownerId,Integer page);
+	/**
+	 * "换"操作中"选择已有"弹出框页面的模糊查询
+	 * @param str
+	 * @param ownerId
+	 * @return
+	 */
+	XzyJsonResult likeSele(String str,BigInteger ownerId,Integer page);
 }

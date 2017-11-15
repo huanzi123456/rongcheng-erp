@@ -3,7 +3,6 @@ package com.rongcheng.erp.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.List;
 /**
  * 系统商品对应关系关联表
  * @author 薛宗艳
@@ -12,7 +11,6 @@ public class PlatformErpLink implements Serializable{
 
     //序列号
     private static final long serialVersionUID = -7280301959854021797L;
-    private List<ItemCommonInfo> commonInfo;
     
     //属性
     private BigInteger id;                      //1.记录编号
@@ -51,10 +49,9 @@ public class PlatformErpLink implements Serializable{
 	public PlatformErpLink() {
 		super();
 	}
-	public PlatformErpLink(List<ItemCommonInfo> commonInfo, BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemWareid, String platformItemName, String platformItemAttrid1, String platformItemAttrvaluealias1, String platformItemAttrvalue1, String platformItemAttrid2, String platformItemAttrvaluealias2, String platformItemAttrvalue2, String platformItemState, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio,
-			Integer remnantStock, String reserved1, String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
+	public PlatformErpLink(BigInteger id, BigInteger itemId, BigInteger platformId, BigInteger shopId, String platformShopId, String platformShopName, BigInteger platformItemSku, BigInteger platformItemWareid, String platformItemName, String platformItemAttrid1, String platformItemAttrvaluealias1, String platformItemAttrvalue1, String platformItemAttrid2, String platformItemAttrvaluealias2, String platformItemAttrvalue2, String platformItemState, String platformUserCode, String platformUserImg, BigInteger warehouseId, BigInteger stocklocationId, Integer autoSynchron, Integer autoOnsale, Integer synchronException, Integer availableStock, Integer allocationRatio, Integer remnantStock, String reserved1,
+			String note, BigInteger ownerId, BigInteger operatorId, Boolean authorized, Timestamp gmtCreate, Timestamp gmtModified) {
 		super();
-		this.commonInfo = commonInfo;
 		this.id = id;
 		this.itemId = itemId;
 		this.platformId = platformId;
@@ -88,12 +85,6 @@ public class PlatformErpLink implements Serializable{
 		this.authorized = authorized;
 		this.gmtCreate = gmtCreate;
 		this.gmtModified = gmtModified;
-	}
-	public List<ItemCommonInfo> getCommonInfo() {
-		return commonInfo;
-	}
-	public void setCommonInfo(List<ItemCommonInfo> commonInfo) {
-		this.commonInfo = commonInfo;
 	}
 	public BigInteger getId() {
 		return id;
@@ -305,7 +296,6 @@ public class PlatformErpLink implements Serializable{
 		result = prime * result + ((autoOnsale == null) ? 0 : autoOnsale.hashCode());
 		result = prime * result + ((autoSynchron == null) ? 0 : autoSynchron.hashCode());
 		result = prime * result + ((availableStock == null) ? 0 : availableStock.hashCode());
-		result = prime * result + ((commonInfo == null) ? 0 : commonInfo.hashCode());
 		result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
 		result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -369,11 +359,6 @@ public class PlatformErpLink implements Serializable{
 			if (other.availableStock != null)
 				return false;
 		} else if (!availableStock.equals(other.availableStock))
-			return false;
-		if (commonInfo == null) {
-			if (other.commonInfo != null)
-				return false;
-		} else if (!commonInfo.equals(other.commonInfo))
 			return false;
 		if (gmtCreate == null) {
 			if (other.gmtCreate != null)
@@ -519,7 +504,7 @@ public class PlatformErpLink implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "PlatformErpLink [commonInfo=" + commonInfo + ", id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemWareid=" + platformItemWareid + ", platformItemName=" + platformItemName + ", platformItemAttrid1=" + platformItemAttrid1 + ", platformItemAttrvaluealias1=" + platformItemAttrvaluealias1 + ", platformItemAttrvalue1=" + platformItemAttrvalue1 + ", platformItemAttrid2=" + platformItemAttrid2 + ", platformItemAttrvaluealias2=" + platformItemAttrvaluealias2 + ", platformItemAttrvalue2=" + platformItemAttrvalue2
-				+ ", platformItemState=" + platformItemState + ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock=" + availableStock + ", allocationRatio=" + allocationRatio + ", remnantStock=" + remnantStock + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized=" + authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
+		return "PlatformErpLink [id=" + id + ", itemId=" + itemId + ", platformId=" + platformId + ", shopId=" + shopId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemWareid=" + platformItemWareid + ", platformItemName=" + platformItemName + ", platformItemAttrid1=" + platformItemAttrid1 + ", platformItemAttrvaluealias1=" + platformItemAttrvaluealias1 + ", platformItemAttrvalue1=" + platformItemAttrvalue1 + ", platformItemAttrid2=" + platformItemAttrid2 + ", platformItemAttrvaluealias2=" + platformItemAttrvaluealias2 + ", platformItemAttrvalue2=" + platformItemAttrvalue2 + ", platformItemState=" + platformItemState
+				+ ", platformUserCode=" + platformUserCode + ", platformUserImg=" + platformUserImg + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId + ", autoSynchron=" + autoSynchron + ", autoOnsale=" + autoOnsale + ", synchronException=" + synchronException + ", availableStock=" + availableStock + ", allocationRatio=" + allocationRatio + ", remnantStock=" + remnantStock + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorized=" + authorized + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
 	}
 }

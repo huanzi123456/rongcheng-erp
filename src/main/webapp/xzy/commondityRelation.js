@@ -1,41 +1,54 @@
-var now_page;             //当前页
+/**
+ * 线上商品对应关系页面
+ */
+var currentOwnerId;             //当前用户的ownerid
+var now_page;//线上商品对应关系主页中分页查询的   当前页
+var input_change_page;//线上商品对应关系"换"操作中查询   当前页
 $(function(){
-	/*
-     * 1.分页查询用户
+	/**
+     * 1.线上商品对应关系的分页查询
      */
 	commonPage(1);
-	/*
-	 * 2."换"操作中"选择已有"弹出框页面的分页查询
+	/**
+	 * 2."换"  操作中  "选择已有"  弹出框页面的分页查询
 	 */
-	$(".input_change").click(popoverPages(1));
-	/*
-	 * 全选
+	$("#xzy_input_change").click(popoverPages(1));
+	/**
+	 * 3."选择已有" 弹出框页面的关键字查询
 	 */
-	$("#xzy_limit").on("click",".xzy_checkAll",function(){
-		var ok = $(this).prop("checked");//选中状态
-		var num = $("#xzy_limit").find("input[name='id[]']").length;
-		if(ok){
-			for(var i=0;i<num;i++){
-				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",true);
-			}
-		}else{
-			for(var i=0;i<num;i++){
-				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",false);
-			}
+	$(".xzy_onBlur").blur(function(){popoverPages(1);});
+	/**
+	 * 4."选择已有" 弹出框页面的保存按钮
+	 */
+	$("#xzy_save").click(function(){
+		var input_length = $("#xzy_limits tr").find("input[name='NumOne']").length;
+		console.log("leng:"+input_length);
+		//var boolean = $("#xzy_limits tr").find("input[name='NumOne']").prop("checked",true);
+		//$('input:radio[name="sex"]:checked')
+		for(var i=0;i<input_length;i++){
+			var bool = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").prop("checked");
+			if(bool){
+				var input_i = $("#xzy_limits").find("input[name='NumOne']:eq("+i+")").parent();
+				var common_id = input_i.next().text();//商品id
+				console.log("id:"+common_id);
+			}			
 		}
+		
 	});
 });
 /**
- * 2."换"操作中"选择已有"弹出框页面的分页查询
+ * 2."换"  操作中  "选择已有"  弹出框页面的分页查询
+ * 3."选择已有" 弹出框页面的关键字查询
  * @param page
- * @returns
+ * @returns 
  */
 function popoverPages(page){
 	$("#xzy_limits").find("tr").remove();
+	var inputs = $(".xzy_onBlur").val();	
 	$.ajax({
 		url:"/onLineCommodity/commonPages.do",
 		type:"post",
-		data:{"page":page},
+		data:{"inputs":inputs,"page":page,"currentOwnerId":currentOwnerId},
 		dataType:"json",				
 		success:function(result){
 			if(result.status == 0){
@@ -44,13 +57,7 @@ function popoverPages(page){
 				var datas = result.data;
 				var five_tr;
 				for(var i=0;i<datas.length;i++){
-					var unit = datas[i].unit;                           //计量单位
-					if(unit == null){
-						unit = "小米加步枪";
-					}
 					var list = datas[i].itemCommonInfo;
-					var id = list[0].id;                                 //商品ID
-					var name = list[0].name;                             //商品名称
 					var color = list[0].color;
 					var size = list[0].size;
 					var commonSpecification;                             //商品规格
@@ -59,76 +66,37 @@ function popoverPages(page){
 					}else{
 						commonSpecification = size+color;
 					}
-					var normal_price = list[0].normalPrice;              //商品原价
-//					console.log("计量单位:"+unit);
-//					console.log("商品ID:"+id);
-//		    		console.log("商品名称:"+name);
-//		    		console.log("商品颜色:"+color);
-//		    		console.log("商品尺码:"+size);
-//		    		console.log("商品原价:"+normal_price);
 		    		var one_tr = '<tr>'+
-		              '<td>'+
-		                '<input type="radio" name="NumOne">'+
-		              '</td>'+
-		              '<td>'+
-		                '<span class="span">'+id+'</span>'+
-		              '</td>'+
-		              '<td>'+
-		                '<span class="span">'+name+'</span>'+
-		              '</td>'+
-		              '<td>'+
-		                '<span class="span">'+commonSpecification+'</span>'+
-		              '</td>'+
-		              '<td>'+
-		              normal_price+
-		              '</td>'+
-		              '<td>'+
-		              unit+
-		              '</td>'+
+		              '<td><input type="radio" name="NumOne"></td>'+
+		              '<td><span class="span">'+list[0].id+'</span></td>'+//商品ID
+		              '<td><span class="span">'+list[0].name+'</span></td>'+//商品名称
+		              '<td><span class="span">'+commonSpecification+'</span></td>'+//商品规格
+		              '<td>'+list[0].normalPrice+'</td>'+//商品原价
+		              '<td>'+datas[i].unit+'</td>'+//计量单位
 		            '</tr>';
 		    		five_tr += one_tr;
 				}
-				var head_tr = '<tr>'+
+				var table_tr = '<tr>'+
 	              '<th width="5">&nbsp;</th>'+
-	              '<th width="19">'+
-	                '商品编码'+
-	              '</th>'+
-	              '<th width="19">'+
-	                '商品名称'+
-	              '</th>'+
-	              '<th width="19">'+
-	                '商品规格'+
-	              '</th>'+
-	              '<th width="19">'+
-	                '商品价格'+
-	              '</th>'+
-	              '<th width="19">'+
-	                '单位'+
-	              '</th>'+
+	              '<th width="19">商品编码</th>'+
+	              '<th width="19">商品名称</th>'+
+	              '<th width="19">商品规格</th>'+
+	              '<th width="19">商品价格</th>'+
+	              '<th width="19">单位</th>'+
 	            '</tr>'+		            
-	            five_tr;
-				var tableTr;
-				if(maxPage == 1){
-					tableTr = head_tr;
-				}else{
-					tableTr = head_tr + '<tr>'+
-		              '<td colspan="10"><div class="pagelist" id="novels"></div></td>'+
-		              '</tr>';
-				}
-				var $tableTr = $(tableTr);
-				$("#xzy_limits").append($tableTr);
+	            five_tr+
+	            '<tr><td colspan="10"><div class="pagelist" id="novels"></div></td></tr>';
+				var $table_tr = $(table_tr);
+				$("#xzy_limits").append($table_tr);
 				//动态添加页码
-				var data = new Object();
-				data.size = pageSize;
-				pagination(maxPage,page,"novels","popoverPages",data);
-				$("#pageClick").unbind('click');
+				pagination(maxPage,page,"novels","popoverPages",{num:2});
 			}
 		},
 		error:function(){"哎呀..页面不见了!"}
 	});
 }
 /**
- * 1.页面查询
+ * 1.线上商品对应关系的分页查询
  * @param page:当前页
  * @returns
  */
@@ -146,13 +114,15 @@ function commonPage(page){
 				var pageSize = result.pageSize;                        //每页的记录数
 				var maxPage = result.maxPage;                          //总的页数
 				var datas = result.data;
+				currentOwnerId = result.msg;
 				var five_tr ;
 				for(var i=0;i<datas.length;i++){
-					var platformErpLinkId = datas[i].id;               //线上商品关联表的id
-					var platformShopId = datas[i].platformShopId;      //平台店铺id
-					var platformShopName = datas[i].platformShopName;  //店铺名称
-					var platformItemSku = datas[i].platformItemSku;    //平台(来源)商品编码
-					var platformItemName = datas[i].platformItemName;  //平台商品名称		
+					//线上商品信息
+					//var platformErpLinkId = datas[i].id;               //线上商品关联表的id
+					//var platformShopId = datas[i].platformShopId;      //平台店铺id
+					//var platformShopName = datas[i].platformShopName;  //平台店铺名称
+					//var platformItemSku = datas[i].platformItemSku;    //平台(来源)商品编码
+					//var platformItemName = datas[i].platformItemName;  //平台商品名称		
 					var attr1 = datas[i].platformItemAttrvaluealias1;
 					var attr2 = datas[i].platformItemAttrvaluealias2;
 					var onlineSpecification;                           //线上商品规格
@@ -161,17 +131,12 @@ function commonPage(page){
 					}else{
 						onlineSpecification = attr1+"*"+attr2;
 					}
-					var onlineImg = datas[i].platformUserImg;          //线上商品图片
-		    		var list = datas[i].commonInfo;
-		    		var itemCommonInfoId = list[0].id;                 //系统商品信息表的id
-		    		var name = list[0].name;	                       //系统商品名称	
-		    		if(name==null){
-		    			name="未设置系统商品名";
-		    		}
-		    		var offlineImg = list[0].image1;                   //系统商品图片
-		    		if(offlineImg == null){
-		    			offlineImg=onlineImg;
-		    		}
+					//var onlineImg = datas[i].platformUserImg;          //线上商品图片
+					//系统商品信息
+		    		var list = datas[i].itemCommonInfo;	;
+		    		//var itemCommonInfoId = list[0].id;                 //系统商品信息表的id
+		    		//var name = list[0].name;	                       //系统商品名称	
+		    		//var offlineImg = list[0].image1;                   //系统商品图片
 		    		var size = list[0].size;
 		    		var color = list[0].color;
 		    		var offlineSpecification;                          //系统商品规格
@@ -183,145 +148,112 @@ function commonPage(page){
 					if(offlineSpecification == null){
 						offlineSpecification = "未设置系统商品规格";
 					}
-//					console.log("线上商品关联表id:"+platformErpLinkId);
-//					console.log("平台店铺id:"+platformShopId);
-//		    		console.log("店铺名称:"+platformShopName);
-//		    		console.log("平台(来源)商品编码:"+platformItemSku);
-//		    		console.log("平台商品名称:"+platformItemName);
-//		    		console.log("线上商品规格:"+onlineSpecification);
-//		    		console.log("线上商品图片:"+onlineImg);
-//		    		console.log("系统商品信息表的id:"+itemCommonInfoId);
-//		    		console.log("系统商品名称:"+name);
-//					console.log("系统商品图片:"+offlineImg);
-//		    		console.log("系统商品规格:"+offlineSpecification);
 				    var one_tr = '<tr>'+
-			          '<td>'+
+			          '<td val='+datas[i].id+'>'+//线上商品关联表的id
 			            '<input type="checkbox" name="id[]" value="1" class="check_coding" /><br>'+
 			            ((page-1)*pageSize+(i+1))+
 			          '</td>'+
 			          '<td>'+
 			            '<div class="sjx" title="线上商品和系统商品编码不一致"></div>'+
 			            '<div class="img_box">'+
-			              '<img src="'+onlineImg+'" alt="">'+
+			              '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
 			              '<div class="show_img_box">'+
-			                '<img src="'+onlineImg+'" alt="">'+
+			                '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
 			              '</div>'+
 			            '</div>'+
 			            '<div class="dianpu">'+
-			              '<img src="'+onlineImg+'" alt="" title="微店">'+
+			              '<img src="'+datas[i].platformUserImg+'" alt="" title="微店">'+//线上商品图片
 			            '</div>'+
 			          '</td>'+
 			          '<td>'+
 			            '<p>'+
-			            platformShopName+
+			            datas[i].platformShopName+//平台店铺名称
 			            '</p>'+
-			            '<span>'+platformShopId+'</span>'+
+			            '<span>'+datas[i].platformShopId+'</span>'+//平台店铺id
 			          '</td>'+
 			          '<td>'+
 			            '<div>'+
-			              '<div class="wh" title="线上商品的商家编码没有编写">'+platformItemSku+'</div>'+
-			              '<span class="span50">'+onlineSpecification+'</span>'+
+			              '<div class="wh" title="线上商品的商家编码没有编写">'+datas[i].platformItemSku+'</div>'+//平台(来源)商品编码
+			              '<span class="span50">'+onlineSpecification+'</span>'+//线上商品规格
 			            '</div>'+
 			            '<p>'+
-			            platformItemName+
+			            datas[i].platformItemName+//平台商品名称
 			            '</p>'+
 			          '</td>'+  
 			          '<td style="border-left: 1px dashed #999;">'+
 			            '<div class="img_box">'+
-			              '<img src="'+offlineImg+'" alt="">'+
+			              '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
 			              '<div class="show_img_box">'+
-			                '<img src="../images/400.png" alt="">'+
+			                '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
 			              '</div>'+
 			            '</div>'+
 			          '</td>'+
 			          '<td >'+
 			            '<div>'+
-			             '<span class="span50">'+itemCommonInfoId+'</span>'+
-			              '<span class="span50">'+offlineSpecification+'</span>'+
+			             '<span class="span50">'+list[0].id+'</span>'+//系统商品信息表的id
+			              '<span class="span50">'+offlineSpecification+'</span>'+//系统商品规格
 			            '</div>'+
 			            '<p>'+
-			            name+
+			            list[0].name+//系统商品名称
 			            '</p>'+
 			          '</td>'+
 			          '<td>'+
-			            '<a href="javascript:;" class="button border-main single_huan input_change"> 换</a>'+
+			            '<a href="javascript:;" class="button border-main single_huan" id="xzy_input_change"> 换</a>'+
 			          '</td>'+
 			        '</tr>'
 			        five_tr +=  one_tr; 
 				}
-				var body_tr = '<tr>'+
+				var table_tr = '<tr>'+
 		          '<th width="30"><input type="checkbox" class="xzy_checkAll"/>1</th>'+
 		          '<th width="100">&nbsp;</th>'+
 		          '<th>线上店铺</th>'+       
-		          '<th>'+
-		            '<span class="span50">线上商品编码</span>'+
-		            '<span class="span50">线上商品规格</span>'+
-		          '</th>'+
+		          '<th><span class="span50">线上商品编码</span><span class="span50">线上商品规格</span></th>'+
 		          '<th width="50">&nbsp;</th>'+
-		          '<th>'+
-		            '<span class="span50">对应系统商品编码</span>'+
-		            '<span class="span50">对应系统商品规格</span>'+
-		          '</th>'+
+		          '<th><span class="span50">对应系统商品编码</span><span class="span50">对应系统商品规格</span></th>'+
 		          '<th>操作</th>'+       
-		        '</tr>'+
-		        five_tr;		       
-		        /*
-		         * 如果总页数等于1,则不加下面的页码
-		         */
-		        var table_tr;
-		        if(maxPage==1){
-		        	table_tr = body_tr;
-		        }else{
-		        	table_tr = body_tr +
-		        	 '<tr>'+
-			          '<td colspan="10"><div class="pagelist" id="pageClick"></div></td>'+
-			        '</tr>';
-		        }  
+		        '</tr>'+five_tr+
+		        '<tr><td colspan="10"><div class="pagelist" id="pageClick"></div></td></tr>';
+				//追加tr
 		        var $table = $(table_tr);
          		$("#xzy_limit").append($table);
-				/*
-				* 线上商品对应关系页面 换按钮弹出框
-				* single_updating_box 弹出框
-				* single_updating_bc  弹出框的已有框保存按钮
-				* single_updating_list  弹出框的选项卡列表
-				* single_updating_list_btn_box   弹出框的选项卡按钮盒子
-				* single_new_bc  弹出框新建框保存按钮
-				* single_new_qx  弹出框新建框取消按钮
-				* single_huan  打开弹出框按钮
-				* single_updating_delbtn   弹出框右上角叉号
-				*/
-				var single_updating_box=$(".single_updating_box"),
-					single_updating_bc=$(".single_updating_bc"),
-					single_new_bc=$(".single_new_bc"),
-					single_new_qx=$(".single_new_qx"),
-					single_huan=$(".single_huan"),
-					single_updating_delbtn=$(".single_updating_delbtn"),
-					single_updating_list=$(".single_updating_list"),
-					single_updating_list_btn=$(".single_updating_list_btn_box span"),
-					num=1;
-				single_huan.click(function(){
-					single_updating_box.css("display","block");
-				});
-				single_updating_bc.click(function(){
-					single_updating_box.css("display","none");
-				});
-				single_new_bc.click(function(){
-					single_updating_box.css("display","none");
-				});
-				single_new_qx.click(function(){
-					single_updating_box.css("display","none");
-				});
-				single_updating_delbtn.click(function(){
-					single_updating_box.css("display","none");
-				});
+         		//添加 "换" 弹出框
+         		pop_up_box();
          		//动态添加页码
-				var data = new Object();
-				data.size = pageSize;
-				pagination(maxPage,page,"pageClick","commonPage",data);
+				pagination(maxPage,page,"pageClick","commonPage",{num:1});
 			}	
 		},
 		error:function(){
 			alert("不好了,页面飞走了");
 		}
+	});
+}
+/**
+ * 添加 "换" 弹出框
+ * @returns
+ */
+function pop_up_box(){
+	var single_updating_box=$(".single_updating_box"),
+		single_updating_bc=$(".single_updating_bc"),
+		single_new_bc=$(".single_new_bc"),
+		single_new_qx=$(".single_new_qx"),
+		single_huan=$(".single_huan"),
+		single_updating_delbtn=$(".single_updating_delbtn"),
+		single_updating_list=$(".single_updating_list"),
+		single_updating_list_btn=$(".single_updating_list_btn_box span"),
+		num=1;
+	single_huan.click(function(){
+		single_updating_box.css("display","block");
+	});
+	single_updating_bc.click(function(){
+		single_updating_box.css("display","none");
+	});
+	single_new_bc.click(function(){
+		single_updating_box.css("display","none");
+	});
+	single_new_qx.click(function(){
+		single_updating_box.css("display","none");
+	});
+	single_updating_delbtn.click(function(){
+		single_updating_box.css("display","none");
 	});
 }

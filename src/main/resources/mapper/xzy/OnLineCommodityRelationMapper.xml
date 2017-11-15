@@ -6,7 +6,7 @@
 <!-- 店铺商品-erp系统商品对应关系关联表 -->
 <resultMap id="xzyPlatformErpLink" type="com.rongcheng.erp.entity.PlatformErpLink" >
    <id column="id" property="id"/>  
-   <result column="item_id" property="ownerId"/>  
+   <result column="item_id" property="itemId"/>  
    <result column="platform_id" property="platformId"/>
    <result column="shop_id" property="shopId"/>
    <result column="platform_shop_id" property="platformShopId"/>
@@ -55,7 +55,7 @@
      <result column="brand" property="brand"/>
      <result column="series" property="series"/>
      <result column="color" property="color"/>
-     <result column="size" property="size"/>
+     <result column="size" property="size" jdbcType="VARCHAR"/>
      <result column="spec" property="spec"/>
      <result column="normal_price" property="normalPrice"/>
      <result column="cost_price" property="costPrice"/>
@@ -113,21 +113,32 @@
 <!-- 
   二.线上商品对应关系页面的处理
  -->
- <!-- 1.统计platform_erp_link表的记录数 -->
+ <!-- 
+   1.线上商品对应关系页面的分页查询
+   (1)统计platform_erp_link表的记录数
+   (2)分页查询
+  -->
  <select id="totalCount" resultType="int">
    SELECT COUNT(id)
    FROM platform_erp_link
    WHERE owner_id  = #{ownerId}
  </select>
- <resultMap id="xzybaseResultMap" type="com.rongcheng.erp.entity.PlatformErpLink" extends="xzyPlatformErpLink">  
-   <association property="commonInfo" resultMap="userMap"/>
+ <resultMap id="xzybaseResultMap" type="com.rongcheng.erp.dto.PlatformErpLinkItemCommonInfo">  
+   <result column="aid" property="platformErpLinkId"/>
+   <result column="platform_shop_id" property="platformShopId"/>
+   <result column="platform_shop_name" property="platformShopName"/>
+   <result column="platform_item_sku" property="platformItemSku"/>
+   <result column="platform_item_name" property="platformItemName"/>
+   <result column="platform_item_attrvaluealias1" property="platformItemAttrvaluealias1"/>
+   <result column="platform_item_attrvaluealias2" property="platformItemAttrvaluealias2"/>
+   <result column="platform_user_img" property="platformUserImg"/>
+   <association property="itemCommonInfo" resultMap="userMap"/>
  </resultMap>
  <resultMap type="com.rongcheng.erp.entity.ItemCommonInfo" id="userMap" extends="xzyItemCommonInfo">  
  </resultMap>
-<!-- 2.分页查询 --> 
 <select id="seleCommonInfo" resultMap="xzybaseResultMap">
   SELECT 
-    a.id,
+    a.id as aid,
     a.platform_shop_name,
     a.platform_shop_id,
     a.platform_item_sku,
@@ -142,18 +153,20 @@
     b.size
   FROM platform_erp_link a
   LEFT OUTER JOIN item_common_info b
-  ON a.platform_id = b.platform_id
-  AND a.platform_item_sku = b.platform_item_sku
-  AND a.owner_id = #{ownerId}
+  ON a.item_id = b.id
+  AND a.owner_id = b.owner_id = #{ownerId}
   LIMIT #{page},#{pageSize}  
 </select>
-<!-- 3.统计系统商品信息表1（高频使用表）中的记录数 -->
+<!-- 
+  2."换"操作中"选择已有"弹出框页面的分页查询
+  (1)统计系统商品信息表1（高频使用表）中的记录数
+  (2)分页查询
+ -->
 <select id="getTotalCount" resultType="int">
   SELECT COUNT(id)
    FROM item_common_info
    WHERE owner_id  = #{ownerId}
 </select>
-<!-- 4."换"操作中"选择已有"弹出框页面的分页查询 -->
 <resultMap type="com.rongcheng.erp.dto.ItemCommonAndEspInfo" id="xzybasesResultMap">
   <id column="id" property="id"/>
   <result column="unit" property="unit"/>
@@ -174,6 +187,52 @@
   LEFT JOIN item_esp_info b
   ON a.id = b.id
   AND a.owner_id = b.owner_id = #{ownerId}
+  LIMIT #{page},#{pageSize}
+</select>
+<!-- 
+   3."换"操作中"选择已有"弹出框页面的关键字查询
+   (1)统计满足条件的记录数
+   (2)将满足条件的记录分页查询
+ -->
+<select id="seleCountId" parameterType="com.rongcheng.erp.entity.ItemCommonInfo" resultType="java.lang.Integer">
+  SELECT COUNT(a.id) id
+  FROM (SELECT b.id,
+               b.name,
+               IFNULL(color,"") color,
+               b.size
+        FROM item_common_info b
+        WHERE owner_id = #{ownerId}) a
+  WHERE a.name LIKE CONCAT_WS('', '%', #{name}, '%')
+  <if test="id != null">
+  OR    a.id LIKE CONCAT_WS('', '%', #{id}, '%')
+  </if>
+  OR    a.size LIKE CONCAT_WS('', '%',#{size}, '%')
+  OR    a.color LIKE CONCAT_WS('', '%',#{color}, '%')
+</select>
+<select id="likeEspInfo" parameterType="java.util.Map" resultMap="xzybasesResultMap">
+  SELECT c.id,
+       c.name,
+       c.color,
+       c.size,
+       c.normal_price,
+       c.unit
+  FROM (SELECT a.id,
+               a.name,
+               IFNULL(color,"") color,
+               a.size,
+               a.normal_price,
+               a.owner_id,
+               b.unit
+        FROM   item_common_info a
+        LEFT   JOIN item_esp_info b
+        ON     a.id = b.id
+        AND    a.owner_id = b.owner_id = #{ownerId}) c
+  WHERE c.name LIKE CONCAT_WS('', '%', #{name}, '%')
+  <if test="id != null">
+  OR    c.id LIKE CONCAT_WS('', '%', #{id,jdbcType=BIGINT,javaType=BIGINTEGER}, '%')
+  </if>
+  OR    c.size LIKE CONCAT_WS('', '%', #{size,jdbcType=VARCHAR,javaType=STRING}, '%')
+  OR    c.color LIKE CONCAT_WS('', '%', #{color}, '%')
   LIMIT #{page},#{pageSize}
 </select>
 </mapper>

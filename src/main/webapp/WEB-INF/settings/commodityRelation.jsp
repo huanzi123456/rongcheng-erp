@@ -21,6 +21,7 @@
       }
     </style>
     <script type="text/javascript" src="/xzy/commondityRelation.js"></script>
+    <script type="text/javascript" src="/xzy/util-page.js"></script>
     <script type="text/javascript" src="/util/jiml-utils.js"></script>
 </head>
 <body style="position: relative;">
@@ -108,7 +109,7 @@
             <span class="span50">对应系统商品规格</span>
           </th>
           <th>操作</th>       
-        </tr>      
+        </tr>             
         <tr>
           <td>
             <input type="checkbox" name="id[]" value="1" class="check_coding" /><br>
@@ -135,8 +136,8 @@
           <td>
             <div>
               <div class="wh" title="线上商品的商家编码没有编写">线上商品编码用sku</div>
-              <!-- <span>2556496549595</span> -->
-              <!--
+               -->
+              <!-- <span>2556496549595</span>
               <span class="span50">线上商品规格</span>
             </div>
             <p>
@@ -189,10 +190,9 @@
           </td>
           <td>
             <div>
-              <div class="wh" title="线上商品的商家编码没有编写"></div>
-                -->
-              <!-- <span>2556496549595</span> -->
-              <!-- 
+              <div class="wh" title="线上商品的商家编码没有编写"></div> -->
+              <!-- <span>2556496549595</span> 
+
               <span class="span50">2556496549595</span>
             </div>
             <p>
@@ -276,7 +276,7 @@
         <tr>
           <td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
         </tr>
-         -->
+        -->
       </table>
     </div>
    </div>
@@ -1142,11 +1142,11 @@
         <div class="single_updating_list">
           <div class="single_updating_keyword">
             <span>关键字：&nbsp;</span>
-            <input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。">
+            <input type="text" placeholder="商品编码/商品名称/商品规格。" class="xzy_onBlur">
           </div>
-          <div class="single_updating_table">         
+          <div class="single_updating_table">                 
             <table id="xzy_limits">
-               <!--
+              <!-- 
               <tr>
                 <th width="5">&nbsp;</th>
                 <th width="19">
@@ -1268,11 +1268,11 @@
               <tr>
                 <td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
               </tr>
-             --> 
-            </table>
+              --> 
+            </table>          
           </div>
           <div class="single_updating_btn">
-            <a href="javascript:;" class="button border-main single_updating_bc"> 保存</a>
+            <a href="javascript:;" class="button border-main single_updating_bc" id="xzy_save"> 保存</a>
           </div>
         </div>
         <div class="single_updating_list">
