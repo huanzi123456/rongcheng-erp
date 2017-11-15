@@ -15,14 +15,15 @@
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
         <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="position" property="position" jdbcType="VARCHAR" />
-        <result column="shelf_code" property="shelfCode" jdbcType="VARCHAR" />
+        <result column="user_warehouse_code" property="userWarehouseCode" jdbcType="VARCHAR" />
+        <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
         <result column="consignor_name" property="consignorName" jdbcType="VARCHAR" />
         <result column="consignor_tel" property="consignorTel" jdbcType="VARCHAR" />
-        <result column="consignor_mobile" property="noconsignorMobilete" jdbcType="VARCHAR" />
+        <result column="consignor_mobile" property="consignorMobilete" jdbcType="VARCHAR" />
         <result column="region_id" property="regionId" jdbcType="BIGINT" />
         <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+        <result column="warehouse_status" property="warehouseStatus" jdbcType="TINYINT" />
+        <result column="connection_code" property="connectionCode" jdbcType="BIGINT" />
     </resultMap>
     
     <resultMap id="AddressCarrierAllocationMap" type="com.rongcheng.erp.entity.vo.AddressCarrierAllocation" >
@@ -33,7 +34,7 @@
     </resultMap>
     
     <select id="findWarehouseRegionShopByOwnerId" resultMap="WarehouseRegionShopMap">
-        select t.id, t.warehouse_id, d.name, t.stocklocation_id
+        select t.id, t.warehouse_id, d.warehouse_name, t.stocklocation_id
         from warehouse_region_shop as t,warehouse_info as d
         where t.owner_id = #{ownerId} and t.warehouse_id = d.id
         group by warehouse_id,stocklocation_id

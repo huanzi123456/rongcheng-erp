@@ -18,15 +18,15 @@ public class WarehouseRegionShopVO {
     private Boolean authorization;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
-    private String name;
-    private String position;
-    private String shelfCode;
+    private String warehouseName;
+    private String userWarehouseCode;
     private String consignorName;
     private String consignorTel;
     private String consignorMobile;
     private BigInteger regionId;
     private String userAddress;
-
+    private Boolean warehouseStatus;
+    private BigInteger connectionCode;
     public BigInteger getId() {
         return id;
     }
@@ -105,23 +105,17 @@ public class WarehouseRegionShopVO {
     public void setGmtModified(Timestamp gmtModified) {
         this.gmtModified = gmtModified;
     }
-    public String getName() {
-        return name;
+    public String getWarehouseName() {
+        return warehouseName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setWarehouseName(String warehouseName) {
+        this.warehouseName = warehouseName;
     }
-    public String getPosition() {
-        return position;
+    public String getUserWarehouseCode() {
+        return userWarehouseCode;
     }
-    public void setPosition(String position) {
-        this.position = position;
-    }
-    public String getShelfCode() {
-        return shelfCode;
-    }
-    public void setShelfCode(String shelfCode) {
-        this.shelfCode = shelfCode;
+    public void setUserWarehouseCode(String userWarehouseCode) {
+        this.userWarehouseCode = userWarehouseCode;
     }
     public String getConsignorName() {
         return consignorName;
@@ -153,15 +147,28 @@ public class WarehouseRegionShopVO {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
+    public Boolean getWarehouseStatus() {
+        return warehouseStatus;
+    }
+    public void setWarehouseStatus(Boolean warehouseStatus) {
+        this.warehouseStatus = warehouseStatus;
+    }
+    public BigInteger getConnectionCode() {
+        return connectionCode;
+    }
+    public void setConnectionCode(BigInteger connectionCode) {
+        this.connectionCode = connectionCode;
+    }
     @Override
     public String toString() {
-        return "WarehouseRegionShop [id=" + id + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId
-                + ", coverRegionId=" + coverRegionId + ", shopId=" + shopId + ", warehouseNmae=" + warehouseNmae
-                + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId
-                + ", authorization=" + authorization + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
-                + ", name=" + name + ", position=" + position + ", shelfCode=" + shelfCode + ", consignorName="
-                + consignorName + ", consignorTel=" + consignorTel + ", consignorMobile=" + consignorMobile
-                + ", regionId=" + regionId + ", userAddress=" + userAddress + "]";
+        return "WarehouseRegionShopVO [id=" + id + ", warehouseId=" + warehouseId + ", stocklocationId="
+                + stocklocationId + ", coverRegionId=" + coverRegionId + ", shopId=" + shopId + ", warehouseNmae="
+                + warehouseNmae + ", reserved1=" + reserved1 + ", note=" + note + ", ownerId=" + ownerId
+                + ", operatorId=" + operatorId + ", authorization=" + authorization + ", gmtCreate=" + gmtCreate
+                + ", gmtModified=" + gmtModified + ", warehouseName=" + warehouseName + ", userWarehouseCode="
+                + userWarehouseCode + ", consignorName=" + consignorName + ", consignorTel=" + consignorTel
+                + ", consignorMobile=" + consignorMobile + ", regionId=" + regionId + ", userAddress=" + userAddress
+                + ", warehouseStatus=" + warehouseStatus + ", connectionCode=" + connectionCode + "]";
     }
     
 }
