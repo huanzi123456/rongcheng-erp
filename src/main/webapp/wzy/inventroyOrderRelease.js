@@ -395,14 +395,13 @@ function doSetTbodyInfo(list){
 	//获取tbody并清空
 	var listTbody = $("#list_body");
 	listTbody.empty();
-	
 	//遍历信息并填写
 	for (var i=0;i<list.length;i++){
 		var tr=$("<tr></tr>");
 		tr.data("warehouseId",list[i].warehouseId);
 		tr.data("stocklocationId",list[i].stocklocationId)
 		var tds="<td>"+(i+1)+"</td>" +
-				"<td><p>"+list[i].name+"</p></td>" +
+				"<td><p>"+list[i].warehouseName+"</p></td>" +
 				"<td><p>"+list[i].stocklocationId+"</p></td>"+
 				"<td>" +
 				' <a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>'+		
