@@ -4,8 +4,8 @@
 	
     <resultMap id="ItemCommonInfoMap" type="com.rongcheng.erp.entity.ItemCommonInfo" >
         <id column="id" property="id" jdbcType="BIGINT" />
-    	<result column="erp_item_num" property="erpItemNum" jdbcType="BIGINT" />
-        <result column="name" property="name" jdbcType="BIGINT" />
+    	<result column="erp_item_num" property="erpItemNum" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="short_name" property="shortName" jdbcType="VARCHAR" />
         <result column="platform_id" property="platformId" jdbcType="BIGINT" />
         <result column="platform_item_sku" property="platformItemSku" jdbcType="BIGINT" />
@@ -217,7 +217,7 @@
     </delete>
     
     <insert id="saveItemCommonInfo">
-        insert into  Item_common_info 
+        insert into Item_common_info 
         <trim prefix="(gmt_create," suffix=")" suffixOverrides="," >
         <if test="id != null" >
             id,

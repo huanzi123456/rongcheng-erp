@@ -18,7 +18,7 @@
 	    <div class="padding border-bottom">
 		    <ul class="search">
 		        <li>
-		        	订单审核中的订单将以配置的规则自动选择对呀仓库，当一个订单同时满足多个仓库规则时，优先匹配库存充足的仓库。
+		        	订单审核中的订单将以配置的规则自动选择对应仓库，当一个订单同时满足多个仓库规则时，优先匹配库存充足的仓库。
 		        </li>
 	     	</ul>
 	     	<ul class="search">
@@ -38,94 +38,113 @@
 	        </li>
      	</ul>
 	    <table class="table table-hover text-center list_table">
-			<tr>
-				<th width="60">序号</th> 
-				<th width="100">仓库名称</th>
-				<th width="25%">覆盖区域</th>
-				<th width="25%">发货商品</th>
-				<th width="25%">发货店铺</th>      
-			</tr>      
-			<tr>
-				<td>1</td>
-				<td>
-					<p>
-						默认仓库
-					</p>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						【全部地区】
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
-				</td>
-				<td>
-					<p style="width: 80%;float: left;">
-						（不设置）
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						【全部店铺】
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
-				</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>
-					<p>
-						仓库1
-					</p>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						地区1；地区2；地区3；地区4；地区5；地区6；地区1；地区2；地区3；地区4；地区5；地区6；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
-				</td>
-				<td>
-					<p style="width: 80%;float: left;">
-						商品1；商品2；商品3；商品4；商品5；商品6；商品7；商品8；商品9；商品10；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						店铺1；店铺2；店铺3；店铺4；店铺5；店铺6；店铺7；店铺8；店铺9；店铺10；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
-				</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>
-					<p>
-						仓库2
-					</p>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						地区1；地区2；地区3；地区4；地区5；地区6；地区1；地区2；地区3；地区4；地区5；地区6；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
-				</td>
-				<td>
-					<p style="width: 80%;float: left;">
-						商品1；商品2；商品3；商品4；商品5；商品6；商品7；商品8；商品9；商品10；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
-				</td>  
-				<td>
-					<p style="width: 80%;float: left;">
-						店铺1；店铺2；店铺3；店铺4；店铺5；店铺6；店铺7；店铺8；店铺9；店铺10；
-					</p>
-					<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
-			</tr>
+			<thead>
+				<tr>
+					<th width="60">序号</th> 
+					<th width="100">仓库名称</th>
+					<th width="100">库位</th>
+					<th width="25%">覆盖区域</th>
+					<th width="25%">发货商品</th>
+					<th width="25%">发货店铺</th>      
+				</tr>
+			</thead>
+			<tbody>      
+				<tr>
+					<td>1</td>
+					<td>
+						<p>
+							默认仓库
+						</p>
+					</td>  
+					<td>
+	                    <p>
+	                                                       默认库位
+	                    </p>
+	                </td>
+					<td>
+						<p style="width: 80%;float: left;">
+							【全部地区】
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
+					</td>
+					<td>
+						<p style="width: 80%;float: left;">
+							（不设置）
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
+					</td>  
+					<td>
+						<p style="width: 80%;float: left;">
+							【全部店铺】
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>
+						<p>
+							仓库1
+						</p>
+					</td>  
+					<td>
+                        <p>
+                                                           默认库位
+                        </p>
+                    </td>
+					<td>
+						<p style="width: 80%;float: left;">
+							地区1；地区2；地区3；地区4；地区5；地区6；地区1；地区2；地区3；地区4；地区5；地区6；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
+					</td>
+					<td>
+						<p style="width: 80%;float: left;">
+							商品1；商品2；商品3；商品4；商品5；商品6；商品7；商品8；商品9；商品10；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
+					</td>  
+					<td>
+						<p style="width: 80%;float: left;">
+							店铺1；店铺2；店铺3；店铺4；店铺5；店铺6；店铺7；店铺8；店铺9；店铺10；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
+					</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>
+						<p>
+							仓库2
+						</p>
+					</td>
+					<td>
+                        <p>
+                                                           默认库位
+                        </p>
+                    </td>  
+					<td>
+						<p style="width: 80%;float: left;">
+							地区1；地区2；地区3；地区4；地区5；地区6；地区1；地区2；地区3；地区4；地区5；地区6；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dq_alert">设置</a>
+					</td>
+					<td>
+						<p style="width: 80%;float: left;">
+							商品1；商品2；商品3；商品4；商品5；商品6；商品7；商品8；商品9；商品10；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="sp_alert">设置</a>
+					</td>  
+					<td>
+						<p style="width: 80%;float: left;">
+							店铺1；店铺2；店铺3；店铺4；店铺5；店铺6；店铺7；店铺8；店铺9；店铺10；
+						</p>
+						<a href="javascript:;" style="line-height: 30px;color: blue;" class="dp_alert">设置</a>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot id="tfoot">
+			</tfoot>
 		</table>
  	</div>
  	<div class="regional_rules_box">

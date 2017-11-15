@@ -97,13 +97,13 @@ function doSetTbodyInfo(list){
 		tr.data("id",list[i].id);
 		var firstTd='<td><input type="checkbox" name="checkedItem" value="[id]"></td>';
 		firstTd=firstTd.replace("[id]",list[i].id);
-		var tds="<td>"+list[i].erpItemNum+"</td>" +
-				"<td>"+list[i].name+"</td>"+
-				"<td>"+list[i].styleCode+"</td>"+
-				"<td>"+list[i].barCode+"</td>"+
-				"<td>"+list[i].color+" * "+list[i].size+"</td>"+
-				"<td>"+list[i].normalPrice+"</td>"+
-				"<td>"+list[i].brand+"</td>"+
+		var tds="<td><p>"+list[i].erpItemNum+"</p></td>" +
+				"<td><p>"+list[i].name+"</p></td>"+
+				"<td><p>"+list[i].styleCode+"</p></td>"+
+				"<td><p>"+list[i].barCode+"</p></td>"+
+				"<td><p>"+list[i].color+" * "+list[i].size+"</p></td>"+
+				"<td><p>"+list[i].normalPrice+"</p></td>"+
+				"<td><p>"+list[i].brand+"</p></td>"+
 				"<td>"+
 				'<a href="javascript:;" class="button border-main management_amend"> 修改</a>'+
 				'<a href="javascript:;" class="button border-red"> 删除</a>'+

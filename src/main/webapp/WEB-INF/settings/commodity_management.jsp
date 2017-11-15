@@ -326,7 +326,7 @@
     </div>
 </body>
 <script src="/util/jiml-utils.js"></script>
-<script src="/wzy/ItemInfo.js"></script>
+<script src="/wzy/itemInfo.js"></script>
 <script>
     var boxHeight=document.querySelector('.div_big_box').offsetHeight;
     var commodity_management_box=document.querySelector(".commodity_management_box");

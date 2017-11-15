@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Wzy_InventoryOrderReleaseDAO">
+    
+    <resultMap id="WarehouseRegionShopMap" type="com.rongcheng.erp.entity.vo.WarehouseRegionShopVO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="warehouse_id" property="warehouseId" jdbcType="BIGINT" />
+        <result column="stocklocation_id" property="stocklocationId" jdbcType="BIGINT" />
+        <result column="cover_region_id" property="coverRegionId" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="reserved1" property="reserved1" jdbcType="VARCHAR" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="is_authorized" property="authorized" jdbcType="TINYINT" />
+        <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="position" property="position" jdbcType="VARCHAR" />
+        <result column="shelf_code" property="shelfCode" jdbcType="VARCHAR" />
+        <result column="consignor_name" property="consignorName" jdbcType="VARCHAR" />
+        <result column="consignor_tel" property="consignorTel" jdbcType="VARCHAR" />
+        <result column="consignor_mobile" property="noconsignorMobilete" jdbcType="VARCHAR" />
+        <result column="region_id" property="regionId" jdbcType="BIGINT" />
+        <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="AddressCarrierAllocationMap" type="com.rongcheng.erp.entity.vo.AddressCarrierAllocation" >
+        <id column="region_id" property="regionId" jdbcType="BIGINT" />
+        <result column="region_code" property="regionCode" jdbcType="BIGINT" />
+        <result column="region_name" property="name" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <select id="findWarehouseRegionShopByOwnerId" resultMap="WarehouseRegionShopMap">
+        select t.id, t.warehouse_id, d.name, t.stocklocation_id
+        from warehouse_region_shop as t,warehouse_info as d
+        where t.owner_id = #{ownerId} and t.warehouse_id = d.id
+        group by warehouse_id,stocklocation_id
+        limit #{startPage}, #{row}
+    </select>
+    
+    <select id="findWarehouseCover" resultType="int">
+        select cover_region_id from warehouse_region_shop
+        <where>
+            <if test="ownerId != null">
+               and owner_id = #{ownerId,jdbcType=BIGINT}
+            </if>
+            <if test="warehouseId != null">
+               and warehouse_id = #{warehouseId,jdbcType=BIGINT}
+            </if>
+            <if test="ownerId != null">
+               and stocklocation_id = #{stocklocationId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    
+    <select id="findWarehouseRegionShopCount" resultType="int">
+        select count(id) from (select id from warehouse_region_shop 
+        group by warehouse_id,stocklocation_id) as num
+    </select>
+    
+    <select id="findAddressCarrierAllocation" resultMap="AddressCarrierAllocationMap">
+        select region_id, parent_id, region_name, region_code from address_carrier_allocation
+        where right(region_code,4)="0000";
+    </select>
+    
+    <select id="findAddressCarrierAllocationSecond" resultMap="AddressCarrierAllocationMap">
+        select region_id, parent_id, region_name, region_code from address_carrier_allocation
+        where right(region_code,2)="00" and right(region_code,4)!="0000"
+    </select>
+    
+    <delete id="deleteCoverArea">
+        delete from warehouse_region_shop 
+        <where>
+            <if test="ownerId != null">
+               and owner_id = #{ownerId,jdbcType=BIGINT}
+            </if>
+            <if test="warehouseId != null">
+               and warehouse_id = #{warehouseId,jdbcType=BIGINT}
+            </if>
+            <if test="ownerId != null">
+               and stocklocation_id = #{stocklocationId,jdbcType=BIGINT}
+            </if>
+            <if test="coverRegionId != null">
+                and cover_region_id = #{coverRegionId, jdbcType=BIGINT}
+            </if>
+        </where>
+    </delete>
+    
+    <insert id="saveCoverArea">
+        insert into warehouse_region_shop
+        <trim prefix="(gmt_create," suffix=")" suffixOverrides=",">
+            <if test=" warehouseId != null">
+                warehouse_id, 
+            </if>
+            <if test=" stocklocationId != null">
+                stocklocation_id,
+            </if>
+            <if test=" ownerId != null">
+                owner_id,
+            </if>
+            <if test=" coverRegionId != null">
+                cover_region_id,
+            </if>
+        </trim>
+        <trim prefix="values(now()," suffix=")" suffixOverrides=",">
+            <if test=" warehouseId != null">
+                #{warehouseId, jdbcType=BIGINT},
+            </if>
+            <if test=" stocklocationId != null">
+                #{stocklocationId, jdbcType=BIGINT},
+            </if>
+            <if test=" ownerId != null">
+                #{ownerId, jdbcType=BIGINT},
+            </if>
+            <if test=" coverRegionId != null">
+                #{coverRegionId, jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+</mapper>

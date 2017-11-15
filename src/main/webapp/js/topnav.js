@@ -12,7 +12,7 @@ var bread_li=document.querySelectorAll(".bread>li"),
 			'account/account_add_amend.html'
 		]*/
 	arr1=[
-		'settings/commodity_management.html',
+		'/ItemInfoAdmin.do',
 		'/audit/orderAdd.do',
 		'/toPrint.do',
 		'/shipmentInspection.do',
