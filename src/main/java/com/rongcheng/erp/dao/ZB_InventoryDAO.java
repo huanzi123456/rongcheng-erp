@@ -421,6 +421,18 @@ public interface ZB_InventoryDAO {
     int updatePlatformErpLink(PlatformErpLink platformErpLink);
 
     /**
+     * 获取 总库存 根据参数
+     * @param itemId  商品ID
+     * @param warehouseId 仓库ID
+     * @param stocklocationId 库位ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    int getSumStockQuantityByItemIdWarehouseIdStocklocationId(
+            BigInteger itemId, BigInteger warehouseId, BigInteger stocklocationId, BigInteger ownerId);
+
+    /**
      * 查询 仓库信息
      * @param ownerId 主账号ID
      * @return

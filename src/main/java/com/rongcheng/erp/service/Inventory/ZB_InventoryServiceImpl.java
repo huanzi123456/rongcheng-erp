@@ -8,9 +8,13 @@ import javax.annotation.Resource;
 
 import com.rongcheng.erp.dto.PlatformErpLinkShopWarehouseInfo;
 import com.rongcheng.erp.entity.*;
+import com.rongcheng.erp.exception.NameException;
+import com.rongcheng.erp.exception.UploadStockException;
+import com.rongcheng.erp.jd.upload.item.JingDongStockWriteUpdateSkuStock;
 import com.rongcheng.erp.utils.UUIDTool;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.rongcheng.erp.dao.ZB_InventoryDAO;
@@ -24,6 +28,15 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      */
     @Resource
     ZB_InventoryDAO inventoryDAO;
+
+    @Value("#{config['serverUrl']}")
+    private String serverUrl;
+    @Value("#{config['jdAppKeys']}")
+    private String appKey;
+    @Value("#{config['jdAppSecrets']}")
+    private String appSecret;
+    @Value("#{config['jdAccessTokens']}")
+    private String accessToken;
     
     /**
      * 加载 库存状态 页面
@@ -864,7 +877,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @return 修改的条数
      * @author 赵滨
      */
-    public int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId) {
+    public int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId)
+            throws UploadStockException {
         int row = 0;
 
         //遍历每一条商品，获取它的所有店铺和自动上传设置  eg:101,102
@@ -888,6 +902,7 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
                 //检查配置，如果匹配到这条信息就修改
                 row += checkInventorySyncConfiguations(
                         configuations, platformErpLinkShopWarehouseInfo, itemWarehouseStocklocationList);
+
             }
         }
         return row;
@@ -902,60 +917,54 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      */
     private int checkInventorySyncConfiguations(
             String configuations, PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo,
-            List<Map<String, Object>> itemWarehouseStocklocationList) {
+            List<Map<String, Object>> itemWarehouseStocklocationList) throws UploadStockException {
         //获取店铺ID
         BigInteger shopId = platformErpLinkShopWarehouseInfo.getShopId();
-        //解析JSON，遍历其中的每一条店铺信息，匹配相关的内容
-        try {
-            // 把字符串转换为JSONArray对象
-            JSONArray jsonArray = JSONArray.fromObject(configuations);
-            if(jsonArray.size() > 0){
-                // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                for(int i = 0; i < jsonArray.size(); i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    //如果店铺相同，继续检查
-                    if (shopId.toString().equals(jsonObject.get("shopId").toString())) {
-                        String warehouseId = jsonObject.get("warehouseId").toString();
-                        String stocklocationId = jsonObject.get("stocklocationId").toString();
+        // 把字符串转换为JSONArray对象
+        JSONArray jsonArray = JSONArray.fromObject(configuations);
+        // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+        for(int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        //选中 全部仓库 全部库位
-                        if ("0".equals(warehouseId) && "0".equals(stocklocationId)) {
-                            //修改
-                            return updateInventorySyncConfiguation(
-                                    jsonObject, platformErpLinkShopWarehouseInfo.getId());
-                        }
+            //如果店铺相同，继续检查
+            if (shopId.toString().equals(jsonObject.get("shopId").toString())) {
+                String warehouseId = jsonObject.get("warehouseId").toString();
+                String stocklocationId = jsonObject.get("stocklocationId").toString();
 
-                        //选中 其他仓库 全部库位
-                        if (!"0".equals(warehouseId) && "0".equals(stocklocationId)) {
-                            //检查是否存在相同仓库库位
-                            Boolean ExistRepetition =
-                                    ExistRepetitionWarehouseStocklocation(
-                                            itemWarehouseStocklocationList, warehouseId, "");
-                            if (ExistRepetition) {
-                                //修改
-                                return updateInventorySyncConfiguation(
-                                        jsonObject, platformErpLinkShopWarehouseInfo.getId());
-                            }
-                        }
+                //选中 全部仓库 全部库位
+                if ("0".equals(warehouseId) && "0".equals(stocklocationId)) {
+                    //修改
+                    return updateInventorySyncConfiguation(
+                            jsonObject, platformErpLinkShopWarehouseInfo);
+                }
 
-                        //选中 其他仓库 其他库位
-                        if (!"0".equals(warehouseId) && !"0".equals(stocklocationId)) {
-                            //检查是否存在相同仓库库位
-                            Boolean ExistRepetition =
-                                    ExistRepetitionWarehouseStocklocation(
-                                            itemWarehouseStocklocationList, warehouseId, stocklocationId);
-                            if (ExistRepetition) {
-                                //修改
-                                return updateInventorySyncConfiguation(
-                                        jsonObject, platformErpLinkShopWarehouseInfo.getId());
-                            }
-                        }
+                //选中 其他仓库 全部库位
+                if (!"0".equals(warehouseId) && "0".equals(stocklocationId)) {
+                    //检查是否存在相同仓库库位
+                    Boolean ExistRepetition =
+                            ExistRepetitionWarehouseStocklocation(
+                                    itemWarehouseStocklocationList, warehouseId, "");
+                    if (ExistRepetition) {
+                        //修改
+                        return updateInventorySyncConfiguation(
+                                jsonObject, platformErpLinkShopWarehouseInfo);
+                    }
+                }
+
+                //选中 其他仓库 其他库位
+                if (!"0".equals(warehouseId) && !"0".equals(stocklocationId)) {
+                    //检查是否存在相同仓库库位
+                    Boolean ExistRepetition =
+                            ExistRepetitionWarehouseStocklocation(
+                                    itemWarehouseStocklocationList, warehouseId, stocklocationId);
+                    if (ExistRepetition) {
+                        //修改
+                        return updateInventorySyncConfiguation(
+                                jsonObject, platformErpLinkShopWarehouseInfo);
                     }
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return 0;
     }
@@ -978,9 +987,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
             if (itemWarehouseStocklocation.get("warehouseId").toString().equals(warehouseId)) {
                 //库位相同 或者 不检查库位
                 if (itemWarehouseStocklocation.get("stocklocationId").toString().equals(stocklocationId) ||
-                        "".toString().equals(stocklocationId)) {
+                        "".toString().equals(stocklocationId))
                     return true;
-                }
             }
         }
         return false;
@@ -988,16 +996,31 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
 
     /**
      * 修改 系统商品对应关系关联表 调用DAO层方法
-     * @param jsonObject 参数JSON对象
-     * @param platformErpLinkId 需要修改的ID
+     *
+     * @param jsonObject                       参数JSON对象
+     * @param platformErpLinkShopWarehouseInfo 库位商品库存关联单条对象
      * @return
      * @author 赵滨
      */
-    private int updateInventorySyncConfiguation(JSONObject jsonObject, BigInteger platformErpLinkId) {
+    private int updateInventorySyncConfiguation(
+            JSONObject jsonObject, PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo)
+            throws UploadStockException {
+
+        //获取 同步（开关键）
+        Integer synchron = new Integer(jsonObject.get("synchron").toString());
+        //获取 自动同步（开关键）
+        Integer autoSynchron = new Integer(jsonObject.get("autoSynchron").toString());
+        //定义 设置自动同步
+        Integer setAutoSynchron = 0;
+
+        //同步和自动同步都打开的时候，才开启自动同步
+        if (synchron == 1 && autoSynchron == 1)
+            setAutoSynchron = 1;
+
         //创建 系统商品对应关系关联表 然后设置信息
         PlatformErpLink platformErpLink = new PlatformErpLink();
-        platformErpLink.setId(platformErpLinkId);
-        platformErpLink.setAutoSynchron(new Integer(jsonObject.get("autoSynchron").toString()));
+        platformErpLink.setId(platformErpLinkShopWarehouseInfo.getId());
+        platformErpLink.setAutoSynchron(setAutoSynchron);
         platformErpLink.setAutoOnsale(new Integer(jsonObject.get("autoOnsale").toString()));
         platformErpLink.setSynchronException(new Integer(jsonObject.get("synchronException").toString()));
         platformErpLink.setAvailableStock(new Integer(jsonObject.get("availableStock").toString()));
@@ -1005,9 +1028,53 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         platformErpLink.setRemnantStock(new Integer(jsonObject.get("remnantStock").toString()));
         platformErpLink.setWarehouseId(new BigInteger(jsonObject.get("warehouseId").toString()));
         platformErpLink.setStocklocationId(new BigInteger(jsonObject.get("stocklocationId").toString()));
+        platformErpLink.setOwnerId(platformErpLinkShopWarehouseInfo.getOwnerId());
         platformErpLink.setGmtModified(new Timestamp(System.currentTimeMillis()));
+
+        //开启同步，需要调接口同步
+        if (synchron == 1) {
+            platformErpLinkShopWarehouseInfo.setWarehouseId(
+                    new BigInteger(jsonObject.get("warehouseId").toString()));
+            platformErpLinkShopWarehouseInfo.setStocklocationId(
+                    new BigInteger(jsonObject.get("stocklocationId").toString()));
+            //同步库存,调用接口
+            Boolean isSynchronizeSuccessful = synchronizeStock(platformErpLinkShopWarehouseInfo);
+            if (!isSynchronizeSuccessful) {
+                throw new UploadStockException("上传库存至平台产生错误，请稍后重试");
+            }
+        }
+
         //修改
         return inventoryDAO.updatePlatformErpLink(platformErpLink);
+    }
+
+    private Boolean synchronizeStock(PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo) {
+        //获取 平台（来源）商品编码  eq：商品编码（京东）
+        BigInteger platformItemSku = platformErpLinkShopWarehouseInfo.getPlatformItemSku();
+        //获取商品ID
+        BigInteger itemId = platformErpLinkShopWarehouseInfo.getItemId();
+        //获取仓库ID
+        BigInteger warehouseId = platformErpLinkShopWarehouseInfo.getWarehouseId();
+        //获取库位ID
+        BigInteger stocklocationId = platformErpLinkShopWarehouseInfo.getStocklocationId();
+        //获取主账号ID
+        BigInteger ownerId = platformErpLinkShopWarehouseInfo.getOwnerId();
+        //获取库存
+        Integer sumStockQuantity = inventoryDAO.getSumStockQuantityByItemIdWarehouseIdStocklocationId(
+                itemId, warehouseId, stocklocationId, ownerId);
+        //获取访问令牌
+        String accessTooken = "";
+
+        //根据平台ID判断调用谁的接口
+        if (platformErpLinkShopWarehouseInfo.getPlatformId() != null) {
+            if ("3".equals(platformErpLinkShopWarehouseInfo.getPlatformId().toString())) {
+                //调用京东接口，上传库存
+                return JingDongStockWriteUpdateSkuStock.updateSkuStock(
+                        serverUrl, accessToken, appKey, appSecret,
+                        platformItemSku.longValue(), sumStockQuantity.longValue());
+            }
+        }
+        return false;
     }
 
     /**

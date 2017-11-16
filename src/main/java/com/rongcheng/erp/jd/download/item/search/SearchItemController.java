@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.item.search;
+package com.rongcheng.erp.jd.download.item.search;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -20,7 +20,7 @@ import com.rongcheng.erp.dao.Jxb_ItemEspDAO;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.ItemEspInfo;
 import com.rongcheng.erp.entity.UserInfo;
-import com.rongcheng.erp.jd.item.converter.JDItem2BaseEntity;
+import com.rongcheng.erp.jd.download.item.converter.JDItem2BaseEntity;
 
 /**
  * 

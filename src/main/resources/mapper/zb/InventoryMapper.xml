@@ -1707,6 +1707,28 @@
     </update>
 
     <!--/**
+    * 获取 总库存 根据参数
+    * @param itemId  商品ID
+    * @param warehouseId 仓库ID
+    * @param stocklocationId 库位ID
+    * @param ownerId 主账号ID
+    * @return
+    * @author 赵滨
+    */-->
+    <select id="getSumStockQuantityByItemIdWarehouseIdStocklocationId" resultType="int">
+        SELECT sum(stock_quantity)
+        FROM location_item_stock
+        WHERE owner_id = #{3}
+        AND item_id = #{0}
+        <if test="param2 != '' and param2 != null">
+            AND warehouse_id = #{1}
+        </if>
+        <if test="param3 != '' and param3 != null">
+            AND stocklocation_id = #{1}
+        </if>
+    </select>
+
+    <!--/**
     * 查询 仓库
     * @param ownerId 主账号ID
     * @return

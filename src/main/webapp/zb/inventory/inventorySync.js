@@ -4,7 +4,6 @@ var key_words = ""; //0.全局变量，关键字
 var auto_synchron = "";//0.全局变量，自动同步
 var item_ids = [];//商品ID
 
-
 $(function () {
     //1.加载页面
     loadInventorySync(now_page, key_words, auto_synchron);
@@ -59,6 +58,7 @@ function loadOptionsControl() {
         checkedOne($("#inventorySync_syncTable"), "allAutoSynchron", "autoSynchron", $(this).prop("checked"));
     });
 
+    return;
     //监听'开启自动同步' 自动同步
     $("#inventorySync_startSync").click(function () {
         //如果勾选
@@ -191,14 +191,23 @@ function inventorySyncEnterSync() {
 
     //创建 配置信息对象 数组
     var configuations = new Array();
-
+    //获取自动同步
+    var autoSynchron =  $("#inventorySync_startSync").prop("checked");
     //先获取同步配置列表的内容
     var syncTableTrs = $("#inventorySync_syncTable").find("tr").not(":first");
+    //是否选中单选内容
+    var notCheckedSingle = true;
+
     //遍历每条列表
     for (var i = 0; i < syncTableTrs.length; i++) {
         //获取每条列表
         var syncTableTr = syncTableTrs.eq(i);
-
+        //获取同步选择框
+        var synchron = syncTableTr.find("input[name='autoSynchron']").prop("checked");
+        //如果选中单选，修改
+        if (synchron) {
+            notCheckedSingle = false;
+        }
         //查看规则填写的内容是否符合规范
         if (!/^\d+$/g.test(Number(syncTableTr.find("input[name='allocationRatio']").val())) ||
             !/^\d+$/g.test(Number(syncTableTr.find("input[name='remnantStock']").val())) ||
@@ -207,9 +216,13 @@ function inventorySyncEnterSync() {
             showMessage("请在规则中填写正整数(0-9999)");
             return;
         }
-        configuations.push(newConfiguation(syncTableTr));
+        configuations.push(newConfiguation(syncTableTr, autoSynchron));
     }
-    
+    //开启自动同步，但是没有选择店铺
+    if (autoSynchron && notCheckedSingle) {
+        showMessage("请选择开启自动同步的店铺")
+        return;
+    }
 
     //发送请求，获取同步配置
     $.ajax({
@@ -225,14 +238,21 @@ function inventorySyncEnterSync() {
         success: function (result) {
             //接收参数
             var row = result.data
-            if (row > 0) {
-                showMessage("库存同步配置成功");
-                //隐藏 警戒库 弹出框
-                $(".inventory_sync_box").css("display", "none");
-                //加载页面
-                loadInventorySync(now_page, key_words, auto_synchron);
-            } else {
-                showMessage("库存同步配置为零");
+            var state = result.state;
+            if (state == 0) {
+                if (row > 0) {
+                    showMessage("库存同步配置成功");
+                    //隐藏 警戒库 弹出框
+                    $(".inventory_sync_box").css("display", "none");
+                    //加载页面
+                    loadInventorySync(now_page, key_words, auto_synchron);
+                } else {
+                    showMessage("库存同步配置为零");
+                }
+            } else if (state == 1) {
+                //获取异常信息
+                var message = result.message;
+                showMessage(message);
             }
         },
         error: function () {
@@ -247,14 +267,16 @@ function inventorySyncEnterSync() {
  * @param syncTableTr 每条配置tr
  * @author 赵滨
  */
-function newConfiguation(syncTableTr) {
+function newConfiguation(syncTableTr, autoSynchron) {
     //创建返回对象map
     var map = {};
 
     //加入 ID
     // map["id"] = Number(configurationId);
+    //加入 同步（开关键）
+    map["synchron"] = Number(syncTableTr.find("input[name='autoSynchron']").prop("checked"));
     //加入 库存自动同步状况（开关键）
-    map["autoSynchron"] = Number(syncTableTr.find("input[name='autoSynchron']").prop("checked"));
+    map["autoSynchron"] = Number(autoSynchron);
     //加入 自动上架状况（开关键）
     map["autoOnsale"] = Number(syncTableTr.find("input[name='autoOnsale']").prop("checked"));
     //加入 例外情况（库存低于警戒值不同步）

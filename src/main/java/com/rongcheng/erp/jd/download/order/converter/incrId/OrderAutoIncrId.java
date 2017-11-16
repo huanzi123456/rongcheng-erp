@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.item.converter.incrId;
+package com.rongcheng.erp.jd.download.order.converter.incrId;
 
 import java.math.BigInteger;
 
@@ -7,12 +7,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.rongcheng.erp.dao.Jxb_ItemCommonDAO;
+import com.rongcheng.erp.dao.Jxb_OrderDAO;
 
 @Service
-public class ItemAutoIncrId {
+public class OrderAutoIncrId {
 	@Resource
-	private Jxb_ItemCommonDAO dao;
+	private Jxb_OrderDAO dao;
 	private static BigInteger id;
 	private final static BigInteger ONE = new BigInteger("1");
 

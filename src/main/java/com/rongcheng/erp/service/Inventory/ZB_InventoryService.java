@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
+import com.rongcheng.erp.exception.UploadStockException;
 import com.rongcheng.erp.utils.JsonResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -218,7 +219,8 @@ public interface ZB_InventoryService {
      * @return 修改的条数
      * @author 赵滨
      */
-    int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId);
+    int updateInventorySyncConfiguations(String configuations, BigInteger[] itemIds, BigInteger ownerId)
+            throws UploadStockException;
 
     /**
      * 加载 仓库和库位 页面

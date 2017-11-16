@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.item.converter;
+package com.rongcheng.erp.jd.download.item.converter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -12,7 +12,7 @@ import com.jd.open.api.sdk.domain.ware.WareReadService.Page;
 import com.jd.open.api.sdk.domain.ware.WareReadService.Ware;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.ItemEspInfo;
-import com.rongcheng.erp.jd.item.converter.incrId.ItemAutoIncrId;
+import com.rongcheng.erp.jd.download.item.converter.incrId.ItemAutoIncrId;
 
 public class JDItem2BaseEntity {
 	public static Map<String, List<?>> parse(Page itemResult, BigInteger ownerId) {

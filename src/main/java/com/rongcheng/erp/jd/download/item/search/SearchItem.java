@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.item.search;
+package com.rongcheng.erp.jd.download.item.search;
 
 import java.util.Date;
 

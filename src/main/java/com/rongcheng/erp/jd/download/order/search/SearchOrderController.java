@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.order.search;
+package com.rongcheng.erp.jd.download.order.search;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.rongcheng.erp.jd.download.order.converter.JDOrder2BaseEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,6 @@ import com.rongcheng.erp.entity.BuyerInfo;
 import com.rongcheng.erp.entity.OrderInfo;
 import com.rongcheng.erp.entity.OrderItemLink;
 import com.rongcheng.erp.entity.UserInfo;
-import com.rongcheng.erp.jd.order.converter.JDOrder2BaseEntity;
 
 /**
  * 

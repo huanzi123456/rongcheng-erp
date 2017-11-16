@@ -1,21 +1,21 @@
 package com.rongcheng.erp.controller;
 
-
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.rongcheng.erp.exception.UploadStockException;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongcheng.erp.service.Inventory.ZB_InventoryService;
 import com.rongcheng.erp.utils.JsonResult;
-
 
 /**
  * 库位设置 控制层
@@ -35,12 +35,12 @@ public class ZB_InventoryController {
     //临时主账号
     private BigInteger ownerId = new BigInteger("1");
 
-//    @ExceptionHandler(OrderOutNumberException.class)
-//    @ResponseBody
-//    public JsonResult orderOutNumberException(OrderOutNumberException e){
-//        e.printStackTrace();
-//        return new JsonResult(5,e);
-//    }
+    @ExceptionHandler(UploadStockException.class)
+    @ResponseBody
+    public JsonResult uploadStockException(UploadStockException e){
+        e.printStackTrace();
+        return new JsonResult(JsonResult.ERROR, e);
+    }
 
     /**
      * 跳转 库存状态 页面
@@ -217,7 +217,6 @@ public class ZB_InventoryController {
      * @param consignorTel      联系人电话
      * @param regionId          地区ID
      * @param userAddress       地址详细
-     * @param ownerId           主账号ID
      * @return
      * @author 赵滨
      */

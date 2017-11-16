@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.authorization.code;
+package com.rongcheng.erp.jd.download.authorization.code;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

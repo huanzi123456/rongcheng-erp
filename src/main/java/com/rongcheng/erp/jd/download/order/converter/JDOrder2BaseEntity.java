@@ -1,4 +1,4 @@
-package com.rongcheng.erp.jd.order.converter;
+package com.rongcheng.erp.jd.download.order.converter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,6 +13,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.rongcheng.erp.jd.download.order.converter.incrId.BuyerInfoAutoIncrId;
+import com.rongcheng.erp.jd.download.order.converter.incrId.OrderAutoIncrId;
 import org.springframework.stereotype.Service;
 
 import com.jd.open.api.sdk.domain.order.ItemInfo;
@@ -25,9 +27,7 @@ import com.rongcheng.erp.entity.BuyerInfo;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.OrderInfo;
 import com.rongcheng.erp.entity.OrderItemLink;
-import com.rongcheng.erp.jd.order.converter.incrId.OrderAutoIncrId;
 
-import com.rongcheng.erp.jd.order.converter.incrId.BuyerInfoAutoIncrId;
 @Service("jDOrder2BaseEntity")
 public class JDOrder2BaseEntity {
 	@Resource
