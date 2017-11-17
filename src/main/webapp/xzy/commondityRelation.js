@@ -591,32 +591,3 @@ function common_box(){
 			hs_code_box.css("display","none");
 		})
 }
-function common_none(){
-	/*
-	* 线上商品对应关系页面 批量处理商品对应关系按钮弹出框
-	* commodity_relation_bc 弹出框保存按钮
-	* commodity_relation_qx 弹出框取消按钮
-	* commodity_relation_delbtn  弹出框右上角叉号
-	* commodity_relation_box  弹出框
-	* commodity_relation_select  触发弹出框的点击按钮
-	*/
-	
-	var commodity_relation_bc=$(".commodity_relation_bc"),
-		commodity_relation_qx=$(".commodity_relation_qx"),
-		commodity_relation_delbtn=$(".commodity_relation_delbtn"),
-		commodity_relation_box=$(".commodity_relation_box"),
-		commodity_relation_select=$(".commodity_relation_select");
-
-		commodity_relation_select.click(function(){
-			commodity_relation_box.css("display","none");
-		});
-		commodity_relation_bc.click(function(){
-			commodity_relation_box.css("display","none");
-		});
-		commodity_relation_qx.click(function(){
-			commodity_relation_box.css("display","none");
-		});
-		commodity_relation_delbtn.click(function(){
-			commodity_relation_box.css("display","none");
-		});
-}
