@@ -7,6 +7,8 @@ import com.jd.open.api.sdk.request.ware.StockWriteUpdateSkuStockRequest;
 import com.jd.open.api.sdk.response.ware.StockWriteUpdateSkuStockResponse;
 import net.sf.json.JSONObject;
 
+import java.util.Set;
+
 /**
  * 京东 设置sku库存
  * @author 赵滨
@@ -43,6 +45,11 @@ public class JingDongStockWriteUpdateSkuStock {
 
         if (success == true) {
             return true;
+        } else {
+            Set keySet = jsonObject.keySet();
+            for (Object key : keySet) {
+                System.out.println("key:" + key + ",value:" + jsonObject.get(key));
+            }
         }
         return false;
     }

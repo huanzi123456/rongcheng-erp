@@ -572,11 +572,11 @@ function createInventorySyncBatchSync(list) {
             '    <select class="input availableStock" ' +
             '               style="width:215px; line-height:17px; display:inline-block">' +
             '      <option value="0"'+(platformErpLinkShopWarehouseInfo.availableStock == 0?"selected":"")+
-            '               >可用量(订单量买家付款后扣减)</option>' +
-            '      <option value="1"'+(platformErpLinkShopWarehouseInfo.availableStock == 1?"selected":"")+
-            '               >可用量(订单量审核后扣减)</option>' +
-            '      <option value="2"'+(platformErpLinkShopWarehouseInfo.availableStock == 2?"selected":"")+
             '               >总量</option>' +
+            '      <option value="1"'+(platformErpLinkShopWarehouseInfo.availableStock == 1?"selected":"")+
+            '               >可用量(订单量买家付款后扣减)</option>' +
+            '      <option value="2"'+(platformErpLinkShopWarehouseInfo.availableStock == 2?"selected":"")+
+            '               >可用量(订单量审核后扣减)</option>' +
             '    </select>' +
             '    <span>X</span>' +
             '    <input type="text" class="input" name="allocationRatio" ' +

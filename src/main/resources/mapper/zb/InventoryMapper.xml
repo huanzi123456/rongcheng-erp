@@ -1729,6 +1729,41 @@
     </select>
 
     <!--/**
+    * 获取 订单占用量 根据参数
+    * @param itemId 商品ID
+    * @param isPay 是否从付款开始匹配
+    * @param ownerId 主账号ID
+    * @return
+    * @author 赵滨
+    */
+    int (BigInteger itemId, Boolean isPay, BigInteger ownerId);-->
+    <select id="getSumOrderStockQuantityByItemId" resultType="int">
+        select ifnull(sum(l.quantity), 0) as orderStockQuantity
+        from
+        order_item_link as l ,
+        item_common_info as it,
+        order_info as o
+        where
+        it.id = l.order_item_id
+        and
+        l.erp_order_id = o.id
+        and
+        l.order_item_id = #{0}
+        and
+        o.order_status in (
+        <if test="param2 != '' and param2 != null">
+            2,
+        </if>
+        3, 4, 5, 6)
+        and
+        l.owner_id = #{2}
+        and
+        it.owner_id = #{2}
+        and
+        o.owner_id = #{2}
+    </select>
+
+    <!--/**
     * 查询 仓库
     * @param ownerId 主账号ID
     * @return

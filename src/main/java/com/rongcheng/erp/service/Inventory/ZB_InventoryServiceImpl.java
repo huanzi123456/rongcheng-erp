@@ -1019,7 +1019,14 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
 
         //创建 系统商品对应关系关联表 然后设置信息
         PlatformErpLink platformErpLink = new PlatformErpLink();
+        //复制基本内容
         platformErpLink.setId(platformErpLinkShopWarehouseInfo.getId());
+        platformErpLink.setOwnerId(platformErpLinkShopWarehouseInfo.getOwnerId());
+        platformErpLink.setPlatformItemSku(platformErpLinkShopWarehouseInfo.getPlatformItemSku());
+        platformErpLink.setItemId(platformErpLinkShopWarehouseInfo.getItemId());
+        platformErpLink.setPlatformId(platformErpLinkShopWarehouseInfo.getPlatformId());
+
+        //修改的内容
         platformErpLink.setAutoSynchron(setAutoSynchron);
         platformErpLink.setAutoOnsale(new Integer(jsonObject.get("autoOnsale").toString()));
         platformErpLink.setSynchronException(new Integer(jsonObject.get("synchronException").toString()));
@@ -1028,17 +1035,12 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         platformErpLink.setRemnantStock(new Integer(jsonObject.get("remnantStock").toString()));
         platformErpLink.setWarehouseId(new BigInteger(jsonObject.get("warehouseId").toString()));
         platformErpLink.setStocklocationId(new BigInteger(jsonObject.get("stocklocationId").toString()));
-        platformErpLink.setOwnerId(platformErpLinkShopWarehouseInfo.getOwnerId());
         platformErpLink.setGmtModified(new Timestamp(System.currentTimeMillis()));
 
         //开启同步，需要调接口同步
         if (synchron == 1) {
-            platformErpLinkShopWarehouseInfo.setWarehouseId(
-                    new BigInteger(jsonObject.get("warehouseId").toString()));
-            platformErpLinkShopWarehouseInfo.setStocklocationId(
-                    new BigInteger(jsonObject.get("stocklocationId").toString()));
             //同步库存,调用接口
-            Boolean isSynchronizeSuccessful = synchronizeStock(platformErpLinkShopWarehouseInfo);
+            Boolean isSynchronizeSuccessful = synchronizeStock(platformErpLink);
             if (!isSynchronizeSuccessful) {
                 throw new UploadStockException("上传库存至平台产生错误，请稍后重试");
             }
@@ -1048,30 +1050,45 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         return inventoryDAO.updatePlatformErpLink(platformErpLink);
     }
 
-    private Boolean synchronizeStock(PlatformErpLinkShopWarehouseInfo platformErpLinkShopWarehouseInfo) {
+    private Boolean synchronizeStock(PlatformErpLink platformErpLink) {
         //获取 平台（来源）商品编码  eq：商品编码（京东）
-        BigInteger platformItemSku = platformErpLinkShopWarehouseInfo.getPlatformItemSku();
+        BigInteger platformItemSku = platformErpLink.getPlatformItemSku();
         //获取商品ID
-        BigInteger itemId = platformErpLinkShopWarehouseInfo.getItemId();
+        BigInteger itemId = platformErpLink.getItemId();
         //获取仓库ID
-        BigInteger warehouseId = platformErpLinkShopWarehouseInfo.getWarehouseId();
+        BigInteger warehouseId = platformErpLink.getWarehouseId();
         //获取库位ID
-        BigInteger stocklocationId = platformErpLinkShopWarehouseInfo.getStocklocationId();
+        BigInteger stocklocationId = platformErpLink.getStocklocationId();
         //获取主账号ID
-        BigInteger ownerId = platformErpLinkShopWarehouseInfo.getOwnerId();
-        //获取库存
+        BigInteger ownerId = platformErpLink.getOwnerId();
+        //获取库存可用量
+        Integer availableStock = platformErpLink.getAvailableStock();
+        //获取库存分配比例
+        Integer allocationRatio = platformErpLink.getAllocationRatio();
+        //获取库存零头
+        Integer remnantStock = platformErpLink.getRemnantStock();
+        //获取访问令牌
+//        String accessToken = "";
+
+        //获取库存总量
         Integer sumStockQuantity = inventoryDAO.getSumStockQuantityByItemIdWarehouseIdStocklocationId(
                 itemId, warehouseId, stocklocationId, ownerId);
-        //获取访问令牌
-        String accessTooken = "";
+        //按照规则计算
+        if (availableStock == 1) {
+            sumStockQuantity -= inventoryDAO.getSumOrderStockQuantityByItemId(itemId, true, ownerId);
+        } else if (availableStock == 2) {
+            sumStockQuantity -= inventoryDAO.getSumOrderStockQuantityByItemId(itemId, false, ownerId);
+        }
+        //获取库存数量
+        Integer stockNum = sumStockQuantity * allocationRatio / 100 + remnantStock;
 
         //根据平台ID判断调用谁的接口
-        if (platformErpLinkShopWarehouseInfo.getPlatformId() != null) {
-            if ("3".equals(platformErpLinkShopWarehouseInfo.getPlatformId().toString())) {
+        if (platformErpLink.getPlatformId() != null) {
+            if ("3".equals(platformErpLink.getPlatformId().toString())) {
                 //调用京东接口，上传库存
                 return JingDongStockWriteUpdateSkuStock.updateSkuStock(
                         serverUrl, accessToken, appKey, appSecret,
-                        platformItemSku.longValue(), sumStockQuantity.longValue());
+                        platformItemSku.longValue(), stockNum.longValue());
             }
         }
         return false;
