@@ -77,4 +77,16 @@ public class Xzy_OnLineCommodityRelationController {
 		XzyJsonResult result = services.modifyLinkInfo(currentOwnerId, common_id, platformErpLinkId);	
 		return result;
 	}
+	/**
+	 * 批量维护对应关系弹出框页面的保存按钮
+	 * @param currentOwnerId :ownerID
+	 * @param obj            :店铺商品-erp系统商品对应关系关联表的(id+itemId)字符串
+	 * @return
+	 */
+	@RequestMapping("/modifyInfos.do")
+	@ResponseBody
+	public XzyJsonResult modifyInfos(BigInteger currentOwnerId,String obj){
+		XzyJsonResult result = services.modifyLinkInfos(currentOwnerId, obj);
+		return result;
+	}
 }

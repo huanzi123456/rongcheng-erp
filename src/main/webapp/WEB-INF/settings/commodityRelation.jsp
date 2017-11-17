@@ -21,7 +21,6 @@
       }
     </style>
     <script type="text/javascript" src="/xzy/commondityRelation.js"></script>
-    <script type="text/javascript" src="/xzy/util-page.js"></script>
     <script type="text/javascript" src="/util/jiml-utils.js"></script>
 </head>
 <body style="position: relative;">
@@ -60,7 +59,7 @@
         <ul class="search search_bottom">
             <li style="width: 18%;">
               <div class="select_mf">
-                <a href="javascript:;" class="button border-main commodity_relation_select">批量维护对应关系</a>
+                <a href="javascript:;" class="button border-main commodity_relation_select" id="xzy_maintainRelation">批量维护对应关系</a>
                 <div class="commodity_xiala">
                   <div class="dsjx"></div>
                 </div>
@@ -299,6 +298,7 @@
         </div>
         <div class="commodity_relation_middle">
           <table>
+             <!--
             <tr>
               <th width="50">序号</th>
               <th>线上店铺</th>
@@ -310,7 +310,7 @@
               <th>对应系统商品名称</th>
               <th>对应系统商品规格</th>
               <th width="64">取消</th>
-            </tr>
+            </tr>          
             <tr>
               <td>
                 1
@@ -635,6 +635,7 @@
                 <a href="javascript:;" class="button border-red"> 取消</a>
               </td>
             </tr>
+             -->
           </table>
         </div>
         <div class="commodity_relation_btn">
@@ -653,10 +654,11 @@
       <div class="hs_code_content">
         <div class="hs_code_keyword">
           <span>关键字：&nbsp;</span>
-          <input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。">
+          <input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。" class="xzy_SecondOnBlur">
         </div>
         <div class="hs_code_table">
-          <table> 
+          <table id="tableLimits"> 
+          <!-- 
             <tr>
               <th width="5">&nbsp;</th>
               <th width="19">
@@ -858,10 +860,11 @@
             <tr>
               <td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
             </tr>
+             -->
           </table>
         </div>
         <div class="hs_code_btn">
-          <a href="javascript:;" class="button border-main hs_code_bc"> 保存</a>
+          <a href="javascript:;" class="button border-main hs_code_bc" id="xzy_keeps"> 保存</a>
         </div>
       </div>
     </div>

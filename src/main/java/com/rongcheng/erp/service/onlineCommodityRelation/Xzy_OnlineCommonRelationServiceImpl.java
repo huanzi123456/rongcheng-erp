@@ -129,13 +129,31 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
      * "换"弹出框中"选择已有"页面的保存按钮
      */
 	@Override
-	public XzyJsonResult modifyLinkInfo(BigInteger currentOwnerId, BigInteger common_id, BigInteger platformErpLinkId) {
+	public XzyJsonResult modifyLinkInfo(BigInteger currentOwnerId, BigInteger common_id, BigInteger platformErpLinkId) {		
 		XzyJsonResult result = new XzyJsonResult();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("ownerId", currentOwnerId);
 		map.put("itemId", common_id);
 		map.put("id", platformErpLinkId);
 		dao.updatePlatformErpLink(map);
+		result.setStatus(0);
+		return result;
+	}
+	/**
+	 * 批量维护对应关系弹出框页面的保存按钮
+	 */
+	@Override
+	public XzyJsonResult modifyLinkInfos(BigInteger currentOwnerId,String obj) {
+		XzyJsonResult result = new XzyJsonResult();
+		String[] strs = obj.split(",");
+		for(int i=0;i<strs.length;i++){
+			String[] arr = strs[i].split("-");			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("ownerId", currentOwnerId);
+			map.put("itemId", new BigInteger(arr[1]));
+			map.put("id", new BigInteger(arr[0]));
+			dao.updatePlatformErpLink(map);
+		}
 		result.setStatus(0);
 		return result;
 	}	

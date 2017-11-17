@@ -1,29 +1,312 @@
 var currentOwnerId;             //当前用户的ownerid
 var now_page;                   //线上商品对应关系主页中分页查询的   当前页
+var list;
+var obj = new Array();
 $(function(){
 	//线上商品对应关系的分页查询
 	commonPage(1);
-	//"换" 操作按钮(分页查询,保存按钮)
+	//"换" 弹出框的 "选择已有" 页面的(分页查询,保存按钮)
 	$("#xzy_limit").on("click","#xzy_input_change",change_input);
+	//在"换" 弹出框中:点击"选择已有"和"新建"按钮切换时
+	$(".active").click(function(){
+		$(".xzy_onBlur").val("");
+		popoverPages(1);
+	});
 	//"换" 弹出框的 "选择已有" 页面的关键字查询
 	$(".xzy_onBlur").blur(function(){popoverPages(1);});
-	/*
-	 * 全选
-	 */
-	$("#xzy_limit").on("click",".xzy_checkAll",function(){
-		var ok = $(this).prop("checked");//选中状态
-		var num = $("#xzy_limit").find("input[name='id[]']").length;
+	//线上商品对应关系页面的复选框
+	$("#xzy_limit").on("click","#xzy_check",checkboxButton)
+	//线上商品对应关系页面的"批量维护对应关系"按钮
+	$("#xzy_maintainRelation").click(maintaimRelation);
+	//线上商品对应关系页面的"批量维护对应关系"弹出框页面的系统商品弹出框的分页查询
+	$(".commodity_relation_middle table").on("click",".search_commodity",secondPopbox);
+	//线上商品对应关系页面的"批量维护对应关系"弹出框页面的系统商品弹出框页面的关键字查询,保存按钮
+	$(".xzy_SecondOnBlur").blur(function(){secondPages(1);});
+	//线上商品对应关系页面的"批量维护对应关系"弹出框页面的保存按钮
+	$(".commodity_relation_bc").click(modify_commonInfo);
+	//线上商品对应关系页面的"批量维护对应关系"弹出框页面的取消按钮
+	$(".commodity_relation_middle table").on("click",".border-red",cancelButton);	
+});
+/**
+ * 线上商品对应关系页面的"批量维护对应关系"弹出框页面的取消按钮
+ * @returns
+ */
+function cancelButton(){	
+	var tr_index = $(this).parent().parent().index();
+	var $find_table = $(".commodity_relation_middle").find("table");
+	$find_table.find("tr:eq("+tr_index+")").remove();
+	var table_tr_length = $find_table.find("tr").length-1;
+	var this_num = $(this).parent().parent().find("td:first").text();
+	for(var i=this_num;i<=table_tr_length;i++){
+		$find_table.find("tr:eq("+i+")").find("td:first").text(i);
+	}
+}
+//线上商品对应关系页面的"批量维护对应关系"弹出框页面的保存按钮
+function modify_commonInfo(){
+	if(obj == ""){return;}
+	$.ajax({
+		url:"/onLineCommodity/modifyInfos.do",
+		type:"post",
+		cache : false,
+	     traditional: true,
+		data:{"currentOwnerId":currentOwnerId,"obj":obj},
+		dataType:"json",		
+		success:function(result){
+			if(result.status == 0){	
+				commonPage(now_page);
+				obj.splice(0,obj.length);
+			}
+		},
+		error:function(){
+			alert("页面飞到瓜哇国去了....");
+		}
+	});	
+}
+/**
+ * 线上商品对应关系页面的"批量维护对应关系"弹出框页面的系统商品弹出框
+ */
+function secondPopbox(){
+	//弹出框页面
+	$(".xzy_SecondOnBlur").val("");
+	secondPages(1);
+	//保存按钮
+	var $this = $(this);
+    $("#xzy_keeps").unbind("click").click(function(){
+	   save_Secondinput($this);
+    });
+}
+/**
+ * 获取弹出框中被选中的线下商品信息
+ * @returns
+ */
+function save_Secondinput($this){	
+	var input_length = $("#tableLimits tr").find("input[name='NumOne']").length;
+	var common_id;
+	var common_name;
+	var common_size;
+	for(var i=0;i<input_length;i++){
+		var bool = $("#tableLimits").find("input[name='NumOne']:eq("+i+")").prop("checked");
+		if(bool){
+			var input_i = $("#tableLimits").find("input[name='NumOne']:eq("+i+")").parent();			
+			common_id = input_i.next().text();//系统商品信息表1的id
+			common_name = input_i.next().next().text();//商品名称
+			common_size = input_i.next().next().next().text();//商品规格
+		}			
+	}
+	if(common_id != undefined){
+		var linkid = $this.parent().parent().parent().find("td:first").attr("name");//线上商品关联表的id
+		$this.parent().find("input").attr("value",common_id);//系统商品信息表的id(系统商品编码)
+		$this.parent().parent().next().text(common_name);//系统商品名称
+		$this.parent().parent().next().next().text(common_size);//系统商品规格
+		var arrs = linkid+"-"+common_id;
+		obj.push(arrs);
+	}
+}
+/**
+ * 线上商品对应关系页面的"批量维护对应关系"弹出框页面的系统商品弹出框的分页查询
+ * @param page
+ * @returns
+ */
+function secondPages(page){
+	$("#tableLimits").find("tr").remove();
+	var inputs = $(".xzy_SecondOnBlur").val();
+	$.ajax({
+		url:"/onLineCommodity/commonPages.do",
+		type:"post",
+		data:{"inputs":inputs,"page":page,"currentOwnerId":currentOwnerId},
+		dataType:"json",				
+		success:function(result){
+			if(result.status == 0){
+				var pageSize = result.pageSize;                        //每页的记录数
+				var maxPage = result.maxPage;                          //总的页数
+				var datas = result.data;
+				var five_tr;
+				for(var i=0;i<datas.length;i++){
+					var list = datas[i].itemCommonInfo;
+					var color = list[0].color;
+					var size = list[0].size;
+					var commonSpecification;                            //商品规格
+					if(color == null){
+						commonSpecification = size;
+					}else{
+						commonSpecification = size+color;
+					}
+					//$("#tableLimits").find("input[name='NumOne']:eq("+i+")").parent();
+		    		var one_tr = '<tr>'+
+		              '<td><input type="radio" name="NumOne"></td>'+
+		              '<td><span class="span">'+list[0].id+'</span></td>'+//商品ID
+		              '<td><span class="span">'+list[0].name+'</span></td>'+//商品名称
+		              '<td><span class="span">'+commonSpecification+'</span></td>'+//商品规格
+		              '<td>'+list[0].normalPrice+'</td>'+//商品原价
+		              '<td>'+datas[i].unit+'</td>'+//计量单位
+		            '</tr>';
+		    		five_tr += one_tr;
+				}
+				var table_tr = '<tr>'+
+	              '<th width="5">&nbsp;</th>'+
+	              '<th width="19">商品编码</th>'+
+	              '<th width="19">商品名称</th>'+
+	              '<th width="19">商品规格</th>'+
+	              '<th width="19">商品价格</th>'+
+	              '<th width="19">单位</th>'+
+	            '</tr>'+		            
+	            five_tr+
+	            '<tr><td colspan="10"><div class="pagelist" id="secondOnclick"></div></td></tr>';
+				var $table_tr = $(table_tr);
+				$("#tableLimits").append($table_tr);
+				//动态添加页码
+				pagination(maxPage,page,"secondOnclick","secondPages",{num:3});
+				//添加 "换" 弹出框(点击保存按钮时,弹出框取消)
+				common_box();
+			}
+		},
+		error:function(){"哎呀..页面不见了!"}
+	});
+}
+/**
+ * 线上商品对应关系页面的"批量维护对应关系"按钮
+ * @returns
+ */
+function maintaimRelation(){
+	obj.splice(0,obj.length);
+	$(".commodity_relation_middle").find("table").find("tr").remove();
+	var five_tr;
+	for(var i=0;i<list.length;i++){
+		var arr = list[i].split("-");		
+		var one_tr = 
+		'<tr>'+
+		  '<td name='+arr[0]+'>'+(i+1)+'<div class="dianpu"><img src="'+arr[1]+'" alt=""></div></td>'+//线上商品关联表的id  序号     线上商品图片
+          '<td><p>'+arr[2]+'</p><span>'+arr[3]+'</span></td>'+//平台店铺名称   平台店铺id
+          '<td>'+
+            '<span class="span50">&nbsp;'+arr[4]+'</span>'+//平台(来源)商品编码
+            '<span class="span50">'+arr[5]+'</span>'+//线上商品规格
+            '<p>'+arr[6]+'</p>'+//平台商品名称
+          '</td>'+
+          '<td style="border-left: 1px dashed #999;">'+
+            '<div class="spbm">'+
+              '<input type="text" value="'+arr[7]+'">'+//系统商品信息表的id(系统商品编码)
+              '<div class="fdjPng search_commodity"></div>'+
+            '</div>'+
+          '</td>'+
+          '<td><p>'+arr[9]+'</p></td>'+//系统商品名称
+          '<td><p>'+arr[8]+'</p></td>'+//系统商品规格
+          '<td><a href="javascript:;" class="button border-red"> 取消</a></td>'+
+        '</tr>';
+		five_tr += one_tr; 
+	}
+	var table_tr = 
+	'<tr>'+
+      '<th width="50">序号</th>'+
+      '<th>线上店铺</th>'+
+      '<th width="240"><span class="span50">线上商品编码/名称</span><span class="span50">线上商品规格</span>'+
+      '</th><th width="125">对应系统商品编码</th>'+
+      '<th>对应系统商品名称</th>'+
+      '<th>对应系统商品规格</th>'+
+      '<th width="64">取消</th>'+
+    '</tr>'+
+    five_tr;
+	var $table_tr = $(table_tr);
+	$(".commodity_relation_middle").find("table").append($table_tr);
+	common_box();	
+}
+/**
+ * 线上商品对应关系页面的复选框
+ * @returns
+ */
+function checkboxButton(){
+	list = new Array();
+	var value = $(this).attr("value");//value=0:全选;value=1:单选
+	var num = $("#xzy_limit").find("input[name='id[]']").length;
+	if(value == 0){//全选
+		var ok = $(this).prop("checked");	
 		if(ok){
 			for(var i=0;i<num;i++){
 				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",true);
+				var $input = $("#xzy_limit").find("input[name='id[]']:eq("+i+")").parent();
+				var strInfo = get_info($input);
+				list.push(strInfo);
 			}
+			$(this).parent().find("p").text(num);
 		}else{
 			for(var i=0;i<num;i++){
-				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",false);
+				$("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked",false);				
 			}
+			list.splice(0,list.length);
+			$(this).parent().find("p").text(0);
 		}
-	});
-});
+	}else if(value == 1){//单选
+		var $input = $(this).parent();
+		var strInfo = get_info($input);
+		var ok = $(this).prop("checked");//选中状态
+		if(ok){
+			var nums = $(this).parent().parent().parent().find("tr:first").find("th:first").find("p").text();
+			var num1=parseInt(nums);   
+            var num2=parseInt(1);   
+            var num3=num1+num2;  
+			$(this).parent().parent().parent().find("tr:first").find("th:first").find("p").text(num3);
+			list.push(strInfo);
+			//判断全选下的每一个input,如果全部被选中,则将全选选中
+			var boolean = true;			
+			for(var i=0;i<num;i++){
+				var sure = $("#xzy_limit").find("input[name='id[]']:eq("+i+")").prop("checked");
+				var j=0;
+				if(sure == false){
+					boolean = false;
+				}
+			}
+			if(boolean){
+				$("#xzy_limit").find("input[value='0']").prop("checked",true);
+			}
+		}else{
+			for(var i=0;i<list.length;i++){
+				if(strInfo == list[i]){
+					list.splice(i,1);
+				}
+			}
+			$("#xzy_limit").find("input[value='0']").prop("checked",false);
+			var nums = $(this).parent().parent().parent().find("tr:first").find("th:first").find("p").text();			
+			var num1=parseInt(nums);   
+            var num2=parseInt(1);   
+            var num3=num1-num2;  
+			$(this).parent().parent().parent().find("tr:first").find("th:first").find("p").text(num3);
+		}
+	}
+}
+/**
+ * 获取"线上商品对应关系的分页查询"的商品及店铺信息
+ * @param $input
+ * @returns
+ */
+function get_info($input){
+	//线上商品信息
+	var linkId= $input.attr("val");//线上商品关联表的id
+	var onlineImg =  $input.next().find("img:first").attr("src")//线上商品图片
+	var platformShopName = $input.parent().find("td:eq(2)").find("p").text();//平台店铺名称
+	var platformShopId = $input.parent().find("td:eq(2)").find("span").text();//平台店铺id
+	var platformItemSku = $input.parent().find("td:eq(3)").find("div[class='wh']").text()//平台(来源)商品编码
+	var onlineSpecification = $input.parent().find("td:eq(3)").find("span[class='span50']").text()//线上商品规格
+	var platformItemName = $input.parent().find("td:eq(3)").find("p").text()//平台商品名称
+	//系统商品信息
+	//var systemImg = $input.parent().find("td:eq(4)").find("img:first").attr("src");//系统商品图片
+	var systemId = $input.parent().find("td:eq(5)").find("span:first").text();//系统商品信息表的id
+	var systemGe = $input.parent().find("td:eq(5)").find("span:eq(1)").text();//系统商品规格
+	var systemName = $input.parent().find("td:eq(5)").find("p").text();//系统商品名称
+	//console.log("线上商品关联表的id:"+linkId);
+	//console.log("线上商品图片:"+onlineImg);
+	//console.log("平台店铺名称:"+platformShopName);
+	//console.log("平台店铺id:"+platformShopId);
+	//console.log("平台(来源)商品编码:"+platformItemSku);
+	//console.log("线上商品规格:"+onlineSpecification);
+	//console.log("平台商品名称:"+platformItemName);
+	//console.log("系统商品图片:"+systemImg);
+	//console.log("系统商品信息表的id:"+systemId);
+	//console.log("系统商品规格:"+systemGe);
+	//console.log("系统商品名称:"+systemName);
+	var strInfo = linkId+"-"+onlineImg+"-"+platformShopName+"-"+platformShopId+"-"+
+	platformItemSku+"-"+onlineSpecification+"-"+platformItemName+"-"+
+	systemId+"-"+systemGe+"-"+systemName;
+	return strInfo;
+}
 /**
  * "换" 操作按钮(分页查询,保存按钮)
  */
@@ -81,7 +364,7 @@ function save_input(platformErpLinkId){
  */
 function popoverPages(page){
 	$("#xzy_limits").find("tr").remove();
-	var inputs = $(".xzy_onBlur").val();	
+	var inputs = $(".xzy_onBlur").val();
 	$.ajax({
 		url:"/onLineCommodity/commonPages.do",
 		type:"post",
@@ -140,6 +423,7 @@ function popoverPages(page){
  * @returns
  */
 function commonPage(page){
+	list="";
 	now_page = page;
 	$("#xzy_limit").find("tr").remove();
 	$.ajax({
@@ -179,7 +463,7 @@ function commonPage(page){
 					}
 				    var one_tr = '<tr>'+
 			          '<td val='+datas[i].platformErpLinkId+'>'+//线上商品关联表的id
-			            '<input type="checkbox" name="id[]" value="1" class="check_coding" /><br>'+
+			            '<input type="checkbox" name="id[]" value="1" class="check_coding" id="xzy_check"/><br>'+
 			            ((page-1)*pageSize+(i+1))+
 			          '</td>'+
 			          '<td>'+
@@ -233,7 +517,7 @@ function commonPage(page){
 			        five_tr +=  one_tr; 
 				}
 				var table_tr = '<tr>'+
-		          '<th width="30"><input type="checkbox" class="xzy_checkAll"/>1</th>'+
+		          '<th width="30"><input type="checkbox" value="0" id="xzy_check"/><p>0</p></th>'+
 		          '<th width="100">&nbsp;</th>'+
 		          '<th>线上店铺</th>'+       
 		          '<th><span class="span50">线上商品编码</span><span class="span50">线上商品规格</span></th>'+
@@ -244,11 +528,12 @@ function commonPage(page){
 		        '<tr><td colspan="10"><div class="pagelist" id="pageClick"></div></td></tr>';
 				//追加tr
 		        var $table = $(table_tr);
-         		$("#xzy_limit").append($table);
+         		$("#xzy_limit").append($table);         		
          		//添加 "换" 弹出框
          		pop_up_box();
          		//动态添加页码
 				pagination(maxPage,page,"pageClick","commonPage",{num:1});
+				
 			}	
 		},
 		error:function(){
@@ -285,4 +570,53 @@ function pop_up_box(){
 	single_updating_delbtn.click(function(){
 		single_updating_box.css("display","none");
 	});
+}
+/**
+ *线上商品对应关系页面 批量处理商品对应关系按钮弹出框里边的系统商品按钮
+ * @returns
+ */
+function common_box(){
+	var search_commodity=$(".search_commodity"),
+		hs_code_bc=$(".hs_code_bc"),
+		hs_code_box=$(".hs_code_box"),
+		hs_code_delbtn=$(".hs_code_delbtn");
+
+		search_commodity.click(function(){
+			hs_code_box.css("display","block");
+		});
+		hs_code_bc.click(function(){
+			hs_code_box.css("display","none");
+		});
+		hs_code_delbtn.click(function(){
+			hs_code_box.css("display","none");
+		})
+}
+function common_none(){
+	/*
+	* 线上商品对应关系页面 批量处理商品对应关系按钮弹出框
+	* commodity_relation_bc 弹出框保存按钮
+	* commodity_relation_qx 弹出框取消按钮
+	* commodity_relation_delbtn  弹出框右上角叉号
+	* commodity_relation_box  弹出框
+	* commodity_relation_select  触发弹出框的点击按钮
+	*/
+	
+	var commodity_relation_bc=$(".commodity_relation_bc"),
+		commodity_relation_qx=$(".commodity_relation_qx"),
+		commodity_relation_delbtn=$(".commodity_relation_delbtn"),
+		commodity_relation_box=$(".commodity_relation_box"),
+		commodity_relation_select=$(".commodity_relation_select");
+
+		commodity_relation_select.click(function(){
+			commodity_relation_box.css("display","none");
+		});
+		commodity_relation_bc.click(function(){
+			commodity_relation_box.css("display","none");
+		});
+		commodity_relation_qx.click(function(){
+			commodity_relation_box.css("display","none");
+		});
+		commodity_relation_delbtn.click(function(){
+			commodity_relation_box.css("display","none");
+		});
 }
