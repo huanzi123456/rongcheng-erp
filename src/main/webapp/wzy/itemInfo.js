@@ -102,13 +102,13 @@ function doSetTbodyInfo(list){
   						"</div>"+
 					"</td>";
 		firstTd=firstTd.replace("[id]",list[i].id);
-		var tds="<td><p>"+list[i].erpItemNum+"</p></td>" +
+		var tds="<td>"+list[i].erpItemNum+"</td>" +
 				"<td><p>"+list[i].name+"</p></td>"+
-				"<td><p>"+list[i].styleCode+"</p></td>"+
-				"<td><p>"+list[i].barCode+"</p></td>"+
-				"<td><p>"+list[i].color+" * "+list[i].size+"</p></td>"+
-				"<td><p>"+list[i].normalPrice+"</p></td>"+
-				"<td><p>"+list[i].brand+"</p></td>"+
+				"<td>"+list[i].styleCode+"</td>"+
+				"<td>"+list[i].barCode+"</td>"+
+				"<td><p>"+list[i].color+" * "+list[i].size+"<p></td>"+
+				"<td>"+list[i].normalPrice+"</p></td>"+
+				"<td>"+list[i].brand+"</td>"+
 				"<td>"+
 				'<a href="javascript:;" class="button border-main management_amend"> 修改</a>'+
 				'<a href="javascript:;" class="button border-red"> 删除</a>'+

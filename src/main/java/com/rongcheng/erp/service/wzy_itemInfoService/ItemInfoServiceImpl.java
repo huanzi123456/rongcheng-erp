@@ -13,6 +13,7 @@ import com.rongcheng.erp.dao.Wzy_ItemInfoDAO;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.ItemEspInfo;
 import com.rongcheng.erp.entity.vo.ItemInfo;
+import com.rongcheng.erp.exception.OrderOutNumberException;
 
 @Service("itemInfoService")
 public class ItemInfoServiceImpl implements ItemInfoService {
@@ -27,11 +28,11 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     //分页查询全部
     @Override
     public Map<String,Object> findUserByKeyWord(
-            BigInteger ownerId, Integer row, Integer nowPage, String keyWord) throws RuntimeException{
+            BigInteger ownerId, Integer row, Integer nowPage, String keyWord) throws OrderOutNumberException{
 
         //账号判断
         if(ownerId == null) {
-            throw new RuntimeException("您的账号已超时");
+            throw new OrderOutNumberException("您的账号已超时");
         }
         
         //分页处理
@@ -65,19 +66,23 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //添加商品表1
     @Override
-    public int saveItemCommonInfo(ItemInfo Item) throws RuntimeException{
+    public int saveItemCommonInfo(ItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
-            throw new RuntimeException("未得到数据");
+            throw new OrderOutNumberException("未得到数据");
         }
         ici = getItemCommonInfo(Item);
-        return dao.saveItemCommonInfo(ici);
+        int success = dao.saveItemCommonInfo(ici);
+        if(success <=0) {
+            throw new OrderOutNumberException("插入失败，可能是您输入的某个数据过长");
+        }
+        return success;
     }
 
     //添加商品表2
     @Override
-    public int saveItemEspInfo(ItemInfo Item) throws RuntimeException{
+    public int saveItemEspInfo(ItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
-            throw new RuntimeException("未得到数据");
+            throw new OrderOutNumberException("未得到数据");
         }
         iei = getItemEspInfo(Item);
         BigInteger id = dao.findItemMaxId();
@@ -85,7 +90,11 @@ public class ItemInfoServiceImpl implements ItemInfoService {
             id = new BigInteger("1");
         }
         iei.setItemId(id);
-        return dao.saveItemEspInfo(iei);
+        int success =  dao.saveItemEspInfo(iei);
+        if(success <=0) {
+            throw new OrderOutNumberException("插入失败，可能是您输入的某个数据过长");
+        }
+        return success;
     }
     
     //将数据转换成两组
@@ -157,26 +166,26 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //商品更新
     @Override
-    public int updateItemInfo(ItemInfo info, BigInteger ownerId) throws RuntimeException{
+    public int updateItemInfo(ItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
         if(info == null) {
-            throw new RuntimeException("未找到修改的数据");
+            throw new OrderOutNumberException("未找到修改的数据");
         }
-        ici=getItemCommonInfo(info);
-        iei=getItemEspInfo(info);
-        int success1 = dao.updateItemCommonInfo(ici);
-        int success2 = dao.updateItemEspInfo(iei);
-        if(success1 <=0 ||success2 <=0) {
-            return 0;
-        }else {
+        try {
+            ici=getItemCommonInfo(info);
+            iei=getItemEspInfo(info);
+            dao.updateItemCommonInfo(ici);
+            dao.updateItemEspInfo(iei);
             return 1;
+        }catch(OrderOutNumberException e) {
+            throw new OrderOutNumberException("更新失败，可能是您输入的某个数据过长");
         }
     }
     
     //商品删除
     @Override
-    public int removeItemInfo(String id) throws RuntimeException{
+    public int removeItemInfo(String id) throws OrderOutNumberException{
         if(id==null) {
-            throw new RuntimeException("数据获取异常");
+            throw new OrderOutNumberException("数据获取异常");
         }
         String[] ids = id.split(",");
         int index = 0;
@@ -187,17 +196,17 @@ public class ItemInfoServiceImpl implements ItemInfoService {
                 dao.removeItemEspInfo(itemId);
                 index++;
             }
-        }catch(RuntimeException e) {
-            throw new RuntimeException("删除未全部完成");
+        }catch(OrderOutNumberException e) {
+            throw new OrderOutNumberException("删除未全部完成");
         }
         return index;
     }
 
     //商品id查询
     @Override
-    public List<ItemInfo> findItemInfoById(BigInteger id) throws RuntimeException{
+    public List<ItemInfo> findItemInfoById(BigInteger id) throws OrderOutNumberException{
         if(id == null) {
-            throw new RuntimeException("未找到修改的数据");
+            throw new OrderOutNumberException("未找到修改的数据");
         }
         return dao.findItemInfoById(id);
     }
