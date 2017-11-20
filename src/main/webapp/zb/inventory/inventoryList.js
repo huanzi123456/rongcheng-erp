@@ -39,7 +39,56 @@ $(function() {
 	
 	//12.点击弹出框内的'保存'
 	$("#inventoryList_save").click(inventoryListSave);
+
+	//13.监听点击'删除'
+    $("#inventoryList_table").on("click", ".delete_button", deleteButton);
 })
+
+/**
+ * 13.监听点击'删除'
+ * @author 赵滨
+ */
+function deleteButton() {
+    if (confirm("您确认删除该仓库吗？")) {
+        //获取仓库ID
+        var warehouseId = $(this).parent().parent().find("input[name='id[]']").val();
+
+        //发送请求，启用停用
+        $.ajax({
+            url : "/inventoryList/deleteInventoryList.do",
+            type : "post",
+            //traditional : true,
+            data : {
+                "warehouseId" : warehouseId // bigint
+            },
+            dataType : "json",
+            success : function(result) {
+                //接受行数
+                var row = result.data
+
+                //如果大于1
+                if (row > 0) {
+                    showMessage("删除仓库成功");
+                    //获取页面中的显示条数
+                    var rows = $("#inventoryList_table").find(".delete_button");
+                    //如果只有一条	并且  当前页码不是首页
+                    if (rows.length == 1 && now_page > 1) {
+                        //返回上一页
+                        now_page--;
+                    }
+                    //加载页面
+                    loadInventoryList(now_page, key_words, warehouse_status);
+                } else {
+                    showMessage("删除0个仓库");
+                }
+
+            },
+            error : function() {
+                showMessage("删除仓库失败");
+            }
+        });
+    }
+}
 
 /**
  * 12.点击弹出框内的'保存'
@@ -342,7 +391,6 @@ function useDisable() {
 			}
 		});
 	}
-	
 }
 
 /**
@@ -565,7 +613,7 @@ function createInventoryList(map) {
 	tr += '<th>联系人</th>';
 	tr += '<th width="200">仓库地址</th>';
 	tr += '<th>状态</th>';
-	tr += '<th width="180">操作</th>';
+	tr += '<th width="270">操作</th>';
 	tr += '</tr>';
 	//追加
 	$("#inventoryList_table").append(tr);
@@ -632,6 +680,7 @@ function createInventoryList(map) {
 		}
 		tr += '</a>';
 		tr += '<a href="javascript:;" class="button border-main a_btn_sync amend_button"> 修改</a>';
+		tr += '<a href="javascript:;" class="button border-red  a_btn_sync delete_button"> 删除</a>';
 		tr += '</td>';
 		tr += '</tr>';
 		//转换对象

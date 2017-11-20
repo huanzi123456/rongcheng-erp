@@ -125,7 +125,15 @@ public interface ZB_InventoryService {
     int inventoryListSaveAddUpdate(BigInteger warehouseId, String userWarehouseCode, String warehouseName,
                                    String consignorName, String consignorTel, BigInteger regionId, String userAddress,
                                    BigInteger ownerId);
-    
+    /**
+     * 删除仓库
+     * @param warehouseId 仓库ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    int deleteInventoryList(BigInteger warehouseId, BigInteger ownerId);
+
     /**
      * 加载 库位管理列表 页面
      * @param nowPage 当前页码

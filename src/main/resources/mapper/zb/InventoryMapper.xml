@@ -970,6 +970,22 @@
         owner_id=#{ownerId}
     </update>
 
+    <!--/**
+    * 删除仓库
+    * @param warehouseId 仓库ID
+    * @param ownerId 主账号ID
+    * @return
+    * @author 赵滨
+    */-->
+    <delete id="removeWarehouseInfoById">
+        delete from
+            warehouse_info
+        where
+            id=#{0}
+        and
+            owner_id=#{1}
+    </delete>
+
     <!-- /**
      * 获取 仓库列表
      *

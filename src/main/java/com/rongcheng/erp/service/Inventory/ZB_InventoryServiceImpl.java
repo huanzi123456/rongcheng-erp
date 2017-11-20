@@ -448,6 +448,17 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
       
       return row;
     }
+
+    /**
+     * 删除仓库
+     * @param warehouseId 仓库ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    public int deleteInventoryList(BigInteger warehouseId, BigInteger ownerId) {
+        return inventoryDAO.removeWarehouseInfoById(warehouseId, ownerId);
+    }
     
     /**
      * 加载 库位管理列表 页面

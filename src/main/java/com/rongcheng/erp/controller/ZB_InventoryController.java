@@ -183,11 +183,9 @@ public class ZB_InventoryController {
     @ResponseBody
     @RequestMapping("/inventoryList/loadInventoryList.do")
     public JsonResult loadInventoryList(Integer nowPage, String keywords, Integer warehouseStatus) {
-
         //加载
         Map<String, Object> map =
                 inventoryService.loadInventoryList(nowPage, rows, keywords, warehouseStatus, ownerId);
-
         //返回
         return new JsonResult(map);
     }
@@ -229,6 +227,19 @@ public class ZB_InventoryController {
                 consignorName, consignorTel, regionId, userAddress, ownerId)
         );
     }
+
+    /**
+     * 删除仓库
+     * @param warehouseId 仓库ID
+     * @return
+     * @author 赵滨
+     */
+    @ResponseBody
+    @RequestMapping("/inventoryList/deleteInventoryList.do")
+    public JsonResult deleteInventoryList(BigInteger warehouseId) {
+        return new JsonResult(inventoryService.deleteInventoryList(warehouseId, ownerId));
+    }
+
 
     /**
      * 跳转 库位管理 页面

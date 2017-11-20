@@ -248,6 +248,15 @@ public interface ZB_InventoryDAO {
     int modifyWarehouseInfo(WarehouseInfo warehouseInfo);
 
     /**
+     * 删除仓库
+     * @param warehouseId 仓库ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    int removeWarehouseInfoById(BigInteger warehouseId, BigInteger ownerId);
+
+    /**
      * 获取 仓库列表
      *
      * <p>根据ID
