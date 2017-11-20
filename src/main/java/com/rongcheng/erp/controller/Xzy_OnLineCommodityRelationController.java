@@ -33,16 +33,29 @@ public class Xzy_OnLineCommodityRelationController {
     }
 	/**
 	 * 线上商品对应关系页面的分页查询
-	 * @param page:当前页
+	 * 线上商品对应关系页面的查询按钮
+	 * @param commonState      :状态
+	 * @param platformShopId   :店铺
+	 * @param onlineInfo       :线上商品编号/线上商品名
+	 * @param systemInof       :系统商品编号/系统商品名
+	 * @param page             :当前页
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/commonPage.do")
 	@ResponseBody
-	public XzyJsonResult commonPage(Integer page,HttpServletRequest request){
+	public XzyJsonResult commonPage(String commonState,String platformShopId,String onlineInfo,String systemInof,Integer page,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		UserInfo user = (UserInfo)session.getAttribute("user");
 		BigInteger ownerId = user.getOwnerId();
-		XzyJsonResult result = services.commonPage(ownerId, page);
+		XzyJsonResult result;
+		if(commonState == "" && platformShopId == "" && onlineInfo == "" && systemInof == ""){
+			//无条件的分页查询
+			result = services.commonPage(ownerId, page);
+		}else{
+			//四个条件的分页查询(查询按钮)
+			result = services.selectButtons(commonState, platformShopId, onlineInfo, systemInof, ownerId, page);
+		}
 		return result;
 	}
 	/**
@@ -87,6 +100,20 @@ public class Xzy_OnLineCommodityRelationController {
 	@ResponseBody
 	public XzyJsonResult modifyInfos(BigInteger currentOwnerId,String obj){
 		XzyJsonResult result = services.modifyLinkInfos(currentOwnerId, obj);
+		return result;
+	}
+	/**
+	 * 线上商品对应关系页面的店铺下拉选的加载店铺
+	 * @param currentOwnerId
+	 * @return
+	 */
+	@RequestMapping("/addShopInfos.do")
+	@ResponseBody
+	public XzyJsonResult addShopInfo(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		UserInfo user = (UserInfo)session.getAttribute("user");
+		BigInteger ownerId = user.getOwnerId();
+		XzyJsonResult result = services.addShopInfos(ownerId);
 		return result;
 	}
 }

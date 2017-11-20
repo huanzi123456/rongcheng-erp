@@ -11,6 +11,7 @@ import com.rongcheng.erp.dto.ItemCommonAndEspInfo;
 import com.rongcheng.erp.dto.PlatformErpLinkItemCommonInfo;
 import com.rongcheng.erp.dto.XzyJsonResult;
 import com.rongcheng.erp.entity.ItemCommonInfo;
+import com.rongcheng.erp.entity.ShopInfo;
 /**
  * 线上商品对应关系页面
  * @author 薛宗艳
@@ -154,6 +155,60 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
 			map.put("id", new BigInteger(arr[0]));
 			dao.updatePlatformErpLink(map);
 		}
+		result.setStatus(0);
+		return result;
+	}
+	/**
+	 * 线上商品对应关系页面的店铺下拉选的加载店铺
+	 */
+	@Override
+	public XzyJsonResult addShopInfos(BigInteger currentOwnerId) {
+		XzyJsonResult result = new XzyJsonResult();
+		List<ShopInfo> list = dao.selectShopInfo(currentOwnerId);
+		result.setData(list);
+		result.setStatus(0);
+		return result;
+	}
+	/**
+	 * 线上商品对应关系页面的查询按钮
+	 */
+	@Override
+	public XzyJsonResult selectButtons(String commonState, String platformShopId, String onlineInfo, String systemInof, BigInteger currentOwnerId,Integer page) {
+		XzyJsonResult result = new XzyJsonResult();
+		BigInteger onlineCommonSku = null ;
+		BigInteger systemCommonId = null ; 
+		try {
+			onlineCommonSku = new BigInteger(onlineInfo);
+			systemCommonId = new BigInteger(systemInof);
+		} catch (Exception e) {
+			
+		}		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("ownerId", currentOwnerId);          //ownerId      BigInteger
+		map.put("platformItemState", commonState);   //状态                         Stirng 
+		map.put("platformShopId", platformShopId);   //店铺                         String	
+		map.put("platformItemSku", onlineCommonSku); //线上商品编号          BigInteger
+		map.put("platformItemName", onlineInfo);     //线上商品名              Stirng 
+		map.put("id", systemCommonId);               //系统商品编号          BigInteger
+		map.put("name", systemInof);                 //系统商品名              Stirng 
+		//1.统计满足条件的记录数
+		Integer count = dao.selectButtonCount(map);		
+		page=(page-1)*(new Integer (pageSize));
+		Integer max_page;//总页数
+		if(count<=new Integer(pageSize)){
+			max_page=1;		
+		}if(count%(new Integer(pageSize))==0){
+			max_page=count/(new Integer(pageSize));
+		}else{
+			max_page = count/(new Integer(pageSize))+1;			
+		}
+		//2.分页查询
+		map.put("page", page);                      
+		map.put("pageSize", new Integer(pageSize));
+		List<PlatformErpLinkItemCommonInfo> list = dao.selectCommonInfo(map);
+		result.setMaxPage(max_page);
+    	result.setPageSize(new Integer(pageSize));
+    	result.setData(list);
 		result.setStatus(0);
 		return result;
 	}	

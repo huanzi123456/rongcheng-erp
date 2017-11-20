@@ -245,4 +245,76 @@
   WHERE id = #{id,jdbcType=BIGINT,javaType=BIGINTEGER}
   AND owner_id = #{ownerId,jdbcType=BIGINT,javaType=BIGINTEGER}
 </update>
+<!-- 
+  5.线上商品对应关系页面的店铺下拉选的加载店铺
+ -->
+<select id="selectShopInfo" parameterType="java.math.BigInteger" resultType="com.rongcheng.erp.entity.ShopInfo">  
+  SELECT NAME,platform_shop_id as platformShopId
+  FROM shop_info
+  WHERE owner_id = #{ownerId}
+</select>
+<!-- 
+  6.线上商品对应关系页面的查询按钮
+    (1)统计满足条件的记录数
+    (2)分页查询
+ -->
+<select id="selectButtonCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(a.id)
+  FROM platform_erp_link a,item_common_info b
+  WHERE a.item_id = b.id
+  AND a.owner_id = b.owner_id = #{ownerId}
+  <include refid="xzy_if_sql"/>
+</select> 
+<select id="selectCommonInfo" parameterType="java.util.Map" resultMap="xzybaseResultMap">
+  SELECT c.aid,
+         c.platform_shop_name,
+         c.platform_shop_id,
+         c.platform_item_sku,
+         c.platform_item_name,
+         c.platform_item_attrvaluealias1,
+         c.platform_item_attrvaluealias2,
+         c.platform_user_img,
+         c.id,
+         c.name,
+         c.image1,
+         c.color,
+         c.size
+  FROM  (SELECT a.id AS aid,
+                a.platform_shop_name,
+                a.platform_shop_id,
+                a.platform_item_sku,
+                a.platform_item_name,
+                a.platform_item_attrvaluealias1,
+                a.platform_item_attrvaluealias2,
+                a.platform_user_img,
+                b.id,
+                b.name,
+                b.image1,
+                b.color,
+                b.size
+          FROM  platform_erp_link a,item_common_info b
+          WHERE a.item_id = b.id
+          AND a.owner_id = b.owner_id = #{ownerId}
+          <include refid="xzy_if_sql"/>
+          ) c 
+  LIMIT #{page},#{pageSize} 
+</select>
+<sql id="xzy_if_sql">
+  <if test="platformItemState != '' and platformItemState != null">
+    <!-- 线上商品状态  and platformItemState != null-->
+    AND a.platform_item_state = #{platformItemState}
+  </if>
+  <if test="platformShopId !='' and platformShopId != null">
+    <!-- 平台店铺id and platformShopId != null-->
+    AND a.platform_shop_id = #{platformShopId}
+  </if>
+  <if test="platformItemSku!='' and platformItemSku!=null ">
+    <!-- 线上商品编号或线上商品名 and onlineInfo != null -->
+    AND (a.platform_item_sku LIKE CONCAT_WS('', '%',#{platformItemSku}, '%') OR a.platform_item_name LIKE CONCAT_WS('', '%',#{platformItemName}, '%'))
+  </if>
+  <if test="id!='' and id!=null">
+    <!-- 系统商品编号或系统商品名 and systemInof != null -->
+    AND (b.id LIKE CONCAT_WS('', '%',#{id}, '%') OR b.name LIKE CONCAT_WS('', '%',#{name}, '%'))
+  </if> 
+</sql>
 </mapper>

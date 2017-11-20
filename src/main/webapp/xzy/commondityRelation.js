@@ -26,7 +26,55 @@ $(function(){
 	$(".commodity_relation_bc").click(modify_commonInfo);
 	//线上商品对应关系页面的"批量维护对应关系"弹出框页面的取消按钮
 	$(".commodity_relation_middle table").on("click",".border-red",cancelButton);	
+	//线上商品对应关系页面的店铺下拉选的加载店铺信息
+	addOption();	
+	//线上商品对应关系页面的查询按钮
+	$(".icon-search").click(function(){commonPage(1);});
 });
+/**
+ * 获取线上商品对应关系页面的店铺信息
+ * @returns
+ */
+function getShopInfo(){
+	var platformShopId = $("#xzy_select1").find("option:selected").val();
+	return platformShopId;
+}
+/**
+ * 获取线上商品对应关系页面的商品状态
+ * @returns
+ */
+function getCommonState(){
+	var commonState = $("#xzy_select0").find("option:selected").text();
+	return commonState;
+}
+/**
+ * 线上商品对应关系页面的店铺下拉选的加载
+ * @returns
+ */
+function addOption(){
+	$.ajax({
+		url:"/onLineCommodity/addShopInfos.do",
+		type:"post",
+		data:{},
+		dataType:"json",
+		success:function(result){
+			if(result.status==0){
+				var datas = result.data;
+				var options;
+				for(var i=0;i<datas.length;i++){
+					var one_option = '<option value="'+datas[i].platformShopId+'" id="xzy_onclick">'+datas[i].name+'</option>'
+					options += one_option;
+				}
+				var select = ' <option value="" id="xzy_onclick">全部店铺</option>'+options;
+				var $select = $(select);
+				$("#xzy_select1").append($select);
+			}
+		},
+		error:function(){
+			alert("店铺加载失败...")
+		}
+	});
+}
 /**
  * 线上商品对应关系页面的"批量维护对应关系"弹出框页面的取消按钮
  * @returns
@@ -287,21 +335,9 @@ function get_info($input){
 	var onlineSpecification = $input.parent().find("td:eq(3)").find("span[class='span50']").text()//线上商品规格
 	var platformItemName = $input.parent().find("td:eq(3)").find("p").text()//平台商品名称
 	//系统商品信息
-	//var systemImg = $input.parent().find("td:eq(4)").find("img:first").attr("src");//系统商品图片
 	var systemId = $input.parent().find("td:eq(5)").find("span:first").text();//系统商品信息表的id
 	var systemGe = $input.parent().find("td:eq(5)").find("span:eq(1)").text();//系统商品规格
 	var systemName = $input.parent().find("td:eq(5)").find("p").text();//系统商品名称
-	//console.log("线上商品关联表的id:"+linkId);
-	//console.log("线上商品图片:"+onlineImg);
-	//console.log("平台店铺名称:"+platformShopName);
-	//console.log("平台店铺id:"+platformShopId);
-	//console.log("平台(来源)商品编码:"+platformItemSku);
-	//console.log("线上商品规格:"+onlineSpecification);
-	//console.log("平台商品名称:"+platformItemName);
-	//console.log("系统商品图片:"+systemImg);
-	//console.log("系统商品信息表的id:"+systemId);
-	//console.log("系统商品规格:"+systemGe);
-	//console.log("系统商品名称:"+systemName);
 	var strInfo = linkId+"-"+onlineImg+"-"+platformShopName+"-"+platformShopId+"-"+
 	platformItemSku+"-"+onlineSpecification+"-"+platformItemName+"-"+
 	systemId+"-"+systemGe+"-"+systemName;
@@ -423,123 +459,146 @@ function popoverPages(page){
  * @returns
  */
 function commonPage(page){
+	/////////////////////////////////////////////
+	//平台店铺信息
+    var platformShopId = getShopInfo();
+    //商品状态
+    var commonState = getCommonState();
+    if(commonState == "在售商品"){
+    	commonState = 1;
+    }else if(commonState == "下架商品"){
+    	commonState = 2;
+    }else if(commonState == "全部"){
+    	commonState = "";
+    }
+    if(platformShopId == undefined){
+    	platformShopId = "";
+    }
+    //线上商品编号或名称
+	var onlineInfo = $("#xzy_online").val();
+	//系统商品编号或名称
+	var systemInof = $("#xzy_system").val();
+	/////////////////////////////////////////////
 	list="";
 	now_page = page;
 	$("#xzy_limit").find("tr").remove();
 	$.ajax({
 		url:"/onLineCommodity/commonPage.do",
 		type:"post",
-		data:{"page":page},
+		data:{"commonState":commonState,"platformShopId":platformShopId,"onlineInfo":onlineInfo,"systemInof":systemInof,"page":page},
 		dataType:"json",		
 		success:function(result){
-			if(result.status == 0){
-				var pageSize = result.pageSize;                        //每页的记录数
-				var maxPage = result.maxPage;                          //总的页数
-				var datas = result.data;
-				currentOwnerId = result.msg;
-				var five_tr ;
-				for(var i=0;i<datas.length;i++){
-					//线上商品信息	
-					var attr1 = datas[i].platformItemAttrvaluealias1;
-					var attr2 = datas[i].platformItemAttrvaluealias2;
-					var onlineSpecification;                           //线上商品规格
-					if(attr2 == ""){
-						onlineSpecification = attr1;
-					}else{
-						onlineSpecification = attr1+"*"+attr2;
-					}
-					//系统商品信息
-		    		var list = datas[i].itemCommonInfo;	;
-		    		var size = list[0].size;
-		    		var color = list[0].color;
-		    		var offlineSpecification;                          //系统商品规格
-					if(color == null){
-						offlineSpecification = size;
-					}else{
-						offlineSpecification = size+"*"+color;
-					}
-					if(offlineSpecification == null){
-						offlineSpecification = "未设置系统商品规格";
-					}
-				    var one_tr = '<tr>'+
-			          '<td val='+datas[i].platformErpLinkId+'>'+//线上商品关联表的id
-			            '<input type="checkbox" name="id[]" value="1" class="check_coding" id="xzy_check"/><br>'+
-			            ((page-1)*pageSize+(i+1))+
-			          '</td>'+
-			          '<td>'+
-			            '<div class="sjx" title="线上商品和系统商品编码不一致"></div>'+
-			            '<div class="img_box">'+
-			              '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
-			              '<div class="show_img_box">'+
-			                '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
-			              '</div>'+
-			            '</div>'+
-			            '<div class="dianpu">'+
-			              '<img src="'+datas[i].platformUserImg+'" alt="" title="微店">'+//线上商品图片
-			            '</div>'+
-			          '</td>'+
-			          '<td>'+
-			            '<p>'+
-			            datas[i].platformShopName+//平台店铺名称
-			            '</p>'+
-			            '<span>'+datas[i].platformShopId+'</span>'+//平台店铺id
-			          '</td>'+
-			          '<td>'+
-			            '<div>'+
-			              '<div class="wh" title="线上商品的商家编码没有编写">'+datas[i].platformItemSku+'</div>'+//平台(来源)商品编码
-			              '<span class="span50">'+onlineSpecification+'</span>'+//线上商品规格
-			            '</div>'+
-			            '<p>'+
-			            datas[i].platformItemName+//平台商品名称
-			            '</p>'+
-			          '</td>'+  
-			          '<td style="border-left: 1px dashed #999;">'+
-			            '<div class="img_box">'+
-			              '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
-			              '<div class="show_img_box">'+
-			                '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
-			              '</div>'+
-			            '</div>'+
-			          '</td>'+
-			          '<td >'+
-			            '<div>'+
-			             '<span class="span50">'+list[0].id+'</span>'+//系统商品信息表的id
-			              '<span class="span50">'+offlineSpecification+'</span>'+//系统商品规格
-			            '</div>'+
-			            '<p>'+
-			            list[0].name+//系统商品名称
-			            '</p>'+
-			          '</td>'+
-			          '<td>'+
-			            '<a href="javascript:;" class="button border-main single_huan" id="xzy_input_change"> 换</a>'+
-			          '</td>'+
-			        '</tr>'
-			        five_tr +=  one_tr; 
-				}
-				var table_tr = '<tr>'+
-		          '<th width="30"><input type="checkbox" value="0" id="xzy_check"/><p>0</p></th>'+
-		          '<th width="100">&nbsp;</th>'+
-		          '<th>线上店铺</th>'+       
-		          '<th><span class="span50">线上商品编码</span><span class="span50">线上商品规格</span></th>'+
-		          '<th width="50">&nbsp;</th>'+
-		          '<th><span class="span50">对应系统商品编码</span><span class="span50">对应系统商品规格</span></th>'+
-		          '<th>操作</th>'+       
-		        '</tr>'+five_tr+
-		        '<tr><td colspan="10"><div class="pagelist" id="pageClick"></div></td></tr>';
-				//追加tr
-		        var $table = $(table_tr);
-         		$("#xzy_limit").append($table);         		
-         		//添加 "换" 弹出框
-         		pop_up_box();
-         		//动态添加页码
-				pagination(maxPage,page,"pageClick","commonPage",{num:1});
-				
-			}	
+			homePage(result,page);	
 		},
 		error:function(){
 			alert("不好了,页面飞走了");
 		}
 	});
+}
+function homePage(result,page){
+	if(result.status == 0){
+		var pageSize = result.pageSize;                        //每页的记录数
+		var maxPage = result.maxPage;                          //总的页数
+		var datas = result.data;
+		currentOwnerId = result.msg;
+		var five_tr ;
+		for(var i=0;i<datas.length;i++){
+			//线上商品信息	
+			var attr1 = datas[i].platformItemAttrvaluealias1;
+			var attr2 = datas[i].platformItemAttrvaluealias2;
+			var onlineSpecification;                           //线上商品规格
+			if(attr2 == ""){
+				onlineSpecification = attr1;
+			}else{
+				onlineSpecification = attr1+"*"+attr2;
+			}
+			//系统商品信息
+    		var list = datas[i].itemCommonInfo;	;
+    		var size = list[0].size;
+    		var color = list[0].color;
+    		var offlineSpecification;                          //系统商品规格
+			if(color == null){
+				offlineSpecification = size;
+			}else{
+				offlineSpecification = size+"*"+color;
+			}
+			if(offlineSpecification == null){
+				offlineSpecification = "未设置系统商品规格";
+			}
+		    var one_tr = '<tr>'+
+	          '<td val='+datas[i].platformErpLinkId+'>'+//线上商品关联表的id
+	            '<input type="checkbox" name="id[]" value="1" class="check_coding" id="xzy_check"/><br>'+
+	            ((page-1)*pageSize+(i+1))+
+	          '</td>'+
+	          '<td>'+
+	            '<div class="sjx" title="线上商品和系统商品编码不一致"></div>'+
+	            '<div class="img_box">'+
+	              '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
+	              '<div class="show_img_box">'+
+	                '<img src="'+datas[i].platformUserImg+'" alt="">'+//线上商品图片
+	              '</div>'+
+	            '</div>'+
+	            '<div class="dianpu">'+
+	              '<img src="'+datas[i].platformUserImg+'" alt="" title="微店">'+//线上商品图片
+	            '</div>'+
+	          '</td>'+
+	          '<td>'+
+	            '<p>'+
+	            datas[i].platformShopName+//平台店铺名称
+	            '</p>'+
+	            '<span>'+datas[i].platformShopId+'</span>'+//平台店铺id
+	          '</td>'+
+	          '<td>'+
+	            '<div>'+
+	              '<div class="wh" title="线上商品的商家编码没有编写">'+datas[i].platformItemSku+'</div>'+//平台(来源)商品编码
+	              '<span class="span50">'+onlineSpecification+'</span>'+//线上商品规格
+	            '</div>'+
+	            '<p>'+
+	            datas[i].platformItemName+//平台商品名称
+	            '</p>'+
+	          '</td>'+  
+	          '<td style="border-left: 1px dashed #999;">'+
+	            '<div class="img_box">'+
+	              '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
+	              '<div class="show_img_box">'+
+	                '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
+	              '</div>'+
+	            '</div>'+
+	          '</td>'+
+	          '<td >'+
+	            '<div>'+
+	             '<span class="span50">'+list[0].id+'</span>'+//系统商品信息表的id
+	              '<span class="span50">'+offlineSpecification+'</span>'+//系统商品规格
+	            '</div>'+
+	            '<p>'+
+	            list[0].name+//系统商品名称
+	            '</p>'+
+	          '</td>'+
+	          '<td>'+
+	            '<a href="javascript:;" class="button border-main single_huan" id="xzy_input_change"> 换</a>'+
+	          '</td>'+
+	        '</tr>'
+	        five_tr +=  one_tr; 
+		}
+		var table_tr = '<tr>'+
+          '<th width="30"><input type="checkbox" value="0" id="xzy_check"/><p>0</p></th>'+
+          '<th width="100">&nbsp;</th>'+
+          '<th>线上店铺</th>'+       
+          '<th><span class="span50">线上商品编码</span><span class="span50">线上商品规格</span></th>'+
+          '<th width="50">&nbsp;</th>'+
+          '<th><span class="span50">对应系统商品编码</span><span class="span50">对应系统商品规格</span></th>'+
+          '<th>操作</th>'+       
+        '</tr>'+five_tr+
+        '<tr><td colspan="10"><div class="pagelist" id="pageClick"></div></td></tr>';
+		//追加tr
+        var $table = $(table_tr);
+ 		$("#xzy_limit").append($table);         		
+ 		//添加 "换" 弹出框
+ 		pop_up_box();
+ 		//动态添加页码
+		pagination(maxPage,page,"pageClick","commonPage",{num:1});
+		
+	}
 }
 /**
  * 添加 "换" 弹出框

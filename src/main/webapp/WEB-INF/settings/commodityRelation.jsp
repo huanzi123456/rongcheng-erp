@@ -30,24 +30,26 @@
         <div class="padding border-bottom">
           <ul class="search">
               <li>状态：
-                <select class="input" style="width:80px; line-height:17px; display:inline-block">
-                  <option value="">全部</option>
+                <select class="input" style="width:80px; line-height:17px; display:inline-block" id="xzy_select0">
+                  <option value="-1">全部</option>
                   <option value="1">在售商品</option>
                   <option value="0">下架商品</option>
                 </select>
               </li>
               <li>店铺：
-                <select class="input" style="width:80px; line-height:17px; display:inline-block">
+                <select class="input" style="width:80px; line-height:17px; display:inline-block" id="xzy_select1">
+                  <!-- 
                   <option value="">全部店铺</option>
                   <option value="1">店铺1</option>
                   <option value="0">店铺2</option>
+                   -->
                 </select>
               </li>
               <li>线上商品：
-                <input type="text" placeholder="商品编号/商品名称" class="input" style="width:140px; line-height:17px;display:inline-block" />
+                <input type="text" placeholder="商品编号/商品名称" class="input" style="width:140px; line-height:17px;display:inline-block" id="xzy_online"/>
               </li>
               <li>系统商品：
-                <input type="text" placeholder="商品编号/商品名称" class="input" style="width:140px; line-height:17px;display:inline-block" />
+                <input type="text" placeholder="商品编号/商品名称" class="input" style="width:140px; line-height:17px;display:inline-block" id="xzy_system"/>
                 <a href="javascript:;" class="button border-main icon-search"> 查询</a>
               </li>
               <li style="line-height: 20px;">

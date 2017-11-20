@@ -27,7 +27,9 @@
 	* commodity_relation_delbtn  弹出框右上角叉号
 	* commodity_relation_box  弹出框
 	* commodity_relation_select  触发弹出框的点击按钮
-	*/
+	*/$(".commodity_relation_select").click(function(){
+		commodity_relation_box.css("display","block");
+	});
 
 	var commodity_relation_bc=$(".commodity_relation_bc"),
 		commodity_relation_qx=$(".commodity_relation_qx"),

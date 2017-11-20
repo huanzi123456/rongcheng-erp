@@ -45,4 +45,20 @@ public interface Xzy_OnlineCommonRelationService {
 	 * @return
 	 */
 	XzyJsonResult modifyLinkInfos(BigInteger currentOwnerId,String obj);
+	/**
+	 * 线上商品对应关系页面的店铺下拉选的加载店铺
+	 * @param currentOwnerId
+	 * @return
+	 */
+	XzyJsonResult addShopInfos(BigInteger currentOwnerId);
+	/**
+	 * 线上商品对应关系页面的查询按钮
+	 * @param commonState      :状态
+	 * @param platformShopId   :店铺
+	 * @param onlineInfo       :线上商品编号/名
+	 * @param systemInof       :系统商品编号/名
+	 * @param currentOwnerId   :ownerID
+	 * @return
+	 */
+	XzyJsonResult selectButtons(String commonState,String platformShopId,String onlineInfo,String systemInof,BigInteger currentOwnerId,Integer page);
 }
