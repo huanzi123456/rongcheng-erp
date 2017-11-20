@@ -86,16 +86,21 @@ function doGetItemInfo(now_page, key_word){
 
 //tbody页面
 function doSetTbodyInfo(list){
-	
 	//获取tbody并清空
 	var tbody = $("#tbody");
 	tbody.empty();
-	
 	//遍历信息并填写
 	for (var i=0;i<list.length;i++){
 		var tr=$("<tr></tr>");
 		tr.data("id",list[i].id);
-		var firstTd='<td><input type="checkbox" name="checkedItem" value="[id]"></td>';
+		var firstTd="<td><input type='checkbox' name='checkedItem' value='[id]'>" +
+						"<div class='img_box'>"+
+  							"<img src='"+list[i].image1+"' alt=''>"+
+  							"<div class='img_show_box'>"+
+  								"<img src='"+list[i].image1+"' alt=''>"+
+  								"</div>"+
+  						"</div>"+
+					"</td>";
 		firstTd=firstTd.replace("[id]",list[i].id);
 		var tds="<td><p>"+list[i].erpItemNum+"</p></td>" +
 				"<td><p>"+list[i].name+"</p></td>"+

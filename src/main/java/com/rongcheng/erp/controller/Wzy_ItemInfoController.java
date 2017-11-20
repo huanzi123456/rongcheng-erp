@@ -9,11 +9,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongcheng.erp.entity.UserInfo;
 import com.rongcheng.erp.entity.vo.ItemInfo;
+import com.rongcheng.erp.exception.OrderOutNumberException;
 import com.rongcheng.erp.service.wzy_itemInfoService.ItemInfoService;
 import com.rongcheng.erp.utils.JsonResult;
 
@@ -52,6 +54,7 @@ public class Wzy_ItemInfoController {
     @RequestMapping("/saveItemInfo.do")
     @ResponseBody
     public JsonResult saveItemInfo(ItemInfo info, HttpSession session) {
+        System.out.println(info);
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         info.setOwnerId(ownerId);
@@ -89,7 +92,7 @@ public class Wzy_ItemInfoController {
         BigInteger ownerId = user.getOwnerId();
         int success = service.updateItemInfo(id,ownerId);
         if(success == 0) {
-            return new JsonResult(0,null,"更新");
+            return new JsonResult(0,null,"更新失败");
         }
         return new JsonResult(0,null,"更新成功");
     }
@@ -105,5 +108,13 @@ public class Wzy_ItemInfoController {
         Map<String,Object> map= new HashMap<String,Object>();
         map.put("list", list);
         return new JsonResult(map);
+    }
+
+    //异常处理
+    @ExceptionHandler(OrderOutNumberException.class)
+    @ResponseBody
+    public JsonResult orderOutNumberException(OrderOutNumberException e){
+        e.printStackTrace();
+        return new JsonResult(5,e);
     }
 }

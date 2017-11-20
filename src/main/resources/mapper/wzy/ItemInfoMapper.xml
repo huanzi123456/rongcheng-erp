@@ -18,8 +18,8 @@
         <result column="series" property="series" jdbcType="VARCHAR" />
         <result column="color" property="color" jdbcType="VARCHAR" />
         <result column="size" property="size" jdbcType="VARCHAR" />
-        <result column="normalPrice" property="normalPrice" jdbcType="DECIMAL" />
-        <result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
+        <result column="normal_price" property="normalPrice" jdbcType="DECIMAL" />
+        <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
         <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
         <result column="bar_code" property="barCode" jdbcType="TIMESTAMP" />
         <result column="package_condition" property="packageCondition" jdbcType="VARCHAR" />
@@ -87,8 +87,8 @@
         <result column="series" property="series" jdbcType="VARCHAR" />
         <result column="color" property="color" jdbcType="VARCHAR" />
         <result column="size" property="size" jdbcType="VARCHAR" />
-        <result column="normalPrice" property="normalPrice" jdbcType="DECIMAL" />
-        <result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
+        <result column="normal_price" property="normalPrice" jdbcType="DECIMAL" />
+        <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
         <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
         <result column="bar_code" property="barCode" jdbcType="TIMESTAMP" />
         <result column="package_condition" property="packageCondition" jdbcType="VARCHAR" />

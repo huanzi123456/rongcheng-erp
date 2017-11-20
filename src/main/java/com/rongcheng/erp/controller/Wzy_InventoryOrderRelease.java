@@ -7,10 +7,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rongcheng.erp.entity.UserInfo;
+import com.rongcheng.erp.exception.OrderOutNumberException;
 import com.rongcheng.erp.service.wzy_orderReleaseService.OrderReleaseService;
 import com.rongcheng.erp.utils.JsonResult;
 
@@ -51,7 +53,7 @@ public class Wzy_InventoryOrderRelease {
         return new JsonResult(map);
     }
     
-    //对于仓库的覆盖地址进行更新
+    //4.对于仓库的覆盖地址进行更新
     @RequestMapping("/updateCoverArea.do")
     @ResponseBody
     public JsonResult updateCoverArea(
@@ -60,5 +62,13 @@ public class Wzy_InventoryOrderRelease {
         BigInteger ownerId = user.getOwnerId();
         service.updateWarehouseCoverArea(insertList, deleteList, warehouseId, stocklocationId, ownerId);
         return new JsonResult(0, null, "数据更新成功");
+    }
+    
+    //异常处理
+    @ExceptionHandler(OrderOutNumberException.class)
+    @ResponseBody
+    public JsonResult orderOutNumberException(OrderOutNumberException e){
+        e.printStackTrace();
+        return new JsonResult(5,e);
     }
 }
