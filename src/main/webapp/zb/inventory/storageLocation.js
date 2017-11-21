@@ -475,24 +475,52 @@ function clickWarehouse() {
  * @author 赵滨
  */
 function clickPage() {
-
-	var aHtml = $(this).html();
-	//判断当前页的值
-	if(aHtml=="首页"){
-		now_page = 1;
-	}else if(aHtml=="上一页"){
-		if(now_page>1){
-			now_page--;
-		}
-	}else if(aHtml=="下一页"){
-		if(now_page<max_page){
-			now_page++;
-		}
-	}else if(aHtml=="尾页"){
-		now_page = parseInt(max_page);
-	}else{
-		now_page = parseInt(aHtml);
-	}
+    var aHtml = $(this).html();
+    //判断当前页的值
+    if (aHtml == "首页") {
+        if (now_page == 1) {
+            return;
+        }
+        now_page = 1;
+    } else if (aHtml == "上一页") {
+        if (now_page > 1) {
+            now_page--;
+        } else {
+            return;
+        }
+    } else if (aHtml == "下一页") {
+        if (now_page < max_page) {
+            now_page++;
+        } else {
+            return;
+        }
+    } else if (aHtml == "尾页") {
+        if (now_page == parseInt(max_page)) {
+            return;
+        }
+        now_page = parseInt(max_page);
+    } else if (aHtml == "跳转") {
+        var goto = $("input[name='goto']").val();
+        if (!/^[0-9]*$/.test(goto)) {
+            showMessage("请输入正整数");
+            return;
+        }
+        if (goto == "" || goto == null) {
+            return;
+        }
+        if (goto == 0) {
+            goto = 1;
+        }
+        if (goto > max_page) {
+            showMessage("最大页数为" + max_page + "页，跳转页数不能超过最大页数");
+            return;
+        } else if (now_page == goto) {
+            return;
+        }
+        now_page = parseInt(goto);
+    } else {
+        now_page = parseInt(aHtml);
+    }
 	
 	//加载页面
 	loadStorageLocation(now_page, key_words, warehouse_info_id);
@@ -558,13 +586,15 @@ function loadStorageLocation(nowPage, keywords, warehouseInfoId) {
 function createStorageLocation(map) {
 	//加载最大页数
 	max_page = map.maxPage;
+    //行数
+    var rows = map.rows;
 	//清空页面
 	$("#storageLocation_table").children().remove();
 	
 	//第一部分
 	var tr = '';
 	tr += '<tr>';
-	tr += '<th width="60"><input type="checkbox" name="allId" value="" class="check_coding" />ID</th>';
+	tr += '<th width="80"><input type="checkbox" name="allId" value="" class="check_coding" />序号</th>';
 	tr += '<th>商品编码</th>';       
 	tr += '<th width="100">商品名称</th>';
 	tr += '<th>商品条码</th>';
@@ -593,13 +623,16 @@ function createStorageLocation(map) {
 		tr = '';
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listItemCommonStock[i].id+'" class="check_coding" />';
-		tr += listItemCommonStock[i].itemId;	//ID
+        tr += (i + 1) + ((parseInt(now_page) - 1) * parseInt(rows));	//序号
+		// tr += listItemCommonStock[i].itemId;	//ID
 		tr += '</td>';
 		tr += '<td>';
 		tr += listItemCommonStock[i].erpItemNum;	//编码
 		tr += '</td>';
 		tr += '<td>';
-		tr += '<p>';
+        tr += '<p title="';
+		tr += listItemCommonStock[i].name;	//名称
+        tr += '">';
 		tr += listItemCommonStock[i].name;	//名称
 		tr += '</p>';
 		tr += '</td> '; 
@@ -808,7 +841,10 @@ function createStorageLocation(map) {
         }
 
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="goto" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
         tr += '</li>';
 
         //加入页面

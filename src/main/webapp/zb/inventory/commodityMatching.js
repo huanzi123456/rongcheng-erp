@@ -445,7 +445,13 @@ function createAlertMatching(map) {
             }
             tr += locationItemStockAndItem.erpItemNum;  //商品编码
             tr += '</td>';
-            tr += '<td><p>'+locationItemStockAndItem.name+'</p></td>'; //商品名称
+            tr += '<td>';
+            tr += '<p title="';
+            tr += locationItemStockAndItem.name;    //商品名称
+            tr += '">';
+            tr += locationItemStockAndItem.name;    //商品名称
+            tr += '</p>';
+            tr += '</td>'; //商品名称
             tr += '<td>';
             tr += '<p>';
             tr += locationItemStockAndItem.barCode;  //商品条码
@@ -481,15 +487,18 @@ function createAlertMatching(map) {
         //定义页码变量
         var nowPage = null;
         var maxPage = null;
+        var goto = null;
 
         //根据不同的部分，来拼接变量名
         if (tableOfAlert == "tableTopOfAlert") {
             nowPage = window["now_page_top"];
             maxPage = window["max_page_top"];
+            goto = "goto_top";
 
         } else if (tableOfAlert == "tableBottomOfAlert") {
             nowPage = window["now_page_bottom"];
             maxPage = window["max_page_bottom"];
+            goto = "goto_bottom";
         }
         var tr = '';
         //开始部分
@@ -584,7 +593,10 @@ function createAlertMatching(map) {
             }
         }
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="' + goto + '" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
         tr += '</td></tr>';
         //加入页面
         $("#" + tableOfAlert + "").append(tr);
@@ -878,36 +890,39 @@ function loadClickPage() {
     //点击主页面页码
     $("#commodityMatchingTableParent").on("click", ".pagelist a", function () {
         //改变页码
-        changePageList("", $(this).html());
-        //加载页面
-        loadCommodityMatching(now_page, key_words, warehouse_id, stocklocation_id);
+        if (changePageList("", $(this).html())) {
+            //加载页面
+            loadCommodityMatching(now_page, key_words, warehouse_id, stocklocation_id);
+        }
     });
 
     //点击顶部页码
     $("#tableTopOfAlert").on("click", ".pagelist a", function () {
         //改变页码
-        changePageList("_top", $(this).html());
-        //加载 顶部 内容
-        loadWarehouseAndStocklocationOfAlert(
-            now_page_top, key_words_top, warehouse_id_top, stocklocation_id_top,
-            "", "", "", "");
-        //初始化底部信息
-        initializeBottom();
+        if (changePageList("_top", $(this).html())) {
+            //加载 顶部 内容
+            loadWarehouseAndStocklocationOfAlert(
+                now_page_top, key_words_top, warehouse_id_top, stocklocation_id_top,
+                "", "", "", "");
+            //初始化底部信息
+            initializeBottom();
+        }
     });
 
     //点击底部面页码
     $("#tableBottomOfAlert").on("click", ".pagelist a", function () {
         //改变页码
-        changePageList("_bottom", $(this).html());
-        //加载 底部 内容
-        loadWarehouseAndStocklocationOfAlert(
-            "", "", "", "",
-            now_page_bottom, key_words_bottom, warehouse_id_bottom, stocklocation_id_bottom);
-        //等待加载 底部 内容，完成后，再执行方法
-        load_ajax.done(function() {
-            //关联顶部底部勾选
-            checkedBindTopBottom();
-        });
+        if (changePageList("_bottom", $(this).html())) {
+            //加载 底部 内容
+            loadWarehouseAndStocklocationOfAlert(
+                "", "", "", "",
+                now_page_bottom, key_words_bottom, warehouse_id_bottom, stocklocation_id_bottom);
+            //等待加载 底部 内容，完成后，再执行方法
+            load_ajax.done(function() {
+                //关联顶部底部勾选
+                checkedBindTopBottom();
+            });
+        }
     });
 
     //改变页码
@@ -917,25 +932,55 @@ function loadClickPage() {
         var maxPage = window["max_page" + name];
 
         //判断当前页的值
-        if(aHtml=="首页"){
+        if (aHtml == "首页") {
+            if (nowPage == 1) {
+                return;
+            }
             nowPage = 1;
-        }else if(aHtml=="上一页"){
-            if(nowPage>1){
+        } else if (aHtml == "上一页") {
+            if (nowPage > 1) {
                 nowPage--;
+            } else {
+                return;
             }
-        }else if(aHtml=="下一页"){
-            if(nowPage<maxPage){
+        } else if (aHtml == "下一页") {
+            if (nowPage < maxPage) {
                 nowPage++;
+            } else {
+                return;
             }
-        }else if(aHtml=="尾页"){
+        } else if (aHtml == "尾页") {
+            if (nowPage == parseInt(maxPage)) {
+                return;
+            }
             nowPage = parseInt(maxPage);
-        }else{
+        } else if (aHtml == "跳转") {
+            var goto = $("input[name='goto" + name +"']").val();
+            if (!/^[0-9]*$/.test(goto)) {
+                showMessage("请输入正整数");
+                return;
+            }
+            if (goto == "" || goto == null) {
+                return;
+            }
+            if (goto == 0) {
+                goto = 1;
+            }
+            if (goto > maxPage) {
+                showMessage("最大页数为" + maxPage + "页，跳转页数不能超过最大页数");
+                return;
+            } else if (nowPage == goto) {
+                return;
+            }
+            nowPage = parseInt(goto);
+        } else {
             nowPage = parseInt(aHtml);
         }
 
         //返回给全局变量
         window["now_page" + name] = nowPage;
         window["max_page" + name] = maxPage;
+        return true;
     }
 }
 
@@ -1022,7 +1067,9 @@ function createCommodityMatching(map) {
             tb += '<tr>';
             tb += '<td><span>'+locationItemStockAndItem.erpItemNum+'</span></td>';  //商品编码
             tb += '<td>';
-            tb += '<p>';
+            tb += '<p title="';
+            tb += locationItemStockAndItem.name;    //商品名称
+            tb += '">';
             tb += locationItemStockAndItem.name;    //商品名称
             tb += '</p>';
             tb += '</td>';
@@ -1180,7 +1227,10 @@ function createCommodityMatching(map) {
             }
         }
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="goto" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
         tr += '</div>';
         //加入页面
         $("#commodityMatchingTableParent").append(tr);

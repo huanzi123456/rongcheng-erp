@@ -35,8 +35,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
     private String appKey;
     @Value("#{config['jdAppSecrets']}")
     private String appSecret;
-    @Value("#{config['jdAccessTokens']}")
-    private String accessToken;
+//    @Value("#{config['jdAccessTokens']}")
+//    private String accessToken;
     
     /**
      * 加载 库存状态 页面
@@ -93,7 +93,9 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
 
         //加入总量
         map.put("itemCommonStock", itemCommonStock);
-        
+        //加入行数
+        map.put("rows", rows);
+
         return map;
     }
     
@@ -138,7 +140,7 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
     }
     
     /**
-     * 加载 库存库位 页面
+     * 加载 库位库存 页面
      * @param nowPage 当前页数
      * @param keywords 搜索关键字
      * @param rows 显示的行数
@@ -167,7 +169,9 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         Map<String, Object> itemCommonStock =
                 inventoryDAO.getItemCommonStockByWarehouseInfoId(ownerId, warehouseInfoId);
         map.put("itemCommonStock", itemCommonStock);
-        
+
+        map.put("rows", rows);
+
         return map;
     }
     
@@ -505,10 +509,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
      * @author 赵滨
      */
     public List<ItemCommonInfo> listItemByLocationId(BigInteger locationId, BigInteger ownerId) {
-        
         //返回
         return inventoryDAO.listItemByLocationId(locationId, ownerId);
-        
     }
     
     /**
@@ -1036,6 +1038,7 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         platformErpLink.setPlatformItemSku(platformErpLinkShopWarehouseInfo.getPlatformItemSku());
         platformErpLink.setItemId(platformErpLinkShopWarehouseInfo.getItemId());
         platformErpLink.setPlatformId(platformErpLinkShopWarehouseInfo.getPlatformId());
+        platformErpLink.setShopId(platformErpLinkShopWarehouseInfo.getShopId());
 
         //修改的内容
         platformErpLink.setAutoSynchron(setAutoSynchron);
@@ -1066,6 +1069,8 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         BigInteger platformItemSku = platformErpLink.getPlatformItemSku();
         //获取商品ID
         BigInteger itemId = platformErpLink.getItemId();
+        //获取店铺ID
+        BigInteger shopId = platformErpLink.getShopId();
         //获取仓库ID
         BigInteger warehouseId = platformErpLink.getWarehouseId();
         //获取库位ID
@@ -1079,7 +1084,7 @@ public class ZB_InventoryServiceImpl implements ZB_InventoryService {
         //获取库存零头
         Integer remnantStock = platformErpLink.getRemnantStock();
         //获取访问令牌
-//        String accessToken = "";
+        String accessToken = inventoryDAO.getAuthorityAccessByShopId(shopId, ownerId).getAccessToken();
 
         //获取库存总量
         Integer sumStockQuantity = inventoryDAO.getSumStockQuantityByItemIdWarehouseIdStocklocationId(

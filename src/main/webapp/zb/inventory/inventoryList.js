@@ -117,10 +117,8 @@ function inventoryListSave() {
 	
 	//如果省份不为空
 	if ($("#city-picker3").parent().find("span[data-count='province']").attr("data-code") != null) {
-		
 		//赋值
 		regionId = $("#city-picker3").parent().find("span[data-count='province']").attr("data-code");
-		
 	}
 	
 	//如果城市不为空
@@ -144,10 +142,13 @@ function inventoryListSave() {
 	
 	//仓库编码不能为空
 	if (userWarehouseCode == "") {
-		
 		showMessage("仓库编码不能为空");
 		return;
-		
+	}
+	//仓库名称不能为空
+	if (warehouseName == "") {
+		showMessage("仓库名称不能为空");
+		return;
 	}
 
     //如果地址id为空则 改成默认
@@ -517,24 +518,52 @@ function keywordsKeydown(e) {
  * @author 赵滨
  */
 function clickPage() {
-
-	var aHtml = $(this).html();
-	//判断当前页的值
-	if(aHtml=="首页"){
-		now_page = 1;
-	}else if(aHtml=="上一页"){
-		if(now_page>1){
-			now_page--;
-		}
-	}else if(aHtml=="下一页"){
-		if(now_page<max_page){
-			now_page++;
-		}
-	}else if(aHtml=="尾页"){
-		now_page = parseInt(max_page);
-	}else{
-		now_page = parseInt(aHtml);
-	}
+    var aHtml = $(this).html();
+    //判断当前页的值
+    if (aHtml == "首页") {
+        if (now_page == 1) {
+            return;
+        }
+        now_page = 1;
+    } else if (aHtml == "上一页") {
+        if (now_page > 1) {
+            now_page--;
+        } else {
+            return;
+        }
+    } else if (aHtml == "下一页") {
+        if (now_page < max_page) {
+            now_page++;
+        } else {
+            return;
+        }
+    } else if (aHtml == "尾页") {
+        if (now_page == parseInt(max_page)) {
+            return;
+        }
+        now_page = parseInt(max_page);
+    } else if (aHtml == "跳转") {
+        var goto = $("input[name='goto']").val();
+        if (!/^[0-9]*$/.test(goto)) {
+            showMessage("请输入正整数");
+            return;
+        }
+        if (goto == "" || goto == null) {
+            return;
+        }
+        if (goto == 0) {
+            goto = 1;
+        }
+        if (goto > max_page) {
+            showMessage("最大页数为" + max_page + "页，跳转页数不能超过最大页数");
+            return;
+        } else if (now_page == goto) {
+            return;
+        }
+        now_page = parseInt(goto);
+    } else {
+        now_page = parseInt(aHtml);
+    }
 	
 	//加载页面
 	loadInventoryList(now_page, key_words, warehouse_status);
@@ -601,6 +630,8 @@ function loadInventoryList(nowPage, keywords, warehouseStatus) {
 function createInventoryList(map) {
 	//加载最大页数
 	max_page = map.maxPage;
+    //行数
+    var rows = map.rows;
 	//清空页面
 	$("#inventoryList_table").children().remove();
 	
@@ -627,7 +658,7 @@ function createInventoryList(map) {
 		tr = '';
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listWarehouseInfo[i].id+'" class="check_coding" />';	//ID
-		tr += (i + 1) + ((parseInt(now_page) - 1) * parseInt(map.rows));	//序号
+		tr += (i + 1) + ((parseInt(now_page) - 1) * parseInt(rows));	//序号
 		tr += '</td>';
 		tr += '<td>';
 		tr += listWarehouseInfo[i].userWarehouseCode;	//仓库编码
@@ -801,7 +832,10 @@ function createInventoryList(map) {
         }
 
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="goto" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
         tr += '</td></tr>';
 
         //加入页面

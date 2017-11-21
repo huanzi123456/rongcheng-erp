@@ -1241,8 +1241,8 @@
 		    i.category,
 		    i.brand,
 		    i.series,
-		    i.color,
-		    i.size,
+		    ifnull(i.color, "") as color,
+		    ifnull(i.size, "") as size,
 		    i.normal_price as normalPrice,
 		    i.cost_price as costPrice,
 		    i.promotion_price as promotionPrice,
@@ -1304,8 +1304,8 @@
         category,
         brand,
         series,
-        color,
-        size,
+        ifnull(color, "") as color,
+        ifnull(size, "") as size,
         normal_price as normalPrice,
         cost_price as costPrice,
         promotion_price as promotionPrice,
@@ -1721,6 +1721,52 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--/**
+     * 获取授权令牌 根据参数
+     * @param shopId 店铺ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */-->
+    <select id="getAccessTokenByShopId" resultType="com.rongcheng.erp.entity.AuthorityAccess">
+        select
+            id,
+            account_num as accountNum,
+            shop_id as shopId,
+            operation_mode as operationMode,
+            grant_type as grantType,
+            authorization_code as authorizationCode,
+            authorization_state as authorizationState,
+            token_type as tokenType,
+            access_token as accessToken,
+            refresh_token as refreshToken,
+            return_code as returnCode,
+            authorization_time as authorizationTime,
+            authorization_length as authorizationLength,
+            user_nick as userNick,
+            authorization_scope as authorizationScope,
+            authorization_view as authorizationView,
+            native_application as nativeApplication,
+            response_type as responseType,
+            app_id as appId,
+            app_secret as appSecret,
+            redirect_uri as redirectUri,
+            reserved1,
+            reserved2,
+            reserved3,
+            reserved4,
+            reserved5,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            gmt_create as gmtCreate,
+            gmt_modified as gmtModified
+        from
+            authority_access
+        WHERE shop_id = #{0}
+        AND owner_id = #{1}
+    </select>
 
     <!--/**
     * 获取 总库存 根据参数

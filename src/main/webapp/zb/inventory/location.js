@@ -128,23 +128,22 @@ function locationDelete() {
  * @author 赵滨
  */
 function itemDelete() {
-	
-	//获取该条ID
-	var itemId = $(this).parent().parent().data("listItemCommonInfo").id;
-	
-	//遍历需要删除的id
-	for (var i = 0; i < item_del_id.length; i++) {
-		
-		if (item_del_id[i] == itemId) {
-			
-			//追加删除数组
-			del_item_id.push(itemId);
-		}
-	}
-	
-	//删除该条
-	$(this).parent().parent().remove();
-	
+    if(confirm('确定删除吗?')){
+        //获取该条ID
+        var itemId = $(this).parent().parent().data("listItemCommonInfo").id;
+
+        //遍历需要删除的id
+        for (var i = 0; i < item_del_id.length; i++) {
+
+            if (item_del_id[i] == itemId) {
+                //追加删除数组
+                del_item_id.push(itemId);
+            }
+        }
+
+        //删除该条
+        $(this).parent().parent().remove();
+    }
 }
 
 /**
@@ -321,24 +320,52 @@ function itemAll() {
  * @author 赵滨
  */
 function clickContentPage() {
-
-	var aHtml = $(this).html();
-	//判断当前页的值
-	if(aHtml=="首页"){
-		now_page2 = 1;
-	}else if(aHtml=="上一页"){
-		if(now_page2>1){
-			now_page2--;
-		}
-	}else if(aHtml=="下一页"){
-		if(now_page2<max_page2){
-			now_page2++;
-		}
-	}else if(aHtml=="尾页"){
-		now_page2 = parseInt(max_page2);
-	}else{
-		now_page2 = parseInt(aHtml);
-	}
+    var aHtml = $(this).html();
+    //判断当前页的值
+    if (aHtml == "首页") {
+        if (now_page2 == 1) {
+            return;
+        }
+        now_page2 = 1;
+    } else if (aHtml == "上一页") {
+        if (now_page2 > 1) {
+            now_page2--;
+        } else {
+            return;
+        }
+    } else if (aHtml == "下一页") {
+        if (now_page2 < max_page2) {
+            now_page2++;
+        } else {
+            return;
+        }
+    } else if (aHtml == "尾页") {
+        if (now_page2 == parseInt(max_page2)) {
+            return;
+        }
+        now_page2 = parseInt(max_page2);
+    } else if (aHtml == "跳转") {
+        var goto = $("input[name='goto2']").val();
+        if (!/^[0-9]*$/.test(goto)) {
+            showMessage("请输入正整数");
+            return;
+        }
+        if (goto == "" || goto == null) {
+            return;
+        }
+        if (goto == 0) {
+            goto = 1;
+        }
+        if (goto > max_page2) {
+            showMessage("最大页数为" + max_page2 + "页，跳转页数不能超过最大页数");
+            return;
+        } else if (now_page2 == goto) {
+            return;
+        }
+        now_page2 = parseInt(goto);
+    } else {
+        now_page2 = parseInt(aHtml);
+    }
 	
 	//加载页面
 	listItemByKeywords(now_page2, key_words2);
@@ -507,7 +534,9 @@ function createListItemByKeywords(map) {
 		tr += listItemCommonInfo[i].erpItemNum;	//商品编码
 		tr += '</td>';
 		tr += '<td>';
-		tr += '<p>';
+        tr += '<p title="';
+        tr += listItemCommonInfo[i].name;		//商品名称
+        tr += '">';
 		tr += listItemCommonInfo[i].name;		//商品名称
 		tr += '</p>';
 		tr += '</td>';
@@ -660,7 +689,10 @@ function createListItemByKeywords(map) {
         }
 
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="goto2" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
 
         //加入页面
         $(".content_page").append(tr);
@@ -1058,28 +1090,55 @@ function keywordsKeydown(e) {
  * @author 赵滨
  */
 function clickPage() {
-
-	var aHtml = $(this).html();
-	//判断当前页的值
-	if(aHtml=="首页"){
-		now_page1 = 1;
-	}else if(aHtml=="上一页"){
-		if(now_page1>1){
-			now_page1--;
-		}
-	}else if(aHtml=="下一页"){
-		if(now_page1<max_page1){
-			now_page1++;
-		}
-	}else if(aHtml=="尾页"){
-		now_page1 = parseInt(max_page1);
-	}else{
-		now_page1 = parseInt(aHtml);
-	}
+    var aHtml = $(this).html();
+    //判断当前页的值
+    if (aHtml == "首页") {
+        if (now_page1 == 1) {
+            return;
+        }
+        now_page1 = 1;
+    } else if (aHtml == "上一页") {
+        if (now_page1 > 1) {
+            now_page1--;
+        } else {
+            return;
+        }
+    } else if (aHtml == "下一页") {
+        if (now_page1 < max_page1) {
+            now_page1++;
+        } else {
+            return;
+        }
+    } else if (aHtml == "尾页") {
+        if (now_page1 == parseInt(max_page1)) {
+            return;
+        }
+        now_page1 = parseInt(max_page1);
+    } else if (aHtml == "跳转") {
+        var goto = $("input[name='goto1']").val();
+        if (!/^[0-9]*$/.test(goto)) {
+            showMessage("请输入正整数");
+            return;
+        }
+        if (goto == "" || goto == null) {
+            return;
+        }
+        if (goto == 0) {
+            goto = 1;
+        }
+        if (goto > max_page1) {
+            showMessage("最大页数为" + max_page1 + "页，跳转页数不能超过最大页数");
+            return;
+        } else if (now_page1 == goto) {
+            return;
+        }
+        now_page1 = parseInt(goto);
+    } else {
+        now_page1 = parseInt(aHtml);
+    }
 	
 	//加载页面
 	loadLocation(now_page1, key_words1);
-	
 }
 
 /**
@@ -1140,6 +1199,8 @@ function loadLocation(nowPage, keywords) {
 function createLocation(map) {
 	//加载最大页数
 	max_page1 = map.maxPage;
+    //行数
+    var rows = map.rows;
 	//清空页面
 	$("#location_table").children().remove();
 	
@@ -1164,7 +1225,7 @@ function createLocation(map) {
 		tr = '';
 		tr += '<tr>';
 		tr += '<td><input type="checkbox" name="id[]" value="'+listStocklocationInfo[i].id+'" class="check_coding" />';
-		tr += (i + 1) + ((parseInt(now_page1) - 1) * parseInt(map.rows));	//序号
+		tr += (i + 1) + ((parseInt(now_page1) - 1) * parseInt(rows));	//序号
 		tr += '</td>';
 		tr += '<td>';
 		tr += listStocklocationInfo[i].userStocklocationCode;	//库位编码
@@ -1302,7 +1363,10 @@ function createLocation(map) {
         }
 
         //结束部分
-        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a></div>';
+        tr += '<a href="javascript:void(0)">下一页</a><a href="javascript:void(0)">尾页</a>';
+        tr += '<input name="goto1" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
         tr += '</td></tr>';
 
         //加入页面

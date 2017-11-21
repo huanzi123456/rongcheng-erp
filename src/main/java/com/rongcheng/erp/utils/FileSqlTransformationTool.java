@@ -19,11 +19,11 @@ public class FileSqlTransformationTool {
         // TODO Auto-generated method stub  
         String fileName = "C:\\Users\\Administrator\\Desktop\\111.txt";
         
-        String tableName = "location_item_stock";
+        String tableName = "authority_access";
         
 //        insertIntoSql(tableName, fileName);
-//        selectSql(tableName, fileName);
-        updateSql(tableName,fileName);
+        selectSql(tableName, fileName);
+//        updateSql(tableName,fileName);
         
     }  
     

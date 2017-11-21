@@ -273,7 +273,7 @@ public interface ZB_InventoryDAO {
      *
      * <p>根据 库位编码
      *
-     * @param userStocklocationCode库位编码
+     * @param userStocklocationCode 库位编码
      * @param ownerId 主账号ID
      * @param start 开始
      * @param row 行数
@@ -428,6 +428,15 @@ public interface ZB_InventoryDAO {
      * @author 赵滨
      */
     int updatePlatformErpLink(PlatformErpLink platformErpLink);
+
+    /**
+     * 获取 用户授权信息表 根据参数
+     * @param shopId 店铺ID
+     * @param ownerId 主账号ID
+     * @return
+     * @author 赵滨
+     */
+    AuthorityAccess getAuthorityAccessByShopId(BigInteger shopId, BigInteger ownerId);
 
     /**
      * 获取 总库存 根据参数

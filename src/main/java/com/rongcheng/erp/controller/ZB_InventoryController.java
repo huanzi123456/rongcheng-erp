@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.rongcheng.erp.exception.UploadStockException;
 import com.sun.javafx.collections.MappingChange;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,9 @@ public class ZB_InventoryController {
     private ZB_InventoryService inventoryService;
 
     //分页相关（每页多少条）
-//    @Value("#{config['rows']}")
-    private int rows = 2;
+    @Value("#{config['rows']}")
+    private int rows;
+//    private int rows = 2;
 
     //临时主账号
     private BigInteger ownerId = new BigInteger("1");
@@ -281,7 +283,6 @@ public class ZB_InventoryController {
     @ResponseBody
     @RequestMapping("/location/listItemByLocationId.do")
     public JsonResult getItemByLocationId(BigInteger locationId) {
-
         //返回
         return new JsonResult(inventoryService.listItemByLocationId(locationId, ownerId));
     }
@@ -297,9 +298,9 @@ public class ZB_InventoryController {
     @ResponseBody
     @RequestMapping("/location/listItemByKeywords.do")
     public JsonResult listItemByKeywords(Integer nowPage, String keywords) {
-
+        int row = 7;
         //返回
-        return new JsonResult(inventoryService.listItemByKeywords(nowPage, keywords, ownerId, rows));
+        return new JsonResult(inventoryService.listItemByKeywords(nowPage, keywords, ownerId, row));
     }
 
     /**
