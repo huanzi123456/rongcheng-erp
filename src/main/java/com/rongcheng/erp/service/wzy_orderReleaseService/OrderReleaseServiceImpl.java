@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rongcheng.erp.dao.Wzy_InventoryOrderReleaseDAO;
+import com.rongcheng.erp.dao.Wzy_InvertoryAllAddressDao;
 import com.rongcheng.erp.entity.vo.AddressCarrierAllocation;
 import com.rongcheng.erp.entity.vo.WarehouseRegionShopVO;
 import com.rongcheng.erp.exception.OrderOutNumberException;
@@ -20,6 +21,8 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
     
     @Resource
     private Wzy_InventoryOrderReleaseDAO dao;
+    @Resource
+    private Wzy_InvertoryAllAddressDao addressDao;
     private Integer maxPage;
     private Integer maxData;
     private Integer startPage;
@@ -50,9 +53,9 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
     //查询全国城市编码并查询仓库的覆盖范围
     @Override
     public Map<String,Object> findAddressCarrierAllocation(Integer warehouseId, Integer stocklocationId, BigInteger ownerId){
-        List<AddressCarrierAllocation> list = dao.findAddressCarrierAllocation();
-        List<AddressCarrierAllocation> list1 = dao.findAddressCarrierAllocationSecond();
-        List<Integer> list2 = dao.findWarehouseCover(warehouseId, stocklocationId, ownerId);
+        List<AddressCarrierAllocation> list = addressDao.findAddressCarrierAllocation();
+        List<AddressCarrierAllocation> list1 = addressDao.findAddressCarrierAllocationSecond();
+        List<Integer> list2 = addressDao.findWarehouseCover(warehouseId, stocklocationId, ownerId);
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("list", list);
         map.put("list1", list1);
@@ -73,7 +76,7 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
             String[] delete = deleteArea.split(",");
             for(int i = 0;i<delete.length;i++) {
                 Integer coverRegionId = Integer.parseInt(delete[i]);
-                dao.deleteCoverArea(warehouseId, stocklocationId, ownerId, coverRegionId);
+                addressDao.deleteCoverArea(warehouseId, stocklocationId, ownerId, coverRegionId);
             }
         }
         
@@ -82,7 +85,7 @@ public class OrderReleaseServiceImpl implements OrderReleaseService {
             String[] insert = insertArea.split(",");
             for(int i = 0;i<insert.length;i++) {
                 Integer coverRegionId = Integer.parseInt(insert[i]);
-                dao.saveCoverArea(warehouseId, stocklocationId, ownerId, coverRegionId);
+                addressDao.saveCoverArea(warehouseId, stocklocationId, ownerId, coverRegionId);
             }
         }
         return 0;
