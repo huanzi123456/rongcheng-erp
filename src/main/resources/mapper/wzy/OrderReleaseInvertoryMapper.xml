@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Wzy_InventoryOrderReleaseDAO">
+
+    <select id="findWarehouseRegionShopByOwnerId" resultType="com.rongcheng.erp.entity.vo.WarehouseRegionShopVO">
+        select d.id as id, d.user_warehouse_code as warehouseCode, d.warehouse_name as warehouseName, 
+        t.name as stocklocationName, t.id as stocklocationId
+        from stocklocation_info as t,warehouse_info as d
+        where d.owner_id = #{ownerId, jdbcType=BIGINT} and t.warehouse_id = d.id
+        limit #{startPage}, #{row}
+    </select>
+    
+    <select id="findWarehouseRegionShopCount" resultType="int">
+        select count(t.id) from stocklocation_info as t, warehouse_info as d 
+        where d.owner_id = #{ownerId, jdbcType=BIGINT} and t.warehouse_id = d.id 
+    </select>
+    
+</mapper>
