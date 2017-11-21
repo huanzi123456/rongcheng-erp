@@ -724,7 +724,52 @@
 .commodity_management_box .new_management .management_content>li>ol>li{
 	display: inline-block;
 }
-.commodity_management_box .new_management .management_content>li>ol>li span{
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate{
+	display: inline-block;
+	width: 155px;
+	border: 1px solid #A9A9A9;
+	height: 25px;
+	line-height: 23px;
+	padding-left: 10px;
+	position: relative;
+}
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_xb{
+	position: absolute;
+	right: 5px;
+	top: 7px;
+	border-top: 8px solid #666;
+	border-left: 5px solid rgba(0,0,0,0); 
+	border-right: 5px solid rgba(0,0,0,0); 
+	cursor: pointer;
+}
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_box{
+	width: 155px;
+	border: 1px solid #A9A9A9;
+	position: absolute;
+	top: 100%;
+	left: -1px;
+	background: #fff;
+	padding: 10px;
+	height: 150px;
+	display: none;
+	overflow: auto;
+}
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate span{
+	overflow: hidden;
+	display: inline-block;
+	max-width: 75%;
+	height: 25px;
+	vertical-align: middle;
+}
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_box li{
+	overflow: hidden;
+	height: 30px;
+	cursor: pointer;
+}
+.commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_box li:hover{
+	background: #eee;
+}
+.commodity_management_box .new_management .management_content>li>ol>li>span{
 	display: inline-block;
 	width: 70px;
 	text-align: left;
@@ -1667,4 +1712,13 @@
 .regional_rules_box .new_regional_rules .regional_rules_content>ol>li ul li:first-child{
 	width: 20%;
 	float: left;
+}
+
+
+
+
+
+/*采购入库单  打印入库单弹出框*/
+.print_godown_entryBox{
+
 }
