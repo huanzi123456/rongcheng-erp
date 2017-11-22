@@ -13,8 +13,10 @@
     <script src="/js/pintuer.js"></script>  
     <link rel="stylesheet" href="/css/double-date.css">
     <script src="/js/double-date.js"></script>    
-     
-    <script type="text/javascript" src="/xzy/dataStatistics.js"></script>     
+    <link rel="stylesheet" href="/xzy/css/selected.css">
+    <script type="text/javascript" src="/xzy/dataStatistics/mainFunction.js"></script>  
+    <script type="text/javascript" src="/xzy/dataStatistics/shopAndPlatform.js"></script> 
+    <script type="text/javascript" src="/xzy/dataStatistics/selectButton.js"></script> 
 </head>
 <body style="position: relative;height: 100%;">
   <div class="panel admin-panel" style="margin-bottom: 20px;">
@@ -25,23 +27,23 @@
           <div class="label">
             <label>创建时间：</label>
           </div>
-          <ul class="field outer clearfix">
-            <li class="button border-main fl" style="margin-right: 5px;" id="today1">当天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="today3">3天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="today7">7天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="today30">30天</li>
+          <ul class="field outer clearfix" id="xzy_select">
+            <li class="button border-main fl createDay" style="margin-right: 5px;" value="1">当天</li>
+            <li class="button border-main fl createDay" style="margin-right: 5px;" value="3">3天</li>
+            <li class="button border-main fl createDay" style="margin-right: 5px;" value="7">7天</li>
+            <li class="button border-main fl createDay" style="margin-right: 5px;" value="30">30天</li>
             <li class="date date1 fl border-main" id="from" style="margin-right: 5px;">
-              <input type="text" class="date-check" id="date1">
+              <input type="text" class="date-check">
             </li>
             <li class="fl" style="line-height: 35px;padding: 0 5px;">至</li>
             <li class="date fl" id="to" style="margin-right: 5px;">
-              <input type="text"  class="date-check" id="date2">
+              <input type="text"  class="date-check">
             </li>
             <li class="fl" style="height: 35px;line-height: 35px;margin: 0 15px 0 30px;">店铺来源：</li>
             <li class="fl">
               <select name="cid" class="input" style="width: 150px;height: 35px;padding: 0 10px;" id="dynamicShop">
-                <option value="-1">全部</option>
                 <!-- 
+                <option value="-1">全部</option>
                 <option value="">某某店铺</option>
                 <option value="">某某店铺</option>
                 <option value="">某某店铺</option>
@@ -55,23 +57,23 @@
           <div class="label">
             <label>付款时间：</label>
           </div>
-          <ul class="field outer clearfix">
-            <li class="button border-main fl" style="margin-right: 5px;" id="payday1">当天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="payday3">3天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="payday7">7天</li>
-            <li class="button border-main fl" style="margin-right: 5px;" id="payday30">30天</li>
+          <ul class="field outer clearfix" id="xzy_selects">
+            <li class="button border-main fl payday" style="margin-right: 5px;" value="1">当天</li>
+            <li class="button border-main fl payday" style="margin-right: 5px;" value="3">3天</li>
+            <li class="button border-main fl payday" style="margin-right: 5px;" value="7">7天</li>
+            <li class="button border-main fl payday" style="margin-right: 5px;" value="30">30天</li>
             <li class="date fl border-main" style="margin-right: 5px;" id="kaishi">
-              <input type="text" class="date-check" id="date3">
+              <input type="text" class="date-check">
             </li>
             <li class="fl" style="line-height: 35px;padding: 0 5px;">至</li>
             <li class="date fl" style="margin-right: 5px;">
-              <input type="text"  class="date-check" id="date4">
+              <input type="text"  class="date-check">
             </li>
             <li class="fl" style="height: 35px;line-height: 35px;margin: 0 15px 0 30px;">平台来源：</li>
             <li class="fl">
               <select name="cid" class="input" style="width: 150px;height: 35px;padding: 0 10px;" id="dynamicPlatform">
-                <option value="-1">全部</option>
                 <!-- 
+                <option value="-1">全部</option>               
                 <option value="">淘宝</option>
                 <option value="">京东</option>
                 <option value="">线下</option>

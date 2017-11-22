@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 
+            数据统计页面
+ --> 
+<!-- 数据统计页面的添加店铺来源和平台来源的下拉选 -->
+<mapper namespace="com.rongcheng.erp.dao.Xzy_DataStatisticsDao">
+<!-- 
+          一.查询所有的店铺  id及name
+ -->
+<select id="selectShopInfo" parameterType="BigInteger" resultType="com.rongcheng.erp.entity.ShopInfo">
+  SELECT id,name
+  FROM shop_info
+  WHERE owner_id=#{ownerId}
+</select> 
+<!-- 
+        二.查询所有的平台id及name
+ -->
+<select id="selectPlatformInfo" parameterType="BigInteger" resultType="com.rongcheng.erp.entity.PlatformInfo">
+  SELECT id,NAME
+  FROM platform_info
+  WHERE owner_id=#{ownerId}
+</select>
+<!-- 
+      三.关联查询  
+ -->
+<!-- 
+  1.订单统计报表 
+     (1)订单总数
+     (2)已发货的订单数 order_status字段的值是7 
+     (3)待发货的订单数  order_status字段值在[2,6]之间的均是待发货
+     (4)已关闭的订单数 refund_close字段值为2
+     (5)成交额(暂时等于商品总价值)
+     (6)客单价=成交额/客户数
+ --> 
+ <!-- (1)订单总数 :统计订单表的id的数量  -->
+<select id="selectTotalOrder" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(DISTINCT a.id)              
+  FROM order_info a
+  <include refid="if_code1"/>
+  WHERE a.owner_id = #{ownerId}
+  <include refid="if_others"/>
+</select>
+<!-- (2)已发货的订单数: order_status字段的值是7-->
+<select id="seleOutGoods" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(DISTINCT a.id)
+  FROM order_info a 
+  <include refid="if_code1"/>
+  WHERE a.owner_id = #{ownerId}
+  <include refid="if_others"/>
+  AND a.order_status = 7
+</select>
+<!-- (3)待发货的订单数 : order_status字段值在[2,6]之间  -->
+<select id="seleWaitGoods" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(DISTINCT a.id)
+  FROM order_info a 
+  <include refid="if_code1"/>
+  WHERE a.owner_id = #{ownerId}
+  <include refid="if_others"/>
+  AND a.order_status IN (2,3,4,5,6)
+</select>
+<!-- (4)已关闭的订单数 refund_close字段值为2 -->
+<select id="seleOrderClosed" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(DISTINCT a.id)
+  FROM order_info a 
+  <include refid="if_code1"/>
+  WHERE a.owner_id = #{ownerId}
+  <include refid="if_others"/>
+  AND a.refund_close = 2
+</select>
+<!-- (5)成交额(暂时等于商品总价值) -->
+<!-- (6)统计客户数(客单价=成交额/客户数)-->
+<select id="seleClients" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT SUM(t.counts) clients
+  FROM (SELECT  a.platform_id,COUNT(DISTINCT a.platform_buyer_id) counts
+        FROM order_info a     
+        <include refid="if_code1"/>
+        WHERE a.owner_id = #{ownerId}
+        <include refid="if_others"/>
+        GROUP BY a.platform_id) t
+</select>
+<!-- 
+  2.商品统计表
+    (1)已发货的订单的商品总个数
+    (2)未发货的订单的商品总个数
+    (3)商品总数
+    (4)商品总价值
+    (5)商品平均价
+    (6)商品总成本
+ -->
+<!-- (1)已发货的订单的商品总个数 -->
+<select id="seleGoodsNum" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(b.order_item_id) outGoods
+  FROM order_info a
+  JOIN order_item_link b
+  ON b.erp_order_id=a.id
+  <include refid="if_code2"/>
+  WHERE a.owner_id = b.owner_id = #{ownerId}
+  <include refid="if_others"/>
+  AND a.order_status = 7
+</select>
+<!-- (2)未发货的订单的商品总个数 -->
+<select id="seleWaitGoodsNum" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT COUNT(b.order_item_id) outGoods
+  FROM order_info a
+  JOIN order_item_link b
+  ON b.erp_order_id=a.id
+  <include refid="if_code2"/>
+  WHERE a.owner_id = b.owner_id = #{ownerId}
+  <include refid="if_others"/>
+  AND a.order_status IN (2,3,4,5,6)
+</select>
+<!-- (3)商品总数,商品总价值,商品总成本  -->
+<select id="selePrice" parameterType="java.util.Map" resultType="com.rongcheng.erp.dto.XzyDataSelectParam">
+  SELECT SUM(t.quantity) quantity,SUM(t.price) price,SUM(t.costPrice) costPrice
+  FROM (SELECT DISTINCT b.order_item_id,SUM(b.quantity) quantity,SUM(b.quantity)*c.normal_price price,SUM(b.quantity)*c.cost_price costPrice
+        FROM order_item_link b
+        JOIN item_common_info c
+        ON b.order_item_id = c.id
+        JOIN order_info a 
+        ON b.erp_order_id=a.id            
+        WHERE a.owner_id=b.owner_id=c.owner_id=#{ownerId}         
+        <include refid="if_code3"/>
+        <include refid="if_others"/>
+        GROUP BY b.order_item_id
+        ORDER BY b.quantity DESC) t
+</select>
+<!-- 
+   3.销售前20  
+ -->
+<select id="SalesTopTwenty" parameterType="java.util.Map" resultType="com.rongcheng.erp.dto.XzyDataSelectParam">
+  SELECT t.quantity,t.name
+  FROM (SELECT DISTINCT SUM(b.quantity) quantity,c.name
+        FROM order_item_link b
+        JOIN item_common_info c
+        ON b.order_item_id = c.id
+        JOIN order_info a 
+        ON b.erp_order_id=a.id
+        WHERE a.owner_id=b.owner_id=c.owner_id=#{ownerId}
+        <include refid="if_code3"/>
+        <include refid="if_others"/>        
+        GROUP BY b.order_item_id ) t
+  ORDER BY t.quantity DESC 
+  LIMIT 0,20 
+</select>
+<sql id="if_others">
+  <!-- 2.订单创建时间1(1,3,7,30) -->
+  <if test="day!=null and day!=''">		 
+	AND TO_DAYS(NOW())-TO_DAYS(a.order_create)&lt;=#{day}				
+  </if>
+  <!-- 3.订单创建时间2(time1-time2) -->
+  <if test="time1!='' and time2!='' and time1!=null and time2!=null">        
+    AND TO_DAYS(a.order_create)&gt;=TO_DAYS(#{time1})
+    AND TO_DAYS(a.order_create)&lt;=TO_DAYS(#{time2})
+  </if>
+  <!-- 4.订单付款时间pay(1,3,7,30) -->
+  <if test="pay!=null and pay!=''">
+    AND TO_DAYS(NOW())-TO_DAYS(a.order_pay)&lt;=#{pay}
+  </if>
+  <!-- 5.订单付款时间2(time3-time4) -->
+  <if test="time3!='' and time4!='' and time3!=null and time4!=null ">
+    AND TO_DAYS(a.order_pay)&gt;=TO_DAYS(#{time3})
+    AND TO_DAYS(a.order_pay)&lt;=TO_DAYS(#{time4})      
+  </if>
+  <!-- 6.店铺id -->
+  <if test="shopId!=-1 and shopId!='' and shopId!=null">
+    AND a.shop_id =#{shopId}       
+  </if>
+  <!-- 7.平台id -->
+  <if test="platformId!=-1 and platformId!=null and platformId!=''">
+    AND a.platform_id =#{platformId}
+  </if>
+  <!-- 8.原始订单状态 -->
+  <if test="orderStatus!=null and orderStatus!=-1 and orderStatus!=''">
+    AND a.order_status =#{orderStatus}
+  </if>
+</sql>
+<!-- 两个表关联:order_item_link b  item_common_info c  -->
+<sql id="if_code1">
+  <!-- 1.code 商品编码 -->
+  <if test="code!=''">
+    JOIN order_item_link b
+    ON b.erp_order_id=a.id
+    JOIN item_common_info c
+    ON c.id = b.order_item_id
+    AND a.owner_id=b.owner_id=c.owner_id=#{ownerId,jdbcType=BIGINT,javaType=BIGINTEGER}
+    AND c.erp_item_num=#{code,jdbcType=CHAR,javaType=STRING}
+  </if>
+</sql>
+<!-- 一个表关联  item_common_info c -->
+<sql id="if_code2">
+  <if test="code!=''">
+    JOIN item_common_info c
+    ON c.id = b.order_item_id
+    AND a.owner_id=b.owner_id=c.owner_id=#{owner_id,jdbcType=BIGINT,javaType=BIGINTEGER}
+    AND c.erp_item_num=#{code,jdbcType=CHAR,javaType=STRING}
+  </if> 
+</sql>
+<!--  -->
+<sql id="if_code3">
+  <if test="code!=''">
+    AND c.erp_item_num=#{code,jdbcType=CHAR,javaType=STRING}
+  </if>
+</sql>
+</mapper>

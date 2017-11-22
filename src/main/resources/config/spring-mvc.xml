@@ -64,5 +64,5 @@
 
 	<bean id="itemAutoIncrId" class="com.rongcheng.erp.jd.download.item.converter.incrId.ItemAutoIncrId"></bean>
 	<bean id="orderAutoIncrId" class="com.rongcheng.erp.jd.download.order.converter.incrId.OrderAutoIncrId"></bean>
-
+	                                                                                                                           
 </beans>
