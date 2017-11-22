@@ -964,7 +964,7 @@ function loadClickPage() {
                 return;
             }
             if (goto == 0) {
-                goto = 1;
+                return;
             }
             if (goto > maxPage) {
                 showMessage("最大页数为" + maxPage + "页，跳转页数不能超过最大页数");

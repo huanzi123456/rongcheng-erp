@@ -21,8 +21,8 @@ public class FileSqlTransformationTool {
         
         String tableName = "authority_access";
         
-//        insertIntoSql(tableName, fileName);
-        selectSql(tableName, fileName);
+        insertIntoSql(tableName, fileName);
+//        selectSql(tableName, fileName);
 //        updateSql(tableName,fileName);
         
     }  

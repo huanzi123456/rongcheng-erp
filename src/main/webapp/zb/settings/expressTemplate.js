@@ -4,9 +4,7 @@ var checkId=null;//0.全局遍历 选中的id
 
 $(function() {
 	//1.空
-
     //2.空
-
 	//3.加载快递面单页面
 	loadExpressTemplate(parseInt(now_page), null, 1, null);
 	
@@ -184,6 +182,13 @@ function expressTemplateRemove() {
 					//如果删除的行数，不是0行
 					if (row !=0 ) {
 						showMessage("删除成功!");
+                        //获取页面中的显示条数
+                        var rows = $("#expressTemplate_table").find("tr");
+                        //如果只有一条	并且  当前页码不是首页
+                        if (rows.length == 3 && now_page > 1) {
+                            //返回上一页
+                            now_page--;
+                        }
                         //加载页面
                         loadExpressTemplate(parseInt(now_page), null, 1, null);
 					} else {
@@ -486,27 +491,54 @@ function createCarrierInfo(carrierInfoList) {
  * @author 赵滨
  */
 function pageClick() {
-
-	var aHtml = $(this).html();
-	//判断当前页的值
-	if(aHtml=="首页"){
-		now_page = 1;
-	}else if(aHtml=="上一页"){
-		if(now_page>1){
-			now_page--;
-		}
-	}else if(aHtml=="下一页"){
-		if(now_page<max_page){
-			now_page++;
-		}
-	}else if(aHtml=="尾页"){
-		now_page = parseInt(max_page);
-	}else{
-		now_page = parseInt(aHtml);
-	}
+    var aHtml = $(this).html();
+    //判断当前页的值
+    if (aHtml == "首页") {
+        if (now_page == 1) {
+            return;
+        }
+        now_page = 1;
+    } else if (aHtml == "上一页") {
+        if (now_page > 1) {
+            now_page--;
+        } else {
+            return;
+        }
+    } else if (aHtml == "下一页") {
+        if (now_page < max_page) {
+            now_page++;
+        } else {
+            return;
+        }
+    } else if (aHtml == "尾页") {
+        if (now_page == parseInt(max_page)) {
+            return;
+        }
+        now_page = parseInt(max_page);
+    } else if (aHtml == "跳转") {
+        var goto = $("input[name='goto']").val();
+        if (!/^[0-9]*$/.test(goto)) {
+            showMessage("请输入正整数");
+            return;
+        }
+        if (goto == "" || goto == null) {
+            return;
+        }
+        if (goto == 0) {
+            return;
+        }
+        if (goto > max_page) {
+            showMessage("最大页数为" + max_page + "页，跳转页数不能超过最大页数");
+            return;
+        } else if (now_page == goto) {
+            return;
+        }
+        now_page = parseInt(goto);
+    } else {
+        now_page = parseInt(aHtml);
+    }
 	//加载页面
 	loadExpressTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
-
 }
 
 /**
@@ -536,25 +568,10 @@ function loadExpressTemplate(page, authorized, ownerId, operatorId) {
 		dataType : "json",
 		success : function(result) {
 			if (result.state == 0) {
-				
 				//获取PrintTemplate集合
 				var map = result.data;
-				/*console.log(map);*/
-				//如果没有内容，就加载前一页
-				if(map.printTemplateList.length == 0){
-					//如果不是首页
-					if(now_page>1){
-						now_page--;
-						//加载页面
-						loadExpressTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), 
-								getCookie("operatorId"));
-					}else{
-						createPrintTemplate(map);
-					}
-				}else{
-					//创建PrintTemplate的tr，追加到页面中
-					createPrintTemplate(map);
-				}
+                //创建PrintTemplate的tr，追加到页面中
+                createPrintTemplate(map);
 				//获取单选框
 				var input = $("input[name='checkExpressTempLate']");
 				//遍历单选框
@@ -760,8 +777,11 @@ function createPrintTemplate(map) {
         }
 
         //尾页结束部分
-        tr += '<a>下一页</a><a>尾页</a> </div></td>';
-        tr += '</tr>';
+        tr += '<a>下一页</a><a>尾页</a>';
+        tr += '<input name="goto" style="border-radius: 3px;' +
+            'border: 1px solid #dfdfdf;padding: 5px 5px;width: 3.5em;font: inherit;text-align: center;">';
+        tr += '<a href="javascript:void(0)">跳转</a></div>';
+        tr += '</td></tr>';
         //将tr对象添加到expressTemplate_table身后
         $table.append(tr);
     }
