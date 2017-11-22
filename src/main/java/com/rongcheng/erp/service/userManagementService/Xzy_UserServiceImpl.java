@@ -101,10 +101,14 @@ public class Xzy_UserServiceImpl implements Xzy_UserService{
         		strMouldId=StringUtils.join(aid,",");
         		//去除角色下的权限名的重复
         		String MouldName = lists.getStrMouldName();
-        		String[] auname = MouldName.split(",");
-        		List<String> aunames = new ArrayList<String>(Arrays.asList(auname));//将数组转换成集合
-        		List<String> aname = UserUtil.removeDuplicate(aunames);//去除重复 
-        		strMouldName=StringUtils.join(aname,",");
+        		if(MouldName!=null){
+        			String[] auname = MouldName.split(",");
+            		List<String> aunames = new ArrayList<String>(Arrays.asList(auname));//将数组转换成集合
+            		List<String> aname = UserUtil.removeDuplicate(aunames);//去除重复 
+            		strMouldName=StringUtils.join(aname,",");
+        		}else{
+        			strMouldName=MouldName;
+        		}       		
     		}else{
     			if(lists.getUserType().equals(1)){
     				strRoleName="全部角色";
