@@ -28,7 +28,6 @@
 }
 .shopping_box{
 	height: 550px;
-	overflow: auto;
 }
 .shopping_box .right_list_shopping{
 	float: right;
@@ -37,6 +36,7 @@
 	width: -webkit-calc(100% - 150px);
 	height: 100%;
 	border-left: 1px solid #ddd;
+	overflow: auto;
 }
 .shopping_box .left_shopping{
 	float: left;

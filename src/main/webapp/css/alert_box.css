@@ -762,12 +762,9 @@
 	vertical-align: middle;
 }
 .commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_box li{
-	overflow: hidden;
-	height: 30px;
+	line-height: 30px;
+	width: 150px;
 	cursor: pointer;
-}
-.commodity_management_box .new_management .management_content>li>ol>li .select_simulate .select_simulate_box li:hover{
-	background: #eee;
 }
 .commodity_management_box .new_management .management_content>li>ol>li>span{
 	display: inline-block;
@@ -1718,7 +1715,1029 @@
 
 
 
-/*采购入库单  打印入库单弹出框*/
+/*采购入库单  新建入库单弹出框*/
 .print_godown_entryBox{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.print_godown_entryBox .print_godown_alert{
+	width: 1000px;
+	height: 600px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_title .print_godown_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content{
+	width: 100%;
+	height: 560px;
+	padding: 10px 20px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table{
+	width: 100%;
+	height: 330px;
+	border: 1px solid #ddd;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table .table_nk{
+	width: 100%;
+	height: 280px;
+	overflow: auto;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table .tj_goods{
+	padding-top: 8px;
+	padding-left: 20px;
+	border-top: 1px solid #ddd;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table{
+	width: 100%;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr{
+	border-bottom: 1px solid #ddd;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr td{
+	padding: 5px;
+	text-align: center;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr th{
+	padding: 5px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr input{
+	display: inline-block;
+	width: 100px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	color: #333;
+	font-weight: 100;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div{
+	width: 100px;
+	height: 45px;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox{
+	margin-top: 5px;
+	width: 100%;
+	overflow: hidden;
+	height: 22px;
+	position: relative;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox .two_row_inputFdj{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+	background: url('../images/fdj.png') no-repeat center;
+	cursor: pointer;
+}
+p.overmore{
+	width: 100px;
+	text-overflow:ellipsis; 
+    overflow:hidden;
+    display:-webkit-box; 
+    -webkit-line-clamp:1; 
+    -webkit-box-orient: vertical;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_gross{
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_gross li{
+	float: left;
+	width: 33.3333333%;
+	line-height: 40px;
+	text-align: center;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_bz{
+	width: 100%;
+	height: 70px;
+	padding: 5px ;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_bz textarea{
+	width: 80%;
+	height: 50px;
+	
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_bz span{
+	vertical-align: top;
+}
+.print_godown_entryBox .print_godown_alert .print_godown_content .print_godown_tj{
+	text-align: center;
+}
 
+
+
+
+/*采购入库单  新建入库单弹出框 中的添加系统商品*/
+.print_code_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.print_code_box .new_print_code{
+	width: 900px;
+	height: 450px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.print_code_box .new_print_code .print_code_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.print_code_box .new_print_code .print_code_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.print_code_box .new_print_code .print_code_title .print_code_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.print_code_box .new_print_code .print_code_content{
+	width: 100%;
+	height: 410px;
+	padding: 10px 20px;
+}
+.print_code_box .new_print_code .print_code_content .print_code_keyword{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.print_code_box .new_print_code .print_code_content .print_code_keyword input{
+	width: 450px;
+	height: 26px;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table{
+	width: 700px;
+	height: 300px;
+	border: 1px solid #ddd;
+	margin: 0 auto 5px;
+	overflow: auto;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table table{
+	width: 100%;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table tr{
+	border-bottom: 1px dashed #ddd;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table tr:hover{
+	background: #E8F9FF;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table th{
+	background: #F9FAFB;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table td{
+	padding: 4px;
+	overflow: hidden;
+	height: 20px;
+	text-align: center;
+}
+.print_code_box .new_print_code .print_code_content .print_code_table td .span{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.print_code_box .new_print_code .print_code_content .print_code_btn{
+	text-align: center;
+}
+
+
+
+/*采购入库单  新建入库单弹出框 中的设定库位*/
+.storageLocation_code_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.storageLocation_code_box .new_storageLocation_code{
+	width: 700px;
+	height: 450px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_title .storageLocation_code_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content{
+	width: 100%;
+	height: 410px;
+	padding: 10px 20px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_keyword{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_keyword input{
+	width: 200px;
+	height: 26px;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table{
+	width: 600px;
+	height: 300px;
+	border: 1px solid #ddd;
+	margin: 0 auto 5px;
+	overflow: auto;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table table{
+	width: 100%;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table tr{
+	border-bottom: 1px dashed #ddd;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table tr:hover{
+	background: #E8F9FF;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table th{
+	background: #F9FAFB;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table td{
+	padding: 4px;
+	overflow: hidden;
+	height: 20px;
+	text-align: center;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table td .span{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.storageLocation_code_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_btn{
+	text-align: center;
+}
+
+
+
+
+
+/*采购入库单  打印入库单弹出框*/
+.godown_entryStamp_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.godown_entryStamp_box .new_godown_entryStamp{
+	width: 400px;
+	height: 300px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_title .godown_entryStamp_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content{
+	width: 100%;
+	height: 260px;
+	padding: 10px 20px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content .godown_entryStam_dyj{
+	width: 100%;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content .godown_entryStam_dyj li{
+	line-height: 60px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content .godown_entryStam_dyj li span{
+	display: inline-block;
+	vertical-align: middle;
+	width: 100px;
+	text-align: right;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content .godown_entryStam_dyj li a{
+	margin-left: 20px;
+}
+.godown_entryStamp_box .new_godown_entryStamp .godown_entryStamp_content .godown_entryStamp_btn{
+	text-align: center;
+	margin-top: 50px;
+}
+
+
+
+
+/*采购入库单  查看按钮*/
+.examine_entry_entryBox{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.examine_entry_entryBox .examine_entry_alert{
+	width: 1000px;
+	height: 600px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_title .examine_entry_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content{
+	width: 100%;
+	height: 560px;
+	padding: 10px 20px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entryTitle{
+	overflow: hidden;
+	width: 100%;
+	height: 60px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entryTitle li{
+	float: left;
+	width: 50%;
+	height: 100%;
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+	line-height: 60px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table{
+	width: 100%;
+	height: 330px;
+	border: 1px solid #ddd;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table .table_nk{
+	width: 100%;
+	height: 280px;
+	overflow: auto;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table{
+	width: 100%;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr{
+	border-bottom: 1px solid #ddd;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr td{
+	padding: 5px;
+	text-align: center;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr th{
+	padding: 5px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr input{
+	display: inline-block;
+	width: 100px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	color: #333;
+	font-weight: 100;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr th .two_row_div{
+	width: 100px;
+	height: 45px;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr th .two_row_div .two_row_inputBox{
+	margin-top: 5px;
+	width: 100%;
+	overflow: hidden;
+	height: 22px;
+	position: relative;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_table table tr th .two_row_div .two_row_inputBox .two_row_inputFdj{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+	background: url('../images/fdj.png') no-repeat center;
+	cursor: pointer;
+}
+p.overmore{
+	width: 100px;
+	text-overflow:ellipsis; 
+    overflow:hidden;
+    display:-webkit-box; 
+    -webkit-line-clamp:1; 
+    -webkit-box-orient: vertical;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_gross{
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+.examine_entry_entryBox .examine_entry_alert .examine_entry_content .examine_entry_gross li{
+	float: left;
+	width: 33.3333333%;
+	line-height: 40px;
+	text-align: center;
+}
+
+
+
+
+/*售后管理 退货单管理页面 新建*/
+.goods_returned_noteBox{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.goods_returned_noteBox .print_godown_alert{
+	width: 1000px;
+	height: 600px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_title .goods_returned_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content{
+	width: 100%;
+	height: 560px;
+	padding: 10px 20px;
+	overflow: auto;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table{
+	width: 100%;
+	height: 254px;
+	border: 1px solid #ddd;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table .table_nk{
+	width: 100%;
+	height: 200px;
+	overflow: auto;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table .tj_goods{
+	padding-top: 8px;
+	padding-left: 20px;
+	border-top: 1px solid #ddd;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table{
+	width: 100%;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr{
+	border-bottom: 1px solid #ddd;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr td{
+	padding: 5px;
+	text-align: center;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr th{
+	padding: 5px;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr input{
+	display: inline-block;
+	width: 100px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	color: #333;
+	font-weight: 100;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div{
+	width: 100px;
+	height: 45px;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox{
+	margin-top: 5px;
+	width: 100%;
+	overflow: hidden;
+	height: 22px;
+	position: relative;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox .two_row_inputFdj{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+	background: url('../images/fdj.png') no-repeat center;
+	cursor: pointer;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_gross{
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_gross li{
+	float: left;
+	width: 33.3333333%;
+	line-height: 40px;
+	text-align: center;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .print_godown_tj{
+	text-align: center;
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .consignee_information{
+	width: 100%;
+	height: 250px;
+	margin-bottom: 10px; 
+}
+.goods_returned_noteBox .print_godown_alert .print_godown_content .consignee_information .consignee_information_content{
+	width: 100%;
+	height: 212px;
+}
+
+
+
+
+
+
+
+/*售后管理 退货单管理页面 新建页面中的添加商品*/
+.goods_returned_note_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.goods_returned_note_box .new_print_code{
+	width: 900px;
+	height: 450px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.goods_returned_note_box .new_print_code .print_code_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.goods_returned_note_box .new_print_code .print_code_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.goods_returned_note_box .new_print_code .print_code_title .goods_returned_note_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.goods_returned_note_box .new_print_code .print_code_content{
+	width: 100%;
+	height: 410px;
+	padding: 10px 20px;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_keyword{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_keyword input{
+	width: 450px;
+	height: 26px;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table{
+	width: 700px;
+	height: 300px;
+	border: 1px solid #ddd;
+	margin: 0 auto 5px;
+	overflow: auto;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table table{
+	width: 100%;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table tr{
+	border-bottom: 1px dashed #ddd;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table tr:hover{
+	background: #E8F9FF;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table th{
+	background: #F9FAFB;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table td{
+	padding: 4px;
+	overflow: hidden;
+	height: 20px;
+	text-align: center;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_table td .span{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.goods_returned_note_box .new_print_code .print_code_content .print_code_btn{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/*售后管理 退货单管理页面 新建页面中的设定库位*/
+.setThe_location_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.setThe_location_box .new_storageLocation_code{
+	width: 700px;
+	height: 450px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_title .setThe_location_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content{
+	width: 100%;
+	height: 410px;
+	padding: 10px 20px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_keyword{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_keyword input{
+	width: 200px;
+	height: 26px;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table{
+	width: 600px;
+	height: 300px;
+	border: 1px solid #ddd;
+	margin: 0 auto 5px;
+	overflow: auto;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table table{
+	width: 100%;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table tr{
+	border-bottom: 1px dashed #ddd;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table tr:hover{
+	background: #E8F9FF;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table th{
+	background: #F9FAFB;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table td{
+	padding: 4px;
+	overflow: hidden;
+	height: 20px;
+	text-align: center;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_table td .span{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.setThe_location_box .new_storageLocation_code .storageLocation_code_content .storageLocation_code_btn{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+/*售后管理 退货单管理页面 新建页面中的搜索*/
+.dDsearch_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 9999;
+	display: none;
+}
+.dDsearch_box .new_print_code{
+	width: 800px;
+	height: 550px;
+	background: #fff;
+	margin: 80px auto 0;
+	border-radius: 5px;
+}
+.dDsearch_box .new_print_code .print_code_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.dDsearch_box .new_print_code .print_code_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.dDsearch_box .new_print_code .print_code_title .dDsearch_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.dDsearch_box .new_print_code .print_code_content{
+	width: 100%;
+	height: 510px;
+	padding: 10px 20px;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_keyword{
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_keyword input{
+	width: 450px;
+	height: 26px;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table{
+	width: 700px;
+	height: 400px;
+	border: 1px solid #ddd;
+	margin: 0 auto 5px;
+	overflow: auto;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table table{
+	width: 100%;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table tr{
+	border-bottom: 1px dashed #ddd;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table tr:hover{
+	background: #E8F9FF;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table th{
+	background: #F9FAFB;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table td{
+	padding: 4px;
+	overflow: hidden;
+	height: 20px;
+	text-align: center;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_table td .span{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.dDsearch_box .new_print_code .print_code_content .print_code_btn{
+	text-align: center;
+}
+
+
+
+
+
+
+
+/*售后管理 退货单管理页面 查看*/
+.goods_returned_ckBox{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+.goods_returned_ckBox .print_godown_alert{
+	width: 1000px;
+	height: 600px;
+	background: #fff;
+	margin: 60px auto 0;
+	border-radius: 5px;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_title .goods_returned_ck_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content{
+	width: 100%;
+	height: 560px;
+	padding: 10px 20px;
+	overflow: auto;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table{
+	width: 100%;
+	height: 254px;
+	border: 1px solid #ddd;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table .table_nk{
+	width: 100%;
+	height: 200px;
+	overflow: auto;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table{
+	width: 100%;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr{
+	border-bottom: 1px solid #ddd;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr td{
+	padding: 5px;
+	text-align: center;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr th{
+	padding: 5px;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr input{
+	display: inline-block;
+	width: 100px;
+	border: 1px solid #ddd;
+	padding-left: 5px;
+	color: #333;
+	font-weight: 100;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div{
+	width: 100px;
+	height: 45px;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox{
+	margin-top: 5px;
+	width: 100%;
+	overflow: hidden;
+	height: 22px;
+	position: relative;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_table table tr th .two_row_div .two_row_inputBox .two_row_inputFdj{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+	background: url('../images/fdj.png') no-repeat center;
+	cursor: pointer;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_gross{
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_gross li{
+	float: left;
+	width: 25%;
+	line-height: 40px;
+	text-align: center;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .print_godown_tj{
+	text-align: center;
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .consignee_information{
+	width: 100%;
+	height: 190px;
+	margin-bottom: 10px; 
+}
+.goods_returned_ckBox .print_godown_alert .print_godown_content .consignee_information .consignee_information_content{
+	width: 100%;
+	height: 212px;
 }
