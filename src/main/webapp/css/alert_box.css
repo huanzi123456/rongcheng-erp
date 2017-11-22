@@ -852,15 +852,13 @@
 	overflow: auto;
 	padding: 5px;
 }
-.amend_classify_box .new_classify .classify_content .classify_box>li{
-	height: 30px;
+.amend_classify_box .new_classify .classify_content .classify_box li{
 	line-height: 30px;
 	font-size: 16px;
-	width: 100%;
+	width: 180px;
 	padding-left: 15px;
-}
-.amend_classify_box .new_classify .classify_content .classify_box>li:hover{
-	background: #A8C6EE;
+	text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .amend_classify_box .new_classify .classify_content .classify_tj{
 	text-align: center;
