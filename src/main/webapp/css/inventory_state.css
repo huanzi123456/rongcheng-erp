@@ -44,10 +44,11 @@
 	padding-top: 60px;
 	padding-left: 0;
 	height: 100%;
-	overflow: auto;
 }
 .shopping_box .left_shopping .left_fl{
 	width: 150px;
+	height: 490px;
+	overflow: auto;
 	padding-left: 0;
 }
 .shopping_box .left_shopping li{
