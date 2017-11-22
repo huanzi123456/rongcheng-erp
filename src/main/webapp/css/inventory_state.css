@@ -28,8 +28,9 @@
 }
 .shopping_box .right_list_shopping{
 	float: right;
-	width: 88%;
-	/*border-left: 1px solid #ddd;*/
+	width: calc(100% - 150px);
+	width: -moz-calc(100% - 150px);
+	width: -webkit-calc(100% - 150px)
 }
 .shopping_box .right_list_shopping table{
 	border-left: 1px solid #ddd;
@@ -39,16 +40,20 @@
 }
 .shopping_box .left_shopping{
 	float: left;
-	width: 12%;
+	width: 150px;
 	padding-top: 60px;
 	padding-left: 0;
-	overflow: auto;
 }
-
-.shopping_box .left_shopping>li{
-	width: 100%;
+.shopping_box .left_shopping .left_fl{
+	width: 150px;
+	overflow: auto;
+	padding-left: 0;
+}
+.shopping_box .left_shopping li{
+	width: 150px;
 	line-height: 30px;
-	padding-left: 20px;
+	padding-left: 20px;	
+    white-space: nowrap;
 }
 .all_price{
 	height: 60px;
