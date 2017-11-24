@@ -3,43 +3,40 @@ var now_page=1;//0.全局变量 当前页数
 var checkId=null;//0.全局遍历 选中的id
 
 $(function() {
-	//1.空
-	//2.空
-	//3.加载快递面单页面
-	loadInvoiceTemplate(parseInt(now_page), null, 1, null);
+	//1.加载快递面单页面
+	loadInvoiceTemplate(1);
 	
-	//4.监听页码点击事件
+	//2.监听页码点击事件
 	$("#invoiceTemplate_table").on("click", ".pagelist a", pageClick);
 	
-	//5.添加模版单击事件 加载面单图片
-	$("#invoiceTemplate_addInvoiceTemplate").click(loadPrintTemplateImage);
+	//3.添加模版单击事件 加载面单图片
+    $("#invoiceTemplate_templateType").on("click", "li", loadPrintTemplateImage);
 	
-	//6.监听“下一步”单击事件
+	//4.监听“下一步”单击事件
 	$("#invoiceTemplate_next").on("click", "a", nextStep);
 	
-	//7.监听修改单击事件
+	//5.监听修改单击事件
 	$("#invoiceTemplate_table").on("click", ".invoiceTemplate_update", invoiceTemplateUpdate);
 	
-	//8.监听删除单击事件
+	//6.监听删除单击事件
 	$("#invoiceTemplate_table").on("click", ".invoiceTemplate_remove", invoiceTemplateRemove);
 	
-	//9.复制并新建 单击事件
+	//7.复制并新建 单击事件
 	$("#invoiceTemplate_copyAdd").click(copyAdd);
 	
-	//10.点击整条模版，选中单选框
+	//8.点击整条模版，选中单选框
 	$("#invoiceTemplate_table").on("click", ".tr_invoiceTempLate", clickTempLate);
 	
-	//11.鼠标悬浮，改变背景颜色
+	//9.鼠标悬浮，改变背景颜色
 	$("#invoiceTemplate_table").on("mouseover mouseout", ".tr_invoiceTempLate", mouseTempLateTr);
 });
 
 /**
- * 11.鼠标悬浮，改变背景颜色
+ * 9.鼠标悬浮，改变背景颜色
  * @returns
  * @author 赵滨
  */
 function mouseTempLateTr() {
-	
 	//鼠标悬浮
 	if(event.type == "mouseover"){
 		$(this).prop("style","background-color: #FCFCFC;cursor:pointer;");
@@ -50,7 +47,7 @@ function mouseTempLateTr() {
 }
 
 /**
- * 10.点击整条模版，选中单选框
+ * 8.点击整条模版，选中单选框
  * @returns
  * @author 赵滨
  */
@@ -65,94 +62,51 @@ function clickTempLate() {
 }
 
 /**
- * 9.复制并新建 单击事件
+ * 7.复制并新建 单击事件
  * @returns
  * @author 赵滨
  */
 function copyAdd() {
-	
-	//移除click	用来防止无限点击
-	$('#invoiceTemplate_copyAdd').unbind("click");
-	
-	//定义两个筛选条件 用来开启点击事件
-	var returnAjax = false;
-	var timeOut1000 = false;
-	//定时器 一秒
-	setTimeout(function(){
-		//完成定时
-		timeOut1000 = true;
-		//如果条件都满足
-		if (returnAjax == true) {
-			//添加点击事件
-			$("#invoiceTemplate_copyAdd").click(copyAdd);
-		}
-	},1000)
-	
 	//获取订单id
 	var printTemplateId = $("input[name='checkInvoiceTempLate']:checked").parent().parent().data("printTemplateId");
 	//如果没有选中
 	if (printTemplateId == null) {
 		showMessage("请选择一个模版用来复制");
 	}else {
-		//获取参数
-		var authorized = getCookie("authorized");
-		var ownerId = getCookie("ownerId");
-		var operatorId = getCookie("operatorId");
-		
 		//发送请求，复制
 		$.ajax({
-			url : path+"/invoiceTemplate/copyAddInvoiceTemplate.do",
+			url : "/invoiceTemplate/copyAddInvoiceTemplate.do",
 			type : "post",
 			data : {
-				"printTemplateId" : printTemplateId,
-				"authorized" : authorized,
-				"ownerId" : ownerId,
-				"operatorId" : operatorId
+				"printTemplateId" : printTemplateId
 			},
 			dataType : "json",
 			success : function(result) {
-				//获取对象
-				var printTemplate = result.data;
-				/*console.log(printTemplate);*/
-				//如果复制名称过长
-				if (printTemplate == null) {
-					//提示
-					showMessage("复制的模版名称过长");
-				} else {
-					//加载页面
-                    loadInvoiceTemplate(parseInt(now_page), null, 1, null);
-				}
-				//完成返回
-				returnAjax = true;
-				//如果条件都满足
-				if (timeOut1000 == true) {
-					//添加点击事件
-					$("#invoiceTemplate_copyAdd").click(copyAdd);
-				}
+                if (result.state == 1) {
+                    showMessage(result.message);
+                    return;
+                } else {
+                    //获取对象
+                    var printTemplate = result.data;
+                    //加载页面
+                    loadInvoiceTemplate(parseInt(now_page));
+                    showMessage("复制成功")
+                }
 			},
 			error : function() {
-				showMessage("复制失败!");
+				showMessage("复制失败");
 			}
 		});
-		
-		
-		
 	}
 }
 
 /**
- * 8.监听删除单击事件
+ * 6.监听删除单击事件
  * @returns
  * @author 赵滨
  */
 function invoiceTemplateRemove() {
-	
-	if (confirm("您确定要删除吗?")) { 
-		//获取参数
-		var authorized = getCookie("authorized");
-		var ownerId = getCookie("ownerId");
-		var operatorId = getCookie("operatorId");
-		
+	if (confirm("您确定要删除吗?")) {
 		//获取顶级tr
 		var $tr = $(this).parent().parent().parent();
 		//获取模版id
@@ -160,13 +114,10 @@ function invoiceTemplateRemove() {
         $.post().done();
 		//发送请求，删除内容
 		$.ajax({
-			url : path+"/invoiceTemplate/removeInvoiceTemplate.do",
+			url : "/invoiceTemplate/removeInvoiceTemplate.do",
 			type : "post",
 			data : {
-				"printTemplateId" : printTemplateId,
-				"authorized" : authorized,
-				"ownerId" : ownerId,
-				"operatorId" : operatorId
+				"printTemplateId" : printTemplateId
 			},
 			dataType : "json",
 			success : function(result) {
@@ -183,7 +134,7 @@ function invoiceTemplateRemove() {
                             now_page--;
                         }
 						//加载页面
-                        loadInvoiceTemplate(parseInt(now_page), null, 1, null);
+                        loadInvoiceTemplate(parseInt(now_page));
 					} else {
 						showMessage("删除中失败!");
 					}
@@ -197,12 +148,11 @@ function invoiceTemplateRemove() {
 }
 
 /**
- * 7.监听修改单击事件
+ * 5.监听修改单击事件
  * @returns
  * @author 赵滨
  */
 function invoiceTemplateUpdate() {
-	
 	//获取顶级tr
 	var $tr = $(this).parent().parent().parent();
 	//获取模版id
@@ -213,7 +163,7 @@ function invoiceTemplateUpdate() {
 }
 
 /**
- * 6.“下一步”单击事件
+ * 4.“下一步”单击事件
  * @returns
  * @author 赵滨
  */
@@ -245,32 +195,43 @@ function nextStep() {
 }
 
 /**
- * 5.添加模版单击事件 加载面单图片
+ * 3.添加模版单击事件 加载面单图片
  * @returns
  * @author 赵滨
  */
 function loadPrintTemplateImage() {
-	//取消选中内容
-	$('input:radio[name="type"]').prop("checked",false); 
+    //不选择提示内容
+    if ($(this).prop("class") == "company_head") {
+        return;
+    }
 	//清空子类架构
 	$("#invoiceTemplate_printTemplateImage").children().remove();
-	//获取面单类型数组
-	var templateType = [1, 2, 3, 4, 5, 6];
-	//获取参数
-	var authorized = getCookie("authorized");
-	var ownerId = getCookie("ownerId");
-	var operatorId = getCookie("operatorId");
-	//定义是否获取预设模版
-	var preset = true;
-	//发送请求，获取图片
+    //定义是否获取预设模版
+    var preset = true;
+    //获取面单类型数组
+    var templateType = [];
+    //定义面单类型名称
+    var templateTypeName = "";
+
+    //选中的内容
+    var clickContext = $(this).children().val();
+    if (clickContext == "发货单") {
+        templateType = [1, 2];
+        templateTypeName = "发货单";
+    }else if (clickContext == "出库单") {
+        templateType = [3, 4];
+        templateTypeName = "出库单";
+    } else if (clickContext == "入库单") {
+        templateType = [5, 6];
+        templateTypeName = "入库单";
+    }
+    //发送请求，获取图片
 	$.ajax({
-		url : path+"/invoiceTemplate/loadPrintTemplateImage.do",
+		url : "/invoiceTemplate/loadPrintTemplateImage.do",
 		type : "post",
 		traditional : true,
 		data : {
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
+			"carrierInfoId" : 0,
 			"templateType" : templateType,
 			"preset" : preset
 		},
@@ -280,143 +241,71 @@ function loadPrintTemplateImage() {
 				//获取面单模版图片集合
 				var printTemplateImageList = result.data;
 				//创建面单模版图片
-				createPrintTemplateImage(printTemplateImageList);
+				createPrintTemplateImage(printTemplateImageList, templateTypeName);
 			}
 		},
 		error : function() {
 			showMessage("图片加载失败!");
 		}
-		
 	});
 }
 
 /**
- * 5.1.创建面单模版图片
+ * 3.1.创建面单模版图片
  * @param printTemplateImageList 面单模版图片集合
  * @returns
  * @author 赵滨
  */
-function createPrintTemplateImage(printTemplateImageList) {
-	
-	//监听快递公司点击事件
-	$("#invoiceTemplate_templateType").on("click", "li", function(){
-		//不选择提示内容
-		if ($(this).prop("class") == "company_head") {
-			return;
-		}
-		//清空子类架构
-		$("#invoiceTemplate_printTemplateImage").children().remove();
-		//创建
-		var li = '';
-		li += '<li style="width:10%;text-align: right;"> 模板图片 :</li>';
-		li += '<li class="img_checked">';
-		li += '<input type="radio" name="picture"><img src="" alt=""><br>';
-		li += '<span></span>';
-		li += '</li>';
-		li += '<li class="img_checked">';
-		li += '<input type="radio" name="picture"><img src="" alt=""><br>';
-		li += '<span></span>';
-		li += '</li>';
-		//添加
-		$("#invoiceTemplate_printTemplateImage").append(li);
-		
-		//选中的内容
-		var clickContext = $(this).children().val();
-		//如果选中发货单
-		if (clickContext == "发货单") {
-			//取消之前选中内容
-			$('input:radio[name="picture"]').prop("checked",false); 
-			//遍历预设模版
-			for (var i = 0; i < printTemplateImageList.length; i++) {
-				//获取id
-				var printTemplateId = printTemplateImageList[i].id;
-				//如果是普通发货单
-				if (printTemplateId == 1) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-						eq(0).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(0).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(0).html("<b>[普通]</b>发货单");
-				//如果是热敏发货单
-				} else if (printTemplateId == 2) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-					eq(1).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(1).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(1).html("<b>[热敏]</b>发货单");
-				}
-			}
-		//如果选中出库单
-		} else if (clickContext == "出库单") {
-			//取消之前选中内容
-			$('input:radio[name="picture"]').prop("checked",false); 
-			//遍历预设模版
-			for (var i = 0; i < printTemplateImageList.length; i++) {
-				//获取id
-				var printTemplateId = printTemplateImageList[i].id;
-				//如果是普通出库单
-				if (printTemplateId == 3) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-						eq(0).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(0).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(0).html("<b>[普通]</b>出库单");
-				//如果是热敏出库单
-				} else if (printTemplateId == 4) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-					eq(1).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(1).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(1).html("<b>[热敏]</b>出库单");
-				}
-			}
-		//如果选中入库单
-		} else if (clickContext == "入库单") {
-			//取消之前选中内容
-			$('input:radio[name="picture"]').prop("checked",false); 
-			//遍历预设模版
-			for (var i = 0; i < printTemplateImageList.length; i++) {
-				//获取id
-				var printTemplateId = printTemplateImageList[i].id;
-				//如果是普通出库单
-				if (printTemplateId == 5) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-						eq(0).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(0).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(0).html("<b>[普通]</b>入库单");
-				//如果是热敏出库单
-				} else if (printTemplateId == 6) {
-					//替换图片
-					$("#invoiceTemplate_printTemplateImage img").
-					eq(1).prop("src",printTemplateImageList[i].templateImage);
-					//绑定id
-					$("#invoiceTemplate_printTemplateImage img").eq(1).data("printTemplateId", printTemplateId);
-					//替换说明
-					$("#invoiceTemplate_printTemplateImage span").eq(1).html("<b>[热敏]</b>入库单");
-				}
-			}
-		}
-		
-	});
-	//选择图片，就选择radio
+function createPrintTemplateImage(printTemplateImageList, templateTypeName) {
+    //创建
+    var li = '';
+    li += '<li style="width:10%;text-align: right;"> 模板图片 :</li>';
+    li += '<li class="img_checked">';
+    li += '<input type="radio" name="picture"><img src="" alt=""><br>';
+    li += '<span></span>';
+    li += '</li>';
+    li += '<li class="img_checked">';
+    li += '<input type="radio" name="picture"><img src="" alt=""><br>';
+    li += '<span></span>';
+    li += '</li>';
+    //添加
+    $("#invoiceTemplate_printTemplateImage").append(li);
+
+    //取消之前选中内容
+    $('input:radio[name="picture"]').prop("checked",false);
+    //遍历预设模版
+    for (var i = 0; i < printTemplateImageList.length; i++) {
+        //获取id
+        var printTemplateId = printTemplateImageList[i].id;
+        //如果是普通发货单
+        if (printTemplateId == 1 || printTemplateId == 3 || printTemplateId == 5) {
+            //替换图片
+            $("#invoiceTemplate_printTemplateImage img").
+            eq(0).prop("src",printTemplateImageList[i].templateImage);
+            //绑定id
+            $("#invoiceTemplate_printTemplateImage img").eq(0).data("printTemplateId", printTemplateId);
+            //替换说明
+            $("#invoiceTemplate_printTemplateImage span").eq(0).html("<b>[普通]</b>"+ templateTypeName +"");
+            //如果是热敏发货单
+        } else if (printTemplateId == 2 || printTemplateId == 4 || printTemplateId == 6) {
+            //替换图片
+            $("#invoiceTemplate_printTemplateImage img").
+            eq(1).prop("src",printTemplateImageList[i].templateImage);
+            //绑定id
+            $("#invoiceTemplate_printTemplateImage img").eq(1).data("printTemplateId", printTemplateId);
+            //替换说明
+            $("#invoiceTemplate_printTemplateImage span").eq(1).html("<b>[热敏]</b>" + templateTypeName +"");
+        }
+    }
+
+    //选择图片，就选择radio
 	$("#invoiceTemplate_printTemplateImage").on("click", "img", function(){
 		$(this).prev().prop("checked", true);
 	});
 }
 
 /**
- * 4.监听页码点击事件
+ * 2.监听页码点击事件
  * @returns
  * @author 赵滨
  */
@@ -468,33 +357,27 @@ function pageClick() {
         now_page = parseInt(aHtml);
     }
 	//加载页面
-	loadInvoiceTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
+	loadInvoiceTemplate(parseInt(now_page));
 
 }
 
 /**
- * 3.加载快递面单页面
+ * 1.加载快递面单页面
  * @param page	需要加载第几页数
- * @param authorized	是否授权
- * @param ownerId	主账户ID
- * @param operatorId 操作人ID
  * @returns
  * @author 赵滨
  */
-function loadInvoiceTemplate(page, authorized, ownerId, operatorId) {
+function loadInvoiceTemplate(page) {
 	var templateType = [1, 2, 3, 4, 5, 6];
 	
 	//发送请求
 	$.ajax({
-		url : path+"/invoiceTemplate/loadInvoiceTemplate.do",
+		url : "/invoiceTemplate/loadInvoiceTemplate.do",
 		type : "post",
 		traditional : true,
 		async: false,
 		data : {
 			"page" : page,
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
 			"templateType" : templateType
 		},
 		dataType : "json",
@@ -519,13 +402,11 @@ function loadInvoiceTemplate(page, authorized, ownerId, operatorId) {
 		error : function() {
 			showMessage("模版加载失败!");
 		}
-		
 	});
-	
 }
 
 /**
- * 3.1.创建快递面单内容
+ * 1.1.创建快递面单内容
  * @param map 快递面单和快递信息的集合
  * @returns
  * @author 赵滨
@@ -605,7 +486,6 @@ function createInvoiceTemplate(map) {
         tr += '<tr>';
         //尾页开始部分
         tr += '<td colspan="8"><div class="pagelist"> <a>首页</a><a>上一页</a> ';
-        /*console.log(now_page);*/
         //尾页中间部分
         if (max_page > 5) {
             //如果是页码前两个

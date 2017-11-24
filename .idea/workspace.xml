@@ -6,17 +6,50 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="添加跳转页码功能">
+    <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_StockInfoDAO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/StockInfoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_management.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_relation.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/basevalue.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/jQuery.print.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/jquery.PrintArea.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/toPrintOld.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileSqlTransformationTool.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileSqlTransformationTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_CarrierInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_CarrierInfoController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintTemplateController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintTemplateController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_ShipmentController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_ShipmentController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_CarrierInfoDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_CarrierInfoDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_FieldCoordinateDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_FieldCoordinateDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintTemplateDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintTemplateDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_ShipmentDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_ShipmentDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentService.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoService.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintService.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateService.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/CarrierInfoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/CarrierInfoMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/FieldCoordinateMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/FieldCoordinateMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintTemplateMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintTemplateMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/zb/ShipmentMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/zb/ShipmentMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendExpressTemplate.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendExpressTemplate.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressTemplate.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressTemplate.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/shipment/shipmentInspection.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/shipment/shipmentInspection.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendExpressTemplate.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendExpressTemplate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendInvoiceTemplate.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendInvoiceTemplate.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/settings/toPrint.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/settings/toPrint.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/zb/shipment/shipmentInspection.js" afterPath="$PROJECT_DIR$/src/main/webapp/zb/shipment/shipmentInspection.js" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,53 +91,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="expressTemplate.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js">
+      <file leaf-file-name="invoiceTemplate.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="184" column="24" lean-forward="true" selection-start-line="184" selection-start-column="24" selection-end-line="190" selection-end-column="25" />
-              <folding>
-                <marker date="1511318537597" expanded="true" signature="14499:14515" ph="..." />
-                <marker date="1511318537597" expanded="true" signature="14621:14637" ph="..." />
-                <marker date="1511318537597" expanded="true" signature="19269:19394" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="invoiceTemplate.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="159" column="24" lean-forward="true" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
-              <folding>
-                <marker date="1511321375096" expanded="true" signature="6969:6997" ph="..." />
-                <marker date="1511321375096" expanded="true" signature="13603:13618" ph="..." />
-                <marker date="1511321375096" expanded="true" signature="13905:13921" ph="..." />
-                <marker date="1511321375096" expanded="true" signature="14021:14037" ph="..." />
-                <marker date="1511321375096" expanded="true" signature="18395:18520" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="commodityMatching.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="936" column="23" lean-forward="true" selection-start-line="936" selection-start-column="23" selection-end-line="936" selection-end-column="23" />
-              <folding>
-                <marker date="1511317361185" expanded="true" signature="16187:16201" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="17200:17214" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="18112:18126" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="18722:18736" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="19200:19325" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="36716:36730" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="37737:37751" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="38661:38675" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="39275:39289" ph="..." />
-                <marker date="1511317361185" expanded="true" signature="39746:39871" ph="..." />
-              </folding>
+            <state relative-caret-position="200">
+              <caret line="35" column="127" lean-forward="true" selection-start-line="35" selection-start-column="127" selection-end-line="35" selection-end-column="127" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,11 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>序号</find>
-      <find>商品名称</find>
-      <find>正整数</find>
-      <find>跳转</find>
-      <find>clickPage</find>
       <find>pageList</find>
       <find>/location/listItemByLocationId.do</find>
       <find>listItemByLocationId</find>
@@ -153,6 +140,11 @@
       <find>delete</find>
       <find>goto = 1;</find>
       <find>goto</find>
+      <find>exc</find>
+      <find>ex</find>
+      <find>js</find>
+      <find>conf</find>
+      <find>com.rongcheng.print</find>
     </findStrings>
     <replaceStrings>
       <replace>/util/cookie_util.js</replace>
@@ -176,6 +168,8 @@
       <replace>nowPage</replace>
       <replace>maxPage</replace>
       <replace>return;</replace>
+      <replace>com.rongcheng.二批</replace>
+      <replace>com.rongcheng.erp</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -195,30 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendInvoiceTemplate.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/jd/inventory/JingdongLogisticsPdjStockUpload.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/JdException.class" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/DefaultJdClient.class" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/JdClient.class" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/response/AbstractResponse.class" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/request/JdRequest.class" />
-        <option value="E:/MavenRepository/org/springframework/spring-beans/3.2.8.RELEASE/spring-beans-3.2.8.RELEASE.jar!/org/springframework/beans/factory/annotation/Value.class" />
-        <option value="E:/MavenRepository/org/springframework/spring-context/3.2.8.RELEASE/spring-context-3.2.8.RELEASE.jar!/org/springframework/stereotype/Service.class" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/JingDongClientTool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/exception/UploadStockException.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/config.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/TestDo.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/test.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/AuthorityAccess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/jd/upload/item/JingDongStockWriteUpdateSkuStock.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
-        <option value="$PROJECT_DIR$/src/test/java/T1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileSqlTransformationTool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTable.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/test/PrintMapper.xml" />
         <option value="E:/MavenRepository/org/springframework/spring-beans/3.2.8.RELEASE/spring-beans-3.2.8.RELEASE.jar!/org/springframework/beans/factory/BeanFactory.class" />
@@ -236,7 +206,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTableController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/interceptor/SessionInterceptor.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config/jdbc.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/test/java/T2.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js" />
@@ -246,6 +215,31 @@
         <option value="$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_ShipmentDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintTemplateDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_CarrierInfoDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_FieldCoordinateDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_CarrierInfoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_ShipmentController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintTemplateController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/CarrierInfoMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/FieldCoordinateMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintTemplateMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/ShipmentMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/zb/shipment/shipmentInspection.js" />
       </list>
     </option>
   </component>
@@ -393,8 +387,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -420,22 +413,57 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="zb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="zb" type="462c0819:PsiDirectoryNode" />
+              <item name="shipment" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="web.xml&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/web.xml&#10;config&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/resources/config/config.properties&#10;JdClient &#9;PSI&#9;JAVA://com.jd.open.api.sdk.JdClient&#10;jdC&#9;FILE&#9;jar://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/JdClient.class&#10;.jar&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/lib/jiml-util.jar&#10;web&#9;ACTION&#9;ActivateWebToolWindow&#10;index&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/login/index.jsp" />
+    <property name="SearchEverywhereHistoryKey" value="web&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/web.xml&#10;jxb_UserInfoDao&#9;PSI&#9;JAVA://com.rongcheng.erp.dao.Jxb_UserInfoDao&#10;web.xml&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/web.xml&#10;config&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/resources/config/config.properties&#10;JdClient &#9;PSI&#9;JAVA://com.jd.open.api.sdk.JdClient&#10;jdC&#9;FILE&#9;jar://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/lib/open-api-sdk-2.0.jar!/com/jd/open/api/sdk/JdClient.class&#10;.jar&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/lib/jiml-util.jar&#10;index&#9;FILE&#9;file://E:/JavaProject/rongcheng-erp/src/main/webapp/WEB-INF/login/index.jsp" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
@@ -446,27 +474,27 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.rongcheng.erp.dao" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\utils" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources\config" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources\conf" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\controller" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\audit" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\shipment" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\settings" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\zb\shipment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.rongcheng.erp.test" />
       <recent name="" />
       <recent name="com.rongcheng.erp.controller" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\test" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources\mapper\test" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\utils" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources\config" />
       <recent name="E:\JavaProject\rongcheng-erp\src\main\resources\conf" />
-      <recent name="E:\JavaProject\rongcheng-erp\src" />
-      <recent name="E:\JavaProject\rongcheng-erp" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\resources" />
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -483,12 +511,32 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/inventoryState.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/location.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/inventory/storageLocation.jsp</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_management.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/css/alert_box.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/onlineCommodityRelation/Xzy_SaveDataFromJDServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/userManagementService/Xzy_UserServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/accredit.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-add.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-edit.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-update.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/login/index.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodityRelation.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressPartition.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressTemplate.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/storeMessage.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/account/account_add_amend.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/account/role_management.html</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/css/inventory_state.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/css/pintuer.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/css/show.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/dataStatistics.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/leftnav.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/lsx/storeMessage.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/audit.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/inventory.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/settings.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/shipment.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/show.html</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -496,6 +544,35 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Xzy_DataStatisticsController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Xzy_DataStatisticsDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_DataStatisticsService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_DataStatisticsServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/xzy/DataStatisticsMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/afterSale/return_order_management.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/purchasing_system/purchase_order.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/purchasing_system/purchasing_system.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/surface_single_account.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/css/surface_single_account.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/inventory_sync_log.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/print_log.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/receipts_log.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/repertory_log.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/dataStatistics/sensitivity_log.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/grid.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/highcharts.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/jquery-1.5.2.min.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/logisticsRecord.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/pruchasing_system.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/return_order_management.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/js/show.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/afterSale.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/dataStatisticsList.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/topnav/purchasing_system.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/xzy/css/selected.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/xzy/dataStatistics/mainFunction.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/xzy/dataStatistics/selectButton.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/xzy/dataStatistics/shopAndPlatform.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -503,6 +580,17 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/dataStatisticsController/Xzy_AddShopAndPlatformController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/dataStatisticsController/Xzy_DataSelectController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/dataStatisticsDao/Xzy_DataAddShopAndPlatformDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/dataStatisticsDao/Xzy_DataSelectDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_AddShopAndPlatformService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_AddShopAndPlatformServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_DataSelectService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_DataSelectServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/xzy/DataAddShopAndPlatform.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/xzy/DataSelectMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/xzy/dataStatistics.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -919,7 +1007,13 @@
       <workItem from="1510908970971" duration="2024000" />
       <workItem from="1511141383321" duration="10006000" />
       <workItem from="1511227074950" duration="29111000" />
-      <workItem from="1511313749763" duration="8839000" />
+      <workItem from="1511313749763" duration="8880000" />
+      <workItem from="1511334702465" duration="288000" />
+      <workItem from="1511338437595" duration="17000" />
+      <workItem from="1511343135777" duration="740000" />
+      <workItem from="1511431778932" duration="28000" />
+      <workItem from="1511504481629" duration="47000" />
+      <workItem from="1511507807554" duration="4011000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -1054,7 +1148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511255535111</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="添加跳转页码功能">
+      <created>1511334486756</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1511334486756</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1090,7 +1191,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="462733000" />
+    <option name="totallyTimeSpent" value="467905000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1103,6 +1204,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.5063966" order="7" side_tool="true" content_ui="tabs" />
@@ -1122,11 +1224,12 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.4936034" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.4968017" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.4968017" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19402985" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.50647247" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5038002" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1134,7 +1237,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1237,157 +1339,333 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Jxb_LoginController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/util/cookie_util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="45" column="147" lean-forward="true" selection-start-line="45" selection-start-column="147" selection-end-line="45" selection-end-column="147" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/com/sun/org/apache/bcel/internal/generic/AALOAD.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/util/carrier-utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="66" column="13" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-235">
-          <caret line="126" column="31" lean-forward="false" selection-start-line="126" selection-start-column="27" selection-end-line="126" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/Objects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="97" column="32" lean-forward="true" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/LinkedHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="191" column="46" lean-forward="false" selection-start-line="191" selection-start-column="46" selection-end-line="191" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/HashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="2385" column="18" lean-forward="false" selection-start-line="2385" selection-start-column="18" selection-end-line="2385" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#12846#12847#0" expanded="false" />
-            <element signature="e#12924#12925#0" expanded="false" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/util/Map.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-377">
-          <caret line="455" column="20" lean-forward="false" selection-start-line="455" selection-start-column="12" selection-end-line="455" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/PlatformErpLink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="18" column="60" lean-forward="true" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Jxb_AuditAddOrderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="107" column="74" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="74" />
+        <state relative-caret-position="225">
+          <caret line="37" column="53" lean-forward="false" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/lang/System.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_StockInfoDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="58" column="19" lean-forward="false" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+        <state relative-caret-position="520">
+          <caret line="33" column="24" lean-forward="true" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Java/jdk-8u151-windows-x64/src.zip!/java/sql/Timestamp.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/StockInfoMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        <state relative-caret-position="100">
+          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/userManagementService/Xzy_UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="209" column="38" lean-forward="true" selection-start-line="209" selection-start-column="38" selection-end-line="209" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Xzy_UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="30" column="32" lean-forward="true" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_InventoryDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/settings/addAmendExpressTemplate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="438" column="20" lean-forward="false" selection-start-line="438" selection-start-column="20" selection-end-line="438" selection-end-column="20" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/AuthorityAccess.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendExpressTemplate.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/jd/upload/item/JingDongStockWriteUpdateSkuStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="165" column="42" lean-forward="false" selection-start-line="165" selection-start-column="24" selection-end-line="165" selection-end-column="42" />
+        <state relative-caret-position="325">
+          <caret line="13" column="49" lean-forward="true" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Inventory/ZB_InventoryServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_management.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="533" column="81" lean-forward="false" selection-start-line="533" selection-start-column="63" selection-end-line="533" selection-end-column="81" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/mybatis-config.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/xzy/commondityRelation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
-          <caret line="7" column="49" lean-forward="true" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+          <folding>
+            <marker date="1511230731564" expanded="true" signature="5866:5872" ph="&amp;nbsp;" />
+            <marker date="1511230731564" expanded="true" signature="7035:7041" ph="&amp;nbsp;" />
+            <marker date="1511230731564" expanded="true" signature="7217:7246" ph="..." />
+            <marker date="1511230731564" expanded="true" signature="14004:14010" ph="&amp;nbsp;" />
+            <marker date="1511230731564" expanded="true" signature="17981:18010" ph="..." />
+            <marker date="1511230731564" expanded="true" signature="18948:18954" ph="&amp;nbsp;" />
+            <marker date="1511230731564" expanded="true" signature="19113:19119" ph="&amp;nbsp;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodityRelation.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/shipment/shipmentInspection.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_management.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/addAmendInvoiceTemplate.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="49" lean-forward="true" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/Shipment/ZB_ShipmentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="6" column="46" lean-forward="true" selection-start-line="6" selection-start-column="46" selection-end-line="6" selection-end-column="46" />
+          <folding>
+            <marker date="1511512258125" expanded="false" signature="1043:1059" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="51" lean-forward="true" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+          <folding>
+            <marker date="1511512258138" expanded="false" signature="3848:3864" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="13186:13202" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="22274:22290" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="22496:22512" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="23618:23634" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="23987:24003" ph="&lt;~&gt;" />
+            <marker date="1511512258138" expanded="false" signature="24621:24656" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/audit/order-print.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_ShipmentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintTemplateService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_CarrierInfoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintTemplateDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_FieldCoordinateDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/printTemplate/ZB_PrintServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <folding>
+            <marker date="1511512258133" expanded="false" signature="1058:1074" ph="&lt;~&gt;" />
+            <marker date="1511512258133" expanded="false" signature="1239:1255" ph="&lt;~&gt;" />
+            <marker date="1511512258133" expanded="false" signature="4215:4231" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/carrierInfo/ZB_CarrierInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_CarrierInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-161">
+          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_ShipmentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding>
+            <marker date="1511512258110" expanded="false" signature="1143:1154" ph=" { " />
+            <marker date="1511512258110" expanded="false" signature="1191:1197" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintTemplateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-258">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <marker date="1511512258107" expanded="false" signature="1427:1438" ph=" { " />
+            <marker date="1511512258107" expanded="false" signature="1472:1478" ph=" }" />
+            <marker date="1511512258107" expanded="false" signature="4100:4111" ph=" { " />
+            <marker date="1511512258107" expanded="false" signature="4153:4159" ph=" }" />
+            <marker date="1511512258107" expanded="false" signature="5615:5626" ph=" { " />
+            <marker date="1511512258107" expanded="false" signature="5660:5666" ph=" }" />
+            <marker date="1511512258107" expanded="false" signature="8295:8306" ph=" { " />
+            <marker date="1511512258107" expanded="false" signature="8348:8354" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="91" column="56" lean-forward="false" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/interceptor/SessionInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Jxb_UserInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="34" lean-forward="true" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/jd/download/item/converter/incrId/ItemAutoIncrId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1395,64 +1673,30 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="9" column="51" lean-forward="true" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Jxb_BuyerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/utils/FileSqlTransformationTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/jd/download/item/converter/incrId/ItemAutoIncrId.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/jdbc.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/T1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="95" column="17" lean-forward="true" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
+        <state relative-caret-position="169">
+          <caret line="8" column="69" lean-forward="false" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://E:/MavenRepository/org/springframework/spring-beans/3.2.8.RELEASE/spring-beans-3.2.8.RELEASE.jar!/org/springframework/beans/factory/BeanFactory.class">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+        <state relative-caret-position="-31">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_PrintDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/mybatis-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/TestAS_Jxb_OrderDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1460,84 +1704,85 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/spring-mybatis.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="85" column="62" lean-forward="false" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTableServiceImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="36" column="36" lean-forward="false" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/apache-tomcat-9.0.1/lib/servlet-api.jar!/javax/servlet/ServletRequest.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTableService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/test/PrintMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTableController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/interceptor/SessionInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="42" column="33" lean-forward="true" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="515">
+          <caret line="93" column="69" lean-forward="true" selection-start-line="93" selection-start-column="69" selection-end-line="93" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="62" column="11" lean-forward="true" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
+        <state relative-caret-position="330">
+          <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/CarrierInfoMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+        <state relative-caret-position="95">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding>
+            <marker date="1511512258140" expanded="true" signature="475:1010" ph="select id, c... carrier_info" />
+            <marker date="1511512258140" expanded="true" signature="1272:1775" ph="select id, c... carrier_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/FieldCoordinateMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/PrintTemplateMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="62" lean-forward="true" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+          <folding>
+            <marker date="1511512258146" expanded="true" signature="7696:8520" ph="select id, c... print_template" />
+            <marker date="1511512258146" expanded="true" signature="8671:8742" ph="SELECT count... print_template" />
+            <marker date="1511512258146" expanded="true" signature="8903:8945" ph="SELECT max(i... print_template" />
+            <marker date="1511512258146" expanded="true" signature="9218:10393" ph="insert into print_template... " />
+            <marker date="1511512258146" expanded="true" signature="9717:10383" ph="select id+##{... print_template" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/ShipmentMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+          <folding>
+            <marker date="1511512258149" expanded="true" signature="584:1031" ph="select i.erp... order_info" />
+            <marker date="1511512258149" expanded="true" signature="1391:1832" ph="select ifnul... order_info" />
+            <marker date="1511512258149" expanded="true" signature="2165:4116" ph="select id, e... order_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding>
+            <marker date="1511512258144" expanded="true" signature="5526:6178" ph="select id, t... field_coordinate" />
+            <marker date="1511512258144" expanded="true" signature="6504:7977" ph="select i.id " />
+            <marker date="1511512258144" expanded="true" signature="8291:9067" ph="select id, c... print_template" />
+            <marker date="1511512258144" expanded="true" signature="9339:11512" ph="select id, e... order_info" />
+            <marker date="1511512258144" expanded="true" signature="11738:13782" ph="update order... " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/InventoryMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="572" column="31" lean-forward="true" selection-start-line="572" selection-start-column="31" selection-end-line="572" selection-end-column="31" />
+        <state relative-caret-position="125">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <marker date="1511251149762" expanded="true" signature="573:2478" ph="select i.id,... " />
-            <marker date="1511251149762" expanded="true" signature="573:3080" ph="select i.id,... " />
+            <marker date="1511251149762" expanded="true" signature="573:3080" ph="select s.id,... " />
             <marker date="1511251149762" expanded="true" signature="4449:6864" ph="select * fro... *" />
             <marker date="1511251149762" expanded="true" signature="4489:6751" ph="select *, (s... id" />
             <marker date="1511251149762" expanded="true" signature="7134:8412" ph="select count... *" />
@@ -1551,7 +1796,7 @@
             <marker date="1511251149762" expanded="true" signature="13914:14080" ph="delete from " />
             <marker date="1511251149762" expanded="true" signature="14326:14455" ph="delete from " />
             <marker date="1511251149762" expanded="true" signature="14799:15229" ph="select sum(l... order_item_link" />
-            <marker date="1511251149762" expanded="true" signature="15988:18040" ph="select i.id,... " />
+            <marker date="1511251149762" expanded="true" signature="15988:18040" ph="select s.id,... " />
             <marker date="1511251149762" expanded="true" signature="19615:20771" ph="select id, u... warehouse_info" />
             <marker date="1511251149762" expanded="true" signature="21944:22644" ph="insert into warehouse_info... " />
             <marker date="1511251149762" expanded="true" signature="22912:23667" ph="update wareh... " />
@@ -1562,7 +1807,7 @@
             <marker date="1511251149762" expanded="true" signature="27962:28546" ph="insert into stocklocation_info... " />
             <marker date="1511251149762" expanded="true" signature="28797:29444" ph="update stock... " />
             <marker date="1511251149762" expanded="true" signature="29647:29761" ph="delete from " />
-            <marker date="1511251149762" expanded="true" signature="30071:31453" ph="select i.id,... stocklocation_info" />
+            <marker date="1511251149762" expanded="true" signature="30071:31453" ph="select i.id,... " />
             <marker date="1511251149762" expanded="true" signature="31745:33280" ph="select id, e... " />
             <marker date="1511251149762" expanded="true" signature="36048:38216" ph="select *, (s... id" />
             <marker date="1511251149762" expanded="true" signature="36153:38067" ph="select /* 商品... " />
@@ -1575,12 +1820,10 @@
             <marker date="1511251149762" expanded="true" signature="38624:38780" ph="select max(p... platform_erp_link" />
             <marker date="1511251149762" expanded="true" signature="38822:38859" ph="/*1.系统商品信息表1... " />
             <marker date="1511251149762" expanded="true" signature="38916:38938" ph="/*20.erp专用-库... " />
-            <marker date="1511251149762" expanded="true" signature="39878:41242" ph="SELECT si.na... platform_erp_link" />
             <marker date="1511251149762" expanded="true" signature="41471:42060" ph="SELECT lis.i... location_item_stock" />
             <marker date="1511251149762" expanded="true" signature="42307:44342" ph="update platf... " />
             <marker date="1511251149762" expanded="true" signature="44590:45869" ph="select id, a... authority_access" />
-            <marker date="1511251149762" expanded="true" signature="46170:46495" ph="SELECT sum(s... location_item_stock" />
-            <marker date="1511251149762" expanded="true" signature="46804:47346" ph="select sum(l... order_item_link" />
+            <marker date="1511251149762" expanded="true" signature="46804:47346" ph="select ifnul... order_item_link" />
             <marker date="1511251149762" expanded="true" signature="47550:48276" ph="select id, u... warehouse_info" />
             <marker date="1511251149762" expanded="true" signature="48488:49090" ph="select id, w... stocklocation_info" />
             <marker date="1511251149762" expanded="true" signature="49450:51371" ph="SELECT l.id,... " />
@@ -1594,158 +1837,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/TestOrderTableDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/expressTemplate.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="3" />
+        <state relative-caret-position="350">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/T2.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/shipment/shipmentInspection.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="26" column="34" lean-forward="true" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        <state relative-caret-position="225">
+          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+          <folding>
+            <marker date="1511512258168" expanded="true" signature="3998:4010" ph="..." />
+            <marker date="1511512258168" expanded="true" signature="4526:4538" ph="..." />
+            <marker date="1511512258168" expanded="true" signature="4733:4745" ph="..." />
+            <marker date="1511512258168" expanded="true" signature="5129:5145" ph="..." />
+            <marker date="1511512258168" expanded="true" signature="5371:5377" ph="&amp;nbsp;" />
+            <marker date="1511512258168" expanded="true" signature="5456:5462" ph="&amp;nbsp;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/invoiceTemplate.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="35" column="127" lean-forward="true" selection-start-line="35" selection-start-column="127" selection-end-line="35" selection-end-column="127" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventorySync.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="718" column="24" lean-forward="true" selection-start-line="718" selection-start-column="24" selection-end-line="718" selection-end-column="24" />
-          <folding>
-            <marker date="1511317330862" expanded="true" signature="14873:14891" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="15023:15041" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="15091:15109" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="15159:15177" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="15227:15245" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="18704:18722" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19055:19072" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19173:19224" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19380:19397" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19502:19553" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19709:19726" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="19825:19876" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="20865:20883" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="21071:21089" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="30311:30325" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="31332:31346" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="32256:32270" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="32870:32884" ph="..." />
-            <marker date="1511317330862" expanded="true" signature="33342:33467" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/location.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="129" column="9" lean-forward="false" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
-          <folding>
-            <marker date="1511317340099" expanded="true" signature="11485:11499" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="12513:12527" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="13451:13465" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="14073:14087" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="14548:14673" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="24268:24280" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="24401:24413" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="25484:25498" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="26512:26526" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="27450:27464" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="28072:28086" ph="..." />
-            <marker date="1511317340099" expanded="true" signature="28547:28672" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/storageLocation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1511317350911" expanded="true" signature="14716:14749" ph="..." />
-            <marker date="1511317350911" expanded="true" signature="15177:15191" ph="..." />
-            <marker date="1511317350911" expanded="true" signature="16200:16214" ph="..." />
-            <marker date="1511317350911" expanded="true" signature="17128:17142" ph="..." />
-            <marker date="1511317350911" expanded="true" signature="17748:17762" ph="..." />
-            <marker date="1511317350911" expanded="true" signature="18222:18347" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-          <folding>
-            <marker date="1511317354669" expanded="true" signature="13785:13797" ph="..." />
-            <marker date="1511317354669" expanded="true" signature="15866:15880" ph="..." />
-            <marker date="1511317354669" expanded="true" signature="16889:16903" ph="..." />
-            <marker date="1511317354669" expanded="true" signature="17817:17831" ph="..." />
-            <marker date="1511317354669" expanded="true" signature="18437:18451" ph="..." />
-            <marker date="1511317354669" expanded="true" signature="18911:19036" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/inventoryState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding>
-            <marker date="1511317293965" expanded="true" signature="11890:11923" ph="..." />
-            <marker date="1511317293965" expanded="true" signature="12347:12361" ph="..." />
-            <marker date="1511317293965" expanded="true" signature="13368:13382" ph="..." />
-            <marker date="1511317293965" expanded="true" signature="14292:14306" ph="..." />
-            <marker date="1511317293965" expanded="true" signature="14906:14920" ph="..." />
-            <marker date="1511317293965" expanded="true" signature="15378:15503" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/settings/expressTemplate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="184" column="24" lean-forward="true" selection-start-line="184" selection-start-column="24" selection-end-line="190" selection-end-column="25" />
-          <folding>
-            <marker date="1511318537597" expanded="true" signature="14499:14515" ph="..." />
-            <marker date="1511318537597" expanded="true" signature="14621:14637" ph="..." />
-            <marker date="1511318537597" expanded="true" signature="19269:19394" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/settings/invoiceTemplate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="159" column="24" lean-forward="true" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
-          <folding>
-            <marker date="1511321375096" expanded="true" signature="6969:6997" ph="..." />
-            <marker date="1511321375096" expanded="true" signature="13603:13618" ph="..." />
-            <marker date="1511321375096" expanded="true" signature="13905:13921" ph="..." />
-            <marker date="1511321375096" expanded="true" signature="14021:14037" ph="..." />
-            <marker date="1511321375096" expanded="true" signature="18395:18520" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/zb/inventory/commodityMatching.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="936" column="23" lean-forward="true" selection-start-line="936" selection-start-column="23" selection-end-line="936" selection-end-column="23" />
-          <folding>
-            <marker date="1511317361185" expanded="true" signature="16187:16201" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="17200:17214" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="18112:18126" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="18722:18736" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="19200:19325" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="36716:36730" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="37737:37751" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="38661:38675" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="39275:39289" ph="..." />
-            <marker date="1511317361185" expanded="true" signature="39746:39871" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>

@@ -6,7 +6,6 @@
 	<!-- /**
      * 根据ID查询快递信息
      * @param id ID
-     * @param authorized 是否授权
      * @param ownerId   主账户ID
      * @return CarrierInfo 快递信息
      * @author 赵滨
@@ -29,17 +28,14 @@
         from 
             carrier_info
         where 
-            owner_id=#{2}
-        <!-- and 
-            is_authorized=#{1} -->
-        and 
+            owner_id=#{1}
+        and
             id=#{0}
         
     </select>
 
     <!-- /**
      * 查询全部快递信息
-     * @param authorized 是否授权
      * @param ownerId   主账户ID
      * @return List<CarrierInfo> 快递信息集合
      * @author 赵滨
@@ -62,49 +58,8 @@
         from 
             carrier_info
         where 
-            owner_id=#{1}
-       <!--  and 
-            is_authorized=#{0} -->
-        
+            owner_id=#{0}
     </select>
-    
-    <!-- /**
-     * 保存快递信息
-     * @param carrierInfo 快递信息]
-     * @return row 行数
-     * @author 赵滨
-     */ -->
-    <!-- <insert id="saveCarrierInfo"
-            parameterType="com.rongcheng.erpntity.CarrierInfo">
-        insert into carrier_info 
-        (  
-            carrier_name,
-            carrier_logo,
-            terminal_name,
-            terminal_code,
-            reserved1,
-            note,
-            owner_id,
-            operator_id,
-            is_authorized,
-            gmt_create,
-            gmt_modified
-        )           
-        values 
-        (
-            #{carrierName},
-            #{carrierLogo},
-            #{terminalName},
-            #{terminalCode},
-            #{reserved1},
-            #{note},
-            #{ownerId},
-            #{operatorId},
-            #{authorized},
-            #{gmtCreate},
-            #{gmtModified}
-        )
-    </insert> -->
 </mapper>
 
 

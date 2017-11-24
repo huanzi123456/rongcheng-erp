@@ -30,10 +30,7 @@
 <!-- 赵滨 -->
 <script src="/util/templateJson.js"></script>
 <script src="/util/cookie_util.js"></script>
-<script src="/zb/settings/basevalue.js"></script>
 <script src="/zb/settings/toPrint.js"></script>
-<script src="/zb/settings/jquery.PrintArea.js"></script>
-<script src="/zb/settings/jQuery.print.js"></script>
 <style type="text/css">
     .cursor_default :HOVER{
       cursor:default;

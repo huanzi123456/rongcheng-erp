@@ -51,7 +51,6 @@
     <!-- /**
      * 查找字段坐标 根据模版id
      * @param templateId 单据模版id
-     * @param authorized 是否授权
      * @param ownerId 主账号id
      * @return List<FieldCoordinate> 字段坐标集合
      * @author 赵滨
@@ -78,18 +77,14 @@
         from 
             field_coordinate 
         where 
-            <!-- is_authorized=#{1}
-        and -->
-            owner_id=#{2} 
+            owner_id=#{1}
         and 
             template_id=#{0}
-    
     </select>
     
     <!-- /**
      * 查找字段坐标 根据id
      * @param id    坐标id
-     * @param authorized 是否授权
      * @param ownerId 主账号id
      * @return 字段坐标集
      * @author 赵滨
@@ -116,9 +111,7 @@
         from 
             field_coordinate 
         where 
-            <!-- is_authorized=#{1}
-        and -->
-            owner_id=#{2} 
+            owner_id=#{1}
         and 
             id=#{0}
     
@@ -152,15 +145,12 @@
         where 
             owner_id=#{ownerId} 
         and 
-           <!--  is_authorized=#{authorized}
-        and  -->
             id=#{id}
     </update>
     
     <!-- /**
      * 移除字段坐标 根据模版id
      * @param templateId 单据模版id
-     * @param authorized 是否授权
      * @param ownerId 主账号id
      * @return row 删除行数
      * @author 赵滨
@@ -171,9 +161,7 @@
         where 
             template_id=#{0}
         and
-            owner_id=#{2} 
-       <!--  and 
-            is_authorized=#{1} -->
+            owner_id=#{1}
     </delete>
     
     <!-- /**
@@ -186,8 +174,7 @@
         delete from 
             field_coordinate 
         <trim prefix="WHERE" prefixOverrides="AND"> 
-            <!-- <if test="authorized != null">is_authorized = #{authorized} and </if>  -->
-            <if test="ownerId != null">owner_id = #{ownerId}</if> 
+            <if test="ownerId != null">owner_id = #{ownerId}</if>
             <if test="fieldCoordinateIdDel!=null and fieldCoordinateIdDel.length!=0">and id IN
                 <foreach collection="fieldCoordinateIdDel" item="item" open="(" separator="," close=")">
                     #{item}
@@ -195,7 +182,106 @@
             </if>
         </trim>
     </delete>
-    
+
+    <!--/**
+    * 初始化字段坐标
+    * @param id 模板ID
+    * @param ownerId 主账号ID
+    * @param timestamp 创建时间
+    * @return
+    * @author 赵滨
+    */-->
+    <insert id="initializationFieldCoordinate">
+    insert into field_coordinate
+    (
+        template_id,
+        field_name,
+        coordinate_type,
+        x_coordinate,
+        y_coordinate,
+        x_length,
+        y_length,
+        reserved1,
+        note,
+        owner_id,
+        operator_id,
+        is_authorized,
+        gmt_create,
+        gmt_modified
+    )
+    (
+        select
+        template_id+#{0},
+        field_name as fieldName,
+        coordinate_type as coordinateType,
+        x_coordinate as xCoordinate,
+        y_coordinate as yCoordinate,
+        x_length as xLength,
+        y_length as yLength,
+        reserved1,
+        note,
+        #{1},
+        operator_id as operatorId,
+        is_authorized as authorized,
+        #{2},
+        null
+    from
+        field_coordinate
+    where owner_id=0
+    )
+    </insert>
+
+    <!--/**
+     * 复制并新建字段坐标
+     * @param id 模板ID
+     * @param ownerId 主账号ID
+     * @param timestamp 创建时间
+     * @return
+     * @author 赵滨
+     */
+    int (BigInteger id, BigInteger ownerId, Timestamp timestamp);-->
+    <insert id="copyAddFieldCoordinate">
+        insert into field_coordinate
+        (
+            template_id,
+            field_name,
+            coordinate_type,
+            x_coordinate,
+            y_coordinate,
+            x_length,
+            y_length,
+            reserved1,
+            note,
+            owner_id,
+            operator_id,
+            is_authorized,
+            gmt_create,
+            gmt_modified
+        )
+        (
+        select
+            #{0},
+            field_name as fieldName,
+            coordinate_type as coordinateType,
+            x_coordinate as xCoordinate,
+            y_coordinate as yCoordinate,
+            x_length as xLength,
+            y_length as yLength,
+            reserved1,
+            note,
+            owner_id as ownerId,
+            operator_id as operatorId,
+            is_authorized as authorized,
+            #{2},
+            null
+        from
+            field_coordinate
+        where
+            owner_id=#{1}
+        and
+            template_id=#{3}
+        )
+    </insert>
 </mapper>
 
 

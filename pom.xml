@@ -4,8 +4,21 @@
 	<groupId>com.rongcheng-tech</groupId>
 	<artifactId>rongcheng-erp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<dependencies>
+    <packaging>war</packaging>
+    <!--设置默认java版本为1.7-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
 
         <!--注意：导包时请标注包的简介，新加入的包请放在最下端，避免不可预知的错误发生-->
 

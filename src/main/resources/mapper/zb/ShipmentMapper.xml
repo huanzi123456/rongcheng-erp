@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
- "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.rongcheng.erp.dao.ZB_ShipmentDAO">
-	
-	<!-- /**
+
+    <!-- /**
      * 获取订单下的商品
      * 
      * <p>根据订单erp订单编号 或者 快递单号
@@ -18,49 +18,30 @@
     <select id="listShipmentItemByOrderNumTrackingNum"
             resultType="java.util.Map">
         select 
-
 			i.erp_item_num as erpItemNum,
-			
 			i.name,
-			
 			i.color,
-			
 			i.size,
-			
 			l.quantity
-			
-		from 
-			
+		from
 			order_info as o, order_item_link as l, item_common_info as i
-			
-		where 
-			
+		where
 			o.id = l.erp_order_id
-			
-		and 
-
-            l.order_item_id = i.id
-            
 		and
-        
+            l.order_item_id = i.id
+		and
             (erp_order_num = #{0}
             OR
             tracking_num = #{0})
-            
-        and 
-            
+        and
             o.owner_id = #{1}
-            
-        and 
-            
+        and
             l.owner_id = #{1}
-
-        and 
-
+        and
             i.owner_id = #{1}
     </select>
-    
-	<!-- /**
+
+    <!-- /**
      * 获取订单验货信息(订单信息和买家信息)
      * 
      * <p>根据订单erp订单编号 或者 快递单号
@@ -72,42 +53,27 @@
      */
     Map<String, Object> (String num, Long ownerId); -->
     <select id="getShipmentByOrderNumTrackingNum" resultType="java.util.Map">
-        select 
-
+        select
 			ifnull(b.consignee_name, '') as consigneeName,
-			
 			ifnull(b.consignee_tel, '') as consigneeTel,
-			
 			ifnull(b.consignee_mobile, '') as consigneeMobile,
-			
 			ifnull(b.region_id, 0) as regionId,
-			
 			ifnull(b.user_address, '') as userAddress
-			
-		from 
-		    
+		from
 		    order_info as o, buyer_info as b
-			
-		where 
-			
+		where
 			o.platform_buyer_id = b.id
-			
 		and
-		
 			(erp_order_num = #{0}
 			OR
 			tracking_num = #{0})
-			
-		and 
-			
+		and
 			o.owner_id = #{1}
-			
-		and 
-			
+		and
 			b.owner_id = #{1}
     </select>
-	
-	<!-- /**
+
+    <!-- /**
      * 获取订单信息
      * 
      * <p>根据订单erp订单编号 或者 快递单号
@@ -117,7 +83,7 @@
      * @return OrderInfo 订单信息
      * @author 赵滨
      */ -->
-	<select id="getOrderInfoByOrderNumTrackingNum" 
+    <select id="getOrderInfoByOrderNumTrackingNum"
             resultType="com.rongcheng.erp.entity.OrderInfo">
         select
 		    id,
@@ -173,85 +139,16 @@
 		    gmt_modified as gmtModified
 		from
 		    order_info
-        
-        where 
-            
+        where
             (erp_order_num = #{0}
             or
             tracking_num = #{0})
-            
-        and 
-        
+        and
             owner_id = #{1}
-            
-        limit 
-        
+        limit
             #{2}, 1
-        
     </select>
 
-    <!-- /**
-     * 获取全国地址+快递分配信息表
-     * 
-     * <p>根据地区ID
-     * 
-     * @param code 地区code
-     * @param ownerId 主账号ID
-     * @return
-     * @author 赵滨
-     */ -->
-    <select id="getAddressCarrierAllocationById"
-            resultType="com.rongcheng.erp.entity.AddressCarrierAllocation">
-        select 
-            
-			region_id as regionId,
-			
-			region_code as regionCode,
-			
-			region_name as regionName,
-			
-			parent_id as parentId,
-			
-			region_level as regionLevel,
-			
-			region_order as regionOrder,
-			
-			region_name_en as regionNameEn,
-			
-			region_short as regionShort,
-			
-			carrier_id as carrierId,
-			
-			head_fee as headFee,
-			
-			repeat_fee as repeatFee,
-			
-			reserved1,
-			
-			note,
-			
-			owner_id as ownerId,
-			
-			operator_id as operatorId,
-			
-			is_authorized as authorized,
-			
-			gmt_create as gmtCreate,
-			
-			gmt_modified as gmtModified
-			
-		from 
-			
-			address_carrier_allocation
-			
-		where 
-		    
-		    region_code  = #{0}
-		    
-		and
-		
-		    owner_id = #{1}
-    </select>
 </mapper>
 
 
