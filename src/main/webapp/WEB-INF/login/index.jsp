@@ -58,7 +58,7 @@
     <div class="right_content">
       <ul class="bread">
         <li>
-          <a href="/topnav/settings.html"  class=" icon-cog" target="left"> 信息设置</a>
+          <a href="/topnav/settings.html"  class=" icon-cog" target="left">基础信息</a>
         </li>
         <li>
           <a href="/topnav/audit.html" class="icon-list-alt" target="left">订单审核</a>
@@ -73,10 +73,16 @@
           <a href="/topnav/inventory.html"  class=" icon-cog" target="left"> 仓库管理</a>
         </li>
         <li>
-          <a href="/topnav/dataStatisticsList.html" class="icon-align-left" target="left"> 数据统计</a>
+          <a href="/topnav/dataStatisticsList.html" class="icon-align-left" target="left"> 日志报表</a>
         </li>
         <li>
           <a href="/topnav/account.jsp" class="icon-file" target="left"> 账号设置</a>
+        </li>
+        <li>
+          <a href="/topnav/purchasing_system.html" class="icon-list-alt" target="left"> 采购管理</a>
+        </li>
+        <li>
+          <a href="/topnav/afterSale.html" class="icon-file" target="left"> 售后管理</a>
         </li>
       </ul>
       <div class="admin">

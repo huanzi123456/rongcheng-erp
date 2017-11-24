@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>  
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <link rel="stylesheet" href="/css/double-date.css">
+    <script src="/js/double-date.js"></script>
+</head>
+<body style="position: relative;min-height: 600px;">
+  	<div class="panel admin-panel accredit-height">
+	    <!-- <div class="panel-head"><strong class="icon-reorder"> 库存同步</strong></div> -->
+	    <div class="padding border-bottom" style="height: 120px;padding: 0;">
+		    <ul class="search" style="overflow:visible;height: 60px;border-bottom: 1px solid #ddd;padding:10px 0 0 10px;">
+		        <li>
+		        	<span class='fl'>打印时间：</span>
+		        	<div class="fl date" id="from"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        	<span class='fl' style='margin: 0 10px;'>至</span>
+		        	<div class="fl date" id="to"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        </li>
+		        <li>单号：
+		          <input type="text" placeholder="系统单号/原始单号" name="keywords" class="input" style="width:150px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>运单号：
+		          <input type="text" placeholder="" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>类型：
+		          <select class="input" style="width:100px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="0">纸质面单</option>
+		            <option value="1">电子面单</option>
+		            <option value="2">菜鸟电子面单</option>
+		            <option value="3">京东电子面单</option>
+		            <option value="4">发货电子面单</option>
+		          </select>
+		        </li>
+		        <li>来源：
+		          <select class="input" style="width:100px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="0">单据打印</option>
+		            <option value="1">补打</option>
+		            <option value="2">一单多包</option>
+		          </select>
+		        </li>
+	     	</ul>
+	     	<ul class="search" style="overflow:visible;height: 55px;padding:10px 0 0 10px;" >
+		        <li>收件地址：
+		        	<input type="text" placeholder="" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>收件人：
+		        	<input type="text" placeholder="" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>买家ID：
+		        	<input type="text" placeholder="" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>订单类型：
+		          <select class="input" style="width:100px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="0">待审核</option>
+		            <option value="1">已审核</option>
+		            <option value="2">已发货</option>
+		            <option value="3">已取消</option>
+		            <option value="4">已关闭</option>
+		          </select>
+		        </li>
+		        <li>
+		          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
+		          <a href="javascript:;" class="button border-main"> 导出</a>
+		        </li>
+	     	</ul>
+	    </div>
+	    <table class="table table-hover text-center list_table">
+			<tr>
+				<th width="60">序号</th>
+				<th>打印时间</th>       
+				<th>日志类型</th>
+				<th>来源</th>
+				<th>收件人地址</th>
+				<th width="105">买家ID/收件人</th>
+				<th>店铺平台</th>
+				<th>系统订单号</th>
+				<th>订单状态</th>
+				<th>物流信息</th>
+				<th>批次流水号</th>
+				<th>操作人</th>       
+			</tr>      
+			<tr>
+				<td>1</td>
+				<td>1991-15-11</td>
+				<td>日志来源</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					<div>
+						<span>5959589</span>
+						<br>
+						<span>张三李四</span>
+					</div>
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>199765965959</td>  
+				<td>已发货</td>  
+				<td>
+					<p>
+						协商一致退货盘础款二代亚光眼影盘础
+					</p>
+				</td>
+				<td>
+					16561266565
+				</td>
+				<td>
+					王五赵六
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1991-15-11</td>
+				<td>日志来源</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					<div>
+						<span>5959589</span>
+						<br>
+						<span>张三李四</span>
+					</div>
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>199765965959</td>  
+				<td>已发货</td>  
+				<td>
+					<p>
+						协商一致退货盘础款二代亚光眼影盘础
+					</p>
+				</td>
+				<td>
+					16561266565
+				</td>
+				<td>
+					王五赵六
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1991-15-11</td>
+				<td>日志来源</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					<div>
+						<span>5959589</span>
+						<br>
+						<span>张三李四</span>
+					</div>
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>199765965959</td>  
+				<td>已发货</td>  
+				<td>
+					<p>
+						协商一致退货盘础款二代亚光眼影盘础
+					</p>
+				</td>
+				<td>
+					16561266565
+				</td>
+				<td>
+					王五赵六
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1991-15-11</td>
+				<td>日志来源</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					<div>
+						<span>5959589</span>
+						<br>
+						<span>张三李四</span>
+					</div>
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>199765965959</td>  
+				<td>已发货</td>  
+				<td>
+					<p>
+						协商一致退货盘础款二代亚光眼影盘础
+					</p>
+				</td>
+				<td>
+					16561266565
+				</td>
+				<td>
+					王五赵六
+				</td>
+			</tr>
+			<tr>
+				<td colspan="12"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+			</tr>
+		</table>
+ 	</div>
+</body>
+</html>

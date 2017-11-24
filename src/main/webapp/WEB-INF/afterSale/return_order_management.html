@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>  
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <link rel="stylesheet" href="/css/double-date.css">
+	<link href="/linkage/css/city-picker.css" rel="stylesheet" type="text/css" />
+    <script src="/js/double-date.js"></script>
+</head>
+<body style="position: relative;min-height: 600px;">
+  	<div class="panel admin-panel accredit-height">
+	    <!-- <div class="panel-head"><strong class="icon-reorder"> 库存同步</strong></div> -->
+	    <div class="padding border-bottom" style="height: 60px;">
+		    <ul class="search" style="overflow:visible;">
+		        <li>
+		        	<span class='fl' style='margin: 0 10px;'>创建时间：</span>
+		        	<div class="fl date" id="from"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        	<span class='fl' style='margin: 0 10px;'>至</span>
+		        	<div class="fl date" id="to"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        </li>
+		        <li>状态：
+		          <select class="input" style="width:80px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="1">新建</option>
+		            <option value="0">完成</option>
+		          </select>
+		        </li>
+		        <li>仓库：
+		          <select class="input" style="width:150px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="1">默认仓库</option>
+		            <option value="0">WH-02</option>
+		          </select>
+		        </li>
+		        <li>关键字：
+		          <input type="text" placeholder="商品编号/商品名称/入库单号" name="keywords" class="input" style="width:200px; line-height:17px;display:inline-block" />
+		          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
+		        </li>
+	     	</ul>
+	    </div>
+	    <ul class="search search_bottom">
+	        <li>
+	          <a href="javascript:;" class="button border-main goods_returned_alertBtn"> 新建</a>
+	        </li>
+	        <li>
+	        	<a href="javascript:;" class="button border-main"> 下载模板</a>
+	        </li>
+	        <li>
+	        	<a href="javascript:;" class="button border-main"> 导入</a>
+	        </li>
+	        <li style="float: right;">
+	        	<a href="javascript:;" class="button border-main"> 导出</a>
+	        </li>
+     	</ul>
+	    <table class="table table-hover text-center list_table">
+			<tr>
+				<th width="60">序号</th>
+				<th>退货单号</th>       
+				<th>原始单号</th>
+				<th>买家昵称</th>
+				<th>收件人</th>
+				<th>快递单号</th>
+				<th>仓库</th>
+				<th>创建时间</th>
+				<th>收货时间</th>
+				<th>退货原因</th>
+				<th>下发状态</th>
+				<th>操作</th>       
+			</tr>      
+			<tr>
+				<td>
+				  1</td>
+				<td>
+					<span class='goods_returned_ck_alertBtn' style='text-decoration: underline;cursor: pointer;'>T56953655</span>
+				</td>
+				<td>T56953655</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1000000000</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1997-11-11</td>  
+				<td>1997-11-11</td>  
+				<td>
+					<p>
+						协商一致退货
+					</p>
+				</td>
+				<td>
+					完成
+				</td>
+				<td>
+					<a href="javascript:;" class="button border-main goods_returned_ck_alertBtn"> 查看</a>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<span class='goods_returned_ck_alertBtn' style='text-decoration: underline;cursor: pointer;'>T56953655</span>
+				</td>
+				<td>T56953655</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1000000000</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1997-11-11</td>  
+				<td>1997-11-11</td>  
+				<td>
+					<p>
+						协商一致退货
+					</p>
+				</td>
+				<td>
+					完成
+				</td>
+				<td>
+					<a href="javascript:;" class="button border-main goods_returned_ck_alertBtn"> 查看</a>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<span class='goods_returned_ck_alertBtn' style='text-decoration: underline;cursor: pointer;'>T56953655</span>
+				</td>
+				<td>T56953655</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1000000000</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1997-11-11</td>  
+				<td>1997-11-11</td>  
+				<td>
+					<p>
+						协商一致退货
+					</p>
+				</td>
+				<td>
+					完成
+				</td>
+				<td>
+					<a href="javascript:;" class="button border-main goods_returned_ck_alertBtn"> 查看</a>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<span class='goods_returned_ck_alertBtn' style='text-decoration: underline;cursor: pointer;'>T56953655</span>
+				</td>
+				<td>T56953655</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1000000000</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1997-11-11</td>  
+				<td>1997-11-11</td>  
+				<td>
+					<p>
+						协商一致退货
+					</p>
+				</td>
+				<td>
+					完成
+				</td>
+				<td>
+					<a href="javascript:;" class="button border-main goods_returned_ck_alertBtn"> 查看</a>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<span class='goods_returned_ck_alertBtn' style='text-decoration: underline;cursor: pointer;'>T56953655</span>
+				</td>
+				<td>T56953655</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1000000000</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>1997-11-11</td>  
+				<td>1997-11-11</td>  
+				<td>
+					<p>
+						协商一致退货
+					</p>
+				</td>
+				<td>
+					完成
+				</td>
+				<td>
+					<a href="javascript:;" class="button border-main goods_returned_ck_alertBtn"> 查看</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="12"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+			</tr>
+		</table>
+ 	</div>
+ 	<div class="goods_returned_noteBox">
+ 		<div class="print_godown_alert">
+ 			<div class="print_godown_title">
+ 				<span>新建退货单</span>
+ 				<div class="goods_returned_delbtn">×</div>
+ 			</div>
+ 			<div class="print_godown_content">
+ 				<div class="padding" style="height: 50px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>
+				    		退货单号：
+				    		<input type="text" placeholder="自动生成" class="input" style="width:200px; line-height:17px;display:inline-block" />
+				    	</li>
+				    	<li>
+				    		原始单号：
+				    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+				    		<a href="javascript:;" style="color: #f00;" class='dDsearch'>搜索</a>
+				    	</li>
+				        <li>退换原因：
+				          <select class="input" style="width:170px; line-height:17px; display:inline-block">
+				            <option value="0">新增</option>
+				            <option value="1">七天无理由退货</option>
+				            <option value="2">质量问题</option>
+				            <option value="3">尺寸色差问题</option>
+				            <option value="4">协商一致退货</option>
+				          </select>
+				        </li>
+			     	</ul>
+			    </div>
+			    <div class="padding" style="height: 50px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>快递公司：
+				          <select class="input" style="width:200px; line-height:17px; display:inline-block">
+				            <option value="0">百世快递</option>
+				            <option value="1">圆通</option>
+				            <option value="2">申通</option>
+				            <option value="3">中通</option>
+				            <option value="4">韵达</option>
+				          </select>
+				        </li>
+				    	<li>
+				    		快递单号：
+				    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+				    	</li>
+				        <li>下发仓库：
+				          <select class="input" style="width:200px; line-height:17px; display:inline-block">
+				            <option value="0">默认仓库</option>
+				            <option value="1">仓库1</option>
+				            <option value="2">仓库2</option>
+				            <option value="3">仓库3</option>
+				            <option value="4">仓库4</option>
+				          </select>
+				        </li>
+			     	</ul>
+			    </div>
+			    <div class="padding" style="height: 50px;margin-bottom: 10px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>
+				    		备注：
+				    		<input type="text" placeholder="" class="input" style="width: 792px; line-height:17px;display:inline-block" />
+				    	</li>
+			     	</ul>
+			    </div>
+			    <div class="consignee_information">
+			    	<div class="panel-head"><strong class="icon-reorder">收件人信息</strong></div>
+				    <div class="consignee_information_content">
+						<div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		买家昵称：
+						    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+						    	</li>
+						        <li>店铺：
+						          <select class="input" style="width:200px; line-height:17px; display:inline-block">
+						            <option value="0">店铺1</option>
+						            <option value="1">店铺2</option>
+						            <option value="2">店铺3</option>
+						            <option value="3">店铺4</option>
+						            <option value="4">店铺5</option>
+						          </select>
+						        </li>
+						        <li>
+						    		姓名：
+						    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+						    	</li>
+					     	</ul>
+					    </div>
+					    <div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		　　邮编：
+						    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+						    	</li>
+						    	<li>
+						    		电话：
+						    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+						    	</li>
+						    	<li>
+						    		手机：
+						    		<input type="text" placeholder="" class="input" style="width:200px; line-height:17px;display:inline-block" />
+						    	</li>
+					     	</ul>
+					    </div>
+					    <div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		　　地址：
+						    		<select class="input" style="width:100px; line-height:17px; display:inline-block">
+							            <option value="0">中国</option>
+							            <option value="1">海外</option>
+							        </select>
+						    	</li>
+						    	<li style="position: relative;">
+						    		<input type="text" placeholder="请选择城市" class="input form-control" style="width:600px; line-height:17px;display:inline-block"  id="city-picker3" class="" readonly type="text" value="" data-toggle="city-picker"/>
+						    	</li>
+					     	</ul>
+					    </div>
+					    <div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		　　　　　<!-- 这里有四个空格，后台请注意粘贴 -->
+							        <input type="text" placeholder="详细地址（粘贴或回车自动解析）" class="input" style="width:715px; line-height:17px;display:inline-block"/>
+						    	</li>
+					     	</ul>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="print_godown_table">
+			    	<div class="table_nk">
+				    	<table>
+				    		<tr>
+				    			<th width="60">序号</th>
+				    			<th>
+				    				<div class="two_row_div">
+				    					<span>商品编码</span>
+				    					<div class="two_row_inputBox">
+				    						<input type="text" placeholder='商品编码'>
+				    						<div class="two_row_inputFdj"></div>
+				    					</div>
+				    				</div>
+				    			</th>
+				    			<th>
+				    				<div class="two_row_div">
+				    					<span>商品名称</span>
+				    					<div class="two_row_inputBox">
+				    						<input type="text" placeholder='商品名称'>
+				    						<div class="two_row_inputFdj"></div>
+				    					</div>
+				    				</div>
+				    			</th>
+				    			<th>商品规格</th>
+				    			<th>数量</th>
+				    			<th>单价</th>
+				    			<th>金额</th>
+				    			<th>
+				    				库位
+				    			</th>
+				    			<th>
+				    				操作
+				    			</th>
+				    		</tr>
+				    		<tr>
+				    			<td>1</td>
+				    			<td>E2656956565</td>
+				    			<td>
+				    				<p class="overmore">
+				    					张三李四张三李四张三李四
+				    					张三李四张三李四张三李四
+				    				</p>
+				    			</td>
+				    			<td>
+				    				商品规格
+				    			</td>
+				    			<td>
+				    				<input type="text" class="numWidth" value="0">
+				    			</td>
+				    			<td>
+				    				￥1111111.11
+				    			</td>
+				    			<td>
+				    				￥1111111.11
+				    			</td>
+				    			<td>
+				    				<a href="javascript:;" class='button border-main setThe_location_alertBtn'>设定库位</a>
+				    			</td>
+				    			<td>
+				    				<a href="javascript:;" class='button border-red'>删除</a>
+				    			</td>
+				    		</tr>
+				    	</table>
+			    	</div>
+			    	<div class="tj_goods">
+			    		<a href="javascript:;" class="button border-main add_goodssBtn">添加商品</a>
+			    	</div>
+			    </div>
+			    <ul class="print_godown_gross">
+			    	<li>
+			    		<b>
+			    			总品数：
+			    			<span>10</span>
+			    		</b>
+			    	</li>
+			    	<li>
+			    		<b>
+			    			总金额：
+			    			<span>2900.00</span>
+			    		</b>
+			    	</li>
+			    	<li>
+			    		<b>
+			    			总数量：
+			    			<span>20</span>
+			    		</b>
+			    	</li>
+			    </ul>
+				<div class="print_godown_tj">
+					<a href="javascript:;" class="button border-main print_godown_bc"> 保存</a>
+					<a href="javascript:;" class="button border-main print_godown_qx"> 保存并收货入库</a>
+				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="goods_returned_note_box">
+ 		<div class="new_print_code">
+ 			<div class="print_code_title">
+ 				<span>添加商品</span>
+ 				<div class="goods_returned_note_delbtn">×</div>
+ 			</div>
+ 			<div class="print_code_content">
+ 				<div class="print_code_keyword">
+ 					<span>关键字：&nbsp;</span>
+ 					<input type="text" placeholder="商品编码/商品名称/商品规格，多个请用分号隔开。">
+ 				</div>
+ 				<div class="print_code_table">
+ 					<table>
+ 						<tr>
+ 							<th width="30">&nbsp;</th>
+ 							<th width="160">
+ 								商品编码
+ 							</th>
+ 							<th width="200">
+ 								商品名称
+ 							</th>
+ 							<th width="100">
+ 								商品规格
+ 							</th>
+ 							<th width="130">
+ 								商品价格
+ 							</th>
+ 							<th width="70">
+ 								单位
+ 							</th>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="checkbox" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								￥100000.00
+ 							</td>
+ 							<td>
+ 								人民币
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+ 						</tr>
+ 					</table>
+ 				</div>
+ 				<div class="print_code_btn">
+ 					<a href="javascript:;" class="button border-main goods_returned_note_bc"> 保存</a>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="setThe_location_box">
+ 		<div class="new_storageLocation_code">
+ 			<div class="storageLocation_code_title">
+ 				<span>选择库位</span>
+ 				<div class="setThe_location_delbtn">×</div>
+ 			</div>
+ 			<div class="storageLocation_code_content">
+ 				<div class="storageLocation_code_keyword">
+ 					<span>库位：&nbsp;</span>
+ 					<input type="text" placeholder="库位编码">
+ 				</div>
+ 				<div class="storageLocation_code_table">
+ 					<table>
+ 						<tr>
+ 							<th width="30">&nbsp;</th>
+ 							<th width="160">
+ 								库位编码
+ 							</th>
+ 							<th width="150">
+ 								库位说明
+ 							</th>
+ 							<th width="150">
+ 								存放商品
+ 							</th>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="radio" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">默认库位，系统商品</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td colspan="4"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+ 						</tr>
+ 					</table>
+ 				</div>
+ 				<div class="storageLocation_code_btn">
+ 					<a href="javascript:;" class="button border-main setThe_location_bc"> 保存</a>
+ 					<a href="javascript:;" class="button border-main setThe_location_qx"> 取消</a>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="dDsearch_box">
+ 		<div class="new_print_code">
+ 			<div class="print_code_title">
+ 				<span></span>
+ 				<div class="dDsearch_delbtn">×</div>
+ 			</div>
+ 			<div class="print_code_content">
+ 				<div class="print_code_keyword">
+ 					<span>关键字：&nbsp;</span>
+ 					<input type="text" placeholder="订单号/原始单号/快递单号/收件人/货品名称/手机号">
+ 				</div>
+ 				<div class="print_code_table">
+ 					<table>
+ 						<tr>
+ 							<th width="30">&nbsp;</th>
+ 							<th width="130">
+ 								原始单号
+ 							</th>
+ 							<th width="147">
+ 								买家昵称
+ 							</th>
+ 							<th width="140">
+ 								快递单号
+ 							</th>
+ 							<th width="130">
+ 								收件人
+ 							</th>
+ 							<th width="120">
+ 								手机
+ 							</th>
+ 						</tr>
+ 						<tr>
+ 							<td>
+ 								<input type="radio" name="NumOne">
+ 							</td>
+ 							<td>
+ 								<span class="span">T4654656565</span>
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								1546486748678
+ 							</td>
+ 							<td>
+ 								<span class="span">咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻咻</span>
+ 							</td>
+ 							<td>
+ 								18222806089
+ 							</td>
+ 						</tr>
+ 						<tr>
+ 							<td colspan="10"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+ 						</tr>
+ 					</table>
+ 				</div>
+ 				<div class="print_code_btn">
+ 					<a href="javascript:;" class="button border-main dDsearch_bc"> 保存</a>
+ 					<a href="javascript:;" class="button border-main dDsearch_qx"> 取消</a>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="goods_returned_ckBox">
+ 		<div class="print_godown_alert">
+ 			<div class="print_godown_title">
+ 				<span>退货单详情</span>
+ 				<div class="goods_returned_ck_delbtn">×</div>
+ 			</div>
+ 			<div class="print_godown_content">
+ 				<div class="padding" style="height: 50px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>
+				    		退货单号：
+				    		<span style="width:200px; line-height:17px;display:inline-block" />
+				    		56565656565
+				    		</span>
+				    	</li>
+				    	<li>
+				    		原始单号：
+				    		<span style="width:200px; line-height:17px;display:inline-block" />
+				    		56565656565
+				    		</span>
+				    	</li>
+				        <li>　　状态：
+				          	<span style="width:200px; line-height:17px;display:inline-block" />
+				    		完成
+				    		</span>
+				        </li>
+			     	</ul>
+			    </div>
+			    <div class="padding" style="height: 50px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>快递公司：
+				          	<span style="width:200px; line-height:17px;display:inline-block;" />
+				    		中通
+				    		</span>
+				        </li>
+				    	<li>
+				    		快递单号：
+				    		<span style="width:200px; line-height:17px;display:inline-block" />
+				    		56565656565
+				    		</span>
+				    	</li>
+				        <li>退换原因：
+				          	<span style="width:200px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+				    		不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。
+				    		</span>
+				        </li>
+			     	</ul>
+			    </div>
+			    <div class="padding" style="height: 50px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>
+				    		下发仓库：
+				    		<span style="width: 792px; line-height:17px;display:inline-block" />
+				    		仓库1
+				    		</span>
+				    	</li>
+			     	</ul>
+			    </div>
+			    <div class="padding" style="height: 50px;margin-bottom: 10px;">
+				    <ul class="search" style="overflow:visible;">
+				    	<li>
+				    		备注：
+				    		<span style="width: 792px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+				    		不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。不好用，就是想退。
+				    		</span>
+				    	</li>
+			     	</ul>
+			    </div>
+			    <div class="consignee_information">
+			    	<div class="panel-head"><strong class="icon-reorder">收件人信息</strong></div>
+				    <div class="consignee_information_content">
+						<div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		买家昵称：
+						    		<span style="width:200px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+						    		张三李四王五赵六
+						    		</span>
+						    	</li>
+						        <li>店铺：
+						          <span style="width:200px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+						    		张三李四王五赵六
+						    		</span>
+						        </li>
+						        <li>
+						    		姓名：
+						    		<span style="width:200px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+						    		张三李四王五赵六
+						    		</span>
+						    	</li>
+					     	</ul>
+					    </div>
+					    <div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		　　邮编：
+						    		<span style="width:200px; line-height:17px;display:inline-block" />
+						    		56565656565
+						    		</span>
+						    	</li>
+						    	<li>
+						    		电话：
+						    		<span style="width:200px; line-height:17px;display:inline-block" />
+						    		56565656565
+						    		</span>
+						    	</li>
+						    	<li>
+						    		手机：
+						    		<span style="width:200px; line-height:17px;display:inline-block" />
+						    		56565656565
+						    		</span>
+						    	</li>
+					     	</ul>
+					    </div>
+					    <div class="padding" style="height: 50px;">
+						    <ul class="search" style="overflow:visible;">
+						    	<li>
+						    		　　地址：
+						    		<span style="width: 792px; line-height:12px;display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" />
+						    		天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县天津市天津区天津县
+						    		</span>
+						    	</li>
+					     	</ul>
+					    </div>
+				    </div>
+			    </div>
+			    <ul class="print_godown_gross">
+			    	<li>
+			    		<b>
+			    			退货的商品
+			    		</b>
+			    	</li>
+			    	<li>
+			    		<b>
+			    			应收总品类：
+			    			<span>2</span>
+			    		</b>
+			    	</li>
+			    	<li>
+			    		<b>
+			    			应收总数量：
+			    			<span>20</span>
+			    		</b>
+			    	</li>
+			    	<li>
+			    		<b>
+			    			应付总金额：
+			    			<span>￥2000.00</span>
+			    		</b>
+			    	</li>
+			    </ul>
+			    <div class="print_godown_table">
+			    	<div class="table_nk">
+				    	<table>
+				    		<tr>
+				    			<th width="60">序号</th>
+				    			<th>
+				    				<div class="two_row_div">
+				    					<span>商品编码</span>
+				    					<div class="two_row_inputBox">
+				    						<input type="text" placeholder=''>
+				    						<div class="two_row_inputFdj"></div>
+				    					</div>
+				    				</div>
+				    			</th>
+				    			<th>
+				    				<div class="two_row_div">
+				    					<span>商品名称</span>
+				    					<div class="two_row_inputBox">
+				    						<input type="text" placeholder=''>
+				    						<div class="two_row_inputFdj"></div>
+				    					</div>
+				    				</div>
+				    			</th>
+				    			<th>商品规格</th>
+				    			<th>数量</th>
+				    			<th>单价</th>
+				    			<th>金额</th>
+				    			<th>
+				    				库位
+				    			</th>
+				    		</tr>
+				    		<tr>
+				    			<td>1</td>
+				    			<td>E2656956565</td>
+				    			<td>
+				    				<p class="overmore">
+				    					张三李四张三李四张三李四
+				    					张三李四张三李四张三李四
+				    				</p>
+				    			</td>
+				    			<td>
+				    				商品规格
+				    			</td>
+				    			<td>
+				    				1
+				    			</td>
+				    			<td>
+				    				￥1111111.11
+				    			</td>
+				    			<td>
+				    				￥1111111.11
+				    			</td>
+				    			<td>
+				    				库位1
+				    			</td>
+				    		</tr>
+				    	</table>
+			    	</div>
+			    </div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<script src="/linkage/js/city-picker.data.js"></script>
+	<script src="/linkage/js/city-picker.js"></script>
+	<script src="/linkage/js/main.js"></script>
+	<script src='/js/return_order_management.js'></script>
+</body>
+</html>

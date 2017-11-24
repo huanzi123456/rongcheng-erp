@@ -1,0 +1,43 @@
+.div_big_box{
+	padding: 10px 20px;
+}
+.surface_single_accountBox{
+	width: 100%;
+}
+.surface_single_accountBox li{
+	line-height: 50px;
+}
+.surface_single_accountBox li span.surface_single_accountTitle{
+	display: inline-block;
+	width: 20%;
+	overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.surface_single_accountBox li input.surface_single_accountInput{
+	display: inline-block;
+	width: 200px;
+	height: 35px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding-left: 5px;
+	margin-right: 20px;
+	background: #fff;
+	cursor: default;
+}
+.surface_single_accountBox li span.annotation{
+	color: #f00;
+}
+.over{
+	width: 200px;
+	overflow: hidden;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+i{
+	color: #f00;
+	font-style: normal;
+	margin: 0 5px;
+}

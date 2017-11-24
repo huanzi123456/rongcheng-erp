@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>  
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <link rel="stylesheet" href="/css/double-date.css">
+    <script src="/js/double-date.js"></script>
+</head>
+<body style="position: relative;min-height: 600px;">
+  	<div class="panel admin-panel accredit-height">
+	    <!-- <div class="panel-head"><strong class="icon-reorder"> 库存同步</strong></div> -->
+	    <div class="padding border-bottom" style="height: 60px;">
+		    <ul class="search" style="overflow:visible;">
+		        <li>
+		        	<span class='fl' style='margin: 0 10px;'>操作时间：</span>
+		        	<div class="fl date" id="from"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        	<span class='fl' style='margin: 0 10px;'>至</span>
+		        	<div class="fl date" id="to"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        </li>
+		        <li>商品编码：
+		          <input type="text" placeholder="商品编码" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>操作人：
+		          <input type="text" placeholder="操作人" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>单据号：
+		          <input type="text" placeholder="单据号" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
+		        </li>
+	     	</ul>
+	    </div>
+	    <table class="table table-hover text-center list_table">
+			<tr>
+				<th width="60">序号</th>
+				<th>商品编码</th>       
+				<th>商品名称</th>
+				<th>单据号</th>
+				<th>仓库</th>
+				<th>库位</th>
+				<th>库存量</th>
+				<th>可用量</th>
+				<th>订单占用量</th>
+				<th>操作人</th>
+				<th>操作类型</th>
+				<th>操作时间</th>      
+			</tr>      
+			<tr>
+				<td>1</td>
+				<td>
+					T56953655
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>T56953655</td>
+				<td>
+					默认仓库
+				</td>
+				<td>
+					默认库位
+				</td>
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>  
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>
+				<td>
+					操作人
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					1997-11-11
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					T56953655
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>T56953655</td>
+				<td>
+					默认仓库
+				</td>
+				<td>
+					默认库位
+				</td>
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>  
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>
+				<td>
+					<i>0</i>--&gt;<i>16</i>
+				</td>
+				<td>
+					操作人
+				</td>
+				<td>
+					<p>
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+				<td>
+					1997-11-11
+				</td>
+			</tr>
+			<tr>
+				<td colspan="12"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+			</tr>
+		</table>
+ 	</div>
+</body>
+</html>

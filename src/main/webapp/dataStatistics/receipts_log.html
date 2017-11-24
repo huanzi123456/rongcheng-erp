@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title></title>  
+    <link rel="stylesheet" href="/css/pintuer.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/pintuer.js"></script>  
+    <link rel="stylesheet" href="/css/inventory_state.css">
+    <link rel="stylesheet" href="/css/alert_box.css">
+    <link rel="stylesheet" href="/css/double-date.css">
+    <script src="/js/double-date.js"></script>
+</head>
+<body style="position: relative;min-height: 600px;">
+  	<div class="panel admin-panel accredit-height">
+	    <!-- <div class="panel-head"><strong class="icon-reorder"> 库存同步</strong></div> -->
+	    <div class="padding border-bottom" style="height: 60px;">
+		    <ul class="search" style="overflow:visible;">
+		        <li>
+		        	<span class='fl' style='margin: 0 10px;'>操作时间：</span>
+		        	<div class="fl date" id="from"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        	<span class='fl' style='margin: 0 10px;'>至</span>
+		        	<div class="fl date" id="to"  style="line-height: 20px;">
+		        		<input type="text" class="date-check">
+		        	</div>
+		        </li>
+		        <li>
+		          <select class="input" style="width:80px; line-height:17px; display:inline-block">
+		          	<option value="">全部</option>
+		            <option value="0" selected>原始订单</option>
+		            <option value="1">系统订单</option>
+		            <option value="2">入库单</option>
+		            <option value="3">调整单</option>
+		            <option value="4">退货单</option>
+		            <option value="5">出库单</option>
+		          </select>
+		        </li>
+		        <li>
+		          <input type="text" placeholder="单据号" name="keywords" class="input" style="width:80px; line-height:17px;display:inline-block" />
+		        </li>
+		        <li>操作类型：
+		          <select class="input" style="width:150px; line-height:17px; display:inline-block">
+		            <option value="">全部</option>
+		            <option value="0">订单创建</option>
+		            <option value="1">合单</option>
+		            <option value="2">撤销合单</option>
+		            <option value="3">审单</option>
+		            <option value="4">撤销审单</option>
+		            <option value="5">发货</option>
+		            <option value="6">关闭</option>
+		            <option value="7">系统关闭</option>
+		            <option value="8">手动删除原始订单</option>
+		            <option value="9">手动请求取消</option>
+		            <option value="10">手动删除系统订单</option>
+		            <option value="11">电子面单取消成功</option>
+		            <option value="12">电子面单取消失败</option>
+		            <option value="13">添加商品</option>
+		            <option value="14">删除商品</option>
+		            <option value="15">手动编辑订单</option>
+		            <option value="16">订单拆单</option>
+		            <option value="17">取消拆单</option>
+		          </select>
+		        </li>
+		        <li>操作人：
+		          <input type="text" placeholder="操作人" name="keywords" class="input" style="width:100px; line-height:17px;display:inline-block" />
+		          <a href="javascript:;" class="button border-main icon-search"> 查询</a>
+		        </li>
+	     	</ul>
+	    </div>
+	    <table class="table table-hover text-center list_table">
+			<tr>
+				<th width="60">序号</th>
+				<th>单据号</th>       
+				<th>单据类型</th>
+				<th>操作时间</th>
+				<th>操作人</th>
+				<th>操作类型</th>
+				<th width="220">描述</th>      
+			</tr>      
+			<tr>
+				<td>1</td>
+				<td>
+					<div>
+						<span>T56953655</span>
+						<br>
+						<span>T56953655</span>
+					</div>
+				</td>
+				<td>单据类型</td>
+				<td>1997-11-11</td>
+				<td>
+					<p>
+						张三
+					</p>
+				</td>  
+				<td>
+					<p>
+						操作类型
+					</p>
+				</td>
+				<td>
+					<p style="width: 200px;">
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<div>
+						<span>T56953655</span>
+						<br>
+						<span>T56953655</span>
+					</div>
+				</td>
+				<td>单据类型</td>
+				<td>1997-11-11</td>
+				<td>
+					<p>
+						张三
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						操作类型
+					</p>
+				</td>
+				<td>
+					<p style="width: 200px;">
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<div>
+						<span>T56953655</span>
+						<br>
+						<span>T56953655</span>
+					</div>
+				</td>
+				<td>单据类型</td>
+				<td>1997-11-11</td>
+				<td>
+					<p>
+						张三
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						操作类型
+					</p>
+				</td>
+				<td>
+					<p style="width: 200px;">
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>
+					<div>
+						<span>T56953655</span>
+						<br>
+						<span>T56953655</span>
+					</div>
+				</td>
+				<td>单据类型</td>
+				<td>1997-11-11</td>
+				<td>
+					<p>
+						张三
+					</p>
+				</td>  
+				
+				<td>
+					<p>
+						操作类型
+					</p>
+				</td>
+				<td>
+					<p style="width: 200px;">
+						二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款二代亚光眼影盘础款
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="7"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+			</tr>
+		</table>
+ 	</div>
+</body>
+</html>
