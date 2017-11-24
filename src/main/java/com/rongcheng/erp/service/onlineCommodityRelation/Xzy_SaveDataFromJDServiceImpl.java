@@ -5,17 +5,13 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.jd.open.api.sdk.DefaultJdClient;
 import com.jd.open.api.sdk.JdClient;
 import com.jd.open.api.sdk.JdException;
@@ -54,6 +50,7 @@ public class Xzy_SaveDataFromJDServiceImpl implements Xzy_SaveDataFromJDService{
 	//@PostConstruct
 	@Override
 	public void save(HttpSession session) throws JdException {
+		//String jdAccessTokens = ((AuthorityAccess) (session.getAttribute("authorityAccess"))).getAccessToken();
 		//查询京东的店铺信息
 		ShopJosResult shop = searchShopInfo(jdAppKeys, jdAppSecrets, jdAccessTokens);
 		String platformShopId = shop.getShopId().toString();//店铺编号                   
@@ -83,7 +80,6 @@ public class Xzy_SaveDataFromJDServiceImpl implements Xzy_SaveDataFromJDService{
 		Integer pageNo = 1;//页码
     	Integer pageSize = 100;//每页条数
     	//查询京东的商品信息
-    	//System.err.println("第"+pageNo+"页");
       	Page jdResult = searchCommonInfo(pageSize, pageNo, jdAppKeys, jdAppSecrets, jdAccessTokens, lastCreatTime);
       	saveData(jdResult,platformShopId,platformShopName,ownerId,shop_id);
       	Long count = jdResult.getTotalItem();//京东可以返回的数据的记录数
@@ -99,7 +95,6 @@ public class Xzy_SaveDataFromJDServiceImpl implements Xzy_SaveDataFromJDService{
     		}
     		for(int i=1;i<num;i++){//i<num
     			pageNo++;
-    			//System.err.println("第"+pageNo+"页");
     			jdResult = searchCommonInfo(pageSize, pageNo, jdAppKeys, jdAppSecrets, jdAccessTokens, lastCreatTime);
     	        saveData(jdResult,platformShopId,platformShopName,ownerId,shop_id);	
       	    }
