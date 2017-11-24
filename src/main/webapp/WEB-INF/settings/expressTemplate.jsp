@@ -19,9 +19,12 @@
 <script src="../js/big_box.js"></script>
 </head>
 <style>
-  .div_big_box{
-    overflow: hidden;
-  }
+  .div_big_box:after{
+      content: "";
+      display: block;
+      height: 0;
+      clear: both;
+    }
 </style>
 <body>
   <div class="div_big_box">

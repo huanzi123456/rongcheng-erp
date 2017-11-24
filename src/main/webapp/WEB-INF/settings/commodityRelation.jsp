@@ -16,9 +16,12 @@
     <link rel="stylesheet" href="../css/commodity_relation.css">
     <script src="../js/big_box.js"></script>
     <style>
-      .div_big_box{
-        overflow: hidden;
-      }
+      .div_big_box:after{
+      content: "";
+      display: block;
+      height: 0;
+      clear: both;
+    }
     </style>
     <script type="text/javascript" src="/xzy/commondityRelation.js"></script>
     <script type="text/javascript" src="/util/jiml-utils.js"></script>
