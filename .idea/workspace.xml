@@ -7,9 +7,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbf82805-424b-4b82-8e38-86593f2952c6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/3.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/4.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/5.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/6.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/bg.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/center_error.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/error_r1_c1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/error_r2_c1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/error_r2_c3.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/error_r3_c2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/gao.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/left.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error/right.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/error.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" afterPath="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,23 +66,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ZB_InventoryController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java">
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="554" column="34" lean-forward="true" selection-start-line="554" selection-start-column="34" selection-end-line="554" selection-end-column="34" />
+            <state relative-caret-position="631">
+              <caret line="29" column="61" lean-forward="false" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ZB_PrintController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java">
+      <file leaf-file-name="PrintMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+            <state relative-caret-position="214">
+              <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1511518954496" expanded="true" signature="5526:6178" ph="select id, t... field_coordinate" />
+                <marker date="1511518954496" expanded="true" signature="6504:7977" ph="select i.id " />
+                <marker date="1511518954496" expanded="true" signature="8291:9067" ph="select id, c... print_template" />
+                <marker date="1511518954496" expanded="true" signature="9339:11512" ph="select id, e... order_info" />
+                <marker date="1511518954496" expanded="true" signature="11738:13782" ph="update order... " />
               </folding>
             </state>
           </provider>
@@ -87,9 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/location/listItemByLocationId.do</find>
-      <find>listItemByLocationId</find>
-      <find>listItemByKeywords</find>
       <find>确定删除吗?</find>
       <find>添加商品</find>
       <find>/商品名称</find>
@@ -117,6 +133,9 @@
       <find>conf</find>
       <find>com.rongcheng.print</find>
       <find>div_big_box</find>
+      <find>404</find>
+      <find>404/</find>
+      <find>www</find>
     </findStrings>
     <replaceStrings>
       <replace>/util/cookie_util.js</replace>
@@ -142,6 +161,7 @@
       <replace>return;</replace>
       <replace>com.rongcheng.二批</replace>
       <replace>com.rongcheng.erp</replace>
+      <replace>error/</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -161,9 +181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/test/PrintMapper.xml" />
-        <option value="E:/MavenRepository/org/springframework/spring-beans/3.2.8.RELEASE/spring-beans-3.2.8.RELEASE.jar!/org/springframework/beans/factory/BeanFactory.class" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/dao/TestOrderTableDAO.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config/spring-mybatis.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/TestOrderTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/test/TestOrderTableDAO.java" />
@@ -206,12 +223,15 @@
         <option value="$PROJECT_DIR$/src/main/resources/config/spring-mvc.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/CarrierInfoMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/FieldCoordinateMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintTemplateMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/ShipmentMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/zb/shipment/shipmentInspection.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_InventoryController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/404.htm" />
+        <option value="$PROJECT_DIR$/src/main/webapp/error.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       </list>
     </option>
   </component>
@@ -383,24 +403,7 @@
               <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="erp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rongcheng-erp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rongcheng-erp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="erp" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -433,11 +436,11 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp" />
       <recent name="E:\JavaProject\rongcheng-erp\src\main\java\com\rongcheng\erp\controller" />
       <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\audit" />
       <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\shipment" />
       <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\WEB-INF\settings" />
-      <recent name="E:\JavaProject\rongcheng-erp\src\main\webapp\zb\shipment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.rongcheng.erp.test" />
@@ -466,10 +469,22 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Xzy_DataStatisticsDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/OrderInfo.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/DataStatisticsService/Xzy_DataStatisticsServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/xzy/DataStatisticsMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Wzy_InventoryOrderRelease.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Wzy_ItemInfoController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Wzy_InventoryOrderReleaseDAO.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Wzy_InvertoryAllAddressDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Wzy_ItemInfoDAO.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/WarehouseRegionShop.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_itemInfoService/ItemInfoService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_itemInfoService/ItemInfoServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_orderReleaseService/OrderReleaseService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_orderReleaseService/OrderReleaseServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/wzy/ItemInfoMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/wzy/OrderReleaseAddressMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/wzy/OrderReleaseInvertoryMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/settings/commodity_management.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/wzy/inventroyOrderRelease.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/wzy/itemInfo.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -477,6 +492,17 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/Wzy_ItemCategoryController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/Wzy_ItemCategoryDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/WzyAddressCarrierAllocation.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/WzyItemInfo.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dto/WzyWarehouseRegionShop.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/CategoryInfo.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/ItemCategoryLink.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_itemInfoService/ItemCategoryService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/service/wzy_itemInfoService/ItemCategoryServiceImpl.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/mapper/wzy/WzyCategoryMapper.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/wzy/categoryTree.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -484,6 +510,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/vo/AddressCarrierAllocation.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/vo/ItemInfo.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/rongcheng/erp/entity/vo/WarehouseRegionShopVO.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -906,7 +935,7 @@
       <workItem from="1511343135777" duration="740000" />
       <workItem from="1511431778932" duration="28000" />
       <workItem from="1511504481629" duration="47000" />
-      <workItem from="1511507807554" duration="5678000" />
+      <workItem from="1511507807554" duration="9657000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1509101261829</created>
@@ -1055,7 +1084,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511512448238</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="成功对接仓库模块的owner_id。">
+      <created>1511514112751</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1511514112751</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1091,7 +1127,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="469572000" />
+    <option name="totallyTimeSpent" value="473551000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1124,11 +1160,11 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.4936034" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934782" sideWeight="0.4968017" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.4968017" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19402985" sideWeight="0.4935275" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.50647247" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19402985" sideWeight="0.48713827" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19402985" sideWeight="0.5128617" order="5" side_tool="true" content_ui="tabs" x="113" y="582" width="474" height="306" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5038002" order="6" side_tool="true" content_ui="tabs" />
@@ -1222,7 +1258,8 @@
     <MESSAGE value="添加删除仓库功能" />
     <MESSAGE value="添加跳转页码功能" />
     <MESSAGE value="修复连接池线程，修改模板模块代码，成功对接相关模块的owner_id。" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复连接池线程，修改模板模块代码，成功对接相关模块的owner_id。" />
+    <MESSAGE value="成功对接仓库模块的owner_id。" />
+    <option name="LAST_COMMIT_MESSAGE" value="成功对接仓库模块的owner_id。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1240,31 +1277,6 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/util/cookie_util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/util/carrier-utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/dao/ZB_StockInfoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="33" column="24" lean-forward="true" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/StockInfoMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1539,14 +1551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1636,20 +1640,6 @@
             <marker date="1511512258149" expanded="true" signature="584:1031" ph="select i.erp... order_info" />
             <marker date="1511512258149" expanded="true" signature="1391:1832" ph="select ifnul... order_info" />
             <marker date="1511512258149" expanded="true" signature="2165:4116" ph="select id, e... order_info" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-          <folding>
-            <marker date="1511512258144" expanded="true" signature="5526:6178" ph="select id, t... field_coordinate" />
-            <marker date="1511512258144" expanded="true" signature="6504:7977" ph="select i.id " />
-            <marker date="1511512258144" expanded="true" signature="8291:9067" ph="select id, c... print_template" />
-            <marker date="1511512258144" expanded="true" signature="9339:11512" ph="select id, e... order_info" />
-            <marker date="1511512258144" expanded="true" signature="11738:13782" ph="update order... " />
           </folding>
         </state>
       </provider>
@@ -1753,7 +1743,7 @@
         <state relative-caret-position="92">
           <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1768,11 +1758,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rongcheng/erp/controller/ZB_PrintController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+        <state relative-caret-position="122">
+          <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/firstPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/error.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="165" column="48" lean-forward="false" selection-start-line="165" selection-start-column="48" selection-end-line="165" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/error.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="180" column="52" lean-forward="true" selection-start-line="180" selection-start-column="52" selection-end-line="180" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/zb/PrintMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+          <folding>
+            <marker date="1511518954496" expanded="true" signature="5526:6178" ph="select id, t... field_coordinate" />
+            <marker date="1511518954496" expanded="true" signature="6504:7977" ph="select i.id " />
+            <marker date="1511518954496" expanded="true" signature="8291:9067" ph="select id, c... print_template" />
+            <marker date="1511518954496" expanded="true" signature="9339:11512" ph="select id, e... order_info" />
+            <marker date="1511518954496" expanded="true" signature="11738:13782" ph="update order... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="29" column="61" lean-forward="false" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>
