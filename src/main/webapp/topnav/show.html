@@ -6,147 +6,329 @@
 		<link rel="stylesheet" href="/css/show.css">
 	</head>
 	<body>
-		<h1>欢迎使用融成信息打印系统</h1>
-		<div class="module_navigation">
-			<h3>常用功能导航</h3>
-			<div class="row_module">
-				<a href="javascript:;">
-					<div class="img_box">
-						<img src="/images/tb.png" alt="">
+		<div class="show_box">
+			<div class="left_box">
+				<div class="top_box">
+					<div class="show_box_title">
+						<div class="img_title_box">
+							<img src="/images/showImg_title.png" alt="图片未找到">
+						</div>
+						<h3>待办事项</h3>
+						<a href="javascript:;" class="refresh_img_box">
+							<img src="/images/refresh.png" alt="">
+						</a>
 					</div>
-					<div class="right_text">
-						<h5>线上平台</h5>
-						<span>待付款:1234</span>
+					<div class="show_box_content">
+						<ul class="bar_type_box">
+							<li>
+								<div class="bar_type_left">
+									<b>库存提醒:</b>
+								</div>
+								<div class="bar_type_right">
+									<a href="javascript:;"><i>0</i></a>个商品已经达到库存警戒线
+								</div>
+							</li>
+							<li>
+								<div class="bar_type_left">
+									<b>待审核:</b>
+								</div>
+								<div class="bar_type_right">
+									<a class="bar_type dsh" href="javascript:;"></a>
+								</div>
+							</li>
+							<li>
+								<div class="bar_type_left">
+									<b>待打单:</b>
+								</div>
+								<div class="bar_type_right">
+									<a class="bar_type ddy" href="javascript:;"></a>
+								</div>
+							</li>
+							<li>
+								<div class="bar_type_left">
+									<b>待发货:</b>
+								</div>
+								<div class="bar_type_right">
+									<a class="bar_type dfh" href="javascript:;"></a>
+								</div>
+							</li>
+							<li>
+								<div class="bar_type_left">
+									<b>当日已发:</b>
+								</div>
+								<div class="bar_type_right">
+									<a class="bar_type dryf" href="javascript:;"></a>
+								</div>
+							</li>
+							<li>
+								<div class="bar_type_left">
+									<b>反馈异常:</b>
+								</div>
+								<div class="bar_type_right">
+									<a class="bar_type fkyc" href="javascript:;"></a>
+								</div>
+							</li>
+						</ul>
 					</div>
-				</a>
-			</div>
-			<div class="xiabiao"></div>
-			<div class="row_module">
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>店铺信息设置</h5>
-							<!-- <span>待付款:1234</span> -->
-						</div>
-					</a>
 				</div>
-				<div class="rightbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
+				<div class="bottom_box">
+					<div class="show_box_title">
+						<div class="img_title_box">
+							<img src="/images/showImg_title.png" alt="图片未找到">
 						</div>
-						<div class="right_text">
-							<h5>商品信息设置</h5>
-							<span>系统商品数:1234</span>
-						</div>
-					</a>
-				</div>
-				<div class="rightbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>单据模板及打印设置</h5>
-							<!-- <span>待付款:1234</span> -->
-						</div>
-					</a>
-				</div>
-				<div class="rightbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>快递分区设置</h5>
-							<!-- <span>待付款:1234</span> -->
-						</div>
-					</a>
+						<h3>店铺7天经营数据</h3>
+						<a href="javascript:;" class="refresh_img_box">
+							<img src="/images/refresh.png" alt="">
+						</a>
+					</div>
+					<div class="show_box_content" id="container">
+						
+					</div>
 				</div>
 			</div>
-			<div class="xiabiao" style="margin-left: 785px;"></div>
-			<div class="row_module">
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>验货发货</h5>
-							<span>待发货:1234</span>
-						</div>
-					</a>
+			<div class="right_box">
+				<div class="show_box_title">
+					<div class="img_title_box">
+						<img src="/images/showImg_title.png" alt="图片未找到">
+					</div>
+					<h3>常用菜单</h3>
 				</div>
-				<div class="leftbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
+				<div class="right_menu_box">
+					<div class="right_menu_top">
+						<div class="menu_top_box">
+							<div class="menu_top_imgBox">
+								<img src="/images/tb.png" alt="">
+							</div>
+							<div class="menu_top_textBox">
+								<a href="javascript:;">
+									<h5>线上平台</h5>
+									<p>待付款:<i>0</i></p>
+								</a>
+							</div>
 						</div>
-						<div class="right_text">
-							<h5>订单打印</h5>
-							<span>待打印:1234</span>
+					</div>
+					<div class="right_menu_middle">
+						<div class="middle_menu_leftBox">
+							<div class="middle_menu_jtBox">
+								<img src="/images/xiabiao.png" alt="">
+							</div>
+							<div class="middle_menu_spBox">
+								<div class="menu_spBox_moduleBox">
+									<a href="javascript:;">
+										<div class="menu_spBox_imgBox">
+											<img src="/images/th.png" alt="">
+										</div>
+										<div class="menu_spBox_textBox">
+											<p>
+												线上商品对应关系
+											</p>
+										</div>
+									</a>
+								</div>
+								<div class="menu_spBox_jtBox">
+									<img src="/images/xiabiao.png" alt="">
+								</div>
+								<div class="menu_spBox_moduleBox">
+									<a href="javascript:;">
+										<div class="menu_spBox_imgBox">
+											<img src="/images/th.png" alt="">
+										</div>
+										<div class="menu_spBox_textBox">
+											<p style="padding-top: 10px;">
+												商品管理
+											</p>
+										</div>
+									</a>
+								</div>
+								<div class="menu_spBox_jtBox">
+									<img src="/images/xiabiao.png" alt="">
+								</div>
+								<div class="menu_spBox_moduleBox">
+									<a href="javascript:;">
+										<div class="menu_spBox_imgBox">
+											<img src="/images/th.png" alt="">
+										</div>
+										<div class="menu_spBox_textBox">
+											<p style="padding-top: 10px;">
+												组合商品
+											</p>
+										</div>
+									</a>
+								</div>
+								<div class="menu_spBox_jtBox">
+									<img src="/images/xiabiao.png" alt="">
+								</div>
+								<div class="menu_spBox_moduleBox">
+									<a href="javascript:;">
+										<div class="menu_spBox_imgBox">
+											<img src="/images/th.png" alt="">
+										</div>
+										<div class="menu_spBox_textBox">
+											<p style="padding-top: 10px;">
+												促销活动
+											</p>
+										</div>
+									</a>
+								</div>
+							</div>
 						</div>
-					</a>
-				</div>
-				<div class="leftbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
+						<div class="middle_menu_rightBox">
+							<div class="middle_menu_jtBox">
+								<div class="middle_menu_jtBox_xx">
+									<img src="/images/xiabiao.png" alt="">
+								</div>	
+								<div class="middle_menu_textBox">
+									<p>同步异常: <i>0</i></p>
+								</div>
+							</div>
+							<div class="middle_menu_ddBox">
+								<div class="middle_menu_ddBox_left">
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											<div class="menu_spBox_imgBox">
+												<img src="/images/th.png" alt="">
+											</div>
+											<div class="menu_spBox_textBox">
+												<h5>订单审核</h5>
+												<p>
+													待审核: <i>0</i>
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="menu_spBox_jtBox">
+										<img src="/images/xiabiao.png" alt="">
+									</div>
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											<div class="menu_spBox_imgBox">
+												<img src="/images/th.png" alt="">
+											</div>
+											<div class="menu_spBox_textBox">
+												<h5>单据打印</h5>
+												<p>
+													待打印: <i>0</i>
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="menu_spBox_jtBox">
+										<img src="/images/xiabiao.png" alt="">
+										<p class="menu_spBox_jtBox_fh">
+											发货
+										</p>
+									</div>
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											<div class="menu_spBox_imgBox">
+												<img src="/images/th.png" alt="">
+											</div>
+											<div class="menu_spBox_textBox">
+												<h5>
+													发货反馈
+												</h5>
+												<p>
+													反馈异常: <i>0</i>
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="menu_spBox_jtBox">
+										<img src="/images/xiabiao.png" alt="">
+									</div>
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											<div class="menu_spBox_imgBox">
+												<img src="/images/th.png" alt="">
+											</div>
+											<div class="menu_spBox_textBox">
+												<h5>
+													单据补打
+												</h5>
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="middle_menu_ddBox_right">
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											
+											<div class="menu_spBox_textBox" style="width: 100%;">
+												<h5>　</h5>
+												<p style="margin: 0 auto;">
+													锁定量: <i>0</i>
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="menu_spBox_jtBox">
+										
+									</div>
+									<div class="menu_spBox_moduleBox">
+										<a href="javascript:;">
+											<div class="menu_spBox_imgBox">
+												<img src="/images/rightbiao.png" alt="">
+												<img src="/images/th.png" alt="">
+											</div>
+											<div class="menu_spBox_textBox">
+												<h5>验货发货</h5>
+												<p>
+													待发货: <i>0</i>
+												</p>
+											</div>
+										</a>
+									</div>
+									<div class="menu_spBox_jtBox">
+										<img src="/images/xiabiao.png" alt="">
+									</div>
+									<div class="menu_spBox_jtBox_xz">
+										<img src="/images/leftbiao.png" alt="">
+										<img src="/images/leftbiao.png" alt="">
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="right_text">
-							<h5>订单编辑及审核</h5>
-							<h6>(允许自动审核订单)</h6>
-							<span>待审核:1234</span>
+					</div>
+					<div class="right_menu_bottom">
+						<div class="right_menu_bottomModule">
+							<a href="javascript:;">
+								<div class="menu_top_imgBox">
+									<img src="/images/th.png" alt="">
+								</div>
+								<div class="menu_top_textBox">
+									<h5>库位库存</h5>
+									<p>总量:<i>0</i></p>
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-				<div class="leftbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
+						<div class="right_menu_bottomModule">
+							<a href="javascript:;">
+								<div class="menu_top_imgBox">
+									<img src="/images/th.png" alt="">
+								</div>
+								<div class="menu_top_textBox">
+									<h5>库存状况</h5>
+									<p>库存警戒:<i>0</i></p>
+								</div>
+							</a>
 						</div>
-						<div class="right_text">
-							<h5>手工建单</h5>
-							<!-- <span>待付款:1234</span> -->
+						<div class="right_menu_bottomModule">
+							<a href="javascript:;">
+								<div class="menu_top_imgBox">
+									<img src="/images/th.png" alt="">
+								</div>
+								<div class="menu_top_textBox">
+									<h5>库存调整</h5>
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-			</div>
-			<div class="xiabiao"></div>
-			<div class="row_module">
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>查询物流</h5>
-							<span>已发货:1234</span>
-						</div>
-					</a>
-				</div>
-				<div class="rightbiao"></div>
-				<div class="lie_module">
-					<a href="javascript:;">
-						<div class="img_box">
-							<img src="/images/th.png" alt="">
-						</div>
-						<div class="right_text">
-							<h5>数据统计</h5>
-							<span>总订单:1234</span>
-						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+    	<script type="text/javascript" src="/js/highcharts.js"></script>
+    	<script type="text/javascript" src="/js/grid.js"></script>
+    	<script src='/js/show.js'></script>
 	</body>
 </html>
