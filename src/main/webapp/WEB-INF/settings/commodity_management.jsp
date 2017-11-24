@@ -41,26 +41,13 @@
                 </ul>
             </div>
             <div class="shopping_box">
-                <ul class="left_shopping">
+                <div class="left_shopping">
                     <div>
                         <a href="javascript:;" class="btn_button class_add">新增</a><a href="javascript:;" class="btn_button class_amend">修改</a><a href="javascript:;" class="btn_button red_color">删除</a>
                     </div>
-                    <li>
-                        <a href="javascript:;">全部商品</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">未分类商品</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">护肤</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">养眼</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">美容</a>
-                    </li>
-                </ul>
+                    <ul class="left_fl">
+                    </ul>
+                </div>
                 <div class="right_list_shopping">
                     <ul class="search search_bottom">
                         <li>
@@ -223,11 +210,13 @@
                         </li>
                         <li class="bfz33">
                             <span>系统分类:</span>
-                            <select name="" id="userClassification">
-                                <option value="1">未分类商品</option>
-                                <option value="2">护肤</option>
-                                <option value="3">互联</option>
-                            </select>
+                            <div style="" class='select_simulate'>
+                                <span>请设置商品的分类</span>
+                                <div class="select_simulate_xb"></div>
+                                <ul class="select_simulate_box">
+                                    
+                                </ul>
+                            </div>
                         </li>
                     </ol>
                 </li>
@@ -291,13 +280,58 @@
             </div>
             <div class="classify_content">
                 <ul class="classify_box">
-                    <li>分类分类</li>
-                    <li>分类分类</li>
-                    <li>分类分类</li>
-                    <li>分类分类</li>
-                    <li>分类分类</li>
-                    <li>分类分类</li>
-                    <li>分类分类</li>
+                    <!-- <li>
+                        <input type="checkbox">分类分类
+                        <ol style="padding-left: 20px;">
+                            <li>
+                                <input type="checkbox">分类分类
+                            </li>
+                            <li>
+                                <input type="checkbox">分类分类
+                                <ol style="padding-left: 20px;">
+                                    <li>
+                                        <input type="checkbox">分类分类
+                                    </li>
+                                    <li>
+                                        <input type="checkbox">分类分类
+                                        <ol style="padding-left: 20px;">
+                                            <li>
+                                                <input type="checkbox">分类分类
+                                            </li>
+                                            <li>
+                                                <input type="checkbox">分类分类
+                                                <ol style="padding-left: 20px;">
+                                                    <li>
+                                                        <input type="checkbox">分类分类
+                                                    </li>
+                                                    <li>
+                                                        <input type="checkbox">分类分类
+                                                        <ol style="padding-left: 20px;">
+                                                            <li>
+                                                                <input type="checkbox">分类分类
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox">分类分类000000000000000000
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <input type="checkbox">分类分类
+                    </li>
+                    <li>
+                        <input type="checkbox">分类分类
+                    </li>
+                    <li>
+                        <input type="checkbox">分类分类
+                    </li> -->
                 </ul>
                 <div class="classify_tj">
                     <a href="javascript:;" class="button border-main classify_bc"> 保存</a>
@@ -315,7 +349,8 @@
             <div class="class_add_content">
                 <div class="class_add_text">
                     <span>分类名称:</span>
-                    <input type="text">
+                    <input type="text" id="class_box_category">
+                    <
                 </div>
                 <div class="class_add__tj">
                     <a href="javascript:;" class="button border-main class_add__bc"> 保存</a>
@@ -325,6 +360,7 @@
         </div>
     </div>
 </body>
+<script src="/wzy/categoryTree.js"></script>
 <script src="/util/jiml-utils.js"></script>
 <script src="/wzy/itemInfo.js"></script>
 <script>

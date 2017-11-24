@@ -46,7 +46,7 @@ public class Wzy_InventoryOrderRelease {
     //3.覆盖范围
     @RequestMapping("/getCoverArea.do")
     @ResponseBody
-    public JsonResult findAddressCarrierAllocation(Integer warehouseId, Integer stocklocationId, String id, HttpSession session) {
+    public JsonResult findAddressCarrierAllocation(BigInteger warehouseId, BigInteger stocklocationId, String id, HttpSession session) {
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         Map<String,Object> map = service.findAddressCarrierAllocation(warehouseId, stocklocationId, ownerId);
@@ -57,7 +57,7 @@ public class Wzy_InventoryOrderRelease {
     @RequestMapping("/updateCoverArea.do")
     @ResponseBody
     public JsonResult updateCoverArea(
-            Integer stocklocationId, Integer warehouseId, String insertList, String deleteList, HttpSession session) {
+            BigInteger stocklocationId, BigInteger warehouseId, String insertList, String deleteList, HttpSession session) {
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         service.updateWarehouseCoverArea(insertList, deleteList, warehouseId, stocklocationId, ownerId);

@@ -9,9 +9,9 @@ public interface OrderReleaseService {
     Map<String, Object> findAllWarehouseByOwnerId(BigInteger ownerId, Integer nowPage, Integer row);
 
     //查询全国城市编码即覆盖范围
-    Map<String, Object> findAddressCarrierAllocation(Integer warehouseId, Integer stocklocationId, BigInteger ownerId);
+    Map<String, Object> findAddressCarrierAllocation(BigInteger warehouseId, BigInteger stocklocationId, BigInteger ownerId);
     
     //更新仓库的覆盖范围
     public int updateWarehouseCoverArea(
-            String insertArea, String deleteArea, Integer warehouseId, Integer stocklocationId, BigInteger ownerId);
+            String insertArea, String deleteArea, BigInteger warehouseId, BigInteger stocklocationId, BigInteger ownerId);
 }
