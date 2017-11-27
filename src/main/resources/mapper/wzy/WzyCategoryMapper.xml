@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rongcheng.erp.dao.Wzy_ItemCategoryDao">
+    
+    <resultMap type="com.rongcheng.erp.entity.CategoryInfo" id="categoryInfoMap">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+        <result column="is_authorization" property="authorization" jdbcType="TINYINT" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <resultMap type="com.rongcheng.erp.entity.ItemCategoryLink" id="itemCategoryLinkMap">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category_id" property="categoryId" jdbcType="BIGINT" />
+        <result column="item_id" property="itemId" jdbcType="BIGINT" />
+        <result column="note" property="note" jdbcType="VARCHAR" />
+        <result column="owner_id" property="ownerId" jdbcType="BIGINT" />
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+        <result column="is_authorization" property="authorization" jdbcType="TINYINT" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <select id="findAllCategoryByOwnerId" resultMap="categoryInfoMap">
+        select id, category_name, parent_id, note, owner_id, operator_id, 
+               is_authorization, gmt_create, gmt_modified
+        from category_info
+        where owner_id = #{ownerId, jdbcType=BIGINT}
+        order by parent_id;
+    </select>
+    
+    <select id="findAllCategoryByItemId" resultMap="itemCategoryLinkMap">
+        select id, category_id, item_id, note, owner_id, operator_id, is_anthorization, 
+                gmt_create, gmt_modified
+        from item_category_link
+        where item_id = #{itemId, jdbcType=BIGINT}
+    </select>
+    
+    <insert id="saveItemCategory">
+        insert into item_category_link
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test=" id !=null">
+                id,
+            </if>
+            <if test=" categoryId !=null">
+                category_id,
+            </if>
+            <if test=" itemId !=null">
+                item_id,
+            </if>
+            <if test=" note !=null">
+                note,
+            </if>
+            <if test=" ownerId !=null">
+                owner_id,
+            </if>
+            <if test=" operatorId !=null">
+                operator_id,
+            </if>
+            <if test=" anthorization !=null">
+                is_anthorization,
+            </if>
+            <if test=" gmtCreate !=null">
+                gmt_create,
+            </if>
+            <if test=" gmtModified !=null">
+                gmt_modified
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test=" id !=null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test=" categoryId !=null">
+                #{categoryId, jdbcType=BIGINT},
+            </if>
+            <if test=" itemId !=null">
+                #{itemId, jdbcType=BIGINT},
+            </if>
+            <if test=" note !=null">
+                #{note, jdbcType=BIGINT},
+            </if>
+            <if test=" ownerId !=null">
+                #{ownerId, jdbcType=BIGINT},
+            </if>
+            <if test=" operatorId !=null">
+                #{operatorId, jdbcType=BIGINT},
+            </if>
+            <if test=" anthorization !=null">
+                #{anthorization, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtCreate !=null">
+                #{gmtCreate, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtModified !=null">
+                #{gmtModified, jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+    
+    <delete id="deleteItemCategory">
+        delete from item_category_link
+        <where>
+            <if test=" categoryId != null">
+                category_id = #{categoryId} and item_id = #{itemId,jdbcType=BIGINT}
+            </if>
+            <if test=" categoryId == null">
+                category_id is null and item_id = #{itemId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </delete>
+    
+    <delete id="deleteAllItemCategory">
+        delete from item_category_link
+        where item_id = #{itemId}
+    </delete>
+
+    <select id="findCountParendIdById" resultType="int">
+        select count(id) from category_info
+        where parent_id = #{parentId,jdbcType=BIGINT} and owner_id = #{ownerId,jdbcType=BIGINT}
+    </select>
+
+    <insert id="saveUserCategory">
+        insert into category_info
+        <trim prefix="(" suffix=")" suffixOverrides=" , ">
+            <if test=" id != null"> 
+                id,
+            </if>
+            <if test=" categoryName != null">
+                category_name,
+            </if>
+            <if test=" parentId != null">
+                parent_id,
+            </if>
+            <if test=" note != null">
+                note,
+            </if>
+            <if test=" ownerId != null">
+                owner_id,
+            </if>
+            <if test=" operatorId != null">
+               operator_id ,
+            </if>
+            <if test=" authorization != null">
+                is_authorization,
+            </if>
+            <if test=" gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test=" gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=" , ">
+            <if test=" id != null"> 
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test=" categoryName != null">
+                #{categoryName, jdbcType=BIGINT},
+            </if>
+            <if test=" parentId != null">
+                #{parentId, jdbcType=BIGINT},
+            </if>
+            <if test=" note != null">
+                #{note, jdbcType=BIGINT},
+            </if>
+            <if test=" ownerId != null">
+                #{ownerId, jdbcType=BIGINT},
+            </if>
+            <if test=" operatorId != null">
+                #{operatorId, jdbcType=BIGINT},
+            </if>
+            <if test=" authorization != null">
+                #{authorization, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtCreate != null">
+                #{gmtCreate, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtModified != null">
+                #{gmtModified, jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateUserCategory">
+        update category_info
+        <set>
+            <if test=" id != null"> 
+                id = #{id, jdbcType=BIGINT},
+            </if>
+            <if test=" categoryName != null">
+                category_name = #{categoryName, jdbcType=BIGINT},
+            </if>
+            <if test=" parentId != null">
+                parent_id = #{parentId, jdbcType=BIGINT},
+            </if>
+            <if test=" note != null">
+                note = #{note, jdbcType=BIGINT},
+            </if>
+            <if test=" ownerId != null">
+                owner_id = #{ownerId, jdbcType=BIGINT},
+            </if>
+            <if test=" operatorId != null">
+                operator_id = #{operatorId, jdbcType=BIGINT},
+            </if>
+            <if test=" authorization != null">
+                is_authorization = #{authorization, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtCreate != null">
+                gmt_create = #{gmtCreate, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtModified != null">
+                gmt_modified = #{gmtModified, jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id, jdbcType=BIGINT} and owner_id = #{ownerId,jdbcType=BIGINT}
+    </update>
+    
+    <delete id="deleteUserCategory">
+        delete from category_info 
+        where id = #{id,jdbcType=BIGINT} and owner_id = #{ownerId,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

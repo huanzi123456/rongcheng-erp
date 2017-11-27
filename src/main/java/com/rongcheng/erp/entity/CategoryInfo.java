@@ -4,18 +4,15 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-public class WarehouseRegionShop implements Serializable{
+public class CategoryInfo implements Serializable {
 
     /**
      * 
      */
-    private static final long serialVersionUID = 3155319445777235184L;
+    private static final long serialVersionUID = -6521232365997174681L;
     private BigInteger id;
-    private BigInteger warehouseId;
-    private BigInteger stocklocationId;
-    private BigInteger coverRegionId;
-    private BigInteger shopId;
-    private String reserved1;
+    private String categoryName;
+    private BigInteger parentId;
     private String note;
     private BigInteger ownerId;
     private BigInteger operatorId;
@@ -23,16 +20,15 @@ public class WarehouseRegionShop implements Serializable{
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     
-    public WarehouseRegionShop(BigInteger id, BigInteger warehouseId, BigInteger stocklocationId,
-            BigInteger coverRegionId, BigInteger shopId, String reserved1, String note, BigInteger ownerId,
+    public CategoryInfo() {
+        super();
+    }
+    public CategoryInfo(BigInteger id, String categoryName, BigInteger parentId, String note, BigInteger ownerId,
             BigInteger operatorId, Boolean authorization, Timestamp gmtCreate, Timestamp gmtModified) {
         super();
         this.id = id;
-        this.warehouseId = warehouseId;
-        this.stocklocationId = stocklocationId;
-        this.coverRegionId = coverRegionId;
-        this.shopId = shopId;
-        this.reserved1 = reserved1;
+        this.categoryName = categoryName;
+        this.parentId = parentId;
         this.note = note;
         this.ownerId = ownerId;
         this.operatorId = operatorId;
@@ -40,46 +36,23 @@ public class WarehouseRegionShop implements Serializable{
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
     }
-    
-    public WarehouseRegionShop() {
-        super();
-    }
-    
     public BigInteger getId() {
         return id;
     }
     public void setId(BigInteger id) {
         this.id = id;
     }
-    public BigInteger getWarehouseId() {
-        return warehouseId;
+    public String getCategoryName() {
+        return categoryName;
     }
-    public void setWarehouseId(BigInteger warehouseId) {
-        this.warehouseId = warehouseId;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
-    public BigInteger getStocklocationId() {
-        return stocklocationId;
+    public BigInteger getParentId() {
+        return parentId;
     }
-    public void setStocklocationId(BigInteger stocklocationId) {
-        this.stocklocationId = stocklocationId;
-    }
-    public BigInteger getCoverRegionId() {
-        return coverRegionId;
-    }
-    public void setCoverRegionId(BigInteger coverRegionId) {
-        this.coverRegionId = coverRegionId;
-    }
-    public BigInteger getShopId() {
-        return shopId;
-    }
-    public void setShopId(BigInteger shopId) {
-        this.shopId = shopId;
-    }
-    public String getReserved1() {
-        return reserved1;
-    }
-    public void setReserved1(String reserved1) {
-        this.reserved1 = reserved1;
+    public void setParentId(BigInteger parentId) {
+        this.parentId = parentId;
     }
     public String getNote() {
         return note;
@@ -119,31 +92,25 @@ public class WarehouseRegionShop implements Serializable{
     }
     @Override
     public String toString() {
-        return "WarehouseRegionShop [id=" + id + ", warehouseId=" + warehouseId + ", stocklocationId=" + stocklocationId
-                + ", coverRegionId=" + coverRegionId + ", shopId=" + shopId + ", reserved1=" + reserved1 + ", note="
-                + note + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorization=" + authorization
+        return "CategoryInfo [id=" + id + ", categoryName=" + categoryName + ", parentId=" + parentId + ", note=" + note
+                + ", ownerId=" + ownerId + ", operatorId=" + operatorId + ", authorization=" + authorization
                 + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + "]";
     }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((authorization == null) ? 0 : authorization.hashCode());
-        result = prime * result + ((coverRegionId == null) ? 0 : coverRegionId.hashCode());
+        result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());
         result = prime * result + ((gmtCreate == null) ? 0 : gmtCreate.hashCode());
         result = prime * result + ((gmtModified == null) ? 0 : gmtModified.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((note == null) ? 0 : note.hashCode());
         result = prime * result + ((operatorId == null) ? 0 : operatorId.hashCode());
         result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
-        result = prime * result + ((reserved1 == null) ? 0 : reserved1.hashCode());
-        result = prime * result + ((shopId == null) ? 0 : shopId.hashCode());
-        result = prime * result + ((stocklocationId == null) ? 0 : stocklocationId.hashCode());
-        result = prime * result + ((warehouseId == null) ? 0 : warehouseId.hashCode());
+        result = prime * result + ((parentId == null) ? 0 : parentId.hashCode());
         return result;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -152,16 +119,16 @@ public class WarehouseRegionShop implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        WarehouseRegionShop other = (WarehouseRegionShop) obj;
+        CategoryInfo other = (CategoryInfo) obj;
         if (authorization == null) {
             if (other.authorization != null)
                 return false;
         } else if (!authorization.equals(other.authorization))
             return false;
-        if (coverRegionId == null) {
-            if (other.coverRegionId != null)
+        if (categoryName == null) {
+            if (other.categoryName != null)
                 return false;
-        } else if (!coverRegionId.equals(other.coverRegionId))
+        } else if (!categoryName.equals(other.categoryName))
             return false;
         if (gmtCreate == null) {
             if (other.gmtCreate != null)
@@ -193,28 +160,12 @@ public class WarehouseRegionShop implements Serializable{
                 return false;
         } else if (!ownerId.equals(other.ownerId))
             return false;
-        if (reserved1 == null) {
-            if (other.reserved1 != null)
+        if (parentId == null) {
+            if (other.parentId != null)
                 return false;
-        } else if (!reserved1.equals(other.reserved1))
-            return false;
-        if (shopId == null) {
-            if (other.shopId != null)
-                return false;
-        } else if (!shopId.equals(other.shopId))
-            return false;
-        if (stocklocationId == null) {
-            if (other.stocklocationId != null)
-                return false;
-        } else if (!stocklocationId.equals(other.stocklocationId))
-            return false;
-        if (warehouseId == null) {
-            if (other.warehouseId != null)
-                return false;
-        } else if (!warehouseId.equals(other.warehouseId))
+        } else if (!parentId.equals(other.parentId))
             return false;
         return true;
     }
-    
-    
+
 }

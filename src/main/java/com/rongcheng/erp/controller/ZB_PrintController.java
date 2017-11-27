@@ -34,7 +34,6 @@ public class ZB_PrintController {
     @RequestMapping("/print/listOrderInfoPrintByIds.do")
     public JsonResult listOrderInfoPrintByIds(BigInteger[] orderInfoIds, HttpSession session) {
         BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
-
         //返回
         return new JsonResult(printService.listOrderInfoPrintByIds(orderInfoIds, ownerId));
     }

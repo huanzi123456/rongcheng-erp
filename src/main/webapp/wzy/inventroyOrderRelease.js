@@ -13,10 +13,10 @@ var key_word = "";
 //最大页数
 var max_page = 1;
 
-//全国地址选取项
+//全国地址选取项（box）
 var selectArea = new Array();
 
-//已经设定好的全国地址
+//已经设定好的全国地址(数据库)
 var coverArea = new Array();
 
 //即将添加的数据
@@ -52,7 +52,7 @@ $(function(){
 	$(".regional_rules_box").on("click",".regional_rules_qx, .regional_rules_delbtn", doCoverAreaCancel);
 })
 
-//监听全国地质的过选点击
+//监听全国地质的多项点击
 function ClickMonitor(){
 	
 	//全选
@@ -86,7 +86,7 @@ function ClickMonitor(){
 		for(i=0;i<subOptions.length;i++){
 			var subOption = subOptions[i].children[0];
         	if(subOption.checked){
-        		parentOption[0].checked = true
+        		parentOption[0].checked = true;
         		return;
         	}else{
         		parentOption[0].checked = false;
@@ -411,16 +411,19 @@ function doSetTfootInfo(page){
 }
 
 //布置页面
-function doSetTbodyInfo(list){
+function doSetTbodyInfo(data){
 	//获取tbody并清空
+	var list = data.list;
+	var startPage = data.startPage;
 	var listTbody = $("#list_body");
 	listTbody.empty();
 	//遍历信息并填写
 	for (var i=0;i<list.length;i++){
+		var num = startPage+1+i;
 		var tr=$("<tr></tr>");
 		tr.data("warehouseId",list[i].id);
 		tr.data("stocklocationId",list[i].stocklocationId)
-		var tds="<td>"+(i+1)+"</td>" +
+		var tds="<td>"+num+"</td>" +
 				"<td><p>"+list[i].warehouseName+"</p></td>" +
 				"<td><p>"+list[i].stocklocationName+"</p></td>"+
 				"<td>" +
@@ -450,7 +453,7 @@ function loadOrderRelease(now_page, max_page){
 		dataType : "json",
 		success : function(result) {
 			//创建页面显示的信息
-			doSetTbodyInfo(result.data.list);
+			doSetTbodyInfo(result.data);
 			doSetTfootInfo(result.data.page);
 		},
 		error : function() {

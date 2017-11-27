@@ -19,6 +19,22 @@
 
 
 
+	/*
+	* 新建 复制新建弹出框 模拟下拉框
+	* select_simulate_box 弹出框
+	* select_simulate_xb  触发按钮
+	*/
+	var select_simulate_xb=$('.select_simulate_xb'),
+		select_simulate_box=$('.select_simulate_box');
+		
+	select_simulate_xb.click(function(){
+		if (select_simulate_box.css('display')=='none') {
+			select_simulate_box.css("display","block");
+		}else{
+			select_simulate_box.css("display","none");
+		}
+	});
+
 
 	/*
 	* 线上商品对应关系页面 批量处理商品对应关系按钮弹出框

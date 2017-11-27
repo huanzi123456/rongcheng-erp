@@ -5,34 +5,29 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.rongcheng.erp.entity.vo.AddressCarrierAllocation;
+import com.rongcheng.erp.dto.WzyAddressCarrierAllocation;
+import com.rongcheng.erp.entity.WarehouseRegionShop;
 
 public interface Wzy_InvertoryAllAddressDao {
   
     //查询全国城市编码(省)
-    List<AddressCarrierAllocation> findAddressCarrierAllocation();
+    List<WzyAddressCarrierAllocation> findAddressCarrierAllocation();
     
     //查询全国城市编码(市)
-    List<AddressCarrierAllocation> findAddressCarrierAllocationSecond();
+    List<WzyAddressCarrierAllocation> findAddressCarrierAllocationSecond();
     
     //更新仓库的全国编码
     int updateCoverArea();
     
     //删除仓库关系(因全国编码改动)
-    int deleteCoverArea(@Param("warehouseId")Integer warehouseId, 
-                        @Param("stocklocationId")Integer stocklocationId, 
-                        @Param("ownerId")BigInteger ownerId,
-                        @Param("coverRegionId")Integer coverRegionId);
+    int deleteCoverArea(WarehouseRegionShop shop);
     
     //插入仓库关系(因全国编码改动)
-    int saveCoverArea(@Param("warehouseId")Integer warehouseId, 
-                      @Param("stocklocationId")Integer stocklocationId, 
-                      @Param("ownerId")BigInteger ownerId,
-                      @Param("coverRegionId")Integer coverRegionId);
+    int saveCoverArea(WarehouseRegionShop shop);
     
     //查询仓库的覆盖范围
     List<Integer> findWarehouseCover(
-            @Param("warehouseId")Integer warehouseId, 
-            @Param("stocklocationId")Integer stocklocationId, 
+            @Param("warehouseId")BigInteger warehouseId, 
+            @Param("stocklocationId")BigInteger stocklocationId, 
             @Param("ownerId")BigInteger ownerId);
 }
