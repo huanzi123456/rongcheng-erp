@@ -12,8 +12,13 @@ $(function(){
 		$(".xzy_onBlur").val("");
 		popoverPages(1);
 	});
+	$(".actives").click(function(){
+		
+	})
 	//"换" 弹出框的 "选择已有" 页面的关键字查询
 	$(".xzy_onBlur").blur(function(){popoverPages(1);});
+	//"换" 弹出框的 "新建" 页面的保存
+	$(".single_new_bc").click(saveCommonInfo)
 	//线上商品对应关系页面的复选框
 	$("#xzy_limit").on("click","#xzy_check",checkboxButton)
 	//线上商品对应关系页面的"批量维护对应关系"按钮
@@ -349,14 +354,20 @@ function get_info($input){
 function change_input(){	
 	//线上商品关联表的id
 	var platformErpLinkId = $(this).parent().parent().find("td:first").attr("val");	
-	//清空关键字的输入框内容
-	$(".xzy_onBlur").val("");
-	//1.分页查询
-	popoverPages(1);
-	//2.保存按钮
-	$("#xzy_save").unbind("click").click(function(){
-		save_input(platformErpLinkId);
-	});
+	var span1 = $(".single_updating_list_btn_box").find("span:first").attr("class");//选择已有
+	var span2 = $(".single_updating_list_btn_box").find("span:last").attr("class");//新建
+	if(span1 != ""){
+		//清空关键字的输入框内容
+		$(".xzy_onBlur").val("");
+		//1.分页查询
+		popoverPages(1);
+		//2.保存按钮
+		$("#xzy_save").unbind("click").click(function(){
+			save_input(platformErpLinkId);
+		});
+	}else if(span2 != undefined){
+		emptyCommonInfo();
+	}	
 }
 /**
  * "换" 弹出框的 "选择已有" 页面的保存按钮
@@ -513,7 +524,19 @@ function homePage(result,page){
 				onlineSpecification = attr1+"*"+attr2;
 			}
 			//系统商品信息
-    		var list = datas[i].itemCommonInfo;	;
+    		var list = datas[i].itemCommonInfo;
+    		var sysImgs = list[0].image1
+    		if(sysImgs == null){
+    			sysImgs = "/images/wh.png"; 
+    		}
+    		var sysId = list[0].id;
+    		if(sysId == null){
+    			sysId = ""; 
+    		}
+    		var sysName = list[0].name;
+    		if(sysName == null){
+    			sysName = "";
+    		}
     		var size = list[0].size;
     		var color = list[0].color;
     		var offlineSpecification;                          //系统商品规格
@@ -523,7 +546,7 @@ function homePage(result,page){
 				offlineSpecification = size+"*"+color;
 			}
 			if(offlineSpecification == null){
-				offlineSpecification = "未设置系统商品规格";
+				offlineSpecification = "";
 			}
 		    var one_tr = '<tr>'+
 	          '<td val='+datas[i].platformErpLinkId+'>'+//线上商品关联表的id
@@ -559,19 +582,19 @@ function homePage(result,page){
 	          '</td>'+  
 	          '<td style="border-left: 1px dashed #999;">'+
 	            '<div class="img_box">'+
-	              '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
+	              '<img src="'+sysImgs+'" alt="">'+//系统商品图片
 	              '<div class="show_img_box">'+
-	                '<img src="'+list[0].image1+'" alt="">'+//系统商品图片
+	                '<img src="'+sysImgs+'" alt="">'+//系统商品图片
 	              '</div>'+
 	            '</div>'+
 	          '</td>'+
 	          '<td >'+
 	            '<div>'+
-	             '<span class="span50">'+list[0].id+'</span>'+//系统商品信息表的id
+	             '<span class="span50">'+sysId+'</span>'+//系统商品信息表的id
 	              '<span class="span50">'+offlineSpecification+'</span>'+//系统商品规格
 	            '</div>'+
 	            '<p>'+
-	            list[0].name+//系统商品名称
+	            sysName+//系统商品名称
 	            '</p>'+
 	          '</td>'+
 	          '<td>'+
