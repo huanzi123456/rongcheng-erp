@@ -24,7 +24,7 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
     private Wzy_ItemCategoryDao dao;
     @Resource
     private Wzy_ItemInfoDAO itemDao;
-   
+    
     private ItemCategoryLink icl;
     private CategoryInfo ci;
     
@@ -49,36 +49,32 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
     }
     
     //对于商品信息的处理
-    public ItemCategoryLink getItemCategoryLink(WzyItemInfo info, BigInteger ownerId) {
+    public ItemCategoryLink getItemCategoryLink(WzyItemInfo info) {
         icl = new ItemCategoryLink();
         icl.setAnthorization(info.getAuthorized());
         icl.setItemId(info.getItemId());
         icl.setNote(info.getNote());
         icl.setOperatorId(info.getOperatorId());
-        icl.setOwnerId(ownerId);
+        icl.setOwnerId(info.getOwnerId());
         icl.setGmtCreate(new Timestamp(System.currentTimeMillis()));
         icl.setGmtModified(new Timestamp(System.currentTimeMillis()));
         return icl;
     }
     
     //为商品添加分类
-    public int saveItemCategoryLink(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
-        if(info == null || ownerId == null) {
+    public int saveItemCategoryLink(WzyItemInfo info) throws OrderOutNumberException{
+        if(info == null) {
             throw new OrderOutNumberException("数据获取失败");
         }
-        BigInteger id = itemDao.findItemCommonInfoId(info);
-        icl = getItemCategoryLink(info, ownerId);
-        icl.setItemId(id);
+        icl = getItemCategoryLink(info);
         int success = 0;
-        if(info.getInsertCategory().equals("k")){
-            success = dao.saveItemCategory(icl);
-        }else if(info.getInsertCategory() != ""){
+        if(!info.getInsertCategory().equals("k")){
             String[] insert = info.getInsertCategory().split(",");
             for(int i = 0;i<insert.length;i++) {
                 icl.setCategoryId(new BigInteger(insert[i]));
             success = dao.saveItemCategory(icl);
             }
-        }else {
+        }else{
             return 1;
         }
         return success;
@@ -95,14 +91,12 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
     }
     
     //删除商品分类(修改商品时)
-    public int deleteItemCategoryLink(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
-        if(info == null || ownerId == null) {
+    public int deleteItemCategoryLink(WzyItemInfo info) throws OrderOutNumberException{
+        if(info == null) {
             throw new OrderOutNumberException("数据获取失败");
         }
-        BigInteger id = itemDao.findItemCommonInfoId(info);
-        icl = getItemCategoryLink(info, ownerId);
-        icl.setItemId(id);
-        System.out.println(icl);
+        icl = getItemCategoryLink(info);
+        icl.setItemId(info.getId());
         int success = 0;
         if(info.getDeleteCategory().equals("k")){
             success = dao.deleteItemCategory(icl);
@@ -161,4 +155,30 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
         }
     }
     
+    //更改分类的点击更新操作
+    public int updateMoreCategory(String id, String insertCategory, BigInteger ownerId) throws OrderOutNumberException {
+        if(id == null ||insertCategory == null) {
+            throw new OrderOutNumberException("数据获取失败");
+        }
+        String[] ids = id.split(",");
+        icl=new ItemCategoryLink();
+        icl.setGmtCreate(new Timestamp(System.currentTimeMillis()));
+        icl.setGmtModified(new Timestamp(System.currentTimeMillis()));
+        icl.setOwnerId(ownerId);
+        for(int i=0; i<ids.length; i++) {
+            icl.setItemId(new BigInteger(ids[i]));
+            dao.deleteAllItemCategory(new BigInteger(ids[i]));
+            if(!insertCategory.equals("k")){
+                String[] insert = insertCategory.split(",");
+                for(int j = 0;j<insert.length;j++) {
+                    icl.setCategoryId(new BigInteger(insert[j]));
+                    dao.saveItemCategory(icl);
+                }
+            }else{
+                return 1;
+            }
+        }
+        return 0;
+    }
+
 }

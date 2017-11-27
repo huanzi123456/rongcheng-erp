@@ -70,7 +70,7 @@ $(function(){
 	})
 
 	//8.用来进行增加与修改的保存
-	$(".commodity_management_box").on("click",".management_bc",doSaveButton);
+	$(".commodity_management_box").on("click",".management_bc",doSaveOrUpdateItemInfo);
 
 	//9.用来取消新建或修改
 	$(".commodity_management_box").on("click",".management_qx, .management_delbtn",doCancelItemInfo)
@@ -117,21 +117,19 @@ $(function(){
 	//14.监听分类选择
 	$(".shopping_box").on("click", ".left_fl a", clickCategory);
 	
-	//15.监听弹出框中的多项选
+	//15.商品box中的多项选
 	$(".select_simulate").on("click",clickCheckBox);
 	
 	//16.更改分类的按钮点击
 	$(".classify_fl").click(function(){
-		//setMoreCategoryInfo();
-		$(".amend_classify_box").css("display","block");
+		saveMoreCategory();
 	})
 	$(".amend_classify_box").on("click", ".classify_delbtn, .classify_qx",function(){
 		$(".amend_classify_box").css("display","none");
 	})
-	$(".amend_classify_box").on("click", ".classify_bc",setMoreCategoryBox);
-	$(".select_simulate_xb").on("click",clickCheckBox);
+	$(".amend_classify_box").on("click", ".classify_bc",doSaveMoreCategory);
+	$(".classify_box").on("click",clickCheckBox2);
 })
-
 
 //加载查询
 function doGetItemInfo(now_page, key_word, category_word){
@@ -152,6 +150,7 @@ function doGetItemInfo(now_page, key_word, category_word){
 			//创建页面显示的信息
 			doSetTbodyInfo(result.data);
 			doSetTfootInfo(result.data.maxPage);
+			$(".input").val("");
 			key_word = $(".input").val("");			
 		},
 		error : function() {
@@ -183,13 +182,21 @@ function doSetTbodyInfo(data){
   						"</div>"+
 					"</td>";
 		firstTd=firstTd.replace("[id]",list[i].id);
+		
+		var code = list[i].erpItemNum?list[i].erpItemNum:" ";
+		var barcode = list[i].barCode?list[i].barCode:" ";
+		var color = list[i].color?list[i].color:" ";
+		var size = list[i].size?list[i].size:" ";
+		var normalPrice = list[i].normalPrice?list[i].normalPrice:" ";
+		var brand = list[i].brand?list[i].brand:" ";
+		
 		var tds="<td>"+list[i].erpItemNum+"</td>" +
 				"<td><p>"+list[i].name+"</p></td>"+
-				"<td>"+list[i].styleCode+"</td>"+
-				"<td>"+list[i].barCode+"</td>"+
-				"<td><p>"+list[i].color+" * "+list[i].size+"<p></td>"+
-				"<td>"+list[i].normalPrice+"</p></td>"+
-				"<td>"+list[i].brand+"</td>"+
+				"<td>"+code+"</td>"+
+				"<td>"+barcode+"</td>"+
+				"<td><p>"+color+" * "+size+"<p></td>"+
+				"<td>"+normalPrice+"</p></td>"+
+				"<td>"+brand+"</td>"+
 				"<td>"+
 				'<a href="javascript:;" class="button border-main management_amend"> 修改</a>'+
 				'<a href="javascript:;" class="button border-red"> 删除</a>'+
@@ -340,12 +347,7 @@ function clickPage() {
 	doGetItemInfo(now_page,key_word,category_word)
 }
 
-//点击保存
-function doSaveButton(){
-	doSaveOrUpdateItemInfo();
-}
-
-//保存商品基本信息
+//点击商品的新建修改保存
 function doSaveOrUpdateItemInfo(){
 	//获取id判断是更新还是添加
 	var id=$(".commodity_management_box").data("id");
@@ -359,11 +361,13 @@ function doSaveOrUpdateItemInfo(){
 	}else{
 		$.post(url,param,function(result){
 			showMessage(result.message);
+			if(!result.state){
+				$(".commodity_management_box").css("display","none");
+				$(".commodity_management_box").removeData("id");
+				now_page = 1;
+				doGetItemInfo(now_page, key_word, category_word);
+			}
 		})
-		$(".commodity_management_box").css("display","none");
-		$(".commodity_management_box").removeData("id");
-		now_page = 1;
-		doGetItemInfo(now_page, key_word, category_word);
 	}
 }
 
@@ -407,7 +411,7 @@ function doCopyAndSave(){
 	}
 }
 
-//点击删除
+//点击商品的删除
 function doRemoveItemInfo(){
 	
 	//获取删除的商品id
@@ -543,7 +547,7 @@ function doGetItemParam(){
 	return param;
 }
 
-//点击修改
+//点击商品的修改
 function doUpDateItemInfo(){
 	//更改模块标题
 	$("#title").html("商品修改");
@@ -565,7 +569,7 @@ function doUpDateItemInfo(){
 	});
 }
 
-//点击取消
+//点击商品box取消
 function doCancelItemInfo(){
 	//移除模块id
 	$(".commodity_management_box").removeData("id")
@@ -579,6 +583,7 @@ function setBoxInfo2(result){
 	if(result){
 		data=result.list[0];
 		lists=result.list1;
+		console.log(lists)
 	}
 	//布置
 	$("#erpItemNum").attr('readonly',true)
@@ -617,16 +622,16 @@ function setBoxInfo2(result){
 		$("input[name='gift']")[0].checked = true
 	}
 	categoryOne=[];
-	for(var i = 0;i<lists.length;i++){
-		if(lists[i].categoryId){
-			$("input[name='category1'][value='"+lists[i].categoryId+"']").prop("checked", true);
-			$("input[name='categoryNull']").prop('checked', false)
-		}
-		if(!lists[i].categoryId){
-			categoryOne.push("k");
-		}else{
+	if(!lists){
+		for(var i = 0;i<lists.length;i++){
+			if(lists[i].categoryId){
+				$("input[name='category1'][value='"+lists[i].categoryId+"']").prop("checked", true);
+				$("input[name='categoryNull']").prop('checked', false)
+			}
 			categoryOne.push(lists[i].categoryId);	
 		}
+	}else{
+		categoryOne.push("k");
 	}
 }
 
@@ -675,12 +680,11 @@ function doFindItemInfoByLike(){
 
 	//设置关键字
 	key_word = $(".input").val().trim();
-	
 	//查询
 	doGetItemInfo(now_page, key_word, category_word)
 }
 
-//点击全选
+//点击商品的全选
 function clickOptions(){
 	var checkeds = $("input[name='checkedItem']")
 	if($("input[name='options']")[0].checked){
@@ -694,7 +698,7 @@ function clickOptions(){
 	}
 }
 
-//布置下拉选分类（关于新建修改）
+//商品box布置下拉选分类（关于新建修改）
 function setCategoryInfo(){
 	
 	//清空下拉选
@@ -729,7 +733,7 @@ function setCategoryInfo(){
 	})
 }
 
-//弹出框递归遍历2
+//商品box递归遍历1
 function doSetCategoryBoxInSimulate(id, list){
     //根据菜单主键id生成菜单列表html
     //id：菜单主键id
@@ -747,7 +751,7 @@ function doSetCategoryBoxInSimulate(id, list){
       }
 }
 
-//递归遍历1
+//商品box递归遍历2
 function GetParentArry2(id, list) {
     var newArry = new Array();
     for (var i in list) {
@@ -764,10 +768,12 @@ function clickCategory(){
 	$(this).css({"color":"blue"});
 	$(this).data("num" ,1);
 	category_word = $(this).attr("value");
+	now_page = 1;
+	key_word = "";
 	doGetItemInfo(now_page, key_word, category_word);
 }
 
-//弹出框多选框的交互
+//商品box多选框的交互
 function clickCheckBox(){
 
 	$("input[name='category1']").change(function(){
@@ -785,7 +791,7 @@ function clickCheckBox(){
 		if(index){
 				$("input[name='categoryNull']").prop('checked', false);
 			}else {
-				$("input[name='categoryNull']").prop('checked', true).attr("readonly","readonly");
+				$("input[name='categoryNull']").prop('checked', true);
 			}
 	})
 	
@@ -797,14 +803,12 @@ function clickCheckBox(){
 				$(this).prop('checked', false);
 			})
 		}else{
-		$("input[name='category1']").each(function(){
-			$(this).prop('checked', true);
-		})
+			obj.prop('checked', true);
 		}
 	})
 }
 
-//子类选中父类选中
+//商品box子类选中父类选中
 function doFatherCheckBox(obj){
 	
 	if(obj.attr("pid")){
@@ -823,7 +827,7 @@ function doFatherCheckBox(obj){
 	return index;
 }
 
-//父类取消子类取消
+//商品box父类取消子类取消
 function doChildrenCheckBox(obj){
 	var child = obj.parent().parent().children().children();
 	var childObj=null;
@@ -840,7 +844,7 @@ function doChildrenCheckBox(obj){
 	}
 }
 
-//获取box中的分类信息
+//获取商品box中的分类信息
 function doGetBoxCategory(){
 	
 	categoryTwo = [];
@@ -856,7 +860,7 @@ function doGetBoxCategory(){
 	}
 	
 	//处理集合
-	comparisonList()
+	comparisonList();
 }
 
 //处理集合
@@ -1031,11 +1035,6 @@ function doDeleteUserCategory(){
 	}
 }
 
-//更改分类（用于对多个商品进行商品）
-function setMoreCategoryInfo(){
-	
-}
-
 //布置更改分类中的界面
 function setMoreCategoryBox(){
 	
@@ -1070,7 +1069,7 @@ function setMoreCategoryBox(){
 	})
 }
 
-//更改分类递归遍历3
+//更改分类递归遍历1
 function doSetCategoryBoxInClassify(id, list){
     //根据菜单主键id生成菜单列表html
     //id：菜单主键id
@@ -1088,7 +1087,7 @@ function doSetCategoryBoxInClassify(id, list){
       }
 }
 
-//递归遍历2
+//更改分类递归遍历2
 function GetParentArry3(id, list) {
     var newArry = new Array();
     for (var i in list) {
@@ -1128,14 +1127,12 @@ function clickCheckBox2(){
 				$(this).prop('checked', false);
 			})
 		}else{
-		$("input[name='category2']").each(function(){
-			$(this).prop('checked', true);
-		})
+			obj.prop('checked', true);
 		}
 	})
 }
 
-//子类选中父类选中2
+//更改分类子类选中父类选中2
 function doFatherCheckBox2(obj){
 	
 	if(obj.attr("pid")){
@@ -1154,7 +1151,7 @@ function doFatherCheckBox2(obj){
 	return index;
 }
 
-//父类取消子类取消2
+//更改分类父类取消子类取消2
 function doChildrenCheckBox2(obj){
 	var child = obj.parent().parent().children().children();
 	var childObj=null;
@@ -1188,4 +1185,77 @@ function doGetBoxCategory2(){
 	
 	//处理集合
 	comparisonList()
+}
+
+//点击更改分类
+function saveMoreCategory(){
+	var ids="";
+	var index = 0;
+	$("#tbody input[name='checkedItem']")
+	  .each(function(){
+		  if($(this).prop("checked")){
+			  if(ids==""){
+				  ids+=$(this).val();
+			  }else{
+				  ids+=","+$(this).val();
+			  }
+			  index++;
+		  }
+	  });
+	if(index == 0){
+		showMessage("请至少选择一个");
+	}else{
+		$(".amend_classify_box").data("id",ids);
+		$(".amend_classify_box").css("display","block");
+	}
+}
+
+//点击更改分类的保存
+function doSaveMoreCategory(){
+
+	//获取需要更改的商品id
+	var id= $(".amend_classify_box").data("id");
+	
+	//获取更改分类中的信息
+	getMoreCategoryInfo()
+	console.log(id)
+	$.ajax({
+		url : "/updateMoreCategory.do",
+		type : "post",
+		//traditional : true,
+		data : {
+			id:id,
+			insertCategory:insertCategory,
+		},
+		dataType : "json",
+		success : function(result) {
+			//创建页面显示的信息
+			$(".amend_classify_box").css("display","none");
+			doGetItemInfo(now_page, key_word, category_word);
+			showMessage("更改分类成功");
+		},
+		error : function() {
+			showMessage("更改分类失败");
+		}
+	});
+	
+}
+
+//获取更改分类中的数据
+function getMoreCategoryInfo(){
+
+	categoryTwo = [];
+	
+	if($("input[name='categoryNull2']").is(":checked")){
+		categoryTwo.push("k");
+	}else{
+		$("input[name='category2']").each(function(){
+			  if($(this).prop("checked")){
+				  categoryTwo.push($(this).val())
+			  }
+		  });
+	}
+	
+	//处理集合
+	comparisonList();
 }

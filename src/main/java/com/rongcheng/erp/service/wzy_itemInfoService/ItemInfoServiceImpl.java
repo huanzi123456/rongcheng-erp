@@ -20,6 +20,9 @@ import com.rongcheng.erp.exception.OrderOutNumberException;
 public class ItemInfoServiceImpl implements ItemInfoService {
     @Resource
     private Wzy_ItemInfoDAO dao;
+    @Resource
+    private ItemCategoryService service;
+    
     private ItemEspInfo iei;
     private ItemCommonInfo ici;
     private List<WzyItemInfo> list;
@@ -66,30 +69,24 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         return map;
     }
     
-    //添加商品表1
+    //添加商品表
     @Override
-    public int saveItemCommonInfo(WzyItemInfo Item) throws OrderOutNumberException{
+    public int saveItemInfo(WzyItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
             throw new OrderOutNumberException("未得到数据");
+        }
+        String erpItemNum = Item.getErpItemNum();
+        int num = dao.findItemInfoByErpItemNum(Item);
+        if(num >0) {
+            return 10;
         }
         ici = getItemCommonInfo(Item);
-        int success = dao.saveItemCommonInfo(ici);
-        if(success <=0) {
-            throw new OrderOutNumberException("插入失败，可能是您输入的某个数据过长");
-        }
-        return success;
-    }
-
-    //添加商品表2
-    @Override
-    public int saveItemEspInfo(WzyItemInfo Item) throws OrderOutNumberException{
-        if(Item == null) {
-            throw new OrderOutNumberException("未得到数据");
-        }
+        dao.saveItemCommonInfo(ici);
         iei = getItemEspInfo(Item);
-        BigInteger id = dao.findItemCommonInfoId(Item);
-        iei.setItemId(id);
+        iei.setItemId(ici.getId());
+        Item.setItemId(ici.getId());
         int success =  dao.saveItemEspInfo(iei);
+        service.saveItemCategoryLink(Item);
         if(success <=0) {
             throw new OrderOutNumberException("插入失败，可能是您输入的某个数据过长");
         }
@@ -169,7 +166,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //商品更新
     @Override
-    public int updateItemInfo(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
+    public int updateItemInfo(WzyItemInfo info) throws OrderOutNumberException{
         if(info == null) {
             throw new OrderOutNumberException("未找到修改的数据");
         }
@@ -213,6 +210,5 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         }
         return dao.findItemInfoById(id);
     }
-
 
 }

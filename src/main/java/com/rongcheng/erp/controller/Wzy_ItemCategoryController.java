@@ -22,6 +22,7 @@ public class Wzy_ItemCategoryController {
     @Resource
     private ItemCategoryService service;
     
+    //查询用户拥有的分类
     @RequestMapping("/findAllCategory.do")
     @ResponseBody
     public JsonResult findAllCategoryInfo(HttpSession session) {
@@ -31,6 +32,7 @@ public class Wzy_ItemCategoryController {
         return new JsonResult(map);
     }
     
+    //添加用户的分类
     @RequestMapping("/saveUserCategory.do")
     @ResponseBody
     public JsonResult saveCategoryInfo(BigInteger id, String name, HttpSession session) {
@@ -43,6 +45,7 @@ public class Wzy_ItemCategoryController {
         return new JsonResult(0,null,"添加成功");
     }
     
+    //修改用户分类
     @RequestMapping("/updateUserCategory.do")
     @ResponseBody
     public JsonResult updateCategoryInfo(BigInteger id, String name, HttpSession session) {
@@ -50,11 +53,12 @@ public class Wzy_ItemCategoryController {
         BigInteger ownerId = user.getOwnerId();
         int success = service.updateUserCategory(id, name, ownerId);
         if(success <= 0) {
-            new JsonResult(1,null,"修改失败");
+            return new JsonResult(1,null,"修改失败");
         }
         return new JsonResult(0,null,"修改成功");
     }
     
+    //删除用户的基层分类
     @RequestMapping("/deleteUserCategory.do")
     @ResponseBody
     public JsonResult deleteCategoryInfo(BigInteger id, HttpSession session) {

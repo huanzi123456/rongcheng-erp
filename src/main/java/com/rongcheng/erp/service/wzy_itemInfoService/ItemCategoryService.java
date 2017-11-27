@@ -17,13 +17,13 @@ public interface ItemCategoryService {
     List<ItemCategoryLink> findAllItemCategoryLink(BigInteger itemId);
     
     //商品分类的创建
-    int saveItemCategoryLink(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException;
+    int saveItemCategoryLink(WzyItemInfo info) throws OrderOutNumberException;
     
     //删除商品分类（删除商品时）
     int removeAllItemCategoryLink(String id) throws OrderOutNumberException;
     
     //删除商品分类(修改商品时)
-    int deleteItemCategoryLink(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException;
+    int deleteItemCategoryLink(WzyItemInfo info) throws OrderOutNumberException;
     
     //删除用户的商品分类
     int deleteUserCategory(BigInteger id, BigInteger ownerId) throws OrderOutNumberException;
@@ -33,5 +33,8 @@ public interface ItemCategoryService {
 
     //添加用户的商品分类
     int saveUserCategory(BigInteger id, String name, BigInteger ownerId) throws OrderOutNumberException;
+
+    //批量更改商品分类
+    int updateMoreCategory(String id, String insertCategory, BigInteger ownerId) throws OrderOutNumberException;
 
 }

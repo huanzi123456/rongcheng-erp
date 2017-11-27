@@ -16,6 +16,9 @@ public interface Wzy_ItemInfoDAO {
 	                                   @Param("startPage")Integer startPage,
 	                                   @Param("row")Integer row,
 	                                   @Param("categoryId")BigInteger categoryId);
+	//判断erpItemNum是否重复
+	int findItemInfoByErpItemNum(WzyItemInfo Item);
+	
 	
 	//查询用户的商品数量
 	Integer findUserItemCount(@Param("ownerId")BigInteger ownerId,
@@ -40,7 +43,7 @@ public interface Wzy_ItemInfoDAO {
     BigInteger findItemCommonInfoId(WzyItemInfo Item);
     
 	//增加用户的商品
-	int saveItemCommonInfo(ItemCommonInfo Item);
+	Integer saveItemCommonInfo(ItemCommonInfo Item);
 	int saveItemEspInfo(ItemEspInfo Item);
 	
 	//更新用户的商品信息

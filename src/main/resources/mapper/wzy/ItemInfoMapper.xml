@@ -140,11 +140,11 @@
 
     <sql id="categoryConditions">
         <if test="categoryId != null">
-            and k.item_id = t.id and
             <if test="categoryId == 0">
-                k.category_id is null
+                and t.id not in(select item_id from item_category_link)
             </if>
             <if test="categoryId != 0">
+                and k.item_id = t.id and
                 k.category_id = #{categoryId,jdbcType = VARCHAR}
             </if>
         </if>
@@ -154,7 +154,7 @@
         select 
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-        <if test="categoryId != null">
+        <if test="categoryId != null and categoryId != 0">
             , item_category_link k
         </if>
         <where>
@@ -169,7 +169,7 @@
     
     <select id="findUserItemCount" resultType="int">
         select count(t.id) from item_common_info as t, item_esp_info as d 
-            <if test="categoryId != null">
+            <if test="categoryId != null and categoryId !=0">
                 , item_category_link k
             </if>
         <where> t.owner_id = #{ownerId,jdbcType=BIGINT} and t.id = d.item_id
@@ -191,7 +191,7 @@
         from(select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-            <if test="categoryId != null">
+            <if test="categoryId != null and categoryId != 0">
                 , item_category_link k
             </if>
         <where> t.erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
@@ -202,7 +202,7 @@
         select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-            <if test="categoryId != null">
+            <if test="categoryId != null and categoryId !=0">
                 , item_category_link k
             </if>
         <where> t.name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
@@ -213,7 +213,7 @@
         select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-            <if test="categoryId != null">
+            <if test="categoryId != null and categoryId !=0">
                 , item_category_link k
             </if>
         <where> t.platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
@@ -227,44 +227,34 @@
     <select id="findUserItemCountByLike"  resultType="int">
         select count(id)from(
 	        select t.id from item_common_info t
-	            <if test="categoryId != null">
+	            <if test="categoryId != null and categoryId !=0">
                     , item_category_link k
                 </if> 
 	            <where> erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
 	                  and t.owner_id = #{ownerId,jdbcType=VARCHAR}
-	                <if test="categoryId != null">
-                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
-                    </if>
+	                <include refid="categoryConditions"/>
                 </where>
 	        UNION
 	        select t.id from item_common_info t
-	            <if test="categoryId != null">
+	            <if test="categoryId != null and categoryId !=0">
                     , item_category_link k
                 </if>
 	            <where> 
 	                name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
 	                and t.owner_id = #{ownerId,jdbcType=VARCHAR}
-	                <if test="categoryId != null">
-                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
-                    </if>
+	                <include refid="categoryConditions"/>
                 </where>
 	        UNION
 	        select t.id from item_common_info t
-	            <if test="categoryId != null">
+	            <if test="categoryId != null and categoryId !=0">
                     , item_category_link k
                 </if>
 	            <where>
 	                platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
                     and t.owner_id = #{ownerId,jdbcType=VARCHAR}
-                    <if test="categoryId != null">
-                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
-                    </if>
+                    <include refid="categoryConditions"/>
 	            </where>
        ) as query
-    </select>
-    
-    <select id="findItemCommonInfoId"  resultType="java.math.BigInteger">
-        select id from item_common_info where erp_item_num = #{erpItemNum,jdbcType=VARCHAR}
     </select>
     
     <select id="findItemInfoById" resultMap="ItemInfoMap">
@@ -272,6 +262,11 @@
         <include refid="selectItemInfo"/>
         from item_esp_info d, item_common_info t 
         where t.id = d.item_id and t.id = #{id,jdbcType=BIGINT}
+    </select>
+ 
+    <select id="findItemInfoByErpItemNum" resultType="int">
+        select count(erp_item_num) from item_common_info 
+        where erp_item_num = #{erpItemNum, jdbcType = VARCHAR} and owner_id = #{ownerId, jdbcType = BIGINT}
     </select>
  
     <delete id="removeItemEspInfo" parameterType="java.math.BigInteger">
@@ -282,7 +277,8 @@
         delete from item_common_info where id=#{id,jdbcType=BIGINT}
     </delete>
     
-    <insert id="saveItemCommonInfo">
+    <insert id="saveItemCommonInfo" useGeneratedKeys="true" keyProperty="id" >
+    
         insert into Item_common_info 
         <trim prefix="(" suffix=")" suffixOverrides="," >
         <if test="id != null" >
@@ -591,7 +587,7 @@
             operator_id,
         </if>
     </trim>
-	    <trim prefix="values (now()," suffix=")" suffixOverrides="," >
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
 	      <if test="id != null" >
 	            #{id, jdbcType=BIGINT},
 	        </if>
