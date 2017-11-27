@@ -1455,7 +1455,48 @@
 .manual_sync_box .new_manual_sync .manual_sync_content .manual_sync_btn{
 	text-align: center;
 }
-
+.single_updating_box .new_single_updating .single_updating_content .single_updating_list .select_simulate{
+	display: inline-block;
+	width: 155px;
+	border: 1px solid #A9A9A9;
+	height: 25px;
+	line-height: 23px;
+	padding-left: 10px;
+	position: relative;
+}
+.single_updating_box .new_single_updating .single_updating_content .single_updating_list .select_simulate_xb{
+	position: absolute;
+	right: 5px;
+	top: 7px;
+	border-top: 8px solid #666;
+	border-left: 5px solid rgba(0,0,0,0); 
+	border-right: 5px solid rgba(0,0,0,0); 
+	cursor: pointer;
+}
+.single_updating_box .new_single_updating .single_updating_content .single_updating_list .select_simulate_box{
+	width: 155px;
+	border: 1px solid #A9A9A9;
+	position: absolute;
+	top: 100%;
+	left: -1px;
+	background: #fff;
+	padding: 10px;
+	height: 150px;
+	display: none;
+	overflow: auto;
+}
+.single_updating_box .new_single_updating .single_updating_content .single_updating_list .management_content span{
+	overflow: hidden;
+	display: inline-block;
+	max-width: 75%;
+	height: 25px;
+	vertical-align: middle;
+}
+.single_updating_box .new_single_updating .single_updating_content .single_updating_list .select_simulate_box li{
+	line-height: 30px;
+	width: 150px;
+	cursor: pointer;
+}
 
 
 

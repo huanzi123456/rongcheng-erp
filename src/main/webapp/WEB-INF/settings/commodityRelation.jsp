@@ -1393,11 +1393,64 @@
                 </li>
                 <li class="bfz33">
                   <span>系统分类:</span>
-                  <select name="" id="">
-                    <option value="1">未分类商品</option>
-                    <option value="2">护肤</option>
-                    <option value="3">互联</option>
-                  </select>
+                  <div style="" class='select_simulate'>
+                    <span>未分类商品未分类商品未分类商品</span>
+                    <div class="select_simulate_xb"></div>
+                    <ul class="select_simulate_box">
+                      <li>
+                        <input type="checkbox">
+                        <span>未分类商品未分类商品</span>
+                        <ol style="padding-left:20px;">
+                          <li>
+                            <input type="checkbox">
+                            <span>未分类商品未分类商品</span>
+                          </li>
+                          <li>
+                            <input type="checkbox">
+                            <span>未分类商品未分类商品</span>
+                            <ol style="padding-left:20px;">
+                              <li>
+                                <input type="checkbox">
+                                <span>未分类商品未分类商品</span>
+                              </li>
+                              <li>
+                                <input type="checkbox">
+                                <span>未分类商品未分类商品</span>
+                                <ol style="padding-left:20px;">
+                                  <li>
+                                    <input type="checkbox">
+                                    <span>未分类商品未分类商品</span>
+                                  </li>
+                                  <li>
+                                    <input type="checkbox">
+                                    <span>未分类商品未分类商品</span>
+                                    <ol style="padding-left:20px;">
+                                      <li>
+                                        <input type="checkbox">
+                                        <span>未分类商品未分类商品</span>
+                                      </li>
+                                      <li>
+                                        <input type="checkbox">
+                                        <span>未分类商品未分类商品</span>
+                                      </li>
+                                    </ol>
+                                  </li>
+                                </ol>
+                              </li>
+                            </ol>
+                          </li>
+                        </ol>
+                      </li>
+                      <li>
+                        <input type="checkbox">
+                        <span>护肤</span>
+                      </li>
+                      <li>
+                        <input type="checkbox">
+                        <span>互联</span>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
               </ol>
             </li>
