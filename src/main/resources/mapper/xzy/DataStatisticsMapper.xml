@@ -69,7 +69,14 @@
   <include refid="if_others"/>
   AND a.refund_close = 2
 </select>
-<!-- (5)成交额(暂时等于商品总价值) -->
+<!-- (5)成交额 -->
+<select id="selectOrderValue" parameterType="java.util.Map" resultType="java.lang.Double">
+  SELECT SUM(a.order_value)
+  FROM order_info a
+  <include refid="if_code1"/>
+  WHERE a.owner_id = #{ownerId}
+  <include refid="if_others"/>
+</select>
 <!-- (6)统计客户数(客单价=成交额/客户数)-->
 <select id="seleClients" parameterType="java.util.Map" resultType="java.lang.Integer">
   SELECT SUM(t.counts) clients

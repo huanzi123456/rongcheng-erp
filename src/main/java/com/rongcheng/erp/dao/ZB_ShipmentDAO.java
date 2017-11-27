@@ -1,18 +1,16 @@
 package com.rongcheng.erp.dao;
 
+import com.rongcheng.erp.entity.OrderInfo;
+
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
-import com.rongcheng.erp.entity.AddressCarrierAllocation;
-import com.rongcheng.erp.entity.OrderInfo;
-
 /**
  * 验货发货 数据访问层
- * 
  * @author 赵滨
  */
 public interface ZB_ShipmentDAO {
-    
     /**
      * 获取订单下的商品
      * 
@@ -23,9 +21,8 @@ public interface ZB_ShipmentDAO {
      * @return list 订单下的商品
      * @author 赵滨
      */
-    List<Map<String, Object>> listShipmentItemByOrderNumTrackingNum(String num, Long ownerId);
-    
-    
+    List<Map<String, Object>> listShipmentItemByOrderNumTrackingNum(String num, BigInteger ownerId);
+
     /**
      * 获取订单验货信息(订单信息和买家信息)
      * 
@@ -36,7 +33,7 @@ public interface ZB_ShipmentDAO {
      * @return map 订单验货信息
      * @author 赵滨
      */
-    Map<String, Object> getShipmentByOrderNumTrackingNum(String num, Long ownerId);
+    Map<String, Object> getShipmentByOrderNumTrackingNum(String num, BigInteger ownerId);
     
     /**
      * 获取订单信息
@@ -49,17 +46,5 @@ public interface ZB_ShipmentDAO {
      * @return OrderInfo 订单信息
      * @author 赵滨
      */
-    OrderInfo getOrderInfoByOrderNumTrackingNum(String num, Long ownerId, int start);
-    
-    /**
-     * 获取全国地址+快递分配信息表
-     * 
-     * <p>根据地区ID
-     * 
-     * @param code 地区code
-     * @param ownerId 主账号ID
-     * @return
-     * @author 赵滨
-     */
-    AddressCarrierAllocation getAddressCarrierAllocationById(Long code, Long ownerId);
+    OrderInfo getOrderInfoByOrderNumTrackingNum(String num, BigInteger ownerId, int start);
 }

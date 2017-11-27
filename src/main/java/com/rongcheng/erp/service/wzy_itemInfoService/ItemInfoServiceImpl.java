@@ -1,6 +1,7 @@
 package com.rongcheng.erp.service.wzy_itemInfoService;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.rongcheng.erp.dao.Wzy_ItemInfoDAO;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.ItemEspInfo;
-import com.rongcheng.erp.entity.vo.ItemInfo;
+import com.rongcheng.erp.dto.WzyItemInfo;
 import com.rongcheng.erp.exception.OrderOutNumberException;
 
 @Service("itemInfoService")
@@ -21,44 +22,45 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     private Wzy_ItemInfoDAO dao;
     private ItemEspInfo iei;
     private ItemCommonInfo ici;
-    private List<ItemInfo> list;
+    private List<WzyItemInfo> list;
     private Integer maxPage;
     private Integer maxData;
     
-    //分页查询全部
+    //分页查询
     @Override
     public Map<String,Object> findUserByKeyWord(
-            BigInteger ownerId, Integer row, Integer nowPage, String keyWord) throws OrderOutNumberException{
+            BigInteger ownerId, Integer row, Integer nowPage, String keyWord, BigInteger categoryId) throws OrderOutNumberException{
 
         //账号判断
         if(ownerId == null) {
             throw new OrderOutNumberException("您的账号已超时");
         }
-        
         //分页处理
         Integer startPage = (nowPage-1)*row;
         //关键字判断
         if(keyWord=="") {
             //执行全部查询查询
-            list = dao.findUserAllItemInfo(ownerId, startPage, row);
+            list = dao.findUserAllItemInfo(ownerId, startPage, row, categoryId);
             //查询全部信息的最大数据并得到最大页数
-            maxData = dao.findUserItemCount(ownerId);
+            maxData = dao.findUserItemCount(ownerId, categoryId);
             maxPage = maxData/row;
             if(maxData%row !=0) {
                 maxPage++;
             }
         }else {
             //模糊查询
-            list = dao.findItemInfoByLike(ownerId, keyWord, startPage, row);
+            list = dao.findItemInfoByLike(ownerId, keyWord, startPage, categoryId, row);
             //模糊查询的最大数据并得到最大页数
-            maxData = dao.findUserItemCountByLike(ownerId, keyWord);
+            maxData = dao.findUserItemCountByLike(ownerId, keyWord, categoryId);
             maxPage = maxData/row;
             if(maxData%row !=0) {
                 maxPage++;
             }
         }
+        
         //建立map
         Map<String,Object> map = new HashMap<String,Object>();
+        map.put("startPage", startPage);
         map.put("list", list);
         map.put("maxPage", maxPage);
         return map;
@@ -66,7 +68,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //添加商品表1
     @Override
-    public int saveItemCommonInfo(ItemInfo Item) throws OrderOutNumberException{
+    public int saveItemCommonInfo(WzyItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
             throw new OrderOutNumberException("未得到数据");
         }
@@ -80,15 +82,12 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 
     //添加商品表2
     @Override
-    public int saveItemEspInfo(ItemInfo Item) throws OrderOutNumberException{
+    public int saveItemEspInfo(WzyItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
             throw new OrderOutNumberException("未得到数据");
         }
         iei = getItemEspInfo(Item);
-        BigInteger id = dao.findItemMaxId();
-        if(id == null) {
-            id = new BigInteger("1");
-        }
+        BigInteger id = dao.findItemCommonInfoId(Item);
         iei.setItemId(id);
         int success =  dao.saveItemEspInfo(iei);
         if(success <=0) {
@@ -98,7 +97,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     }
     
     //将数据转换成两组
-    public ItemEspInfo getItemEspInfo(ItemInfo info) {
+    public ItemEspInfo getItemEspInfo(WzyItemInfo info) {
         iei = new ItemEspInfo();
         iei.setWarehouseId(info.getWarehouseId());
         iei.setName(info.getName());
@@ -125,9 +124,11 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         iei.setPlatformItemSku(info.getPlatformItemSku());
         iei.setOwnerId(info.getOwnerId());
         iei.setItemId(info.getId());
+        iei.setGmtModified(new Timestamp(System.currentTimeMillis()));
+        iei.setGmtCreate(new Timestamp(System.currentTimeMillis()));
         return iei;
     }
-    public ItemCommonInfo getItemCommonInfo(ItemInfo info) {
+    public ItemCommonInfo getItemCommonInfo(WzyItemInfo info) {
         ici= new ItemCommonInfo();
         ici.setId(info.getId());
         ici.setErpItemNum(info.getErpItemNum());
@@ -161,12 +162,14 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         ici.setItemSecretKey(info.getItemSecretKey());
         ici.setUserItemCode(info.getUserItemCode());
         ici.setUserShopCode(info.getUserShopCode());
+        ici.setGmtCreate(new Timestamp(System.currentTimeMillis()));
+        ici.setGmtModified(new Timestamp(System.currentTimeMillis()));
         return ici;
     }
     
     //商品更新
     @Override
-    public int updateItemInfo(ItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
+    public int updateItemInfo(WzyItemInfo info, BigInteger ownerId) throws OrderOutNumberException{
         if(info == null) {
             throw new OrderOutNumberException("未找到修改的数据");
         }
@@ -204,7 +207,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
 
     //商品id查询
     @Override
-    public List<ItemInfo> findItemInfoById(BigInteger id) throws OrderOutNumberException{
+    public List<WzyItemInfo> findItemInfoById(BigInteger id) throws OrderOutNumberException{
         if(id == null) {
             throw new OrderOutNumberException("未找到修改的数据");
         }

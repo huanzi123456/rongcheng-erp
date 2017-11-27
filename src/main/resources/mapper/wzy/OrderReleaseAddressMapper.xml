@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongcheng.erp.dao.Wzy_InvertoryAllAddressDao">
 
-    <resultMap id="AddressCarrierAllocationMap" type="com.rongcheng.erp.entity.vo.AddressCarrierAllocation" >
+    <resultMap id="AddressCarrierAllocationMap" type="com.rongcheng.erp.dto.WzyAddressCarrierAllocation" >
         <id column="region_id" property="regionId" jdbcType="BIGINT" />
         <result column="region_code" property="regionCode" jdbcType="BIGINT" />
         <result column="region_name" property="name" jdbcType="VARCHAR" />
@@ -54,7 +54,7 @@
     
     <insert id="saveCoverArea">
         insert into warehouse_region_shop
-        <trim prefix="(gmt_create," suffix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test=" warehouseId != null">
                 warehouse_id, 
             </if>
@@ -67,8 +67,14 @@
             <if test=" coverRegionId != null">
                 cover_region_id,
             </if>
+            <if test=" gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test=" gmtModified != null">
+                gmt_modified,
+            </if>
         </trim>
-        <trim prefix="values(now()," suffix=")" suffixOverrides=",">
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
             <if test=" warehouseId != null">
                 #{warehouseId, jdbcType=BIGINT},
             </if>
@@ -80,6 +86,12 @@
             </if>
             <if test=" coverRegionId != null">
                 #{coverRegionId, jdbcType=BIGINT},
+            </if>
+            <if test=" gmtCreate != null">
+                #{gmtCreate, jdbcType=TIMESTAMP},
+            </if>
+            <if test=" gmtModified != null">
+                #{gmtModified, jdbcType=TIMESTAMP}
             </if>
         </trim>
     </insert>

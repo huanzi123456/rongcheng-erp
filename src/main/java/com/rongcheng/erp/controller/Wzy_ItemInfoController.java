@@ -13,19 +13,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rongcheng.erp.dto.WzyItemInfo;
+import com.rongcheng.erp.entity.ItemCategoryLink;
 import com.rongcheng.erp.entity.UserInfo;
-import com.rongcheng.erp.entity.vo.ItemInfo;
 import com.rongcheng.erp.exception.OrderOutNumberException;
+import com.rongcheng.erp.service.wzy_itemInfoService.ItemCategoryService;
 import com.rongcheng.erp.service.wzy_itemInfoService.ItemInfoService;
 import com.rongcheng.erp.utils.JsonResult;
 
 @Controller
 public class Wzy_ItemInfoController {
 
-    private Integer row = 8;
+    private Integer row = 6;
     @Resource
     private ItemInfoService service;
-
+    @Resource 
+    private ItemCategoryService category;
     
     //1.跳转到商品管理页面
     @RequestMapping("/ItemInfoAdmin.do")
@@ -36,37 +39,31 @@ public class Wzy_ItemInfoController {
     //2.查询该用户的所有商品
     @RequestMapping("/findUserByKeyWord.do")
     @ResponseBody
-    public JsonResult findUserAllItemInfo(Integer nowPage, String keyWord, HttpSession session) {
+    public JsonResult findUserAllItemInfo(Integer nowPage, String keyWord, BigInteger categotyId, HttpSession session) {
         if(nowPage == null) {
             throw new RuntimeException("数据接收失败");
         }
         //获取用户id
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
-        //创建Map
-        //Map<String,Object> map = ;
         //查询分页
-        Map<String,Object> map= service.findUserByKeyWord(ownerId, row, nowPage, keyWord);
+        Map<String,Object> map= service.findUserByKeyWord(ownerId, row, nowPage, keyWord, categotyId);
         return new JsonResult(map);
     }
     
     //3.创建商品
     @RequestMapping("/saveItemInfo.do")
     @ResponseBody
-    public JsonResult saveItemInfo(ItemInfo info, HttpSession session) {
-        System.out.println(info);
+    public JsonResult saveItemInfo(WzyItemInfo info, HttpSession session) {
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         info.setOwnerId(ownerId);
-        try {
-        int success1 = service.saveItemCommonInfo(info);
-        int success2 = service.saveItemEspInfo(info);
-        if(success1 <=0 ||success2<=0) {
-            return new JsonResult(1,null,"插入失败");
-        }
-        }catch(Exception e) {
-            return new JsonResult(1,null,"商品编号不能重复");
-        }
+            int success1 = service.saveItemCommonInfo(info);
+            int success2 = service.saveItemEspInfo(info);
+            int success3 = category.saveItemCategoryLink(info, ownerId);
+            if(success1 <=0 ||success2<=0 ||success3<=0) {
+                return new JsonResult(1,null,"插入失败");
+            }
         return new JsonResult(0,null,"插入成功");
     }
     
@@ -78,20 +75,23 @@ public class Wzy_ItemInfoController {
             throw new RuntimeException("未获取数据");
         }
         service.removeItemInfo(id);
+        category.removeAllItemCategoryLink(id);
         return new JsonResult(0,null,"删除成功");
     }
     
     //5.商品更新
     @RequestMapping("/updateItemInfo.do")
     @ResponseBody
-    public JsonResult updateItemInfo(ItemInfo id, HttpSession session) {
+    public JsonResult updateItemInfo(WzyItemInfo id, HttpSession session) {
         if(id==null) {
             throw new RuntimeException("未获取数据");
         }
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         int success = service.updateItemInfo(id,ownerId);
-        if(success == 0) {
+        int success1 = category.saveItemCategoryLink(id, ownerId);
+        int success2 = category.deleteItemCategoryLink(id, ownerId);
+        if(success <= 0 && success1 <= 0 && success2 <= 0) {
             return new JsonResult(0,null,"更新失败");
         }
         return new JsonResult(0,null,"更新成功");
@@ -104,9 +104,11 @@ public class Wzy_ItemInfoController {
         if(id==null) {
             throw new RuntimeException("未获取数据");
         }
-        List<ItemInfo> list = service.findItemInfoById(id);
+        List<ItemCategoryLink> list1 = category.findAllItemCategoryLink(id);
+        List<WzyItemInfo> list = service.findItemInfoById(id);
         Map<String,Object> map= new HashMap<String,Object>();
         map.put("list", list);
+        map.put("list1", list1);
         return new JsonResult(map);
     }
 

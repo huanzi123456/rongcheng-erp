@@ -71,7 +71,7 @@
         <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
     </resultMap>
 
-    <resultMap id="ItemInfoMap" type="com.rongcheng.erp.entity.vo.ItemInfo" >
+    <resultMap id="ItemInfoMap" type="com.rongcheng.erp.dto.WzyItemInfo" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="erp_item_num" property="erpItemNum" jdbcType="BIGINT" />
         <result column="name" property="name" jdbcType="BIGINT" />
@@ -138,16 +138,43 @@
             d.weight, d.batch_code, d.expire_date, d.style_code, d.reserved2, d.reserved1 as reserved3, d.item_id
     </sql>
 
+    <sql id="categoryConditions">
+        <if test="categoryId != null">
+            and k.item_id = t.id and
+            <if test="categoryId == 0">
+                k.category_id is null
+            </if>
+            <if test="categoryId != 0">
+                k.category_id = #{categoryId,jdbcType = VARCHAR}
+            </if>
+        </if>
+    </sql>
+
     <select id="findUserAllItemInfo" resultMap="ItemInfoMap">
         select 
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-        where t.id = d.item_id and t.owner_id = #{ownerId,jdbcType=BIGINT} limit #{startPage}, #{row}
+        <if test="categoryId != null">
+            , item_category_link k
+        </if>
+        <where>
+            t.id = d.item_id 
+            <if test="ownerId != null">
+                and t.owner_id = #{ownerId,jdbcType=BIGINT} 
+            </if>
+            <include refid="categoryConditions"/>
+        </where>
+        limit #{startPage}, #{row}
     </select>
     
     <select id="findUserItemCount" resultType="int">
         select count(t.id) from item_common_info as t, item_esp_info as d 
-        where t.owner_id = #{ownerId,jdbcType=BIGINT} and t.id = d.item_id
+            <if test="categoryId != null">
+                , item_category_link k
+            </if>
+        <where> t.owner_id = #{ownerId,jdbcType=BIGINT} and t.id = d.item_id
+            <include refid="categoryConditions"/>
+        </where>
     </select>
     
     <select id="findItemInfoByLike"  resultMap="ItemInfoMap">
@@ -164,41 +191,80 @@
         from(select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-        where t.erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+            <if test="categoryId != null">
+                , item_category_link k
+            </if>
+        <where> t.erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
                 and t.id = d.item_id  and t.owner_id = #{ownerId,jdbcType=VARCHAR}
-        UNION ALL
+                <include refid="categoryConditions"/>
+        </where>
+        UNION
         select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-        where t.name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+            <if test="categoryId != null">
+                , item_category_link k
+            </if>
+        <where> t.name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
                 and t.id = d.item_id  and t.owner_id = #{ownerId,jdbcType=VARCHAR}
-        UNION ALL
+                <include refid="categoryConditions"/>
+        </where>
+        UNION
         select
         <include refid="selectItemInfo"/>
         from item_esp_info as d, item_common_info as t
-        where t.platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
-            and t.id = d.item_id  and t.owner_id = #{ownerId,jdbcType=VARCHAR}) as query
+            <if test="categoryId != null">
+                , item_category_link k
+            </if>
+        <where> t.platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+            and t.id = d.item_id  and t.owner_id = #{ownerId,jdbcType=VARCHAR}
+            <include refid="categoryConditions"/>
+        </where>
+            ) as query
         limit #{startPage}, #{row}
     </select>
 
     <select id="findUserItemCountByLike"  resultType="int">
-       select count(id)from(
-	        select id from item_common_info
-	            where erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
-	                  and owner_id = #{ownerId,jdbcType=VARCHAR}
+        select count(id)from(
+	        select t.id from item_common_info t
+	            <if test="categoryId != null">
+                    , item_category_link k
+                </if> 
+	            <where> erp_item_num like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+	                  and t.owner_id = #{ownerId,jdbcType=VARCHAR}
+	                <if test="categoryId != null">
+                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
+                    </if>
+                </where>
 	        UNION
-	        select id from item_common_info
-	            where name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
-	                  and owner_id = #{ownerId,jdbcType=VARCHAR}
+	        select t.id from item_common_info t
+	            <if test="categoryId != null">
+                    , item_category_link k
+                </if>
+	            <where> 
+	                name like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+	                and t.owner_id = #{ownerId,jdbcType=VARCHAR}
+	                <if test="categoryId != null">
+                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
+                    </if>
+                </where>
 	        UNION
-	        select id from item_common_info
-	            where platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
-	                  and owner_id = #{ownerId,jdbcType=VARCHAR}
+	        select t.id from item_common_info t
+	            <if test="categoryId != null">
+                    , item_category_link k
+                </if>
+	            <where>
+	                platform_id like CONCAT(CONCAT('%', #{keyWord,jdbcType=VARCHAR}), '%')
+                    and t.owner_id = #{ownerId,jdbcType=VARCHAR}
+                    <if test="categoryId != null">
+                        and k.item_id = t.id and k.category_id = #{categoryId,jdbcType = VARCHAR}
+                    </if>
+	            </where>
        ) as query
     </select>
     
-    <select id="findItemMaxId"  resultType="java.math.BigInteger">
-        select max(id) from item_common_info
+    <select id="findItemCommonInfoId"  resultType="java.math.BigInteger">
+        select id from item_common_info where erp_item_num = #{erpItemNum,jdbcType=VARCHAR}
     </select>
     
     <select id="findItemInfoById" resultMap="ItemInfoMap">
@@ -218,7 +284,7 @@
     
     <insert id="saveItemCommonInfo">
         insert into Item_common_info 
-        <trim prefix="(gmt_create," suffix=")" suffixOverrides="," >
+        <trim prefix="(" suffix=")" suffixOverrides="," >
         <if test="id != null" >
             id,
         </if>
@@ -315,6 +381,9 @@
         <if test="shopId != null" >
             shop_id,
         </if>
+        <if test="gmtCreate != null" >
+            gmt_create,
+        </if>
         <if test="gmtModified != null" >
             gmt_modified,
         </if>
@@ -325,7 +394,7 @@
             spec,
         </if>
     </trim>
-	    <trim prefix="values (now()," suffix=")" suffixOverrides="," >
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
 	        <if test="id != null" >
 	            #{id, jdbcType=BIGINT},
 	        </if>
@@ -422,6 +491,9 @@
 	        <if test="shopId != null" >
 	            #{shopId, jdbcType=BIGINT},
 	        </if>
+	        <if test="gmtCreate != null" >
+                #{gmtCreate, jdbcType=TIMESTAMP},
+            </if>
 	        <if test="gmtModified != null" >
 	            #{gmtModified, jdbcType=TIMESTAMP},
 	        </if>
@@ -436,7 +508,7 @@
     
     <insert id="saveItemEspInfo">
         insert into  Item_Esp_info 
-        <trim prefix="(gmt_create," suffix=")" suffixOverrides="," >
+        <trim prefix="(" suffix=")" suffixOverrides="," >
         <if test="id != null" >
             id,
         </if>
@@ -508,6 +580,9 @@
         </if>
         <if test="ownerId != null" >
             owner_id,
+        </if>
+        <if test="gmtCreate != null" >
+            gmt_create,
         </if>
         <if test="gmtModified != null" >
             gmt_modified,
@@ -589,6 +664,9 @@
 	        <if test="ownerId != null" >
 	            #{ownerId, jdbcType=BIGINT},
 	        </if>
+	        <if test="gmtCreate != null" >
+                #{gmtCreate, jdbcType=TIMESTAMP},
+            </if>
 	        <if test="gmtModified != null" >
 	            #{gmtModified, jdbcType=TIMESTAMP},
 	        </if>
@@ -688,7 +766,9 @@
 	        <if test="shopId != null" >
 	            shop_id = #{shopId, jdbcType=BIGINT},
 	        </if>
-	            gmt_modified =now(),
+	        <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            </if>
 	        <if test="operatorId != null" >
 	            operator_id = #{operatorId, jdbcType=BIGINT},
 	        </if>
@@ -771,7 +851,9 @@
             <if test="ownerId != null" >
                 owner_id = #{ownerId, jdbcType=BIGINT},
             </if>
-                gmt_modified = now(),
+            <if test="gmtModified != null" >
+                gmt_modified = #{gmtModified, jdbcType=TIMESTAMP},
+            </if>
             <if test="operatorId != null" >
                 operator_id = #{operatorId, jdbcType=BIGINT},
             </if>

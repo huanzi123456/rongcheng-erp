@@ -1,9 +1,5 @@
-//0.全局变量，打印组件
-var LODOP = window.parent.LODOP;
-
-//0.全局变量 保存删除的id数组
-var fieldCoordinateIdDel = [];
-
+var LODOP = window.parent.LODOP;//0.全局变量，打印组件
+var fieldCoordinateIdDel = [];//0.全局变量 保存删除的id数组
 $(function() {
 	//1.加载页面
 	loadAmendExpressTemplate();
@@ -36,7 +32,6 @@ function gobackAddAmendExpressTemplate() {
  * @author 赵滨
  */
 function loadPrinter() {
-	
 	//如果没有获取到打印组件
 	if (LODOP == null || LODOP == undefined) {
 		showMessage("打印控件没有正确安装或启动，请点击上方执行安装。");
@@ -45,7 +40,6 @@ function loadPrinter() {
 	
 	//获取打印机数目
 	var PRINTER_COUNT = LODOP.GET_PRINTER_COUNT();
-	
 	//如果没有打印机
 	if (PRINTER_COUNT == 0) {
 		return;
@@ -78,7 +72,6 @@ function loadPrinter() {
  * @author 赵滨
  */
 function commitAddAmendExpressTemplate() {
-	
 	//局部变量，用于删除数组
 	var delFieldCoordinateId = [];
 	//复制数组,避免影响全局变量
@@ -91,15 +84,9 @@ function commitAddAmendExpressTemplate() {
 	var data = {};
 	
 	//获取基础参数
-	var authorized = getCookie("authorized");
-	var ownerId = getCookie("ownerId");
-	var operatorId = getCookie("operatorId");
 	var printTemplateId = getCookie("printTemplateId");
 
     //加入到data中
-	data["authorized"] = authorized;
-	data["ownerId"] = ownerId;
-	data["operatorId"] = operatorId;
 	data["printTemplateId"] = printTemplateId;
 
     //获取页面参数 （模版）
@@ -126,7 +113,6 @@ function commitAddAmendExpressTemplate() {
 	data["templateWidth"] = templateWidth;
 	data["templateHeight"] = templateHeight;
     data["printChoice"] = printChoice;
-	/*console.log(templateName, widthTemplate, heightTemplate, printChoice);*/
 	if (templateName == "") {
 		showMessage("请输入模版名称");
 		ok = false;
@@ -269,7 +255,6 @@ function moveAddAmendExpressTemplate() {
 
 		//遍历集合
 		for (var i = 0; i < childrenDiv.length; i++) {
-
 			//获取当前数值的宽
 			var childrenDivWidth = childrenDiv.eq(i).width();
 			//获取当前数值的高
@@ -330,7 +315,6 @@ function moveAddAmendExpressTemplate() {
  * @author 赵滨
  */
 function loadAmendExpressTemplate() {
-
     //加载 页面的列表
     //获取列表的json对象
     var json = eval(templateJson.express);
@@ -350,9 +334,6 @@ function loadAmendExpressTemplate() {
     $("html").append('<script src="/js/expressTemplate.js"></script>');
 
 	//获取参数
-	var authorized = getCookie("authorized");
-	var ownerId = getCookie("ownerId");
-	var operatorId = getCookie("operatorId");
 	var printTemplateId = getCookie("printTemplateId");
 	var preset = getCookie("preset");    //是否预设模版
 
@@ -367,9 +348,6 @@ function loadAmendExpressTemplate() {
 		url : "/addAmendExpressTemplate/loadAddAmendExpressTemplate.do",
 		type : "post",
 		data : {
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
 			"printTemplateId" : printTemplateId,
 			"preset" : preset
 		},
@@ -406,7 +384,6 @@ function loadAmendExpressTemplate() {
 				
 				//获取坐标集合  第二部分
 				var fieldCoordinateList = map.fieldCoordinateList;
-
 				//如果有坐标
                 if (fieldCoordinateList) {
                     for (var i = 0; i < fieldCoordinateList.length; i++) {

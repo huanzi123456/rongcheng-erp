@@ -13,7 +13,6 @@
     <script src="/util/jiml-utils.js"></script>
     <script src="/util/templateJson.js"></script>
     <script src="/util/cookie_util.js"></script>
-    <script src="/zb/settings/basevalue.js"></script>
     <script src="/zb/settings/addAmendExpressTemplate.js"></script>
 </head>
 <body>

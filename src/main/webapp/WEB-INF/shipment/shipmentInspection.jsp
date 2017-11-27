@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="/css/shipment_inspection.css">
     <script src="/util/jiml-utils.js"></script>
     <script src="/util/region/js/jquery.citys.js"></script>
-    <script src="/util/cookie_util.js"></script>
-	<script src="/zb/settings/basevalue.js"></script>
     <script src="/zb/shipment/shipmentInspection.js"></script>
     
 </head>

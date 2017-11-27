@@ -1,11 +1,11 @@
 package com.rongcheng.erp.service.printTemplate;
 
+import com.rongcheng.erp.entity.FieldCoordinate;
+import com.rongcheng.erp.entity.OrderInfo;
+
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
-
-import com.rongcheng.erp.entity.FieldCoordinate;
-import com.rongcheng.erp.entity.OrderInfo;
 
 /**
  * 打印模块 业务层

@@ -14,9 +14,8 @@
 <script src="/js/pintuer.js"></script>
 <script src="/util/jiml-utils.js"></script>
 <script src="/util/cookie_util.js"></script>
-<script src="/zb/settings/basevalue.js"></script>
 <script src="/zb/settings/expressTemplate.js"></script>
-<script src="../js/big_box.js"></script>
+<script src="/js/big_box.js"></script>
 </head>
 <style>
   .div_big_box:after{

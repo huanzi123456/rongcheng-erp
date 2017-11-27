@@ -1,17 +1,14 @@
 package com.rongcheng.erp.controller;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.rongcheng.erp.entity.CarrierInfo;
+import com.rongcheng.erp.service.carrierInfo.ZB_CarrierInfoService;
+import com.rongcheng.erp.utils.JsonResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongcheng.erp.entity.CarrierInfo;
-import com.rongcheng.erp.service.carrierInfo.ZB_CarrierInfoService;
-import com.rongcheng.erp.utils.JsonResult;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 快递信息表 控制层
@@ -26,17 +23,14 @@ public class ZB_CarrierInfoController {
 
     /**
      * 加载快递信息表的内容
-     * @param authorized 是否授权
-     * @param ownerId   主账户ID
-     * @param operatorId 操作人ID
      * @return List<CarrierInfo> 快递信息集合
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/carrierInfo/loadCarrierInfo.do")
-    public JsonResult loadCarrierInfo(Boolean authorized, BigInteger ownerId, BigInteger operatorId) {
-    	//获取快递信息
-        List<CarrierInfo> list = carrierInfoService.listCarrierInfoAll(authorized, ownerId, operatorId);
+    public JsonResult loadCarrierInfo() {
+        //获取快递信息
+        List<CarrierInfo> list = carrierInfoService.listCarrierInfoAll();
         return new JsonResult(list);
     }
 }

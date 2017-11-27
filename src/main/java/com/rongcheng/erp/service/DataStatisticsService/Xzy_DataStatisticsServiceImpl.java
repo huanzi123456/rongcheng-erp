@@ -60,7 +60,10 @@ public class Xzy_DataStatisticsServiceImpl implements Xzy_DataStatisticsService{
 		Integer outOrders = dao.seleOutGoods(map);//已发货的订单数
 		Integer waitOrders = dao.seleWaitGoods(map);//待发货的订单数
 		Integer orderClosed = dao.seleOrderClosed(map);//已关闭的订单数
-		Double volumeOfTrade =0.00;//成交额(暂时等于商品总价值)
+		Double volumeOfTrade =dao.selectOrderValue(map);//成交额(暂时等于商品总价值)
+		if(volumeOfTrade == null){
+			volumeOfTrade = 0.00;
+		}
 		Double clientPrice=0.00;//客单价		
 		Integer clients = dao.seleClients(map);//统计客户数  (客单价=成交额/客户数)null
 		//2.商品统计报表
@@ -104,9 +107,8 @@ public class Xzy_DataStatisticsServiceImpl implements Xzy_DataStatisticsService{
 		maps.put("outOrders",outOrders);//已发货的订单数
 		maps.put("waitOrders",waitOrders);//待发货的订单数		
 		maps.put("seleOrderClosed",orderClosed);//已关闭的订单数
-		  volumeOfTrade=prices;
-		maps.put("volumeOfTrade",volumeOfTrade);//成交额(暂时等于商品总价值)
-		  if(volumeOfTrade==0 || clients==null){
+		maps.put("volumeOfTrade",volumeOfTrade);//成交额
+		  if(volumeOfTrade==0.00 || clients==null){
 			  clientPrice=0.00;
 		  }else{
 			  clientPrice=(volumeOfTrade/clients);

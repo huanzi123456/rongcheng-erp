@@ -1,21 +1,19 @@
 package com.rongcheng.erp.service.printTemplate;
 
+import com.rongcheng.erp.dao.ZB_FieldCoordinateDAO;
+import com.rongcheng.erp.dao.ZB_PrintDAO;
+import com.rongcheng.erp.entity.BuyerInfo;
+import com.rongcheng.erp.entity.FieldCoordinate;
+import com.rongcheng.erp.entity.OrderInfo;
+import com.rongcheng.erp.entity.PrintTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import com.rongcheng.erp.dao.ZB_FieldCoordinateDAO;
-import com.rongcheng.erp.entity.FieldCoordinate;
-import org.springframework.stereotype.Service;
-
-import com.rongcheng.erp.dao.ZB_PrintDAO;
-import com.rongcheng.erp.entity.BuyerInfo;
-import com.rongcheng.erp.entity.OrderInfo;
-import com.rongcheng.erp.entity.PrintTemplate;
 
 /**
  * 打印模块 业务层 实现类
@@ -55,12 +53,12 @@ public class ZB_PrintServiceImpl implements ZB_PrintService {
         
         //查找快递模版
         List<PrintTemplate> listPrintTemplateCarrier  = 
-                printDAO.listPrintTemplateByCarrierId(carrierId, null, ownerId);
+                printDAO.listPrintTemplateByCarrierId(carrierId, ownerId);
         map.put("listPrintTemplateCarrier", listPrintTemplateCarrier);
         
         //查找发货模版
         List<PrintTemplate> listPrintTemplate  = 
-                printDAO.listPrintTemplateByCarrierId(new BigInteger("0"), null, ownerId);
+                printDAO.listPrintTemplateByCarrierId(new BigInteger("0"), ownerId);
         map.put("listPrintTemplate", listPrintTemplate);
         
         //创建买家ID
@@ -96,7 +94,7 @@ public class ZB_PrintServiceImpl implements ZB_PrintService {
     public OrderInfo addOrModifyTracking(BigInteger orderInfoId, BigInteger trackingNum, BigInteger ownerId) {
         
         //查询订单
-        OrderInfo orderInfo = printDAO.getOrderInfoById(orderInfoId, null, ownerId);
+        OrderInfo orderInfo = printDAO.getOrderInfoById(orderInfoId, ownerId);
         //如果存在
         if (orderInfo != null) {
             //更新快递单号
@@ -120,7 +118,7 @@ public class ZB_PrintServiceImpl implements ZB_PrintService {
      */
     public List<FieldCoordinate> listFieldCoordinateByTemplateId(BigInteger templateId, BigInteger ownerId) {
         List<FieldCoordinate> fieldCoordinates =
-                fieldCoordinateDAO.listFieldCoordinateByTemplateId(templateId, null, ownerId);
+                fieldCoordinateDAO.listFieldCoordinateByTemplateId(templateId, ownerId);
         System.out.println(fieldCoordinates);
         return fieldCoordinates;
     }
@@ -133,7 +131,6 @@ public class ZB_PrintServiceImpl implements ZB_PrintService {
      * @author 赵滨
      */
     public int printComplete(BigInteger[] orderInfoIds, String template, BigInteger ownerId) {
-
         //创建时间
         Timestamp time = new Timestamp(System.currentTimeMillis());
 

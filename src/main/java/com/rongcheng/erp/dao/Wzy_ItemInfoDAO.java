@@ -7,33 +7,37 @@ import org.apache.ibatis.annotations.Param;
 
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.ItemEspInfo;
-import com.rongcheng.erp.entity.vo.ItemInfo;
+import com.rongcheng.erp.dto.WzyItemInfo;
 
 public interface Wzy_ItemInfoDAO {
 
 	//查询用户的所有商品
-	List<ItemInfo> findUserAllItemInfo(@Param("ownerId")BigInteger ownerId, 
+	List<WzyItemInfo> findUserAllItemInfo(@Param("ownerId")BigInteger ownerId, 
 	                                   @Param("startPage")Integer startPage,
-	                                   @Param("row")Integer row);
+	                                   @Param("row")Integer row,
+	                                   @Param("categoryId")BigInteger categoryId);
 	
 	//查询用户的商品数量
-	Integer findUserItemCount(BigInteger ownerId);
+	Integer findUserItemCount(@Param("ownerId")BigInteger ownerId,
+	                          @Param("categoryId")BigInteger categoryId);
 	
 	//模糊查询用户的商品数量
 	Integer findUserItemCountByLike(@Param("ownerId")BigInteger ownerId,
-	                                @Param("keyWord")String keyWord);
+	                                @Param("keyWord")String keyWord,
+	                                @Param("categoryId")BigInteger categoryId);
 	
 	//模糊查询
-    List<ItemInfo> findItemInfoByLike(@Param("ownerId")BigInteger ownerId,
+    List<WzyItemInfo> findItemInfoByLike(@Param("ownerId")BigInteger ownerId,
                                       @Param("keyWord")String keyWord,
                                       @Param("startPage")Integer startPage, 
+                                      @Param("categoryId")BigInteger categoryId, 
                                       @Param("row")Integer row);
 
     //id查询
-    List<ItemInfo> findItemInfoById(BigInteger id);
+    List<WzyItemInfo> findItemInfoById(BigInteger id);
     
-    //查询最大id
-    BigInteger findItemMaxId();
+    //查询当前数据id
+    BigInteger findItemCommonInfoId(WzyItemInfo Item);
     
 	//增加用户的商品
 	int saveItemCommonInfo(ItemCommonInfo Item);

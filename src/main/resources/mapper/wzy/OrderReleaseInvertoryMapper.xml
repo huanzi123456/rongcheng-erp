@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rongcheng.erp.dao.Wzy_InventoryOrderReleaseDAO">
 
-    <select id="findWarehouseRegionShopByOwnerId" resultType="com.rongcheng.erp.entity.vo.WarehouseRegionShopVO">
+    <select id="findWarehouseRegionShopByOwnerId" resultType="com.rongcheng.erp.dto.WzyWarehouseRegionShop">
         select d.id as id, d.user_warehouse_code as warehouseCode, d.warehouse_name as warehouseName, 
         t.name as stocklocationName, t.id as stocklocationId
         from stocklocation_info as t,warehouse_info as d

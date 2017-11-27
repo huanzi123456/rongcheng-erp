@@ -1,49 +1,46 @@
 var max_page=1;//0.全局变量 最大页数
 var now_page=1;//0.全局变量 当前页数
 var checkId=null;//0.全局遍历 选中的id
-
 $(function() {
-	//1.空
-    //2.空
-	//3.加载快递面单页面
-	loadExpressTemplate(parseInt(now_page), null, 1, null);
+	//1.加载快递面单页面
+	loadExpressTemplate(1);
 	
-	//4.监听页码点击事件
+	//2.监听页码点击事件
 	$("#expressTemplate_table").on("click", ".pagelist a", pageClick);
 	
-	//5.添加模版单击事件 加载快递公司
+	//3.添加模版单击事件 加载快递公司
 	$("#expressTemplate_addExpressTemplate").click(loadCarrierInfo);
 	
-	//6.监听快递公司点击事件  更改选择框
+	//4.监听快递公司点击事件  更改选择框
 	$("#expressTemplate_carrierInfo").on("click", "li", clickCarrierInfo);
 	
-	//7.添加模版单击事件 加载面单图片
-	$("#expressTemplate_addExpressTemplate").click(loadPrintTemplateImage);
-	
-	//8.监听面单图片点击事件  更改选择框
+	//5.添加模版单击事件 加载面单图片
+    $("#expressTemplate_carrierInfo").on("click", "li", loadPrintTemplateImage);
+
+	//6.监听面单图片点击事件  更改选择框
 	$("#expressTemplate_printTemplateImage").on("click", "li", clickPrintTemplateImage);
 	
-	//9.监听“下一步”单击事件
+	//7.监听“下一步”单击事件
 	$("#expressTemplate_next").on("click", "a", nextStep);
 	
-	//10.监听修改单击事件
+	//8.监听修改单击事件
 	$("#expressTemplate_table").on("click", ".expressTemplate_update", expressTemplateUpdate);
 	
-	//11.监听删除单击事件
+	//9.监听删除单击事件
 	$("#expressTemplate_table").on("click", ".expressTemplate_remove", expressTemplateRemove);
 	
-	//12.复制并新建 单击事件
+	//10.复制并新建 单击事件
 	$("#expressTemplate_copyAdd").click(copyAdd);
 	
-	//13.点击整条模版，选中单选框
+	//11.点击整条模版，选中单选框
 	$("#expressTemplate_table").on("click", ".tr_expressTempLate", clickTempLate);
 	
-	//14.鼠标悬浮，改变背景颜色
+	//12.鼠标悬浮，改变背景颜色
 	$("#expressTemplate_table").on("mouseover mouseout", ".tr_expressTempLate", mouseTempLateTr);
 });
 
 /**
- * 14.鼠标悬浮，改变背景颜色
+ * 12.鼠标悬浮，改变背景颜色
  * @returns
  * @author 赵滨
  */
@@ -59,7 +56,7 @@ function mouseTempLateTr() {
 }
 
 /**
- * 13.点击整条模版，选中单选框
+ * 11.点击整条模版，选中单选框
  * @returns
  * @author 赵滨
  */
@@ -75,70 +72,36 @@ function clickTempLate() {
 }
 
 /**
- * 12.复制并新建 单击事件
+ * 10.复制并新建 单击事件
  * @returns
  * @author 赵滨
  */
 function copyAdd() {
-
-	//移除click	用来防止无限点击
-	$('#expressTemplate_copyAdd').unbind("click");
-	
-	//定义两个筛选条件 用来开启点击事件
-	var returnAjax = false;
-	var timeOut1000 = false;
-	//定时器 一秒
-	setTimeout(function(){
-		//完成定时
-		timeOut1000 = true;
-		//如果条件都满足
-		if (returnAjax == true) {
-			//添加点击事件
-			$("#expressTemplate_copyAdd").click(copyAdd);
-		}
-	},1000)
-	
 	//获取订单id
 	var printTemplateId = $("input[name='checkExpressTempLate']:checked").parent().parent().data("printTemplateId");
 	//如果没有选中
 	if (printTemplateId == null) {
 		showMessage("请选择一个模版用来复制");
 	}else {
-		//获取参数
-		var authorized = getCookie("authorized");
-		var ownerId = getCookie("ownerId");
-		var operatorId = getCookie("operatorId");
-		
 		//发送请求，复制
 		$.ajax({
-			url : path+"/expressTemplate/copyAddExpressTemplate.do",
+			url : "/expressTemplate/copyAddExpressTemplate.do",
 			type : "post",
 			data : {
-				"printTemplateId" : printTemplateId,
-				"authorized" : authorized,
-				"ownerId" : ownerId,
-				"operatorId" : operatorId
+				"printTemplateId" : printTemplateId
 			},
 			dataType : "json",
 			success : function(result) {
-				//获取对象
-				var printTemplate = result.data;
-				/*console.log(printTemplate);*/
-				//如果复制名称过长
-				if (printTemplate == null) {
-					//提示
-					showMessage("复制的模版名称过长");
-				} else {
+                if (result.state == 1) {
+                    showMessage(result.message);
+                    return;
+                } else {
+                    //获取对象
+                    var printTemplate = result.data;
                     //加载页面
-                    loadExpressTemplate(parseInt(now_page), null, 1, null);
-				}
-				//完成返回
-				returnAjax = true;
-				//如果条件都满足
-				if (timeOut1000 == true) {
-					//添加点击事件
-					$("#expressTemplate_copyAdd").click(copyAdd);
-				}
+                    loadExpressTemplate(parseInt(now_page));
+                    showMessage("复制成功")
+                }
 			},
 			error : function() {
 				showMessage("复制失败!");
@@ -148,39 +111,30 @@ function copyAdd() {
 }
 
 /**
- * 11.监听删除单击事件
+ * 9.监听删除单击事件
  * @returns
  * @author 赵滨
  */
 function expressTemplateRemove() {
-	
-	if (confirm("您确定要删除吗?")) { 
-		//获取参数
-		var authorized = getCookie("authorized");
-		var ownerId = getCookie("ownerId");
-		var operatorId = getCookie("operatorId");
-		
+	if (confirm("您确定要删除吗?")) {
 		//获取顶级tr
 		var $tr = $(this).parent().parent().parent();
 		//获取模版id
 		var printTemplateId = $tr.data("printTemplateId");
-		
-		//发送请求，删除内容
+
+        //发送请求，删除内容
 		$.ajax({
-			url : path+"/expressTemplate/removeExpressTemplate.do",
+			url : "/expressTemplate/removeExpressTemplate.do",
 			type : "post",
 			data : {
-				"printTemplateId" : printTemplateId,
-				"authorized" : authorized,
-				"ownerId" : ownerId,
-				"operatorId" : operatorId
+				"printTemplateId" : printTemplateId
 			},
 			dataType : "json",
 			success : function(result) {
 				if (result.state == 0) {
 					var row = result.data;
 					//如果删除的行数，不是0行
-					if (row !=0 ) {
+                    if (row > 0) {
 						showMessage("删除成功!");
                         //获取页面中的显示条数
                         var rows = $("#expressTemplate_table").find("tr");
@@ -190,7 +144,7 @@ function expressTemplateRemove() {
                             now_page--;
                         }
                         //加载页面
-                        loadExpressTemplate(parseInt(now_page), null, 1, null);
+                        loadExpressTemplate(parseInt(now_page));
 					} else {
 						showMessage("删除中失败!");
 					}
@@ -204,12 +158,11 @@ function expressTemplateRemove() {
 }
 
 /**
- * 10.监听修改单击事件
+ * 8.监听修改单击事件
  * @returns
  * @author 赵滨
  */
 function expressTemplateUpdate() {
-	
 	//获取顶级tr
 	var $tr = $(this).parent().parent().parent();
 	//获取模版id
@@ -220,12 +173,11 @@ function expressTemplateUpdate() {
 }
 
 /**
- * 9.“下一步”单击事件
+ * 7.“下一步”单击事件
  * @returns
  * @author 赵滨
  */
 function nextStep() {
-	
 	//获取快递公司id
 	for (var i = 0; i < $("#expressTemplate_carrierInfo li").length; i++) {
 		if ($("#expressTemplate_carrierInfo li").eq(i).attr("class") == "clicking_font_li") {
@@ -259,12 +211,11 @@ function nextStep() {
 }
 
 /**
- * 8.监听面单图片点击事件  更改选择框
+ * 6.监听面单图片点击事件  更改选择框
  * @returns
  * @author 赵滨
  */
 function clickPrintTemplateImage() {
-
 	//获取第0个的class名字
 	var $clickClass = $(this).eq(0).attr("class");
 	//获取li集合
@@ -277,17 +228,10 @@ function clickPrintTemplateImage() {
 		//给选中的li加上class
 		$(this).children("img").attr("class","clicking_img_li");
 	}
-	//获取选中内容
-	/*for (var i = 0; i < $clickLiList.length; i++) {
-		if ($clickImgList.eq(i).attr("class") == "clicking_img_li") {
-			console.log($clickImgList.eq(i).attr("src"));
-		}
-	}*/
-
 }
 
 /**
- * 7.添加模版单击事件 加载面单图片
+ * 5.添加模版单击事件 加载面单图片
  * @returns
  * @author 赵滨
  */
@@ -296,21 +240,19 @@ function loadPrintTemplateImage() {
 	$("#expressTemplate_printTemplateImage li").remove();
 	//获取面单类型数组
 	var templateType = [7, 8, 9];
-	//获取参数
-	var authorized = getCookie("authorized");
-	var ownerId = getCookie("ownerId");
-	var operatorId = getCookie("operatorId");
 	//定义是否获取预设模版
 	var preset = true;
+    //获取快递公司id
+    var carrierInfoId =  $(this).data("carrierInfoId");
+    var carrierInfoName = $(this).html();
+
 	//发送请求，获取图片
 	$.ajax({
-		url : path+"/expressTemplate/loadPrintTemplateImage.do",
+		url : "/expressTemplate/loadPrintTemplateImage.do",
 		type : "post",
 		traditional : true,
 		data : {
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
+			"carrierInfoId" : carrierInfoId,
 			"templateType" : templateType,
 			"preset" : preset
 		},
@@ -320,73 +262,54 @@ function loadPrintTemplateImage() {
 				//获取面单模版图片集合
 				var printTemplateImageList = result.data;
 				//创建面单模版图片
-				createPrintTemplateImage(printTemplateImageList);
+				createPrintTemplateImage(printTemplateImageList, carrierInfoName);
 			}
 		},
 		error : function() {
 			showMessage("图片加载失败!");
 		}
-		
 	});
 }
 
 /**
- * 7.1.创建面单模版图片
+ * 5.1.创建面单模版图片
  * @param printTemplateImageList 面单模版图片集合
  * @returns
  * @author 赵滨
  */
-function createPrintTemplateImage(printTemplateImageList) {
-	
-	//监听快递公司点击事件
-	$("#expressTemplate_carrierInfo").on("click", "li", function(){
-		
-		//清空页面内容
-		$("#expressTemplate_printTemplateImage li").remove();
-		
-		//获取快递公司id
-		var carrierInfoId =  $(this).data("carrierInfoId");
-		/*console.log(carrierInfoId);*/
-		
-		//创建table用于加入tr内容
-		var $printTemplateImage = $("#expressTemplate_printTemplateImage");
-		
-		//创建tr拼接块
-		var li = "";
-		
-		//第一部分 上部
-		li = "";
-		li += '<li class="picture_head">面单图片</li>';
-		
-		//将li对象添加到expressTemplate_printTemplateImage身后
-		$printTemplateImage.append(li);
-		
-		//遍历预设模版	第二部分 下部
-		for (var i = 0; i < printTemplateImageList.length; i++) {
-			
-			//根据快递公司id判断是否添加这条内容
-			if (carrierInfoId == printTemplateImageList[i].carrierId) {
-				li = "";
-				li += '<li><img src="';
-				li += printTemplateImageList[i].templateImage;
-				li += '" alt="" class="clicking_li_img"><br/>';
-				li += "<b>["+printTemplateImageList[i].carrierName+"]</b> ";
-				li += printTemplateImageList[i].templateName;
-				li += '</li>';
-				//转换对象
-				var $li = $(li);
-				//绑定id
-				$li.data("printTemplateId",printTemplateImageList[i].id);
-				//将li对象添加到expressTemplate_carrierInfo身后
-				$printTemplateImage.append($li);
-			}
-		}
-	});
+function createPrintTemplateImage(printTemplateImageList, carrierInfoName) {
+    //创建table用于加入tr内容
+    var $printTemplateImage = $("#expressTemplate_printTemplateImage");
 
+    //创建tr拼接块
+    var li = "";
+    //第一部分 上部
+    li = "";
+    li += '<li class="picture_head">面单图片</li>';
+
+    //将li对象添加到expressTemplate_printTemplateImage身后
+    $printTemplateImage.append(li);
+
+    //遍历预设模版	第二部分 下部
+    for (var i = 0; i < printTemplateImageList.length; i++) {
+        li = "";
+        li += '<li><img src="';
+        li += printTemplateImageList[i].templateImage;
+        li += '" alt="" class="clicking_li_img"><br/>';
+        li += "<b>["+carrierInfoName+"]</b> ";
+        li += printTemplateImageList[i].templateName;
+        li += '</li>';
+        //转换对象
+        var $li = $(li);
+        //绑定id
+        $li.data("printTemplateId",printTemplateImageList[i].id);
+        //将li对象添加到expressTemplate_carrierInfo身后
+        $printTemplateImage.append($li);
+    }
 }
 
 /**
- * 6.监听快递公司点击事件  更改选择框
+ * 4.监听快递公司点击事件  更改选择框
  * @returns
  * @author 赵滨
  */
@@ -402,40 +325,24 @@ function clickCarrierInfo() {
 			//给选中的li加上class
 			$(this).attr("class","clicking_font_li");
 		}
-		//获取选中内容
-		/*for (var i = 0; i < $clickLiList.length; i++) {
-			if ($clickLiList.eq(i).attr("class") == "clicking_font_li") {
-				console.log($clickLiList.eq(i).data("carrierInfoId"));
-			}
-		}*/
 }
 
 /**
- * 5.添加模版单击事件 加载快递公司
+ * 3.添加模版单击事件 加载快递公司
  * @returns
  * @author 赵滨
  */
 function loadCarrierInfo() {
-	
-	//获取参数
-	var authorized = getCookie("authorized");
-	var ownerId = getCookie("ownerId");
-	var operatorId = getCookie("operatorId");
 	//发送请求，加载快递公司名称
 	$.ajax({
-		url : path+"/carrierInfo/loadCarrierInfo.do",
+		url : "/carrierInfo/loadCarrierInfo.do",
 		type : "post",
-		data : {
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId
-		},
+		data : {},
 		dataType : "json",
 		success : function(result) {
 			if (result.state == 0) {
 				//获取快递信息集合
 				var carrierInfoList = result.data;
-				/*console.log(carrierInfoList);*/
 				//创建快递公司名称
 				createCarrierInfo(carrierInfoList);
 			}
@@ -443,12 +350,11 @@ function loadCarrierInfo() {
 		error : function() {
 			showMessage("快递公司加载失败!");
 		}
-		
 	});
 }
 
 /**
- * 5.1.创建快递公司名称
+ * 3.1.创建快递公司名称
  * @param carrierInfoList 快递信息集合
  * @returns
  * @author 赵滨
@@ -486,7 +392,7 @@ function createCarrierInfo(carrierInfoList) {
 }
 
 /**
- * 4.监听页码点击事件
+ * 2.监听页码点击事件
  * @returns
  * @author 赵滨
  */
@@ -538,31 +444,25 @@ function pageClick() {
         now_page = parseInt(aHtml);
     }
 	//加载页面
-	loadExpressTemplate(parseInt(now_page), getCookie("authorized"), getCookie("ownerId"), getCookie("operatorId"));
+	loadExpressTemplate(parseInt(now_page));
 }
 
 /**
- * 3.加载快递面单页面
+ * 1.加载快递面单页面
  * @param page	需要加载第几页数
- * @param authorized	是否授权
- * @param ownerId	主账户ID
- * @param operatorId 操作人ID
  * @returns
  * @author 赵滨
  */
-function loadExpressTemplate(page, authorized, ownerId, operatorId) {
+function loadExpressTemplate(page) {
 	var templateType = [7, 8, 9];
 	
 	//发送请求
 	$.ajax({
-		url : path+"/expressTemplate/loadExpressTemplate.do",
+		url : "/expressTemplate/loadExpressTemplate.do",
 		type : "post",
 		traditional : true,
 		data : {
 			"page" : page,
-			"authorized" : authorized,
-			"ownerId" : ownerId,
-			"operatorId" : operatorId,
 			"templateType" : templateType
 		},
 		dataType : "json",
@@ -591,7 +491,7 @@ function loadExpressTemplate(page, authorized, ownerId, operatorId) {
 }
 
 /**
- * 3.1.创建快递面单内容
+ * 1.1.创建快递面单内容
  * @param map 快递面单和快递信息的集合
  * @returns
  * @author 赵滨

@@ -1,18 +1,17 @@
 package com.rongcheng.erp.service.Shipment;
 
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.rongcheng.erp.dao.ZB_PrintDAO;
 import com.rongcheng.erp.dao.ZB_ShipmentDAO;
 import com.rongcheng.erp.entity.OrderInfo;
 import com.rongcheng.erp.exception.OrderOutNumberException;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 验货发货 业务层Impl
@@ -35,9 +34,8 @@ public class ZB_ShipmentServiceImpl implements ZB_ShipmentService {
      * @return map 验货发货信息
      * @author 赵滨
      */
-    public Map<String, Object> shipmentInspectionOddNumbers(String oddNumbers, Long ownerId) 
+    public Map<String, Object> shipmentInspectionOddNumbers(String oddNumbers, BigInteger ownerId)
             throws OrderOutNumberException{
-        
         //0.创建验货发货集合map
         Map<String, Object> map = new HashMap<String, Object>();
         
@@ -60,12 +58,7 @@ public class ZB_ShipmentServiceImpl implements ZB_ShipmentService {
         //3.获取订单验货信息(订单信息和买家信息)
         Map<String, Object> mapOrder =  shipmentDAO.getShipmentByOrderNumTrackingNum(oddNumbers, ownerId);
         map.put("mapOrder", mapOrder);
-        
-        
 
-                
-        
-        
         return map;
     }
 
@@ -76,8 +69,7 @@ public class ZB_ShipmentServiceImpl implements ZB_ShipmentService {
      * @return
      * @author 赵滨
      */
-    public int shipmentInspectionDeliverGoods(String oddNumbers, Long ownerId) {
-        
+    public int shipmentInspectionDeliverGoods(String oddNumbers, BigInteger ownerId) {
         //根据单号查找订单
         OrderInfo orderInfo = shipmentDAO.getOrderInfoByOrderNumTrackingNum(oddNumbers, ownerId, 0);
         
@@ -95,5 +87,4 @@ public class ZB_ShipmentServiceImpl implements ZB_ShipmentService {
         
         return row;
     }
-
 }

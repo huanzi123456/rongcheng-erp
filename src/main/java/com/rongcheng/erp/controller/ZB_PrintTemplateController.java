@@ -1,22 +1,24 @@
 package com.rongcheng.erp.controller;
 
 
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.rongcheng.erp.entity.OrderInfo;
+import com.rongcheng.erp.entity.PrintTemplate;
+import com.rongcheng.erp.entity.UserInfo;
+import com.rongcheng.erp.exception.NameException;
+import com.rongcheng.erp.service.printTemplate.ZB_PrintTemplateService;
+import com.rongcheng.erp.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongcheng.erp.entity.OrderInfo;
-import com.rongcheng.erp.entity.PrintTemplate;
-import com.rongcheng.erp.service.printTemplate.ZB_PrintTemplateService;
-import com.rongcheng.erp.utils.JsonResult;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 单据模板表 控制层
@@ -25,14 +27,20 @@ import com.rongcheng.erp.utils.JsonResult;
  */
 @Controller
 public class ZB_PrintTemplateController {
-    
     //分页相关（每页多少条）
     @Value("#{config['rows']}")
     private int rows;
-    
+
     @Resource
     private ZB_PrintTemplateService printTemplateService;
-    
+
+    @ExceptionHandler(NameException.class)
+    @ResponseBody
+    public JsonResult uploadStockException(NameException e){
+        e.printStackTrace();
+        return new JsonResult(JsonResult.ERROR, e);
+    }
+
     /**
      * 跳转快递面单页面
      * @return jsp页面
@@ -46,76 +54,68 @@ public class ZB_PrintTemplateController {
     /**
      * 加载快递面单页面的内容
      * @param page  加载的页数
-     * @param authorized    是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId    操作人ID
      * @param templateType  模版类型
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/expressTemplate/loadExpressTemplate.do")
-    public JsonResult loadExpressTemplate(int page, Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType) {
-        /*System.out.println(page+","+authorized+","+ownerId+","+operatorId+","+templateType+","+rows);*/
-        Map<String, Object> map = printTemplateService.listPrintTemplateByPage(page, rows, authorized, ownerId, 
-                operatorId, templateType);
+    public JsonResult loadExpressTemplate(int page, Integer[] templateType, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+        Map<String, Object> map = printTemplateService.listPrintTemplateByPage(page, rows, ownerId, templateType);
         return new JsonResult(map);
     }
 
     /**
      * 查询单据模板图片 （无重复）
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param carrierInfoId 快递ID
      * @param templateType 模版类型[]
      * @param preset 是否使用预设模版
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/expressTemplate/loadPrintTemplateImage.do")
-    public JsonResult loadPrintTemplateImage(Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType, Boolean preset) {
+    public JsonResult loadPrintTemplateImage(
+            BigInteger carrierInfoId, Integer[] templateType, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //获取图片
-        List<PrintTemplate> list = printTemplateService.listPrintTemplateByType(authorized, ownerId, operatorId, 
-                templateType, preset);
+        List<PrintTemplate> list =
+                printTemplateService.listPrintTemplateByType(ownerId, carrierInfoId, templateType, preset);
         return new JsonResult(list);
     }
     
     /**
      * 删除单据模板
      * @param printTemplateId 单据模板id
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param session HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/expressTemplate/removeExpressTemplate.do")
-    public JsonResult removeExpressTemplate(BigInteger printTemplateId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult removeExpressTemplate(BigInteger printTemplateId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //删除模版
-        int row = printTemplateService.removePrintTemplateById(printTemplateId, authorized, ownerId, operatorId);
+        int row = printTemplateService.removePrintTemplateById(printTemplateId, ownerId);
         return new JsonResult(row);
     }
     
     /**
      * 复制并新建单据模板 
      * @param printTemplateId 单据模板id
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param session HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/expressTemplate/copyAddExpressTemplate.do")
-    public JsonResult copyAddExpressTemplate(BigInteger printTemplateId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult copyAddExpressTemplate(BigInteger printTemplateId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //复制模版
-        PrintTemplate printTemplate = printTemplateService.copyAddExpressTemplate(printTemplateId, authorized, ownerId, operatorId);
+        PrintTemplate printTemplate = printTemplateService.copyAddExpressTemplate(printTemplateId, ownerId);
         return new JsonResult(printTemplate);
     }
 
@@ -131,36 +131,37 @@ public class ZB_PrintTemplateController {
 
     /**
      * 加载 添加修改 模版页面的内容
-     * @param authorized    是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId    操作人ID
      * @param printTemplateId  模版id
      * @param preset 是否使用预设模版
+     * @param session    HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/addAmendExpressTemplate/loadAddAmendExpressTemplate.do")
-    public JsonResult loadAddAmendExpressTemplate(Boolean authorized, BigInteger ownerId, BigInteger operatorId,
-                                             BigInteger printTemplateId, Boolean preset) {
-        Map<String, Object> map = printTemplateService.listPrintTemplateById(authorized, ownerId, operatorId, printTemplateId, preset);
+    public JsonResult loadAddAmendExpressTemplate(BigInteger printTemplateId, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+        Map<String, Object> map = printTemplateService.listPrintTemplateById(ownerId, printTemplateId, preset);
         return new JsonResult(map);
     }
 
     /**
      * 提交 添加修改 模版功能
      * @param request 请求
+     * @param preset    是否预设模版
+     * @param session    HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/addAmendExpressTemplate/commitAddAmendExpressTemplate.do")
-    public JsonResult commitAddAmendExpressTemplate(HttpServletRequest request, Boolean preset) {
+    public JsonResult commitAddAmendExpressTemplate(HttpServletRequest request, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+
         //获取集合map
         Map map = request.getParameterMap();
-
         //添加
-        int row = printTemplateService.saveUpdatePrintTemplate(map, preset);
+        int row = printTemplateService.saveUpdatePrintTemplate(map, preset, ownerId);
         return new JsonResult(row);
     }
 
@@ -177,76 +178,68 @@ public class ZB_PrintTemplateController {
     /**
      * 加载自定义单据页面的内容
      * @param page  加载的页数
-     * @param authorized    是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId    操作人ID
      * @param templateType  模版类型
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/invoiceTemplate/loadInvoiceTemplate.do")
-    public JsonResult loadInvoiceTemplate(int page, Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType) {
-        /*System.out.println(page+","+authorized+","+ownerId+","+operatorId+","+templateType+","+rows);*/
-        Map<String, Object> map = printTemplateService.listPrintTemplateByPage(page, rows, authorized, ownerId, 
-                operatorId, templateType);
+    public JsonResult loadInvoiceTemplate(int page, Integer[] templateType, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+        Map<String, Object> map = printTemplateService.listPrintTemplateByPage(page, rows, ownerId, templateType);
         return new JsonResult(map);
     }
 
     /**
      * 查询单据模板图片 （无重复）
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param carrierInfoId 快递ID
      * @param templateType 模版类型[]
      * @param preset 是否使用预设模版
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/invoiceTemplate/loadPrintTemplateImage.do")
-    public JsonResult loadPrintTemplateImg(Boolean authorized, BigInteger ownerId, BigInteger operatorId, 
-            Integer[] templateType, Boolean preset) {
+    public JsonResult loadPrintTemplateImg(
+            BigInteger carrierInfoId, Integer[] templateType, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //获取图片
-        List<PrintTemplate> list = printTemplateService.listPrintTemplateByType(authorized, ownerId, operatorId, 
-                templateType, preset);
+        List<PrintTemplate> list =
+                printTemplateService.listPrintTemplateByType(ownerId, carrierInfoId, templateType, preset);
         return new JsonResult(list);
     }
-    
+
     /**
      * 删除自定义单据模板
      * @param printTemplateId 单据模板id
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/invoiceTemplate/removeInvoiceTemplate.do")
-    public JsonResult removeInvoiceTemplate(BigInteger printTemplateId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult removeInvoiceTemplate(BigInteger printTemplateId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //删除模版
-        int row = printTemplateService.removePrintTemplateById(printTemplateId, authorized, ownerId, operatorId);
+        int row = printTemplateService.removePrintTemplateById(printTemplateId, ownerId);
         return new JsonResult(row);
     }
     
     /**
      * 复制并新建单据模板 
      * @param printTemplateId 单据模板id
-     * @param authorized 是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId 操作人ID
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/invoiceTemplate/copyAddInvoiceTemplate.do")
-    public JsonResult copyAddInvoiceTemplate(BigInteger printTemplateId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult copyAddInvoiceTemplate(BigInteger printTemplateId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //复制模版
-        PrintTemplate printTemplate = printTemplateService.copyAddExpressTemplate(printTemplateId, authorized, ownerId, operatorId);
+        PrintTemplate printTemplate = printTemplateService.copyAddExpressTemplate(printTemplateId, ownerId);
         return new JsonResult(printTemplate);
     }
     
@@ -262,73 +255,69 @@ public class ZB_PrintTemplateController {
 
     /**
      * 加载 添加修改 自定义模版页面的内容
-     * @param authorized    是否授权
-     * @param ownerId   主账号ID
-     * @param operatorId    操作人ID
      * @param printTemplateId  模版id
      * @param preset 是否使用预设模版
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/addAmendInvoiceTemplate/loadAddAmendInvoiceTemplate.do")
-    public JsonResult loadAddAmendInvoiceTemplate(Boolean authorized, BigInteger ownerId, BigInteger operatorId,
-            BigInteger printTemplateId, Boolean preset) {
-        Map<String, Object> map = printTemplateService.listPrintTemplateById(authorized, ownerId, operatorId, printTemplateId, preset);
+    public JsonResult loadAddAmendInvoiceTemplate(BigInteger printTemplateId, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+        Map<String, Object> map = printTemplateService.listPrintTemplateById(ownerId, printTemplateId, preset);
         return new JsonResult(map);
     }
     
     /**
      * 提交 添加修改 自定义模版功能
      * @param request 请求
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/addAmendInvoiceTemplate/commitAddAmendInvoiceTemplate.do")
-    public JsonResult commitAddAmendInvoiceTemplate(HttpServletRequest request, Boolean preset) {
+    public JsonResult commitAddAmendInvoiceTemplate(HttpServletRequest request, Boolean preset, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //获取集合map
         Map map = request.getParameterMap();
         //添加
-        int row = printTemplateService.saveUpdatePrintTemplate(map, preset);
+        int row = printTemplateService.saveUpdatePrintTemplate(map, preset, ownerId);
         return new JsonResult(row);
     }
     
     /**
      * 加载打印页面的面单模版
      * @param carrierId 快递公司id
-     * @param authorized 是否授权
-     * @param ownerId   主账号id
-     * @param operatorId 操作人id
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/printTemplate/loadPrintTemplate.do")
-    public JsonResult loadPrintTemplate(BigInteger carrierId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult loadPrintTemplate(BigInteger carrierId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //查询
         List<PrintTemplate> list = 
-                printTemplateService.listPrintTemplateByCarrierId(carrierId, authorized, ownerId, operatorId);
+                printTemplateService.listPrintTemplateByCarrierId(carrierId, ownerId);
         return new JsonResult(list);
     }
     
     /**
      * 加载打印页面的自定义面单模版
      * @param carrierId 快递公司id
-     * @param authorized 是否授权
-     * @param ownerId   主账号id
-     * @param operatorId 操作人id
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/printTemplate/loadInvoiceTemplate.do")
-    public JsonResult loadInvoiceTemplate(BigInteger carrierId, Boolean authorized, BigInteger ownerId, 
-            BigInteger operatorId) {
+    public JsonResult loadInvoiceTemplate(BigInteger carrierId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         //查询
         List<PrintTemplate> list = 
-                printTemplateService.listPrintTemplateByCarrierId(carrierId, authorized, ownerId, operatorId);
+                printTemplateService.listPrintTemplateByCarrierId(carrierId, ownerId);
         return new JsonResult(list);
     }
     
@@ -336,54 +325,33 @@ public class ZB_PrintTemplateController {
      * 添加或修改订单的快递单号
      * @param orderInfoId 订单id
      * @param trackingNum 快递单号
-     * @param authorized 是否授权
-     * @param ownerId   主账号id
-     * @param operatorId 操作人id
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/printTemplate/addOrModifyTracking.do")
-    public JsonResult addOrModifyTracking(BigInteger orderInfoId, BigInteger trackingNum, Boolean authorized, 
-            BigInteger ownerId, BigInteger operatorId) {
+    public JsonResult addOrModifyTracking(BigInteger orderInfoId, BigInteger trackingNum, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
         OrderInfo orderInfo = 
-                printTemplateService.addOrModifyTracking(orderInfoId, trackingNum, authorized, ownerId, operatorId);
+                printTemplateService.addOrModifyTracking(orderInfoId, trackingNum, ownerId);
         return new JsonResult(orderInfo);
     }
     
     /**
      * 打印面单功能
      * 
-     * @param request
      * @param orderInfoId 订单id[]
      * @param printTemplateId 模版id
-     * @param authorized 是否授权
-     * @param ownerId 主账号id
-     * @param operatorId 操作人id
+     * @param session  HttpSession
      * @return
      * @author 赵滨
      */
     @ResponseBody
     @RequestMapping("/printTemplate/printTemplate.do")
-    public JsonResult printTemplate(HttpServletRequest request, BigInteger[] orderInfoId, BigInteger printTemplateId, 
-            Boolean authorized, BigInteger ownerId, BigInteger operatorId) {
-        
-        //获取项目根目录
-        String projectPath = request.getServletContext().getRealPath("/");
-        
-        /*System.out.println(projectPath);
-        for (int i = 0; i < orderInfoId.length; i++) {
-            System.out.println(orderInfoId[i]);
-        }
-        System.out.println(templateType+","+authorized+","+ownerId+","+operatorId);*/
-        
-        //打印
-//        List<OrderInfo> list = printTemplateService.printTemplate(authorized, ownerId, 
-//                operatorId, orderInfoId, printTemplateId, projectPath);
-//        return new JsonResult(list);
-        Map<String, Object> returnMap = printTemplateService.listPrintAll(authorized, ownerId, 
-                operatorId, orderInfoId, printTemplateId);
+    public JsonResult printTemplate(BigInteger[] orderInfoId, BigInteger printTemplateId, HttpSession session) {
+        BigInteger ownerId = ((UserInfo) (session.getAttribute("user"))).getOwnerId();
+        Map<String, Object> returnMap = printTemplateService.listPrintAll(ownerId, orderInfoId, printTemplateId);
         return new JsonResult(returnMap);
     }
-    
 }

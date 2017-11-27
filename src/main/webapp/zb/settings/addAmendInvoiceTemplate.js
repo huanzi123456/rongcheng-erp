@@ -1,11 +1,6 @@
-//0.全局变量，打印组件
-var LODOP = window.parent.LODOP;
-
-//0.全局变量 保存删除的id数组
-var fieldCoordinateIdDel = [];
-
+var LODOP = window.parent.LODOP;//0.全局变量，打印组件
+var fieldCoordinateIdDel = [];//0.全局变量 保存删除的id数组
 $(function() {
-
 	//1.加载页面
 	loadAddAmendInvoiceTemplate();
 	
@@ -56,30 +51,24 @@ function checkShippingList() {
  * @author 赵滨
  */
 function loadPrinter() {
-	
 	//如果没有获取到打印组件
 	if (LODOP == null || LODOP == undefined) {
 		showMessage("打印控件没有正确安装或启动，请点击上方执行安装。");
 		return;
 	}
-	
 	//获取打印机数目
 	var PRINTER_COUNT = LODOP.GET_PRINTER_COUNT();
-	
 	//如果没有打印机
 	if (PRINTER_COUNT == 0) {
 		return;
 	}
-	
     //清空打印机选项
     $("#addAmendInvoiceTemplate_printChoice").children().remove();
     
     //拼接块
     var op = '<option value="-1">默认打印机</option>';
-    
     //加入选项中
     $("#addAmendInvoiceTemplate_printChoice").append(op);
-    	
 	//遍历数组
 	for (var i = 0; i < PRINTER_COUNT; i++) {
 		op = '';
@@ -98,7 +87,6 @@ function loadPrinter() {
  * @author 赵滨
  */
 function commitAddAmendInvoiceTemplate() {
-	
 	//局部变量，用于删除数组
 	var delFieldCoordinateId = [];
 	//复制数组,避免影响全局变量
@@ -106,14 +94,11 @@ function commitAddAmendInvoiceTemplate() {
 	
 	//判断条件ok
 	var ok = true;
-	
 	//创建发送的参数对象
 	var data = {};
-	
 	//获取基础参数
 	var printTemplateId = getCookie("printTemplateId");
 	//加入到data中
-	data["ownerId"] = 1;
 	data["printTemplateId"] = printTemplateId;
 
 	//获取页面参数 （模版）
@@ -136,7 +121,6 @@ function commitAddAmendInvoiceTemplate() {
 	data["templateWidth"] = templateWidth;
 	data["templateHeight"] = templateHeight;
 	data["printChoice"] = printChoice;
-	/*console.log(templateName, widthTemplate, heightTemplate, printChoice);*/
 	if (templateName == "") {
 		showMessage("请输入模版名称");
 		ok = false;
@@ -144,7 +128,6 @@ function commitAddAmendInvoiceTemplate() {
 
     //定义个数变量
     var iNum = 1;
-
 	//获取框内参数 （坐标） 上部
 	var childrenDiv = $(".header_content").children("div");
 	//遍历集合
@@ -206,7 +189,6 @@ function commitAddAmendInvoiceTemplate() {
         var yLength = childrenDiv.eq(i).find("textarea").css("height");
         //获取坐标id
         var fieldCoordinateId = childrenDiv.eq(i).data("fieldCoordinateId");
-        // console.log(fieldName, topCoordinate, leftCoordinate, xLength, yLength, fieldCoordinateId);
 
         //如果是添加内容
         if (typeof(fieldCoordinateId) == "undefined") {
@@ -344,7 +326,6 @@ function commitAddAmendInvoiceTemplate() {
 			error : function() {
 				showMessage("模版提交失败!");
 			}
-			
 		});
 	}
 }
@@ -355,7 +336,6 @@ function commitAddAmendInvoiceTemplate() {
  * @author 赵滨
  */
 function moveAddAmendInvoiceTemplate() {
-
     //获取框内数值集合
     var childrenDiv = $("#addAmendInvoiceTemplate_printChoice").children("div").children("div");
     //获取左移数值（毫米）
@@ -380,7 +360,6 @@ function moveAddAmendInvoiceTemplate() {
         ok = false;
     }
     if (ok) {
-
         //获取模版的宽度（像素数）
         var widthTemplate = $("#addInvoiceTemplate_background").width();
         //获取模版的高度（像素数）
@@ -466,7 +445,6 @@ function moveAddAmendInvoiceTemplate() {
  * @author 赵滨
  */
 function loadAddAmendInvoiceTemplate() {
-
     $(".header_content").width(1000);
     $(".header_content").height(180);
     $(".table_list_box").width(1000);
@@ -514,20 +492,16 @@ function loadAddAmendInvoiceTemplate() {
         $("#addAmendInvoiceTemplate_title").html("修改模版");
     }
 
-	//根据id，要获取模版信息，和坐标信息
+    //根据id，要获取模版信息，和坐标信息
 	$.ajax({
 		url : "/addAmendInvoiceTemplate/loadAddAmendInvoiceTemplate.do",
 		type : "post",
 		data : {
-			"authorized" : true,
-			"ownerId" : 1,
-			"operatorId" : 1,
 			"printTemplateId" : printTemplateId,
 			"preset" : preset
 		},
 		dataType : "json",
 		success : function(result) {
-
             if (result.state == 0) {
 				//获取map
 				var map = result.data;
@@ -550,7 +524,6 @@ function loadAddAmendInvoiceTemplate() {
 
 				//获取坐标集合  第二部分
 				var fieldCoordinateList = map.fieldCoordinateList;
-
                 //如果有坐标
                 if (fieldCoordinateList) {
                     for (var i = 0; i < fieldCoordinateList.length; i++) {

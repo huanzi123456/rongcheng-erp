@@ -1,11 +1,6 @@
-//0.全局变量，打印组件
-var LODOP = window.parent.LODOP;
-
-//0.全局变量 快递单号
-var trackNum;
- 
+var LODOP = window.parent.LODOP;//0.全局变量，打印组件
+var trackNum;//0.全局变量 快递单号
 $(function() {
-
     //1.点击'单据套打'
     $("#billPrinting").click(billPrinting);
 
@@ -65,7 +60,6 @@ $(function() {
  * @author 赵滨
  */
 function StartRedact() {
-
     //获取快递模版
     var printTemplate = $("#PrintTemplate").find("option:selected").data("printTemplate");
 
@@ -76,7 +70,6 @@ function StartRedact() {
     //跳转 快递单修改页面
     // window.open("/amendInvoiceTemplate.do");
     window.location.href = "/addAmendInvoiceTemplate.do";
-
 }
 
 /**
@@ -84,7 +77,6 @@ function StartRedact() {
  * @author 赵滨
  */
 function StartRedactCarrier() {
-
     //获取快递模版
     var printTemplateCarrier = $("#PrintTemplateCarrier").find("option:selected").data("printTemplateCarrier");
 
@@ -119,7 +111,6 @@ function StartPreview() {
  * @author 赵滨
  */
 function StartPreviewCarrier() {
-
     //获取快递模版
     var printTemplateCarrier = $("#PrintTemplateCarrier").find("option:selected").data("printTemplateCarrier");
 
@@ -157,7 +148,6 @@ function StartPrint() {
 
     //获取打印信息,然后打印
     StartPrintLodop(printTemplate.id, $("#Printer").find("option:selected").html(), true);
-
 }
 
 /**
@@ -213,19 +203,14 @@ function StartPrintLodop(printTemplateId, PrinterName, isPrint) {
         data : {
             "orderInfoId" : orderInfoArray,
             "printTemplateId" : printTemplateId,
-            "authorized" : 1,
-            "ownerId" : 1,
-            "operatorId" : 1
         },
         dataType : "json",
 
         success : function(result) {
             //获取集合
             var returnMap = result.data;
-
             //打印
             returnMapPrint(returnMap, PrinterName, isPrint);
-
         },
         error : function() {
             showMessage("打印失败");
@@ -239,35 +224,26 @@ function StartPrintLodop(printTemplateId, PrinterName, isPrint) {
  * @author 赵滨
  */
 function returnMapPrint(returnMap, PrinterName, isPrint) {
-
     //1 获取基本参数 和 加载打印框
-
     //获取订单集合
     var orderInfoList = returnMap.orderInfoList;
-
     //获取买家集合
     var buyerInfoList = returnMap.buyerInfoList;
-
     //获取字段坐标集合
     var fieldCoordinateList = returnMap.fieldCoordinateList;
-
     //获取订单商品集合
     var listItemCommonInfoList = returnMap.listItemCommonInfoList;
-
     //获取打印模版
     var printTemplate = returnMap.printTemplate;
-
     //获取店铺集合
     var shopInfoList = returnMap.shopInfoList;
 
     //获取模版宽
     var printTemplateWidth = printTemplate.templateWidth;
-
     //获取模版高
     var printTemplateHeight = printTemplate.templateHeight;
 
     //2 打印每一条订单信息
-
     //遍历订单,因为可能是同时打印多条订单
     for (var i = 0; i < orderInfoList.length; i++) {
         //清空
@@ -412,15 +388,11 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
                 if (storageLocation) {
                     tr += '<th>库位</th>';
                 }
-
                 tr += '</tr>';
-
                 //追加
                 $("#print_table thead").append(tr);
             }
-
             tr = '<tr>';
-
             if (serialNumber) {
                 tr += '<td><font size="5">'+(j+1)+'</font></td>';  //序号
             }
@@ -456,9 +428,7 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
             if (storageLocation) {
                 tr += '<td><font size="5">库位...</font></td>';  //库位
             }
-
             tr += '</tr>';
-
             //追加
             $("#print_table tbody").append(tr);
         });
@@ -466,7 +436,6 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
         //如果存在总价
         if (aggregate) {
             tr = '<tr>';
-
             if (serialNumber) {
                 tr += '<td><font size="5">总计</font></td>';  //序号
             }
@@ -500,28 +469,22 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
             if (storageLocation) {
                 tr += '<td></td>';
             }
-
             tr += '</tr>';
-
             //追加
             $("#print_table tbody").append(tr);
         }
 
         //获取发件人地区
         var consignorRegion = getRegionNameByCode(shopInfoList[i].regionId);
-
         //获取收件人地区
         var consigneeRegion = getRegionNameByCode(buyerInfoList[i].regionId);
-
         //遍历字段坐标
         for (var j = 0; j < fieldCoordinateList.length; j++) {
             // console.log("第几条坐标:"+j);
             //获取对象名称
             var fieldCoordinateName = fieldCoordinateList[j].fieldName;
-
             //定义要打印的内容
             var printContext = null;
-
             //获取列表的json对象
             var json = eval(templateJson.express);
 
@@ -561,7 +524,6 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
         }
 
         //3设置打印相关信息
-
         //按序号或名称指定打印机，选定后禁止手工重选；
         LODOP.SET_PRINTER_INDEX(PrinterName);
 
@@ -584,7 +546,6 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
 
         //如果是 打印
         if (isPrint) {
-
             //监听 打印机返回 事件 返回逻辑真假结果（1或true代表真，false或0代表假）
             LODOP.On_Return = function(TaskID,Value){
                 //如果打印成功
@@ -624,23 +585,19 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
                     if (op == "发货单") {
                         //打印完成 发货单
                         printComplete("invoice", 1);
-
                     } else if (op == "出库单") {
                         //打印完成 出库单
                         printComplete("invoice", 2);
-
                     } else if (op == "入库单") {
                         //打印完成 入库单
                         printComplete("invoice", 3);
                     }
                 } else {}
             };
-
             LODOP.PREVIEW();    //打印预览
             return;
         }
     }
-
 }
 
 /**
@@ -650,7 +607,6 @@ function returnMapPrint(returnMap, PrinterName, isPrint) {
 function StartPrintCarrier() {
     //获取快递模版
     var printTemplateCarrier = $("#PrintTemplateCarrier").find("option:selected").data("printTemplateCarrier");
-
     //如果没有模版
     if (printTemplateCarrier == undefined) {
         showMessage("没有面单模版,请您先预设面单模版");
@@ -676,7 +632,6 @@ function StartPrintCarrier() {
 function StartPrintCarrierLodop(printTemplateId, PrinterName, isPrint) {
     //定义订单id
     var orderInfoArray = [];
-
     //获取 订单集合
     var listOrderInfo = $("#orderPrint_table tr");
 
@@ -694,18 +649,15 @@ function StartPrintCarrierLodop(printTemplateId, PrinterName, isPrint) {
             if (trackingNum == "") {
                 showMessage("请在运单号内输入正整数");
                 return;
-
-                //如果输入不是数字
+            //如果输入不是数字
             } else if (isNaN(trackingNum)) {
                 showMessage("请在运单号内输入正整数");
                 return;
-
-                //如果输入不是整数
+            //如果输入不是整数
             } else if (!/^\d+$/.test(trackingNum)) {
                 showMessage("请在运单号内输入正整数");
                 return;
-
-                //如果快递单号过大
+            //如果快递单号过大
             } else if (trackingNum.toString().length > 20) {
                 showMessage("请在运单号内输入正整数");
                 return;
@@ -721,19 +673,14 @@ function StartPrintCarrierLodop(printTemplateId, PrinterName, isPrint) {
         data : {
             "orderInfoId" : orderInfoArray,
             "printTemplateId" : printTemplateId,
-            "authorized" : 1,
-            "ownerId" : 1,
-            "operatorId" : 1
         },
         dataType : "json",
 
         success : function(result) {
             //获取集合
             var returnMap = result.data;
-
             //打印
             returnMapPrintCarrier(returnMap, PrinterName, isPrint);
-
         },
         error : function() {
             showMessage("打印失败");
@@ -748,38 +695,29 @@ function StartPrintCarrierLodop(printTemplateId, PrinterName, isPrint) {
  */
 function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
     //1 获取基本参数 和 加载打印框
-
     //获取订单集合
     var orderInfoList = returnMap.orderInfoList;
-
     //获取买家集合
     var buyerInfoList = returnMap.buyerInfoList;
-
     //获取字段坐标集合
     var fieldCoordinateList = returnMap.fieldCoordinateList;
-
     //获取订单商品集合
     var listItemCommonInfoList = returnMap.listItemCommonInfoList;
-
     //获取打印模版
     var printTemplate = returnMap.printTemplate;
-
     //获取店铺集合
     var shopInfoList = returnMap.shopInfoList;
 
     //获取模版宽
     var printTemplateWidth = printTemplate.templateWidth;
-
     //获取模版高
     var printTemplateHeight = printTemplate.templateHeight;
 
     //2 打印每一条订单信息
-
     //如果是 预览
     if (!isPrint) {
         // 创建对象
         var img = new Image();
-
         // 改变图片的src
         img.src = printTemplate.templateImage;
 
@@ -794,10 +732,8 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
 
     //遍历订单,因为可能是同时打印多条订单
     for (var i = 0; i < orderInfoList.length; i++) {
-
         //获取发件人地区
         var consignorRegion = getRegionNameByCode(shopInfoList[i].regionId);
-
         //获取收件人地区
         var consigneeRegion = getRegionNameByCode(buyerInfoList[i].regionId);
 
@@ -805,10 +741,8 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
         for (var j = 0; j < fieldCoordinateList.length; j++) {
             //获取对象名称
             var fieldCoordinateName = fieldCoordinateList[j].fieldName;
-
             //定义要打印的内容
             var printContext = null;
-
             //获取列表的json对象
             var json = eval(templateJson.express);
 
@@ -834,16 +768,13 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
         }
 
         //3 设置打印相关信息
-
         //按序号或名称指定打印机，选定后禁止手工重选；
         LODOP.SET_PRINTER_INDEX(PrinterName);
-
         //设置基本打印风格：
         LODOP.SET_PRINT_STYLE("FontSize",14);
 
         //如果是 打印
         if (isPrint) {
-
             //监听 打印机返回 事件 返回逻辑真假结果（1或true代表真，false或0代表假）
             LODOP.On_Return = function(TaskID,Value){
                 //如果打印成功
@@ -858,10 +789,8 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
 
         //否则是 预览
         } else {
-
             //设置 各种样式的 打印预览窗口： 2-适宽,  1-下方 工具栏, 1-是 直接打印
             LODOP.SET_PREVIEW_WINDOW(1, 1, 1, "", "", ".开始打印");
-
             //打印后自动关闭预览窗口
             LODOP.SET_PRINT_MODE("AUTO_CLOSE_PREWINDOW",1);
 
@@ -873,7 +802,6 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
                     printComplete("express");
                 } else {}
             };
-
             LODOP.PREVIEW();    //打印预览
             return;
         }
@@ -884,10 +812,8 @@ function returnMapPrintCarrier(returnMap, PrinterName, isPrint) {
  * 12.3 打印完成
  */
 function printComplete(template, type) {
-
     //定义打印完成的订单数组
     var orderInfoIds = [];
-
     //遍历订单
     $("#orderPrint_table tr").not(":first").each(function (i) {
         //加入数组
@@ -896,7 +822,7 @@ function printComplete(template, type) {
 
     //发送请求
     $.ajax({
-        url : "/erp/printComplete.do",
+        url : "/print/printComplete.do",
         type : "post",
         traditional : true,
         data : {
@@ -925,8 +851,7 @@ function printComplete(template, type) {
                     if (template == "express") {
                         //插入提示
                         ul.eq(i).children("li").eq(8).append('<br><span style="color: #c625c3;">已打印电子面单</span>');
-
-                        //如果是发货单
+                    //如果是发货单
                     } else if (template == "invoice") {
                         if (type == 1) {
                             //插入提示
@@ -948,7 +873,6 @@ function printComplete(template, type) {
             showMessage("打印失败");
         }
     });
-
 }
 
 /**
@@ -969,7 +893,6 @@ function addOrModifyTrackingFocus() {
 function addOrModifyInputTextBlur() {
     //获取快递单号
     var trackingNum = $(this).val();
-
     //如果没有修改单号
     if (trackingNum == trackNum) {
         return;
@@ -977,7 +900,6 @@ function addOrModifyInputTextBlur() {
 
     //获取订单id
     var orderInfoId = $(this).parent().parent().data("orderInfo").id;
-
     //判断发送条件
     var ok = true;
     //如果没有输入内容
@@ -1004,7 +926,7 @@ function addOrModifyInputTextBlur() {
     if (ok) {
         //发送请求
         $.ajax({
-            url : "/erp/addOrModifyTracking.do",
+            url : "/print/addOrModifyTracking.do",
             type : "post",
             data : {
                 "orderInfoId" : orderInfoId,
@@ -1048,12 +970,10 @@ function addOrModifyInputTextEnter() {
 function addOrModifyTrackingBlur() {
     //获取快递单号
     var trackingNum = $(this).val();
-
     //如果没有修改单号
     if (trackingNum == trackNum) {
         return;
     }
-
     //获取订单id
     var orderInfoId = $(this).parent().parent().find("input[name='id']").val();
 
@@ -1062,18 +982,15 @@ function addOrModifyTrackingBlur() {
     //如果没有输入内容
     if (trackingNum == "") {
         trackingNum = null;
-
-        //如果输入不是数字
+    //如果输入不是数字
     } else if (isNaN(trackingNum)) {
         ok = false;
         showMessage("请输入正整数");
-
-        //如果输入不是整数
+    //如果输入不是整数
     } else if (!/^\d+$/.test(trackingNum)) {
         ok = false;
         showMessage("请输入正整数");
-
-        //如果快递单号过大
+    //如果快递单号过大
     } else if (trackingNum.toString().length > 20) {
         ok = false;
         showMessage("快递单号过长");
@@ -1083,7 +1000,7 @@ function addOrModifyTrackingBlur() {
     if (ok) {
         //发送请求
         $.ajax({
-            url : "/erp/addOrModifyTracking.do",
+            url : "/print/addOrModifyTracking.do",
             type : "post",
             data : {
                 "orderInfoId" : orderInfoId,
@@ -1093,7 +1010,6 @@ function addOrModifyTrackingBlur() {
             success : function(result) {
                 //获取订单
                 var orderInfo = result.data;
-                /*console.log(orderInfo.trackingNum);*/
             },
             error : function() {
                 showMessage("快递单号保存失败!");
@@ -1169,10 +1085,8 @@ function changePrintType() {
 
         //转换对象
         var $op = $(op);
-
         //绑定数据
         $op.data("printTemplate", listPrintTemplate[i]);
-
         //加入 快递模版
         $("#PrintTemplate").append($op);
     }
@@ -1210,13 +1124,11 @@ function changePrintTemplateCarrier() {
  * @author 赵滨
  */
 function loadPrinter() {
-
     //如果没有获取到打印组件
     if (LODOP == null || LODOP == undefined) {
         showMessage("打印控件没有正确安装或启动，请点击上方执行安装。");
         return;
     }
-
     //获取打印机数目
     var PRINTER_COUNT = LODOP.GET_PRINTER_COUNT();
 
@@ -1224,13 +1136,11 @@ function loadPrinter() {
     if (PRINTER_COUNT == 0) {
         return;
     }
-
     //清空打印机选项
     $("#amendInvoiceTemplate_printChoice").children().remove();
 
     //拼接块
     var op = '<option value="-1">默认打印机</option>';
-
     //加入选项中
     $("#PrinterCarrier").append(op);
 
@@ -1239,23 +1149,18 @@ function loadPrinter() {
 
     //加入选项中
     $("#Printer").append(op);
-
     //遍历数组
     for (var i = 0; i < PRINTER_COUNT; i++) {
         op = '';
         op += '<option value="'+i+'">';
         op += LODOP.GET_PRINTER_NAME(i);	//打印机名称
         op += '</option>';
-
         //转换对象
         var $op = $(op);
-
         //加入选项中
         $("#PrinterCarrier").append($op);
-
         //转换对象
         $op = $(op);
-
         //加入选项中
         $("#Printer").append($op);
     }
@@ -1267,15 +1172,12 @@ function loadPrinter() {
  * @author 赵滨
  */
 function billPrinting() {
-
     //隐藏 提示框
     $(".set_to_play_box").css("display","none");
 
     //1.检查是否选中订单
-
     //获取订单集合
     var OrderInfoList = $("#checkbox_form input[name='id']:checked");
-
     //如果订单数量为零
     if (OrderInfoList.length == 0) {
         //提示 弹出框
@@ -1284,10 +1186,8 @@ function billPrinting() {
     }
 
     //2.检查快递公司是否一致
-
     //获取快递公司集合
     var CarrierInfoList = [];
-
     //遍历 订单集合
     for (var i = 0; i < OrderInfoList.length; i++) {
         //加入快递公司集合
@@ -1296,7 +1196,6 @@ function billPrinting() {
 
     //排序，用于判断
     CarrierInfoList.sort(CarrierInfoList);
-
     //如果收尾不相等，说明存在不同快递公司
     if (CarrierInfoList[0] != CarrierInfoList[CarrierInfoList.length-1]) {
         //提示 弹出框
@@ -1305,10 +1204,8 @@ function billPrinting() {
     }
 
     //3.检查已经打印订单
-
     //获取订单ID
     var OrderInfoIds = [];
-
     //遍历 订单集合
     for (var i = 0; i < OrderInfoList.length; i++) {
         //加入订单ID
@@ -1317,7 +1214,7 @@ function billPrinting() {
 
     //发送请求
     $.ajax({
-        url : "/erp/listOrderInfoPrintByIds.do",
+        url : "/print/listOrderInfoPrintByIds.do",
         type : "post",
         traditional : true,
         data : {
@@ -1336,7 +1233,6 @@ function billPrinting() {
             showMessage("获取订单信息失败!");
         }
     });
-
 }
 
 /**
@@ -1348,319 +1244,301 @@ function billPrinting() {
 function listOrderInfoPrintByIds(map) {
     //1 获取订单集合
     var listOrderInfo = map.listOrderInfo;
+    if (listOrderInfo.length != 0) {
+        //获取已打印订单条数
+        var printNum = 0;
 
-    //获取已打印订单条数
-    var printNum = 0;
+        //遍历订单集合
+        for (var i = 0; i < listOrderInfo.length; i++) {
+            //如果已经打印快递单
+            if (listOrderInfo[i].orderStatus == 4 && listOrderInfo[i].expressSheetPrint != null) {
+                //订单自增
+                printNum++;
 
-    //遍历订单集合
-    for (var i = 0; i < listOrderInfo.length; i++) {
-        //如果已经打印快递单
-        if (listOrderInfo[i].orderStatus == 4 && listOrderInfo[i].expressSheetPrint != null) {
-            //订单自增
-            printNum++;
-
-            //如果已经打印发货单
-        } else if (listOrderInfo[i].orderStatus == 5 && listOrderInfo[i].saleBillPrint != null) {
-            //订单自增
-            printNum++;
-        }
-    }
-
-    //如果存在已经打印订单
-    if (printNum > 0) {
-        //更改提示条数
-        $(".set_to_play_box").find("h4 i:first").html(printNum);
-
-        //显示 提示框
-        $(".set_to_play_box").css("display","block");
-
-        //如果没打印过
-    } else {
-        //显示 打印框
-        $(".express_box").css("display","block");
-    }
-
-    //2 获取发货模版
-    var listBuyerInfo  = map.listBuyerInfo;
-
-    //清空 订单信息
-    $("#orderPrint_table").children().remove();
-
-    //拼接
-    var tr = '';
-
-    //拼接 标题栏
-    tr += '<tr>';
-    tr += '<th>系统单号</th>';
-    tr += '<th>原始单号</th>';
-    tr += '<th width="160">运单号</th>';
-    tr += '<th width="100">收件人</th>';
-    tr += '<th width="200">收件人地址</th>';
-    tr += '<th>批次流水号</th>';
-    tr += '</tr>';
-
-    //追加
-    $("#orderPrint_table").append(tr);
-
-    //遍历 订单 加入页面
-    for (var i = 0; i < listOrderInfo.length; i++) {
-        tr = '';
-
-        tr += '<tr>';
-        tr += '<td>'+listOrderInfo[i].erpOrderNum+'</td>';	//系统单号
-        tr += '<td>'+listOrderInfo[i].platformOrderId+'</td>';	//原始单号
-        tr += '<td><input type="text" value="'+
-            (listOrderInfo[i].trackingNum == null?"":listOrderInfo[i].trackingNum)+'"></td>';	//运单号
-
-        //如果订单和买家一致
-        if (listOrderInfo[i].platformBuyerId == listBuyerInfo[i].id) {
-            tr += '<td>'+listBuyerInfo[i].consigneeName+'</td>';
-            tr += '<td>';
-            tr += '<p>';
-
-            //调取citys.js 获取全国地址表
-            var citys = getRegionNameByCode(listBuyerInfo[i].regionId);
-
-            //如果没有捕获地址
-            if (citys.province == undefined) {
-                tr += listBuyerInfo[i].userAddress;
-
-            } else {
-                tr += citys.province+citys.city+citys.area+listBuyerInfo[i].userAddress;
+                //如果已经打印发货单
+            } else if (listOrderInfo[i].orderStatus == 5 && listOrderInfo[i].saleBillPrint != null) {
+                //订单自增
+                printNum++;
             }
+        }
 
-            tr += '</p>';
-            tr += '</td>';
+        //如果存在已经打印订单
+        if (printNum > 0) {
+            //更改提示条数
+            $(".set_to_play_box").find("h4 i:first").html(printNum);
 
-            //如果不一致
+            //显示 提示框
+            $(".set_to_play_box").css("display","block");
+
+            //如果没打印过
         } else {
-            //遍历买家信息
-            for (var j = 0; j < listBuyerInfo.length; j++) {
-                //如果匹配
-                if (listOrderInfo[i].platformBuyerId == listBuyerInfo[j].id) {
-                    tr += '<td>'+listBuyerInfo[j].consigneeName+'</td>';
-                    tr += '<td>';
-                    tr += '<p>';
-
-                    //调取citys.js 获取全国地址表
-                    var citys = getRegionNameByCode(listBuyerInfo[j].regionId);
-
-                    //如果没有捕获地址
-                    if (citys.province == undefined) {
-                        tr += listBuyerInfo[j].userAddress;
-
-                    } else {
-                        tr += citys.province+citys.city+citys.area+listBuyerInfo[j].userAddress;
-                    }
-
-                    tr += '</p>';
-                    tr += '</td>';
-                }
-            }
+            //显示 打印框
+            $(".express_box").css("display","block");
         }
+    } else {
+        showMessage("没有找到订单");
+        delExpressBtn();
+        return;
+    }
 
-        //批次流水号
-        tr += '<td>'+(listOrderInfo[i].lotCode == null?"":listOrderInfo[i].lotCode)+'</td>';
+    //2 获取买家信息
+    var listBuyerInfo  = map.listBuyerInfo;
+    if (listBuyerInfo.length != 0) {
+        //清空 订单信息
+        $("#orderPrint_table").children().remove();
+
+        //拼接
+        var tr = '';
+        //拼接 标题栏
+        tr += '<tr>';
+        tr += '<th>系统单号</th>';
+        tr += '<th>原始单号</th>';
+        tr += '<th width="160">运单号</th>';
+        tr += '<th width="100">收件人</th>';
+        tr += '<th width="200">收件人地址</th>';
+        tr += '<th>批次流水号</th>';
         tr += '</tr>';
 
-        //转换对象
-        $tr = $(tr);
-
-        //绑定数据
-        $tr.data("orderInfo", listOrderInfo[i]);
-
         //追加
-        $("#orderPrint_table").append($tr);
+        $("#orderPrint_table").append(tr);
+
+        //遍历 订单 加入页面
+        for (var i = 0; i < listOrderInfo.length; i++) {
+            tr = '';
+
+            tr += '<tr>';
+            tr += '<td>'+listOrderInfo[i].erpOrderNum+'</td>';	//系统单号
+            tr += '<td>'+listOrderInfo[i].platformOrderId+'</td>';	//原始单号
+            tr += '<td><input type="text" value="'+
+                (listOrderInfo[i].trackingNum == null?"":listOrderInfo[i].trackingNum)+'"></td>';	//运单号
+
+            //如果订单和买家一致
+            if (listOrderInfo[i].platformBuyerId == listBuyerInfo[i].id) {
+                tr += '<td>'+listBuyerInfo[i].consigneeName+'</td>';
+                tr += '<td>';
+                tr += '<p>';
+
+                //调取citys.js 获取全国地址表
+                var citys = getRegionNameByCode(listBuyerInfo[i].regionId);
+
+                //如果没有捕获地址
+                if (citys.province == undefined) {
+                    tr += listBuyerInfo[i].userAddress;
+
+                } else {
+                    tr += citys.province+citys.city+citys.area+listBuyerInfo[i].userAddress;
+                }
+
+                tr += '</p>';
+                tr += '</td>';
+
+                //如果不一致
+            } else {
+                //遍历买家信息
+                for (var j = 0; j < listBuyerInfo.length; j++) {
+                    //如果匹配
+                    if (listOrderInfo[i].platformBuyerId == listBuyerInfo[j].id) {
+                        tr += '<td>'+listBuyerInfo[j].consigneeName+'</td>';
+                        tr += '<td>';
+                        tr += '<p>';
+
+                        //调取citys.js 获取全国地址表
+                        var citys = getRegionNameByCode(listBuyerInfo[j].regionId);
+
+                        //如果没有捕获地址
+                        if (citys.province == undefined) {
+                            tr += listBuyerInfo[j].userAddress;
+
+                        } else {
+                            tr += citys.province+citys.city+citys.area+listBuyerInfo[j].userAddress;
+                        }
+
+                        tr += '</p>';
+                        tr += '</td>';
+                    }
+                }
+            }
+
+            //批次流水号
+            tr += '<td>'+(listOrderInfo[i].lotCode == null?"":listOrderInfo[i].lotCode)+'</td>';
+            tr += '</tr>';
+
+            //转换对象
+            $tr = $(tr);
+
+            //绑定数据
+            $tr.data("orderInfo", listOrderInfo[i]);
+
+            //追加
+            $("#orderPrint_table").append($tr);
+        }
+
+    } else {
+        showMessage("没有找到买家信息");
+        delExpressBtn();
+        return;
     }
 
     //3 获取快递模版
     var listPrintTemplateCarrier  = map.listPrintTemplateCarrier;
+    if (listPrintTemplateCarrier.length != 0) {
+        //清空快递模版
+        $("#PrintTemplateCarrier").children().remove();
 
-    //清空快递模版
-    $("#PrintTemplateCarrier").children().remove();
+        //拼接
+        var op = '';
 
-    //拼接
-    var op = '';
-
-    //遍历模版
-    for (var i = 0; i < listPrintTemplateCarrier.length; i++) {
-        op = '';
-
-        op += '<option value="'+listPrintTemplateCarrier[i].id+'">'+	//模版ID
-            listPrintTemplateCarrier[i].templateName+'</option>';	//模版名称
-
-        //转换对象
-        $op = $(op);
-
-        //绑定数据
-        $op.data("printTemplateCarrier", listPrintTemplateCarrier[i]);
-
-        //追加
-        $("#PrintTemplateCarrier").append($op);
-    }
-
-    //获取当前选中的打印机
-    var printChoice = "";
-
-    //如果不为空
-    if ($("#PrintTemplateCarrier").find("option:checked").data("printTemplateCarrier") != undefined) {
-        //赋值
-        printChoice = $("#PrintTemplateCarrier").find("option:checked").data("printTemplateCarrier").printChoice;
-    }
-
-    //加载打印机
-    var printChoiceList = $("#PrinterCarrier option");
-    for (var i = 0; i < printChoiceList.length; i++) {
-        if (printChoiceList.eq(i).html() == printChoice) {
-            printChoiceList.eq(i).prop("selected",true);
+        //遍历模版
+        for (var i = 0; i < listPrintTemplateCarrier.length; i++) {
+            op = '';
+            op += '<option value="'+listPrintTemplateCarrier[i].id+'">'+	//模版ID
+                listPrintTemplateCarrier[i].templateName+'</option>';	//模版名称
+            //转换对象
+            $op = $(op);
+            //绑定数据
+            $op.data("printTemplateCarrier", listPrintTemplateCarrier[i]);
+            //追加
+            $("#PrintTemplateCarrier").append($op);
         }
+
+        //获取当前选中的打印机
+        var printChoice = "";
+        //如果不为空
+        if ($("#PrintTemplateCarrier").find("option:checked").data("printTemplateCarrier") != undefined) {
+            //赋值
+            printChoice = $("#PrintTemplateCarrier").find("option:checked").data("printTemplateCarrier").printChoice;
+        }
+        //加载打印机
+        var printChoiceList = $("#PrinterCarrier option");
+        for (var i = 0; i < printChoiceList.length; i++) {
+            if (printChoiceList.eq(i).html() == printChoice) {
+                printChoiceList.eq(i).prop("selected",true);
+            }
+        }
+    } else {
+        showMessage("没有找到快递模板");
+        delExpressBtn();
+        return;
     }
 
     //4 获取发货模版
     var listPrintTemplate  = map.listPrintTemplate;
-    //获取发货单
-    var invoice = [];
-
-    //获取出库单
-    var outboundOrder = [];
-
-    //获取入库单
-    var warehouseReceipt = [];
-
-    //遍历发货模版
-    for (var i = 0; i < listPrintTemplate.length; i++) {
-        //获取模版类型
-        var printTemplateType = listPrintTemplate[i].templateType;
-
-        //如果是发货单
-        if (printTemplateType == 1 || printTemplateType == 2) {
-            //加入数组
-            invoice.push(listPrintTemplate[i]);
-
+    if (listPrintTemplate.length != 0) {
+        //获取发货单
+        var invoice = [];
+        //获取出库单
+        var outboundOrder = [];
+        //获取入库单
+        var warehouseReceipt = [];
+        //遍历发货模版
+        for (var i = 0; i < listPrintTemplate.length; i++) {
+            //获取模版类型
+            var printTemplateType = listPrintTemplate[i].templateType;
+            //如果是发货单
+            if (printTemplateType == 1 || printTemplateType == 2) {
+                //加入数组
+                invoice.push(listPrintTemplate[i]);
             //如果是出库单
-        } else if (printTemplateType == 3 || printTemplateType == 4) {
-            //加入数组
-            outboundOrder.push(listPrintTemplate[i]);
-
+            } else if (printTemplateType == 3 || printTemplateType == 4) {
+                //加入数组
+                outboundOrder.push(listPrintTemplate[i]);
             //如果是入库单
-        } else if (printTemplateType == 5 || printTemplateType == 6) {
-            //加入数组
-            warehouseReceipt.push(listPrintTemplate[i]);
+            } else if (printTemplateType == 5 || printTemplateType == 6) {
+                //加入数组
+                warehouseReceipt.push(listPrintTemplate[i]);
+            }
         }
-    }
+        //清空单据类型
+        $("#PrintType").children().remove();
+        op = '<option value="">发货单</option>';
+        //转换对象
+        $op = $(op);
+        //绑定数据
+        $op.data("listPrintTemplate", invoice);
+        //加入 快递模版
+        $("#PrintType").append($op);
 
-    //清空单据类型
-    $("#PrintType").children().remove();
+        op = '<option value="">出库单</option>';
+        //转换对象
+        $op = $(op);
+        //绑定数据
+        $op.data("listPrintTemplate", outboundOrder);
+        //加入 快递模版
+        $("#PrintType").append($op);
 
-    op = '<option value="">发货单</option>';
+        op = '<option value="">入库单</option>';
+        //转换对象
+        $op = $(op);
+        //绑定数据
+        $op.data("listPrintTemplate", warehouseReceipt);
+        //加入 快递模版
+        $("#PrintType").append($op);
+        //清空快递模版
+        $("#PrintTemplate").children().remove();
 
-    //转换对象
-    $op = $(op);
-
-    //绑定数据
-    $op.data("listPrintTemplate", invoice);
-
-    //加入 快递模版
-    $("#PrintType").append($op);
-
-    op = '<option value="">出库单</option>';
-
-    //转换对象
-    $op = $(op);
-
-    //绑定数据
-    $op.data("listPrintTemplate", outboundOrder);
-
-    //加入 快递模版
-    $("#PrintType").append($op);
-
-    op = '<option value="">入库单</option>';
-
-    //转换对象
-    $op = $(op);
-
-    //绑定数据
-    $op.data("listPrintTemplate", warehouseReceipt);
-
-    //加入 快递模版
-    $("#PrintType").append($op);
-
-    //清空快递模版
-    $("#PrintTemplate").children().remove();
-
-    //获取单据类型 选择框内的值
-    var printType = $("#PrintType").find("option:checked").html();
-
-    //如果是发货单
-    if (printType == "发货单") {
-        //遍历 发货单
-        for (var i = 0; i < invoice.length; i++) {
-            //拼接
-            op = '<option value="'+invoice[i].id+'">'+	//模版ID
-                invoice[i].templateName+'</option>';	//模版名称
-
-            //转换对象
-            $op = $(op);
-
-            //绑定数据
-            $op.data("printTemplate", invoice[i]);
-
-            //加入 快递模版
-            $("#PrintTemplate").append($op);
-        }
-
+        //获取单据类型 选择框内的值
+        var printType = $("#PrintType").find("option:checked").html();
+        //如果是发货单
+        if (printType == "发货单") {
+            //遍历 发货单
+            for (var i = 0; i < invoice.length; i++) {
+                //拼接
+                op = '<option value="'+invoice[i].id+'">'+	//模版ID
+                    invoice[i].templateName+'</option>';	//模版名称
+                //转换对象
+                $op = $(op);
+                //绑定数据
+                $op.data("printTemplate", invoice[i]);
+                //加入 快递模版
+                $("#PrintTemplate").append($op);
+            }
         //如果是出库单
-    } else if (printType == "出库单") {
-        //遍历 出库单
-        for (var i = 0; i < outboundOrder.length; i++) {
-            //拼接
-            op = '<option value="'+outboundOrder[i].id+'">'+	//模版ID
-                outboundOrder[i].templateName+'</option>';	//模版名称
-
-            //转换对象
-            $op = $(op);
-
-            //绑定数据
-            $op.data("printTemplate", outboundOrder[i]);
-
-            //加入 快递模版
-            $("#PrintTemplate").append($op);
-        }
-
+        } else if (printType == "出库单") {
+            //遍历 出库单
+            for (var i = 0; i < outboundOrder.length; i++) {
+                //拼接
+                op = '<option value="'+outboundOrder[i].id+'">'+	//模版ID
+                    outboundOrder[i].templateName+'</option>';	//模版名称
+                //转换对象
+                $op = $(op);
+                //绑定数据
+                $op.data("printTemplate", outboundOrder[i]);
+                //加入 快递模版
+                $("#PrintTemplate").append($op);
+            }
         //如果是入库单
-    } else if (printType == "入库单") {
-        //遍历 入库单
-        for (var i = 0; i < warehouseReceipt.length; i++) {
-            //拼接
-            op = '<option value="'+warehouseReceipt[i].id+'">'+	//模版ID
-                warehouseReceipt[i].templateName+'</option>';	//模版名称
-
-            //转换对象
-            $op = $(op);
-
-            //绑定数据
-            $op.data("printTemplate", warehouseReceipt[i]);
-
-            //加入 快递模版
-            $("#PrintTemplate").append($op);
+        } else if (printType == "入库单") {
+            //遍历 入库单
+            for (var i = 0; i < warehouseReceipt.length; i++) {
+                //拼接
+                op = '<option value="'+warehouseReceipt[i].id+'">'+	//模版ID
+                    warehouseReceipt[i].templateName+'</option>';	//模版名称
+                //转换对象
+                $op = $(op);
+                //绑定数据
+                $op.data("printTemplate", warehouseReceipt[i]);
+                //加入 快递模版
+                $("#PrintTemplate").append($op);
+            }
         }
-    }
-
-    //获取当前选中的打印机
-    var printChoice = "";
-
-    //如果不为空
-    if ($("#PrintTemplate").find("option:checked").data("printTemplate") != undefined) {
-        //赋值
-        printChoice = $("#PrintTemplate").find("option:checked").data("printTemplate").printChoice;
-    }
-
-    //加载打印机
-    var printChoiceList = $("#Printer option");
-    for (var i = 0; i < printChoiceList.length; i++) {
-        if (printChoiceList.eq(i).html() == printChoice) {
-            printChoiceList.eq(i).prop("selected",true);
+        //获取当前选中的打印机
+        var printChoice = "";
+        //如果不为空
+        if ($("#PrintTemplate").find("option:checked").data("printTemplate") != undefined) {
+            //赋值
+            printChoice = $("#PrintTemplate").find("option:checked").data("printTemplate").printChoice;
         }
+        //加载打印机
+        var printChoiceList = $("#Printer option");
+        for (var i = 0; i < printChoiceList.length; i++) {
+            if (printChoiceList.eq(i).html() == printChoice) {
+                printChoiceList.eq(i).prop("selected",true);
+            }
+        }
+    } else {
+        showMessage("没有找到自定义模板");
+        delExpressBtn();
+        return;
     }
 }
 
