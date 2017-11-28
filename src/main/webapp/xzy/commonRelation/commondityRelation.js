@@ -546,6 +546,13 @@ function homePage(result,page){
 			//线上商品信息	
 			var attr1 = datas[i].platformItemAttrvaluealias1;
 			var attr2 = datas[i].platformItemAttrvaluealias2;
+			var platformId = datas[i].platformId;
+			var imgdp;
+			if(platformId == 3){//京东
+				imgdp = "/images/dp.png";
+			}else {
+				imgdp = "/images/dp.png";
+			}
 			var onlineSpecification;                           //线上商品规格
 			if(attr2 == ""){
 				onlineSpecification = attr1;
@@ -591,7 +598,7 @@ function homePage(result,page){
 	              '</div>'+
 	            '</div>'+
 	            '<div class="dianpu">'+
-	              '<img src="'+datas[i].platformUserImg+'" alt="" title="微店">'+//线上商品图片
+	              '<img src="'+imgdp+'" alt="" title="微店">'+//线上商品图片
 	            '</div>'+
 	          '</td>'+
 	          '<td>'+

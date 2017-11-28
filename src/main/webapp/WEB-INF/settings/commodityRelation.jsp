@@ -1451,8 +1451,8 @@
                     </ol>
                 </li>
                 <li class="management_tj">
-                    <a href="javascript:;" class="button border-main management_bc" id="xzy_saves"> 保存</a>
-                    <a href="javascript:;" class="button border-main management_qx"> 取消</a>
+                    <a href="javascript:;" class="button border-main single_new_bc" id="xzy_saves"> 保存</a>
+                    <a href="javascript:;" class="button border-main single_new_qx"> 取消</a>
                 </li>                     
           </ul>
         </div>

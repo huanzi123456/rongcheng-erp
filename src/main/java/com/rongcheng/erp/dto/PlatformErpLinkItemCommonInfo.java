@@ -3,9 +3,7 @@ package com.rongcheng.erp.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
-
 import com.rongcheng.erp.entity.ItemCommonInfo;
-import com.rongcheng.erp.entity.PlatformErpLink;
 /**
  * 表PlatformErpLink 和  ItemCommonInfo表的关联查询 
  * @author 薛宗艳
@@ -14,6 +12,7 @@ import com.rongcheng.erp.entity.PlatformErpLink;
 public class PlatformErpLinkItemCommonInfo implements Serializable{
 	private static final long serialVersionUID = -3715667209882781443L;
     private BigInteger platformErpLinkId;       //1.记录编号
+    private String platformId;                  //平台id
     private String platformShopId;              //5.平台店铺id
     private String platformShopName;            //6.店铺名称
     private BigInteger platformItemSku;         //7.平台(来源)商品编码
@@ -25,9 +24,10 @@ public class PlatformErpLinkItemCommonInfo implements Serializable{
 	public PlatformErpLinkItemCommonInfo() {
 		super();
 	}
-	public PlatformErpLinkItemCommonInfo(BigInteger platformErpLinkId, String platformShopId, String platformShopName, BigInteger platformItemSku, String platformItemName, String platformItemAttrvaluealias1, String platformItemAttrvaluealias2, String platformUserImg, List<ItemCommonInfo> itemCommonInfo) {
+	public PlatformErpLinkItemCommonInfo(BigInteger platformErpLinkId, String platformId, String platformShopId, String platformShopName, BigInteger platformItemSku, String platformItemName, String platformItemAttrvaluealias1, String platformItemAttrvaluealias2, String platformUserImg, List<ItemCommonInfo> itemCommonInfo) {
 		super();
 		this.platformErpLinkId = platformErpLinkId;
+		this.platformId = platformId;
 		this.platformShopId = platformShopId;
 		this.platformShopName = platformShopName;
 		this.platformItemSku = platformItemSku;
@@ -42,6 +42,12 @@ public class PlatformErpLinkItemCommonInfo implements Serializable{
 	}
 	public void setPlatformErpLinkId(BigInteger platformErpLinkId) {
 		this.platformErpLinkId = platformErpLinkId;
+	}
+	public String getPlatformId() {
+		return platformId;
+	}
+	public void setPlatformId(String platformId) {
+		this.platformId = platformId;
 	}
 	public String getPlatformShopId() {
 		return platformShopId;
@@ -100,6 +106,7 @@ public class PlatformErpLinkItemCommonInfo implements Serializable{
 		int result = 1;
 		result = prime * result + ((itemCommonInfo == null) ? 0 : itemCommonInfo.hashCode());
 		result = prime * result + ((platformErpLinkId == null) ? 0 : platformErpLinkId.hashCode());
+		result = prime * result + ((platformId == null) ? 0 : platformId.hashCode());
 		result = prime * result + ((platformItemAttrvaluealias1 == null) ? 0 : platformItemAttrvaluealias1.hashCode());
 		result = prime * result + ((platformItemAttrvaluealias2 == null) ? 0 : platformItemAttrvaluealias2.hashCode());
 		result = prime * result + ((platformItemName == null) ? 0 : platformItemName.hashCode());
@@ -127,6 +134,11 @@ public class PlatformErpLinkItemCommonInfo implements Serializable{
 			if (other.platformErpLinkId != null)
 				return false;
 		} else if (!platformErpLinkId.equals(other.platformErpLinkId))
+			return false;
+		if (platformId == null) {
+			if (other.platformId != null)
+				return false;
+		} else if (!platformId.equals(other.platformId))
 			return false;
 		if (platformItemAttrvaluealias1 == null) {
 			if (other.platformItemAttrvaluealias1 != null)
@@ -167,6 +179,6 @@ public class PlatformErpLinkItemCommonInfo implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "PlatformErpLinkItemCommonInfo [platformErpLinkId=" + platformErpLinkId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemName=" + platformItemName + ", platformItemAttrvaluealias1=" + platformItemAttrvaluealias1 + ", platformItemAttrvaluealias2=" + platformItemAttrvaluealias2 + ", platformUserImg=" + platformUserImg + ", itemCommonInfo=" + itemCommonInfo + "]";
+		return "PlatformErpLinkItemCommonInfo [platformErpLinkId=" + platformErpLinkId + ", platformId=" + platformId + ", platformShopId=" + platformShopId + ", platformShopName=" + platformShopName + ", platformItemSku=" + platformItemSku + ", platformItemName=" + platformItemName + ", platformItemAttrvaluealias1=" + platformItemAttrvaluealias1 + ", platformItemAttrvaluealias2=" + platformItemAttrvaluealias2 + ", platformUserImg=" + platformUserImg + ", itemCommonInfo=" + itemCommonInfo + "]";
 	}
 }

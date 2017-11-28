@@ -125,6 +125,7 @@
  </select>
  <resultMap id="xzybaseResultMap" type="com.rongcheng.erp.dto.PlatformErpLinkItemCommonInfo">  
    <result column="aid" property="platformErpLinkId"/>
+   <result column="platform_id" property="platformId"/>
    <result column="platform_shop_id" property="platformShopId"/>
    <result column="platform_shop_name" property="platformShopName"/>
    <result column="platform_item_sku" property="platformItemSku"/>
@@ -139,6 +140,7 @@
 <select id="seleCommonInfo" resultMap="xzybaseResultMap">
   SELECT 
     a.id as aid,
+    a.platform_id,
     a.platform_shop_name,
     a.platform_shop_id,
     a.platform_item_sku,
