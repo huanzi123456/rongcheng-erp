@@ -23,9 +23,11 @@
       clear: both;
     }
     </style> 
+    <script type="text/javascript" src="/wzy/itemInfo.js"></script>
     <script type="text/javascript" src="/xzy/commonRelation/commondityRelation.js"></script>
     <script type="text/javascript" src="/xzy/commonRelation/newCommons.js"></script>
     <script type="text/javascript" src="/util/jiml-utils.js"></script>
+    
 </head>
 <body style="position: relative;">
   <div class="div_big_box">
@@ -1141,10 +1143,10 @@
       </div>
       <div class="single_updating_content">
         <div class="single_updating_list_btn_box">
-          <span class="active">
+          <span class="active" id="pagesOne">
             选择已有
           </span>
-          <span>
+          <span id="pagesTwo">
             新建
           </span>
         </div>
@@ -1394,17 +1396,11 @@
                 </li>
                 <li class="bfz33">
                   <span>系统分类:</span>
-<<<<<<< HEAD
-                  <select name="" id="" class="commonClassification">
-                    <option value="1">未分类商品</option>
-                    <option value="2">护肤</option>
-                    <option value="3">互联</option>
-                  </select>
-=======
                   <div style="" class='select_simulate'>
                     <span>未分类商品未分类商品未分类商品</span>
                     <div class="select_simulate_xb"></div>
-                    <ul class="select_simulate_box">
+                    <ul class="select_simulate_box" >
+                    <!-- style="display:none"
                       <li>
                         <input type="checkbox">
                         <span>未分类商品未分类商品</span>
@@ -1457,9 +1453,9 @@
                         <input type="checkbox">
                         <span>互联</span>
                       </li>
-                    </ul>
+                      --> 
+                    </ul> 
                   </div>
->>>>>>> f39af89ca913aba314dffab51da14e1645281638
                 </li>
               </ol>
             </li>
@@ -1494,24 +1490,25 @@
                 </li>
                 <li>
                   <div class="fl_div">
-                    <input type="checkbox" class="presell">
+                    <input type="checkbox" name="presell" value="0">
                     <span>预售</span>
                   </div>
                   <div class="fl_div">
-                    <input type="checkbox" class="presells">
+                    <input type="checkbox" name="commissionSell" value="0">
                     <span>代售</span>
                   </div>
                   <div class="fl_div">
-                    <input type="checkbox" class="gift">
+                    <input type="checkbox" name="gift" value="0">
                     <span>赠品</span>
                   </div>
                 </li>
               </ol>
             </li>
             <li class="management_tj">
-              <a href="javascript:;" class="button border-main single_new_bc"> 保存</a>
+              <a href="javascript:;" class="button border-main single_new_bc" id="xzy_saves"> 保存</a>
               <a href="javascript:;" class="button border-main single_new_qx"> 取消</a>
-            </li>
+            </li> 
+                     
           </ul>
         </div>
       </div>

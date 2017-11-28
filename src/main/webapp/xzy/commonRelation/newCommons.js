@@ -1,7 +1,54 @@
 /*
  * "换"弹出框的新建商品页面 
  */
-var obj = new Object();
+/**
+ * 保存按钮
+ * @returns
+ */
+function saveCommonInfo(platformErpLinkId){	
+	var param = getInfo();
+//	console.log("1商品编码:"+param.erpItemNum);
+//    console.log("2商品类目:"+param.category);
+//    console.log("3商品品牌:"+param.brand);
+//    console.log("4商品名称:"+param.name);
+//    console.log("5商品简称:"+param.shortName);
+//    console.log("6商品规格:"+param.spec);
+//    console.log("7.商品颜色:"+param.color);
+//    console.log("8.商品尺码:"+param.size);
+//    console.log("9.商品价格:"+param.normalPrice);
+//    console.log("10.商品成本价:"+param.costPrice);
+//    console.log("11.商品条码:"+param.barCode);
+//    console.log("12.商品包装:"+param.packageCondition);
+//    console.log("13长:"+param.length);
+//    console.log("14宽:"+param.width);
+//    console.log("15高:"+param.height);
+//    console.log("16.商品重量:"+param.weight);
+//    console.log("17.商品单位	:"+param.unit);
+//    console.log("18.商品批次:"+param.batchCode);
+//    console.log("19.保质期:"+param.expireDate);
+//    //console.log("20.季节:"+param.commonSeason);
+//    console.log("21.款号	:"+param.styleCode);
+//    //console.log("22.系统分类:"+param.commonClassification);
+//    console.log("23.自定义1:"+param.reserved1);
+//    console.log("24.自定义2:"+param.reserved2);
+//    console.log("25.自定义3:"+param.reserved3);
+//    console.log("26.备注:"+param.note);
+//    console.log("27.预售:"+param.presell);
+//    console.log("28.代售:"+param.commissionSell);
+//    console.log("29.赠品:"+param.gift)		
+	//线上商品关联表的id
+	param.platformErpLinkId = platformErpLinkId;
+	//对页面信息进行判断	
+	if(!param.commonCode || !param.commonName){
+		showMessage("商品编号或名称不能为空");
+	}else{
+		$.post(url,param,function(result){
+			if(!result.state){
+				
+			}
+		})
+	}
+}
 /**
  * 清空页面信息
  * @returns
@@ -11,7 +58,7 @@ function emptyCommonInfo(){
 	for(var i=0;i<commonNum;i++){
 		$(".management_content").find("input:eq("+i+")").val("");			
 	}
-	$(".commonClassification").find("option:first").prop("selected",true);//系统分类
+	//$(".commonClassification").find("option:first").prop("selected",true);//系统分类
 	$(".comment").val("");//备注	
 	$(".presell").prop("checked",false);//预售
 	$(".presells").prop("checked",false);//代售
@@ -22,76 +69,52 @@ function emptyCommonInfo(){
  * @returns
  */
 function getInfo(){
-	obj.commonCode  = $(".commonCode").val();//1.商品编码
-	obj.commonCategory = $(".commonCategory").val();//2.商品类目
-	obj.commonBrand = $(".commonBrand").val();//3.商品品牌
-	obj.commonName = $(".commonName").val();//4.商品名称
-	obj.commonShortened = $(".commonShortened").val();//5.商品简称
-	obj.commonSpecification = $(".commonSpecification").val();//6.商品规格
-	obj.commonColor =$(".commonColor").val();//7.商品颜色
-	obj.commonSize = $(".commonSize").val();//8.商品尺码
-	obj.commonNormalPrice = $(".commonNormalPrice").val();//9.商品价格
-	obj.commonCostPrice = $(".commonCostPrice").val();//10.商品成本价
-	obj.commonBarcode  = $(".commonCostPrice").val();//11.商品条码	
-	obj.commonPack = $(".commonPack").val();//12.商品包装	
-	obj.commonLang = $(".commonLang").val();//13.长
-	obj.commonWidth = $(".commonWidth").val();//14.宽
-	obj.commonHigh = $(".commonHigh").val();//15.高	
-	obj.commonWeight = $(".commonWeight").val();//16.商品重量
-	obj.commonUnit = $(".commonUnit").val();//17.商品单位	
-	obj.commonBatch = $(".commonBatch").val();//18.商品批次	
-	obj.commonBzq = $(".commonBzq").val();//19.保质期	
-	obj.commonSeason = $(".commonSeason").val();//20.季节
-	obj.commonStyleNum = $(".commonStyleNum").val();//21.款号	
-	obj.commonClassification = $(".commonClassification").find("option:selected").text();//22.系统分类	
-	obj.userDefined1 = $(".userDefined1").val();//23.自定义1
-	obj.userDefined2 = $(".userDefined2").val();//24.自定义2
-	obj.userDefined3 = $(".userDefined3").val();//25.自定义3	
-	obj.comment = $(".comment").val();//26.备注	
-	if($(".presell").prop("checked")){
-		obj.presell = $(".presell").next().text();//27.预售
+	//清空并处理数组
+	//categoryOne = [];
+	//doGetBoxCategory();
+	var presell,commissionSell,gift;
+	var $presell = $(".management_content").find("input[name='presell']");
+	if($presell.prop("checked")){
+		presell = $presell.next().text();//27.预售
 	}
-	if($(".presells").prop("checked")){
-		obj.presells = $(".presells").next().text();//28.代售
+	var $commissionSell = $(".management_content").find("input[name='commissionSell']");
+	if($commissionSell.prop("checked")){
+		commissionSell = $commissionSell.next().text();//28.代售
 	}
-	if($(".gift").prop("checked")){
-		obj.gift = $(".gift").next().text();//29.赠品
+	var $gift = $(".management_content").find("input[name='gift']");
+	if($gift.prop("checked")){
+		gift = $gift.next().text();//29.赠品
 	}
-	return obj;
-}
-/**
- * 保存按钮
- * @returns
- */
-function saveCommonInfo(){
-	var objs = getInfo();
-//    console.log("1商品编码:"+objs.commonCode);
-//    console.log("2商品类目:"+objs.commonCategory);
-//    console.log("3商品品牌:"+objs.commonBrand);
-//    console.log("4商品名称:"+objs.commonName);
-//    console.log("5商品简称:"+objs.commonShortened);
-//    console.log("6商品规格:"+objs.commonSpecification);
-//    console.log("7.商品颜色:"+objs.commonColor);
-//    console.log("8.商品尺码:"+objs.commonSize);
-//    console.log("9.商品价格:"+objs.commonNormalPrice);
-//    console.log("10.商品成本价:"+objs.commonCostPrice);
-//    console.log("11.商品条码:"+objs.commonBarcode);
-//    console.log("12.商品包装:"+objs.commonPack);
-//    console.log("13长:"+objs.commonLang);
-//    console.log("14宽:"+objs.commonWidth);
-//    console.log("15高:"+objs.commonHigh);
-//    console.log("16.商品重量:"+objs.commonWeight);
-//    console.log("17.商品单位	:"+objs.commonUnit);
-//    console.log("18.商品批次:"+objs.commonBatch);
-//    console.log("19.保质期:"+objs.commonBzq);
-//    console.log("20.季节:"+objs.commonSeason);
-//    console.log("21.款号	:"+objs.commonStyleNum);
-//    console.log("22.系统分类:"+objs.commonClassification);
-//    console.log("23.自定义1:"+objs.userDefined1);
-//    console.log("24.自定义2:"+objs.userDefined2);
-//    console.log("25.自定义3:"+objs.userDefined3);
-//    console.log("26.备注:"+objs.comment);
-//    console.log("27.预售:"+objs.presell);
-//    console.log("28.代售:"+objs.presells);
-//    console.log("29.赠品:"+objs.gift);
+	var param = {erpItemNum:$(".commonCode").val(),//1.商品编码
+			     category:$(".commonCategory").val(),//2.商品类目
+			     brand:$(".commonBrand").val(),//3.商品品牌
+			     name:$(".commonName").val(),//4.商品名称
+			     shortName:$(".commonShortened").val(),//5.商品简称
+			     spec:$(".commonSpecification").val(),//6.商品规格
+			     color:$(".commonColor").val(),//7.商品颜色
+			     size:$(".commonSize").val(),//8.商品尺码
+			     normalPrice:$(".commonNormalPrice").val(),//9.商品价格
+			     costPrice:$(".commonCostPrice").val(),//10.商品成本价
+			     barCode:$(".commonCostPrice").val(),//11.商品条码
+			     packageCondition:$(".commonPack").val(),//12.商品包装	
+			     length:$(".commonLang").val(),//13.长
+			     width:$(".commonWidth").val(),//14.宽
+			     height:$(".commonHigh").val(),//15.高	
+			     weight:$(".commonWeight").val(),//16.商品重量
+			     unit:$(".commonUnit").val(),//17.商品单位	
+			     batchCode:$(".commonBatch").val(),//18.商品批次	
+			     expireDate:$(".commonBzq").val(),//19.保质期	
+			     //commonSeason:$(".commonSeason").val(),//20.季节?
+			     styleCode:$(".commonStyleNum").val(),//21.款号
+			     //insertCategory:insertCategory,//22.系统分类
+				 //deleteCategory:deleteCategory,
+				 reserved1:$(".userDefined1").val(),//23.自定义1
+				 reserved2:$(".userDefined2").val(),//24.自定义2
+				 reserved3:$(".userDefined3").val(),//25.自定义3
+				 note:$(".comment").val(),//26.备注	
+				 presell:presell,//27.预售
+				 commissionSell:commissionSell,//28.代售
+	             gift:gift,//29.赠品
+	}
+	return param;
 }
