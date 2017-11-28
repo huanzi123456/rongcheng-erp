@@ -14,7 +14,7 @@ public interface ItemInfoService {
     Map<String,Object> findUserByKeyWord(BigInteger ownerId, Integer row, Integer maxPage, String keyWord, BigInteger categoryId);
     
     //增加用户的商品
-    int saveItemInfo(WzyItemInfo Item);
+    BigInteger saveItemInfo(WzyItemInfo Item);
     
     //将数据转换成两组
     ItemEspInfo getItemEspInfo(WzyItemInfo info);

@@ -71,14 +71,13 @@ public class ItemInfoServiceImpl implements ItemInfoService {
     
     //添加商品表
     @Override
-    public int saveItemInfo(WzyItemInfo Item) throws OrderOutNumberException{
+    public BigInteger saveItemInfo(WzyItemInfo Item) throws OrderOutNumberException{
         if(Item == null) {
             throw new OrderOutNumberException("未得到数据");
         }
-        String erpItemNum = Item.getErpItemNum();
         int num = dao.findItemInfoByErpItemNum(Item);
         if(num >0) {
-            return 10;
+            return new BigInteger("10");
         }
         ici = getItemCommonInfo(Item);
         dao.saveItemCommonInfo(ici);
@@ -90,7 +89,7 @@ public class ItemInfoServiceImpl implements ItemInfoService {
         if(success <=0) {
             throw new OrderOutNumberException("插入失败，可能是您输入的某个数据过长");
         }
-        return success;
+        return ici.getId();
     }
     
     //将数据转换成两组

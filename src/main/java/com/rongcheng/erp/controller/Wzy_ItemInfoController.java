@@ -58,11 +58,9 @@ public class Wzy_ItemInfoController {
         UserInfo user = (UserInfo)session.getAttribute("user");
         BigInteger ownerId = user.getOwnerId();
         info.setOwnerId(ownerId);
-        int success1 = service.saveItemInfo(info);
-        if(success1 <=0) {
-            return new JsonResult(1,null,"插入失败");
-        }
-        if(success1 == 10) {
+        BigInteger success1 = service.saveItemInfo(info);
+        Integer success = Integer.parseInt(success1.toString());
+        if(success == 10) {
             return new JsonResult(1,null,"商品编号不能重复");
         }
         return new JsonResult(0,null,"插入成功");
