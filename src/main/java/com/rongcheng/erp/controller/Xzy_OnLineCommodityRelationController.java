@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.jd.open.api.sdk.JdException;
+import com.rongcheng.erp.dto.WzyItemInfo;
 import com.rongcheng.erp.dto.XzyJsonResult;
 import com.rongcheng.erp.entity.UserInfo;
 import com.rongcheng.erp.service.onlineCommodityRelation.Xzy_OnlineCommonRelationService;
@@ -88,6 +89,19 @@ public class Xzy_OnLineCommodityRelationController {
 	@ResponseBody
 	public XzyJsonResult modifyInfo(BigInteger currentOwnerId,BigInteger common_id,BigInteger platformErpLinkId){
 		XzyJsonResult result = services.modifyLinkInfo(currentOwnerId, common_id, platformErpLinkId);	
+		return result;
+	}
+	/**
+	 * "换"弹出框中"新建"页面的保存按钮
+	 * @param info
+	 * @return
+	 */
+	@RequestMapping("/newButton.do")
+	@ResponseBody
+	public XzyJsonResult newCommons(WzyItemInfo param){
+		System.out.println("新建商品");
+		System.out.println("进入:"+param);		
+		XzyJsonResult result = null;	
 		return result;
 	}
 	/**

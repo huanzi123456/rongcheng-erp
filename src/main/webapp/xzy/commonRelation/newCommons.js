@@ -38,13 +38,16 @@ function saveCommonInfo(platformErpLinkId){
 //    console.log("29.赠品:"+param.gift)		
 	//线上商品关联表的id
 	param.platformErpLinkId = platformErpLinkId;
+	param.ownerId = currentOwnerId;	
+	var url="/onLineCommodity/newButton.do";
 	//对页面信息进行判断	
-	if(!param.commonCode || !param.commonName){
+	if(!param.erpItemNum || !param.name){
 		showMessage("商品编号或名称不能为空");
 	}else{
+		console.log("进入到新建商品");
 		$.post(url,param,function(result){
-			if(!result.state){
-				
+			if(result.status == 0){
+				console.log("成功");
 			}
 		})
 	}
@@ -69,9 +72,10 @@ function emptyCommonInfo(){
  * @returns
  */
 function getInfo(){
-	//清空并处理数组
-	//categoryOne = [];
-	//doGetBoxCategory();
+	///////wzy////////
+	categoryOne = [];
+	doGetBoxCategory();
+	///////////////////
 	var presell,commissionSell,gift;
 	var $presell = $(".management_content").find("input[name='presell']");
 	if($presell.prop("checked")){
@@ -106,8 +110,8 @@ function getInfo(){
 			     expireDate:$(".commonBzq").val(),//19.保质期	
 			     //commonSeason:$(".commonSeason").val(),//20.季节?
 			     styleCode:$(".commonStyleNum").val(),//21.款号
-			     //insertCategory:insertCategory,//22.系统分类
-				 //deleteCategory:deleteCategory,
+			     insertCategory:insertCategory,//22.系统分类
+				 deleteCategory:deleteCategory,
 				 reserved1:$(".userDefined1").val(),//23.自定义1
 				 reserved2:$(".userDefined2").val(),//24.自定义2
 				 reserved3:$(".userDefined3").val(),//25.自定义3

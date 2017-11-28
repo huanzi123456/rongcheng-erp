@@ -17,8 +17,7 @@ $(function(){
 		//清空页面的信息
 		emptyCommonInfo();
 		//系统分类
-		$(".select_simulate_box").find("li").remove();
-		setCategoryInfo();
+		setBoxInfo1();
 	});
 	//"换" 弹出框的 "选择已有" 页面的关键字查询
 	$(".xzy_onBlur").blur(function(){popoverPages(1);});
@@ -365,9 +364,8 @@ function change_input(){
 	}else if(span2 == "active"){//新建页面	
 		//清空页面的信息
 		emptyCommonInfo();
-		//系统分类
-		$(".select_simulate_box").find("li").remove();
-		setCategoryInfo();		
+		//系统分类		
+		setBoxInfo1();
 	}
 	//清空关键字的输入框内容
 	$(".xzy_onBlur").val("");
