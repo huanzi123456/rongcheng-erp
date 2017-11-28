@@ -24,7 +24,7 @@
 	* select_simulate_box 弹出框
 	* select_simulate_xb  触发按钮
 	*/
-	var select_simulate_xb=$('.select_simulate_xb'),
+	/*var select_simulate_xb=$('.select_simulate_xb'),
 		select_simulate_box=$('.select_simulate_box');
 		
 	select_simulate_xb.click(function(){
@@ -33,7 +33,7 @@
 		}else{
 			select_simulate_box.css("display","none");
 		}
-	});
+	});*/
 
 
 	/*
@@ -147,6 +147,7 @@
 		single_updating_box.css("display","none");
 	});
 	single_new_bc.click(function(){
+		console.log("保存按钮");
 		single_updating_box.css("display","none");
 	});
 	single_new_qx.click(function(){

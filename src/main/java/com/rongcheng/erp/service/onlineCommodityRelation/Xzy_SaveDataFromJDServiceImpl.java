@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.jd.open.api.sdk.DefaultJdClient;
@@ -27,7 +26,6 @@ import com.rongcheng.erp.dao.Xzy_OnlineCommodityRelationDao;
 import com.rongcheng.erp.entity.ItemCommonInfo;
 import com.rongcheng.erp.entity.PlatformErpLink;
 import com.rongcheng.erp.entity.ShopInfo;
-import com.rongcheng.erp.entity.UserInfo;
 /**
  * 读取京东的商品信息及店铺信息
  * @author 薛宗艳
@@ -47,9 +45,8 @@ public class Xzy_SaveDataFromJDServiceImpl implements Xzy_SaveDataFromJDService{
 	@Resource
     Xzy_OnlineCommodityRelationDao dao ;	
 	
-	//@PostConstruct
 	@Override
-	public void save(HttpSession session) throws JdException {
+	public void save(String jdAccessTokens,BigInteger ownerId) throws JdException {
 		//String jdAccessTokens = ((AuthorityAccess) (session.getAttribute("authorityAccess"))).getAccessToken();
 		//查询京东的店铺信息
 		ShopJosResult shop = searchShopInfo(jdAppKeys, jdAppSecrets, jdAccessTokens);
@@ -63,7 +60,7 @@ public class Xzy_SaveDataFromJDServiceImpl implements Xzy_SaveDataFromJDService{
 		BigInteger shop_id = dao.seleIdFromShopInfo(shops);//商品所属的店铺id
     	
 		//查询platform_erp_link表中的数据的最大创建时间
-		BigInteger ownerId = ((UserInfo)session.getAttribute("user")).getOwnerId();
+		//BigInteger ownerId = ((UserInfo)session.getAttribute("user")).getOwnerId();
     	PlatformErpLink plat = new PlatformErpLink();
     	plat.setOwnerId(ownerId);
     	plat.setPlatformId(new BigInteger(3+""));

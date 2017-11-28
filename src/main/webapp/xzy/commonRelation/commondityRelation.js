@@ -2,23 +2,26 @@ var currentOwnerId;             //当前用户的ownerid
 var now_page;                   //线上商品对应关系主页中分页查询的   当前页
 var list;
 var obj = new Array();
+//var platformErpLinkId;//线上商品关联表的id
 $(function(){
 	//线上商品对应关系的分页查询
 	commonPage(1);
-	//"换" 弹出框的 "选择已有" 页面的(分页查询,保存按钮)
+	//"换" 弹出框
 	$("#xzy_limit").on("click","#xzy_input_change",change_input);
 	//在"换" 弹出框中:点击"选择已有"和"新建"按钮切换时
-	$(".active").click(function(){
+	$("#pagesOne").click(function(){//选择已有
 		$(".xzy_onBlur").val("");
 		popoverPages(1);
 	});
-	$(".actives").click(function(){
-		
-	})
+	$("#pagesTwo").click(function(){//新建
+		//清空页面的信息
+		emptyCommonInfo();
+		//系统分类
+		$(".select_simulate_box").find("li").remove();
+		setCategoryInfo();
+	});
 	//"换" 弹出框的 "选择已有" 页面的关键字查询
 	$(".xzy_onBlur").blur(function(){popoverPages(1);});
-	//"换" 弹出框的 "新建" 页面的保存
-	$(".single_new_bc").click(saveCommonInfo)
 	//线上商品对应关系页面的复选框
 	$("#xzy_limit").on("click","#xzy_check",checkboxButton)
 	//线上商品对应关系页面的"批量维护对应关系"按钮
@@ -356,18 +359,28 @@ function change_input(){
 	var platformErpLinkId = $(this).parent().parent().find("td:first").attr("val");	
 	var span1 = $(".single_updating_list_btn_box").find("span:first").attr("class");//选择已有
 	var span2 = $(".single_updating_list_btn_box").find("span:last").attr("class");//新建
-	if(span1 != ""){
-		//清空关键字的输入框内容
-		$(".xzy_onBlur").val("");
-		//1.分页查询
-		popoverPages(1);
-		//2.保存按钮
-		$("#xzy_save").unbind("click").click(function(){
-			save_input(platformErpLinkId);
-		});
-	}else if(span2 != undefined){
+	if(span1 == "active"){//选择已有页面				
+		//分页查询
+		popoverPages(1);		
+	}else if(span2 == "active"){//新建页面	
+		//清空页面的信息
 		emptyCommonInfo();
-	}	
+		//系统分类
+		$(".select_simulate_box").find("li").remove();
+		setCategoryInfo();		
+	}
+	//清空关键字的输入框内容
+	$(".xzy_onBlur").val("");
+	//2.保存按钮
+	$("#xzy_save").unbind("click").click(function(){
+		save_input(platformErpLinkId);
+	});
+	//"换" 弹出框的 "新建" 页面的保存按钮
+	$("#xzy_saves").unbind("click").click(function(){
+		saveCommonInfo(platformErpLinkId);
+		//弹出框隐藏
+		$(".single_updating_box").css("display","none");
+	});
 }
 /**
  * "换" 弹出框的 "选择已有" 页面的保存按钮
