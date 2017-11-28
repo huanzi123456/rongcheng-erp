@@ -14,7 +14,8 @@
     <script src="/js/cookie_util.js"></script> 
     <script type="text/javascript" src="/util/region/js/jquery.citys.js"></script>
     <script src="/lsx/accredit.js"></script> 
-	<script src="../js/big_box.js"></script>
+	<script src="/js/big_box.js"></script>
+	<link rel="stylesheet" href="/css/show_sq_box.css">
 </head>
 <style>
   .div_big_box:after{
@@ -165,6 +166,22 @@
 		  </div>
 		</div>
 	</div>
+	<div class="show_sq_box">
+		<div class="new_shopping">
+			<div class="shopping_title">
+				<span>店铺授权</span>
+				<div class="show_sq_delbtn">×</div>
+			</div>
+			<div class="shopping_content">
+				<p class="shopping_content_p">请在打开的页面中，登录相应平台账号授权，授权完成后请选择：</p>
+				<div class="shopping_content_div">
+		            <a href="javascript:;" class="button border-main">已完成授权</a>
+		            <a href="javascript:;" class="button border-main">授权遇到问题</a>
+		          </div>
+			</div>
+		</div>
+	</div>
+	<script src='/js/show_sq_box.js'></script>
 <script>
 //全选
 	$("#checkall").click(function(){ 

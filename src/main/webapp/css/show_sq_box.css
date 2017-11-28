@@ -1,0 +1,53 @@
+.show_sq_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: none;
+	z-index: 999;
+}
+.show_sq_box .new_shopping{
+	width: 500px;
+	height: 220px;
+	background: #fff;
+	margin: 200px auto;
+	border-radius: 5px;
+}
+.show_sq_box .new_shopping .shopping_title{
+	height: 40px;
+	background: #00AAEE;
+	line-height: 40px;
+	padding: 0 10px;
+}
+.show_sq_box .new_shopping .shopping_title span{
+	color: #fff;
+	font-size: 16px;
+}
+.show_sq_box .new_shopping .shopping_title .show_sq_delbtn{
+	font-size: 20px;
+	float: right;
+	width: 20px;
+	height: 40px;
+	cursor: pointer;
+	text-shadow: 0px 2px 1px #fff;
+}
+.show_sq_box .new_shopping .shopping_content{
+	width: 100%;
+	height: 180px;
+	padding: 10px 20px;
+	overflow: hidden;
+}
+.show_sq_box .new_shopping .shopping_content .shopping_content_p{
+	font-size: 15px;
+	line-height: 30px;
+	padding-top: 20px;
+}
+.show_sq_box .new_shopping .shopping_content .shopping_content_div{
+	text-align: center;
+	padding-top: 30px;
+}
+.show_sq_box .new_shopping .shopping_content .shopping_content_div>a:last-child{
+	margin-left: 30px;
+}
