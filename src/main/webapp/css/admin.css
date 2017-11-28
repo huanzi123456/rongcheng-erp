@@ -71,6 +71,7 @@ ul,li{ list-style-type:none;}
 .form-x .form-button { margin-left:10%;}
 .w50 { width:25%; float:left;}
 .form-x .tipss{ float:left; padding-left:10px; color:#888; line-height:42px;}
+.form-x .tips{ float:left; padding-left:10px; color:#f00; line-height:42px;}
 .input-help { float:left; line-height:30px;}
 .input-help li{ float:left;margin-left:10px;}
 .bread{ padding:0 15px; overflow: hidden;margin: 0;}
