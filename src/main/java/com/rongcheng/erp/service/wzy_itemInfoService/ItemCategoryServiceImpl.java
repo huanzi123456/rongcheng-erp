@@ -68,7 +68,7 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
         }
         icl = getItemCategoryLink(info);
         int success = 0;
-        if(!info.getInsertCategory().equals("k")){
+        if(!info.getInsertCategory().equals("k") && info.getInsertCategory() != ""){
             String[] insert = info.getInsertCategory().split(",");
             for(int i = 0;i<insert.length;i++) {
                 icl.setCategoryId(new BigInteger(insert[i]));
