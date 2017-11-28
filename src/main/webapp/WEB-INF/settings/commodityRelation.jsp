@@ -25,7 +25,6 @@
     </style> 
     <script type="text/javascript" src="/wzy/itemInfo.js"></script>
     <script type="text/javascript" src="/xzy/commonRelation/commondityRelation.js"></script>
-    <script type="text/javascript" src="/xzy/commonRelation/newCommons.js"></script>
     <script type="text/javascript" src="/util/jiml-utils.js"></script>
     
 </head>
@@ -1289,226 +1288,172 @@
         <div class="single_updating_list">
           <ul class="management_content">
             <li>
-              <ol>
-                <li class="bfz33">
-                  <span>商品编码:</span>
-                  <b>*</b>
-                  <input type="text" class="commonCode">
-                </li>
-                <li class="bfz33">
-                  <span>商品类目:</span>
-                  <input type="text" class="commonCategory">
-                </li>
-                <li class="bfz33">
-                  <span>商品品牌:</span>
-                  <input type="text" class="commonBrand">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz66">
-                  <span>商品名称:</span>
-                  <b>*</b>
-                  <input type="text" class="commonName">
-                </li>
-                <li class="bfz33">
-                  <span>商品简称:</span>
-                  <input type="text" class="commonShortened">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>商品规格:</span>
-                  <input type="text" class="commonSpecification">
-                </li>
-                <li class="bfz33">
-                  <span>颜色:</span>
-                  <input type="text" class="commonColor">
-                </li>
-                <li class="bfz33">
-                  <span>尺码:</span>
-                  <input type="text" class="commonSize">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>商品价格:</span>
-                  <input type="text" class="commonNormalPrice">
-                </li>
-                <li class="bfz33">
-                  <span>成本价:</span>
-                  <input type="text" class="commonCostPrice">
-                </li>
-                <li class="bfz33">
-                  <span>商品条码:</span>
-                  <input type="text" class="commonBarcode">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>商品包装:</span>
-                  <input type="text" class="commonPack">
-                </li>
-                <li class="bfz33">
-                  <span>长*宽*高:</span>
-                  <input type="text" class="ckg commonLang">
-                  <input type="text" class="ckg commonWidth">
-                  <input type="text" class="ckg commonHigh">
-                </li>
-                <li class="bfz33">
-                  <span>商品重量:</span>
-                  <input type="text" class="ckg commonWeight">kg
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>商品单位:</span>
-                  <input type="text" class="commonUnit">
-                </li>
-                <li class="bfz33">
-                  <span>商品批次:</span>
-                  <input type="text" class="commonBatch">
-                </li>
-                <li class="bfz33">
-                  <span>保质期:</span>
-                  <input type="text" class="commonBzq">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>季节:</span>
-                  <input type="text" class="commonSeason">
-                </li>
-                <li class="bfz33">
-                  <span>款号:</span>
-                  <input type="text" class="commonStyleNum">
-                </li>
-                <li class="bfz33">
-                  <span>系统分类:</span>
-                  <div style="" class='select_simulate'>
-                    <span>未分类商品未分类商品未分类商品</span>
-                    <div class="select_simulate_xb"></div>
-                    <ul class="select_simulate_box" >
-                    <!-- style="display:none"
-                      <li>
-                        <input type="checkbox">
-                        <span>未分类商品未分类商品</span>
-                        <ol style="padding-left:20px;">
-                          <li>
-                            <input type="checkbox">
-                            <span>未分类商品未分类商品</span>
-                          </li>
-                          <li>
-                            <input type="checkbox">
-                            <span>未分类商品未分类商品</span>
-                            <ol style="padding-left:20px;">
-                              <li>
-                                <input type="checkbox">
-                                <span>未分类商品未分类商品</span>
-                              </li>
-                              <li>
-                                <input type="checkbox">
-                                <span>未分类商品未分类商品</span>
-                                <ol style="padding-left:20px;">
-                                  <li>
-                                    <input type="checkbox">
-                                    <span>未分类商品未分类商品</span>
-                                  </li>
-                                  <li>
-                                    <input type="checkbox">
-                                    <span>未分类商品未分类商品</span>
-                                    <ol style="padding-left:20px;">
-                                      <li>
-                                        <input type="checkbox">
-                                        <span>未分类商品未分类商品</span>
-                                      </li>
-                                      <li>
-                                        <input type="checkbox">
-                                        <span>未分类商品未分类商品</span>
-                                      </li>
-                                    </ol>
-                                  </li>
-                                </ol>
-                              </li>
-                            </ol>
-                          </li>
-                        </ol>
-                      </li>
-                      <li>
-                        <input type="checkbox">
-                        <span>护肤</span>
-                      </li>
-                      <li>
-                        <input type="checkbox">
-                        <span>互联</span>
-                      </li>
-                      --> 
-                    </ul> 
-                  </div>
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li class="bfz33">
-                  <span>自定义1:</span>
-                  <input type="text" class="userDefined1">
-                </li>
-                <li class="bfz33">
-                  <span>自定义2:</span>
-                  <input type="text" class="userDefined2">
-                </li>
-                <li class="bfz33">
-                  <span>自定义3:</span>
-                  <input type="text" class="userDefined3">
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li>
-                  <span>备注:</span>
-                  <textarea name="" id="" cols="30" rows="10" class="comment"></textarea>
-                </li>
-              </ol>
-            </li>
-            <li>
-              <ol>
-                <li>
-                  <span>其他:</span>
+                    <ol>
+                        <li class="bfz33">
+                            <span>商品编码:</span>
+                            <b>*</b>
+                            <input type="text" id="erpItemNum">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品类目:</span>
+                            <input type="text" id="category">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品品牌:</span>
+                            <input type="text" id="brand">
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                  <div class="fl_div">
-                    <input type="checkbox" name="presell" value="0">
-                    <span>预售</span>
-                  </div>
-                  <div class="fl_div">
-                    <input type="checkbox" name="commissionSell" value="0">
-                    <span>代售</span>
-                  </div>
-                  <div class="fl_div">
-                    <input type="checkbox" name="gift" value="0">
-                    <span>赠品</span>
-                  </div>
+                    <ol>
+                        <li class="bfz66">
+                            <span>商品名称:</span>
+                            <b>*</b>
+                            <input type="text" id="name">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品简称:</span>
+                            <input type="text" id=shortName>
+                        </li>
+                    </ol>
                 </li>
-              </ol>
-            </li>
-            <li class="management_tj">
-              <a href="javascript:;" class="button border-main single_new_bc" id="xzy_saves"> 保存</a>
-              <a href="javascript:;" class="button border-main single_new_qx"> 取消</a>
-            </li> 
-                     
+                <li>
+                    <ol>
+                        <li class="bfz33">
+                            <span>商品规格:</span>
+                            <input type="text" id="spec">
+                        </li>
+                        <li class="bfz33">
+                            <span>颜色:</span>
+                            <input type="text" id="color">
+                        </li>
+                        <li class="bfz33">
+                            <span>尺码:</span>
+                            <input type="text" id="size">
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li class="bfz33">
+                            <span>商品价格:</span>
+                            <input type="text" id="normalPrice">
+                        </li>
+                        <li class="bfz33">
+                            <span>成本价:</span>
+                            <input type="text" id="costPrice">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品条码:</span>
+                            <input type="text" id="barCode">
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li class="bfz33">
+                            <span>商品包装:</span>
+                            <input type="text" id="packageCondition">
+                        </li>
+                        <li class="bfz33">
+                            <span>长*宽*高:</span>
+                            <input type="text" class="ckg" id="length">
+                            <input type="text" class="ckg" id="width">
+                            <input type="text" class="ckg" id="height">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品重量:</span>
+                            <input type="text" class="ckg" id="weight">kg
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li class="bfz33">
+                            <span>商品单位:</span>
+                            <input type="text" id="unit">
+                        </li>
+                        <li class="bfz33">
+                            <span>商品批次:</span>
+                            <input type="text" id="batchCode">
+                        </li>
+                        <li class="bfz33">
+                            <span>保质期:</span>
+                            <input type="text" id="expireDate">
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li class="bfz33">
+                            <span>季节:</span>
+                            <input type="text">
+                        </li>
+                        <li class="bfz33">
+                            <span>款号:</span>
+                            <input type="text" id="styleCode">
+                        </li>
+                        <li class="bfz33">
+                            <span>系统分类:</span>
+                            <div style="" class='select_simulate'>
+                                <span>请设置商品的分类</span>
+                                <div class="select_simulate_xb"></div>
+                                <ul class="select_simulate_box">
+                                    
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+                <li style="margin: 10px 0">
+                    <ol>
+                        <li class="bfz33">
+                            <span>自定义1:</span>
+                            <input type="text" id="reserved1">
+                        </li>
+                        <li class="bfz33">
+                            <span>自定义2:</span>
+                            <input type="text" id="reserved2">
+                        </li>
+                        <li class="bfz33">
+                            <span>自定义3:</span>
+                            <input type="text" id="reserved3">
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li>
+                            <span>备注:</span>
+                            <textarea name="note" id="note" cols="30" rows="10"></textarea>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <ol>
+                        <li>
+                            <span>其他:</span>
+                        </li>
+                        <li>
+                            <div class="fl_div">
+                                <input type="checkbox" name="presell" value="0">
+                                <span>预售</span>
+                            </div>
+                            <div class="fl_div">
+                                <input type="checkbox" name="commissionSell" value="0">
+                                <span>代售</span>
+                            </div>
+                            <div class="fl_div">
+                                <input type="checkbox" name="gift" value="0">
+                                <span>赠品</span>
+                            </div>
+                        </li>
+                    </ol>
+                </li>
+                <li class="management_tj">
+                    <a href="javascript:;" class="button border-main management_bc" id="xzy_saves"> 保存</a>
+                    <a href="javascript:;" class="button border-main management_qx"> 取消</a>
+                </li>                     
           </ul>
         </div>
       </div>

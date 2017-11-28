@@ -1,6 +1,9 @@
 package com.rongcheng.erp.controller;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +16,7 @@ import com.rongcheng.erp.dto.XzyJsonResult;
 import com.rongcheng.erp.entity.UserInfo;
 import com.rongcheng.erp.service.onlineCommodityRelation.Xzy_OnlineCommonRelationService;
 import com.rongcheng.erp.service.onlineCommodityRelation.Xzy_SaveDataFromJDService;
+import com.rongcheng.erp.service.wzy_itemInfoService.ItemInfoService;
 /**
  * 线上商品对应关系页面
  * @author 薛宗艳
@@ -25,7 +29,10 @@ public class Xzy_OnLineCommodityRelationController {
 	Xzy_SaveDataFromJDService service;//京东的商品店铺数据
 	
 	@Resource
-	Xzy_OnlineCommonRelationService services;
+	Xzy_OnlineCommonRelationService services;//线上商品对应关系页面的service
+	
+	@Resource
+	ItemInfoService wzyService;//wzy的新建商品
 	
 	@RequestMapping("/commodityRelation.do")
     public String toCommodityRelation(HttpSession session) throws JdException{
@@ -99,9 +106,12 @@ public class Xzy_OnLineCommodityRelationController {
 	@RequestMapping("/newButton.do")
 	@ResponseBody
 	public XzyJsonResult newCommons(WzyItemInfo param){
-		System.out.println("新建商品");
-		System.out.println("进入:"+param);		
-		XzyJsonResult result = null;	
+		BigInteger ItemId = wzyService.saveItemInfo(param);//(wzy的service方法)
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", new BigInteger(param.getImage2()));
+		map.put("ownerId", param.getOwnerId());
+		map.put("itemId", ItemId);
+		XzyJsonResult result = services.saveCommonsInfo(map);	
 		return result;
 	}
 	/**

@@ -2,7 +2,6 @@ var currentOwnerId;             //当前用户的ownerid
 var now_page;                   //线上商品对应关系主页中分页查询的   当前页
 var list;
 var obj = new Array();
-//var platformErpLinkId;//线上商品关联表的id
 $(function(){
 	//线上商品对应关系的分页查询
 	commonPage(1);
@@ -14,8 +13,6 @@ $(function(){
 		popoverPages(1);
 	});
 	$("#pagesTwo").click(function(){//新建
-		//清空页面的信息
-		emptyCommonInfo();
 		//系统分类
 		setBoxInfo1();
 	});
@@ -351,7 +348,7 @@ function get_info($input){
 	return strInfo;
 }
 /**
- * "换" 操作按钮(分页查询,保存按钮)
+ * "换" 操作按钮
  */
 function change_input(){	
 	//线上商品关联表的id
@@ -362,14 +359,12 @@ function change_input(){
 		//分页查询
 		popoverPages(1);		
 	}else if(span2 == "active"){//新建页面	
-		//清空页面的信息
-		emptyCommonInfo();
 		//系统分类		
 		setBoxInfo1();
 	}
 	//清空关键字的输入框内容
 	$(".xzy_onBlur").val("");
-	//2.保存按钮
+	//2."换" 弹出框的 "选择已有" 页面的保存按钮
 	$("#xzy_save").unbind("click").click(function(){
 		save_input(platformErpLinkId);
 	});
@@ -474,6 +469,29 @@ function popoverPages(page){
 		},
 		error:function(){"哎呀..页面不见了!"}
 	});
+}
+/**
+ *  "换"弹出框的"新建"页面的保存按钮 
+ * @returns
+ */
+function saveCommonInfo(platformErpLinkId){
+	var param = doGetItemParam();
+	//线上商品关联表的id	
+	param.image2 = platformErpLinkId;
+	param.ownerId = currentOwnerId;	
+	var url="/onLineCommodity/newButton.do";
+	//对页面信息进行判断	
+	if(!param.erpItemNum || !param.name){
+		showMessage("商品编号或名称不能为空");
+	}else{
+		console.log("进入到新建商品");
+		$.post(url,param,function(result){
+			if(result.status == 0){
+				console.log("成功");
+				commonPage(now_page);
+			}
+		})
+	}
 }
 /**
  * 线上商品对应关系的分页查询

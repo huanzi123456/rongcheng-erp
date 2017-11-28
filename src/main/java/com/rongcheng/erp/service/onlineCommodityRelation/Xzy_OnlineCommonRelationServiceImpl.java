@@ -141,6 +141,16 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
 		return result;
 	}
 	/**
+	 * "换"弹出框中"新建"页面的保存按钮
+	 */
+	@Override
+	public XzyJsonResult saveCommonsInfo(Map<String,Object> map) {
+		XzyJsonResult result = new XzyJsonResult();
+		dao.updateLinkCommons(map);
+		result.setStatus(0);
+		return result;
+	}
+	/**
 	 * 批量维护对应关系弹出框页面的保存按钮
 	 */
 	@Override
@@ -211,5 +221,6 @@ public class Xzy_OnlineCommonRelationServiceImpl implements Xzy_OnlineCommonRela
     	result.setData(list);
 		result.setStatus(0);
 		return result;
-	}	
+	}
+		
 }

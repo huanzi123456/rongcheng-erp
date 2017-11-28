@@ -1,6 +1,8 @@
 package com.rongcheng.erp.service.onlineCommodityRelation;
 
 import java.math.BigInteger;
+import java.util.Map;
+
 import com.rongcheng.erp.dto.XzyJsonResult;
 /**
  * 线上商品对应关系页面
@@ -38,6 +40,14 @@ public interface Xzy_OnlineCommonRelationService {
 	 * @return
 	 */
 	XzyJsonResult modifyLinkInfo(BigInteger currentOwnerId,BigInteger common_id,BigInteger platformErpLinkId);
+	/**
+	 * "换"弹出框中"新建"页面的保存按钮
+	 * @param ownerId:ownerID
+	 * @param platformErpLinkId:线上商品信息表的id
+	 * @param ItemId:线上商品信息表关联系统商品信息表的id
+	 * @return
+	 */
+	XzyJsonResult saveCommonsInfo(Map<String,Object> map);
 	/**
 	 * 批量维护对应关系弹出框页面的保存按钮
 	 * @param currentOwnerId :ownerID

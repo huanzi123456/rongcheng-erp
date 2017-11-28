@@ -246,7 +246,16 @@
   AND owner_id = #{ownerId,jdbcType=BIGINT,javaType=BIGINTEGER}
 </update>
 <!-- 
-  5.线上商品对应关系页面的店铺下拉选的加载店铺
+  5."换"操作中"新建"弹出框页面的保存按钮 
+ -->
+<update id="updateLinkCommons" parameterType="java.util.Map">
+  UPDATE platform_erp_link
+  SET item_id = #{itemId}
+  WHERE id = #{id,jdbcType=BIGINT,javaType=BIGINTEGER}
+  AND owner_id = #{ownerId,jdbcType=BIGINT,javaType=BIGINTEGER}
+</update>
+<!-- 
+  6.线上商品对应关系页面的店铺下拉选的加载店铺
  -->
 <select id="selectShopInfo" parameterType="java.math.BigInteger" resultType="com.rongcheng.erp.entity.ShopInfo">  
   SELECT NAME,platform_shop_id as platformShopId
@@ -254,7 +263,7 @@
   WHERE owner_id = #{ownerId}
 </select>
 <!-- 
-  6.线上商品对应关系页面的查询按钮
+  7.线上商品对应关系页面的查询按钮
     (1)统计满足条件的记录数
     (2)分页查询
  -->

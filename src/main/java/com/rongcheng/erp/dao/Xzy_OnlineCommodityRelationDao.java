@@ -53,10 +53,12 @@ public interface Xzy_OnlineCommodityRelationDao {
     List<ItemCommonAndEspInfo> likeEspInfo(Map<String,Object> map);
     //4."换"操作中"选择已有"弹出框页面的保存按钮
     void updatePlatformErpLink(Map<String,Object> map);
-    //5.线上商品对应关系页面的店铺下拉选的加载店铺
+    //5."换"操作中"新建"弹出框页面的保存按钮 
+    void updateLinkCommons(Map<String,Object> map);
+    //6.线上商品对应关系页面的店铺下拉选的加载店铺
     List<ShopInfo> selectShopInfo(BigInteger ownerId);
     /*
-     * 6.线上商品对应关系页面的查询按钮
+     * 7.线上商品对应关系页面的查询按钮
      * (1)统计满足条件的记录数
      * (2)分页查询
      */
