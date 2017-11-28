@@ -9,6 +9,10 @@ public class ItemCategoryLink implements Serializable{
     /**
      * 
      */
+    private static final long serialVersionUID = -3283048002956969626L;
+    /**
+     * 
+     */
     private BigInteger id;
     private BigInteger categoryId;
     private BigInteger itemId;

@@ -578,13 +578,9 @@ function doCancelItemInfo(){
 
 //填写模块用于复制 修改
 function setBoxInfo2(result){
-	var data="";
-	var list="";
-	if(result){
-		data=result.list[0];
-		lists=result.list1;
-		console.log(lists)
-	}
+	var data=result.list[0];
+	var lists=result.list1;
+	
 	//布置
 	$("#erpItemNum").attr('readonly',true)
 	$("#erpItemNum").val(data.erpItemNum)
@@ -622,7 +618,7 @@ function setBoxInfo2(result){
 		$("input[name='gift']")[0].checked = true
 	}
 	categoryOne=[];
-	if(!lists){
+	if(lists){
 		for(var i = 0;i<lists.length;i++){
 			if(lists[i].categoryId){
 				$("input[name='category1'][value='"+lists[i].categoryId+"']").prop("checked", true);
