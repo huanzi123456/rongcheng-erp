@@ -133,7 +133,7 @@
 			            <label></label>
 			        </div>
 		            <div class="field">
-			            <button class="button border-main"> 点击授权</button>
+			            <button class="button border-main show_sq_btn"> 点击授权</button>
 			        </div>
 		            <div class="tips"></div>
 		        </div>
